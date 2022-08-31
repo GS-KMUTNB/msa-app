@@ -1,0 +1,22 @@
+{
+    "select_language_page": {
+            "select_language": "Select Language",
+            "english": "English",
+            "thai": "ไทย"
+    },
+    "select_menu_page": {
+            "menu": "Menu",
+            "welcome": "Welcome To MSA Application",
+            "select_menu": "Select Menu",
+            "menu_screening ":"Nutritional screening form"
+    },
+        "manual_select_menu": {
+            "manual": "User Manual",
+            "description_select_menu": "Description: The menu item page you can select. Assess your kidney disease risk by choosing Menu Nutritionals creening form"
+    },
+        "assessment_page_start": {
+            "assessment": "Assessment",
+            "description_page_start": "Description : To make a /nscreening Nutritional Status /nAssessment Model /nInformation is required. /n - Weight /n - Height /nA section to use to calculate your body mass index (BMI) and have questions for you to do. Answer by choosing to answer in 2 cases, yes and no.",
+            "button_page_start": "Start doing screening /n nutrition"
+    }
+}

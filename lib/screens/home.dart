@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:msa_app/screens/menu.dart';
-import 'package:msa_app/screens/menu_th.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
@@ -60,12 +59,6 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 thaiButton: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder : (context) => const MenuScreenTH(),
-                    ),
-                  );
                 },
               ),
             ),
