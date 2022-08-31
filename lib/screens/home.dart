@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thaiosk/shared/scaffold.dart';
+import 'package:msa_app/shared/scaffold.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return MSAScaffold(
+    return MsaScaffold(
       appbarTitle: "",
       body: Center(
         child: Column(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:thaiosk/shared/shared.dart';
+import 'package:msa_app/shared/shared.dart';
 
-class MSAScaffold extends Scaffold {
-  MSAScaffold({
+class MsaScaffold extends Scaffold {
+  MsaScaffold({
     Key? key,
     String appbarTitle = "",
     required Widget body,
   }) : super(
           key: key,
-          appBar: MSAAppBar(
+          appBar: MsaAppBar(
             title: appbarTitle,
           ),
           body: body,
