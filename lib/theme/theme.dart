@@ -120,10 +120,9 @@ const subtitle2 = TextStyle(
 
 const bodyText1 = TextStyle(
   fontFamily: prompt,
-  fontWeight: FontWeight.w100,
-  fontSize: fontSizeH6,
+  fontSize: fontSizeH3,
   letterSpacing: 0.2,
-  color: blackColor,
+  color: primaryColor,
 );
 
 const bodyText2 = TextStyle(

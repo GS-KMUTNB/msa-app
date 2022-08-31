@@ -15,7 +15,7 @@ class MsaAppBar extends AppBar {
           elevation: 0,
           automaticallyImplyLeading: isLanguageScreen,
           toolbarHeight: isLanguageScreen ? 0 : 70,
-          backgroundColor: Colors.transparent,
+          backgroundColor: primaryColor4,
           title: isLanguageScreen
               ? const SizedBox()
               : Center(
@@ -30,7 +30,10 @@ class MsaAppBar extends AppBar {
               ? const SizedBox()
               : IconButton(
                   onPressed: onPressed,
-                  icon: const Icon(FeatherIcons.chevronLeft),
+                  icon: const Icon(
+                    FeatherIcons.chevronLeft,
+                    color: primaryColor,
+                  ),
                 ),
           actions: [
             isLanguageScreen
@@ -38,10 +41,10 @@ class MsaAppBar extends AppBar {
                 : Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
-                      width: 50,
+                      width: 45,
                       child: MaterialButton(
                         onPressed: () {},
-                        color: Colors.blue,
+                        color: primaryColor,
                         textColor: Colors.white,
                         padding: const EdgeInsets.all(16),
                         shape: const CircleBorder(),

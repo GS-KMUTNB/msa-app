@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
-// import 'package:msa_app/shared/shared.dart';
 
 class MsaScaffold extends Scaffold {
-  const MsaScaffold({
+  MsaScaffold({
     Key? key,
-    String appbarTitle = "",
-    bool isHomeScreen = true,
-    required Widget body,
+    required String bgImage, // only name of image
+    required PreferredSizeWidget appbar,
+    required List<Widget> body,
   }) : super(
           key: key,
-          // appBar: MsaAppBar(
-          //   title: appbarTitle,
-          // ),
-          body: body,
+          appBar: appbar,
+          body: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/$bgImage"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Column(
+                children: body,
+              ),
+            ],
+          ),
         );
 }

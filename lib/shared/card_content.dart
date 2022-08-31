@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:msa_app/theme/theme.dart';
 
-class CardLanguageScreen extends Container {
-  CardLanguageScreen({
-    Key? key,
-    double minFontSizeHeader = 12,
-    double minFontSizeContent = 12,
+class CardContent extends Container {
+  CardContent({
     required double w,
     required double h,
     required Color color,
-    required VoidCallback thaiButton,
-    required VoidCallback engButton,
+    required Widget child,
+    Key? key,
+    double minFontSizeHeader = 12,
+    double minFontSizeContent = 12,
+    bool? haveButton,
+    VoidCallback? button,
   }) : super(
           key: key,
           width: w,
           height: h,
           decoration: BoxDecoration(
-            color: primaryColor4,
+            color: color,
             borderRadius: BorderRadius.circular(30),
             // border: Border.all(color: Colors.black),
             boxShadow: const [
@@ -31,42 +32,6 @@ class CardLanguageScreen extends Container {
               ),
             ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 280,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(color),
-                    ),
-                    onPressed: engButton,
-                    child: const Text(
-                      "English",
-                      style: head3,
-                    ),
-                  ),
-                ),
-                msaSizeBox(height: 40),
-                SizedBox(
-                  width: 280,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(color),
-                    ),
-                    onPressed: thaiButton,
-                    child: const Text(
-                      "Thai",
-                      style: head3,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+          child: child,
         );
 }
