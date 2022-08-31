@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:thaiosk/shared/shared.dart';
 
-class MSAScaffold extends Scaffold {
-  MSAScaffold({
+class MsaScaffold extends Scaffold {
+  MsaScaffold({
     Key? key,
-    String appbarTitle = "",
-    required Widget body,
+    required String bgImage, // only name of image
+    required PreferredSizeWidget appbar,
+    required List<Widget> body,
   }) : super(
           key: key,
-          appBar: MSAAppBar(
-            title: appbarTitle,
+          appBar: appbar,
+          body: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/$bgImage"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Column(
+                children: body,
+              ),
+            ],
           ),
-          body: body,
         );
 }

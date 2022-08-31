@@ -1,46 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:msa_app/theme/theme.dart';
 
 import 'screens/screens.dart';
 
+const appName = "MSA";
+
 void main() {
-  runApp(const MyApp());
+  runApp(const MsaApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MsaApp extends StatelessWidget {
+  const MsaApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demoz',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      title: appName,
+      debugShowCheckedModeBanner: false,
+      theme: msaData(),
+      home: HomeScreen(
+        buildContext: context,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Pagezzz'),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return HomeScreen();
   }
 }

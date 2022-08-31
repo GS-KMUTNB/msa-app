@@ -1,11 +1,60 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:msa_app/theme/theme.dart';
 
-class MSAAppBar extends AppBar {
-  MSAAppBar({
+class MsaAppBar extends AppBar {
+  MsaAppBar({
     Key? key,
     String title = "",
+    bool isLanguageScreen = false,
+    VoidCallback? onPressed,
+    required BuildContext ctx,
   }) : super(
           key: key,
-          title: Text(title),
+          elevation: 0,
+          automaticallyImplyLeading: isLanguageScreen,
+          toolbarHeight: isLanguageScreen ? 0 : 70,
+          backgroundColor: primaryColor4,
+          title: isLanguageScreen
+              ? const SizedBox()
+              : Center(
+                  child: AutoSizeText(
+                    title,
+                    style: head1,
+                    maxLines: 1,
+                    minFontSize: 12,
+                  ),
+                ),
+          leading: isLanguageScreen
+              ? const SizedBox()
+              : IconButton(
+                  onPressed: onPressed,
+                  icon: const Icon(
+                    FeatherIcons.chevronLeft,
+                    color: primaryColor,
+                  ),
+                ),
+          actions: [
+            isLanguageScreen
+                ? const SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 45,
+                      child: MaterialButton(
+                        onPressed: () {},
+                        color: primaryColor,
+                        textColor: Colors.white,
+                        padding: const EdgeInsets.all(16),
+                        shape: const CircleBorder(),
+                        child: const Icon(
+                          Icons.question_mark,
+                          size: 15,
+                        ),
+                      ),
+                    ),
+                  )
+          ],
         );
 }
