@@ -52,7 +52,14 @@ const head1 = TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: fontSizeH1,
   fontStyle: FontStyle.normal,
-  color: blackColor,
+  color: primaryColor,
+);
+
+const head1NoWeight = TextStyle(
+  fontFamily: prompt,
+  fontSize: fontSizeH1,
+  fontStyle: FontStyle.normal,
+  color: primaryColor,
 );
 
 const head2 = TextStyle(
@@ -66,10 +73,9 @@ const head2 = TextStyle(
 
 const head3 = TextStyle(
   fontFamily: prompt,
-  fontWeight: FontWeight.w500,
   fontSize: fontSizeH3,
   letterSpacing: 0.2,
-  color: blackColor,
+  color: primaryColor4,
 );
 
 const head4 = TextStyle(

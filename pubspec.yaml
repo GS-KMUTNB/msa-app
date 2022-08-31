@@ -43,5 +43,7 @@ flutter:
         - asset: assets/fonts/Prompt-Italic.ttf
         - asset: assets/fonts/Prompt-Medium.ttf
         - asset: assets/fonts/Prompt-Regular.ttf
+  assets:
+    - assets/images/
 
   uses-material-design: true
