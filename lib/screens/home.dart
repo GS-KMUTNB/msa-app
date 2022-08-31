@@ -1,25 +1,20 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:msa_app/shared/appbar.dart';
-import 'package:msa_app/shared/scaffold.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
     Key? key,
     required BuildContext buildContext,
-  }) : super(key: key);
+  });
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var _width = MediaQuery.of(context).size.width;
-    var _height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -30,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/language-screen.png"),
                 fit: BoxFit.fitWidth,
@@ -43,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 width: 150.0,
                 height: 150.0,
-                padding: EdgeInsets.all(0),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(0),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.fill,
@@ -52,15 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Text(
+              const Text(
                 "Select Language",
                 style: head1NoWeight,
               ),
               msaSizeBox(height: 10),
               Center(
                 child: CardLanguageScreen(
-                  w: _width - 100,
-                  h: _height / 2.2,
+                  w: width - 100,
+                  h: height / 2.2,
                   color: primaryColor1,
                   engButton: () {},
                   thaiButton: () {},

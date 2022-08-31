@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:msa_app/theme/theme.dart';
 
@@ -45,7 +44,7 @@ class CardLanguageScreen extends Container {
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: engButton,
-                    child: Text(
+                    child: const Text(
                       "English",
                       style: head3,
                     ),
@@ -60,7 +59,7 @@ class CardLanguageScreen extends Container {
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: thaiButton,
-                    child: Text(
+                    child: const Text(
                       "Thai",
                       style: head3,
                     ),

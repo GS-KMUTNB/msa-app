@@ -43,12 +43,12 @@ class MsaAppBar extends AppBar {
                         onPressed: () {},
                         color: Colors.blue,
                         textColor: Colors.white,
-                        child: Icon(
-                          Icons.camera_alt,
+                        padding: const EdgeInsets.all(16),
+                        shape: const CircleBorder(),
+                        child: const Icon(
+                          Icons.question_mark,
                           size: 15,
                         ),
-                        padding: EdgeInsets.all(16),
-                        shape: CircleBorder(),
                       ),
                     ),
                   )
