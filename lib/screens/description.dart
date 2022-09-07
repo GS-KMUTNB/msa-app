@@ -69,9 +69,9 @@ class DescriptionScreen extends StatelessWidget {
                   children: [
                     msaSizeBox(height: 30),
                     const AutoSizeText(
-                      "Description : To make a screening Nutritional Status Assessment Model Information is required. \n- Weight\n- Height A section to use to calculate your body mass index (BMI) and have questions for you to do. Answer by choosing to answer in 2 cases, yes and no.",
+                      "Description :\n\n1. This nutrition screening form uses weight and height data to calculate the mass index. body (BMI) and data from patient history taking By specifying only 'yes' or 'no' answers.\n\n2. This screening form does not save or store information that You fill out and screening results if you want. Screening results, please download or print after each screening.",
                       style: bodyText1,
-                      maxLines: 10,
+                      maxLines: 12,
                       textAlign: TextAlign.left,
                     ),
                     msaSizeBox(height: 30),
@@ -90,7 +90,7 @@ class DescriptionScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: MsaButton(
-                        color: primaryColor4,
+                        color: Colors.green,
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -99,7 +99,7 @@ class DescriptionScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        text: 'Start screening nutrition',
+                        text: 'Start screening',
                         textStyle: bodyText1,
                         h: 120,
                       ),

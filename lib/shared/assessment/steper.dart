@@ -6,8 +6,8 @@ class MsaStepper extends Container {
     Key? key,
     required BuildContext context,
     required int currentStep,
-    required VoidCallback onStepCancel,
-    required VoidCallback onStepContinue,
+    required Function() onStepCancel,
+    required Function() onStepContinue,
     required Function(int) onStepTapped,
     required List<Step> steps,
   }) : super(

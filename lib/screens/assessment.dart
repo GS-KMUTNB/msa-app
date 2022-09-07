@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:msa_app/shared/shared.dart';
-
 import '../../theme/theme.dart';
 
 class AssessmentScreen extends StatefulWidget {
@@ -11,22 +10,28 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  final TextEditingController weightController = TextEditingController();
+  late TextEditingController weightController = TextEditingController();
   final FocusNode weightFocus = FocusNode();
 
-  final TextEditingController heightController = TextEditingController();
+  late TextEditingController heightController = TextEditingController();
   final FocusNode hightFocus = FocusNode();
 
   final _controller = ScrollController();
   int _index = 0;
+  String bmiValue = "";
+  int val = -1;
 
   @override
   void initState() {
     super.initState();
+    weightController = TextEditingController();
+    heightController = TextEditingController();
   }
 
   @override
   void dispose() {
+    weightController.dispose();
+    heightController.dispose();
     super.dispose();
   }
 
@@ -34,6 +39,104 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
+    var fromOne = <Step>[
+      Step(
+        title: bmiValue == "test" ? Text('BMI Calculator') : Text("data"),
+        subtitle: bmiValue == "test"
+            ? Text("please input your weight and height for calculate your BMI")
+            : Text("your BMI"),
+        content: BmiForm(
+          heightController: heightController,
+          hightFocus: hightFocus,
+          weightController: weightController,
+          weightFocus: weightFocus,
+        ),
+      ),
+      Step(
+        title: const Text(
+            'The patient had an unintentional weight loss in During the past 6 months?'),
+        content: StepperRadioButton(
+          groupValueNo: val,
+          groupValueYes: val,
+          onChangedNo: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          onChangedYes: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          width: width,
+        ),
+      ),
+      Step(
+        title:
+            const Text('Patients were fed less than they used to (> 7 days).'),
+        content: StepperRadioButton(
+          groupValueNo: val,
+          groupValueYes: val,
+          onChangedNo: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          onChangedYes: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          width: width,
+        ),
+      ),
+      Step(
+        title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
+        content: StepperRadioButton(
+          groupValueNo: val,
+          groupValueYes: val,
+          onChangedNo: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          onChangedYes: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          width: width,
+        ),
+      ),
+      Step(
+        title:
+            const Text('Patients with critical illness or semi-crisis. or not'),
+        content: StepperRadioButton(
+          groupValueNo: val,
+          groupValueYes: val,
+          onChangedNo: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          onChangedYes: (v) {
+            setState(() {
+              int a = v as int;
+              val = a;
+            });
+          },
+          width: width,
+        ),
+      ),
+    ];
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -64,7 +167,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 h: height / 1.20,
                 color: Colors.white,
                 child: Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: ListView(
                     controller: _controller,
                     children: [
@@ -82,10 +185,18 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                           }
                         },
                         onStepContinue: () {
-                          if (_index <= 0) {
+                          print(_index);
+                          if (_index < (fromOne.length - 1)) {
                             setState(() {
                               _index += 1;
                             });
+                          }
+
+                          if (_index == 1) {
+                            setState(() {
+                              bmiValue = "test";
+                            });
+                            print("index 1 naja");
                           }
                         },
                         onStepTapped: (int index) {
@@ -93,38 +204,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             _index = index;
                           });
                         },
-                        steps: <Step>[
-                          Step(
-                            title: const Text('BMI Calculator'),
-                            subtitle: const Text(
-                              "please input your weight and height for calculate your BMI",
-                            ),
-                            content: BmiForm(
-                              heightController: heightController,
-                              hightFocus: hightFocus,
-                              weightController: weightController,
-                              weightFocus: weightFocus,
-                            ),
-                          ),
-                          const Step(
-                            title: Text('Step 2 title'),
-                            content: Text('Content for Step 2'),
-                          ),
-                          const Step(
-                            title: Text('Step 3 title'),
-                            content: Text('Content for Step 3'),
-                          ),
-                          const Step(
-                            title: Text('Step 4 title'),
-                            content: Text('Content for Step 4'),
-                          ),
-                          const Step(
-                            title: Text('Step 5 title'),
-                            content: Text('Content for Step 5'),
-                          ),
-                        ],
+                        steps: fromOne,
                       ),
-                      msaSizeBox(height: 250),
                     ],
                   ),
                 ),
