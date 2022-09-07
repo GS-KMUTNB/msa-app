@@ -1,7 +1,5 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
-import 'package:msa_app/screens/menu.dart';
+import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
@@ -10,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({
     Key? key,
     required BuildContext buildContext,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MenuScreen(),
+                      builder: (context) => const DescriptionScreen(),
                     ),
                   );
                 },

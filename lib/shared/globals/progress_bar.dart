@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../theme/theme.dart';
+import 'package:msa_app/theme/theme.dart';
 
 class MsaProgressBar extends StatefulWidget {
   const MsaProgressBar({Key? key}) : super(key: key);

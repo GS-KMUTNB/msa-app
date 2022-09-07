@@ -1,13 +1,16 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:msa_app/shared/shared.dart';
 
-import '../shared/shared.dart';
-import '../theme/theme.dart';
-import 'screens.dart';
+import '../../theme/theme.dart';
 
-class AssessmentScreen extends StatelessWidget {
+class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
 
+  @override
+  State<AssessmentScreen> createState() => _AssessmentScreenState();
+}
+
+class _AssessmentScreenState extends State<AssessmentScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -31,45 +34,23 @@ class AssessmentScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.all(30),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    msaSizeBox(height: 30),
-                    const AutoSizeText(
-                      "Description : To make a screening Nutritional Status Assessment Model Information is required. \n- Weight\n- Height A section to use to calculate your body mass index (BMI) and have questions for you to do. Answer by choosing to answer in 2 cases, yes and no.",
-                      style: bodyText1,
-                      maxLines: 10,
-                      textAlign: TextAlign.left,
-                    ),
-                    msaSizeBox(height: 30),
-                    Row(children: <Widget>[
-                      Expanded(
-                        child: Container(
-                            margin:
-                                const EdgeInsets.only(left: 20.0, right: 20.0),
-                            child: const Divider(
-                              color: primaryColor4,
-                              height: 36,
-                              thickness: 3,
-                            )),
-                      ),
-                    ]),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: MsaButton(
-                        color: primaryColor4,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const AssessmentStepperScreen(),
-                            ),
-                          );
-                        },
-                        text: 'Start screening nutrition',
-                        textStyle: bodyText1,
-                        h: 120,
+                    // Progress Bar
+                    const MsaProgressBar(),
+                    msaSizeBox(height: 20),
+                    // BMI form
+                    SizedBox(
+                      width: 60,
+                      child: MaterialButton(
+                        onPressed: () {},
+                        color: primaryColor,
+                        textColor: Colors.white,
+                        padding: const EdgeInsets.all(16),
+                        shape: const CircleBorder(),
+                        child: const Text("BMI"),
                       ),
                     )
                   ],
