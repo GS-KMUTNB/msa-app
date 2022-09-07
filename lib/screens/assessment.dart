@@ -73,7 +73,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 h: height / 1.20,
                 color: Colors.white,
                 child: Container(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: ListView(
                     controller: _controller,
                     children: [
@@ -96,86 +96,5 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
       ),
     );
-
-    // MsaScaffold(
-    // appbar: MsaAppBar(
-    //   ctx: context,
-    //   title: "Assessment",
-    //   onPressed: () {
-    //     Navigator.pop(context);
-    //   },
-    // ),
-    //   bgImage: "bg.png",
-    //   body: [
-    //     GestureDetector(
-    // behavior: HitTestBehavior.opaque,
-    // onTap: () {
-    //   FocusScope.of(context).requestFocus(FocusNode());
-    // },
-    //       child: Container(
-    //         padding: EdgeInsets.all(15.0),
-    // child: ListView(
-    //   controller: _controller,
-    //   children: [
-    // BmiForm(
-    //   heightController: heightController,
-    //   hightFocus: hightFocus,
-    //   weightController: weightController,
-    //   weightFocus: weightFocus,
-    // ),
-    // SizedBox(
-    //   height: 250.0,
-    // ),
-    //     CardContent(
-    //       w: width - 40,
-    //       h: height / 1.20,
-    //       color: Colors.white,
-    //       child: Padding(
-    //         padding: const EdgeInsets.all(30),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: [
-    //             // Progress Bar
-    //             // ignore: fixme
-    // MsaProgressBar(), //FIXME add logic for progressbar
-    // msaSizeBox(height: 10),
-    //             // BMI form
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //     SizedBox(
-    //       height: 250.0,
-    //     ),
-    //           ],
-    //           // children: [
-    //           // CardContent(
-    //           //   w: width - 40,
-    //           //   h: height / 1.20,
-    //           //   color: Colors.white,
-    //           //   child: SingleChildScrollView(
-    //           //     physics: const BouncingScrollPhysics(),
-    //           //     child: Padding(
-    //           //       padding: const EdgeInsets.all(30),
-    //           //       child: Column(
-    //           //         crossAxisAlignment: CrossAxisAlignment.start,
-    //           //         children: [
-    //           //           // Progress Bar
-    //           //           // ignore: fixme
-    //           //           MsaProgressBar(), //FIXME add logic for progressbar
-    //           //           msaSizeBox(height: 10),
-    //           //           // BMI form
-    //           //           BmiForm(),
-    //           //         ],
-    //           //       ),
-    //           //     ),
-    //           //   ),
-    //           // ),
-    //           // ],
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 }
