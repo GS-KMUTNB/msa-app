@@ -22,6 +22,37 @@ class DescriptionScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
+        onPressedHint: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('AlertDialog Title'),
+            content: Column(
+              children: [
+                const Text("data"),
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/bg.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        ),
       ),
       bgImage: "bg.png",
       body: [

@@ -17,6 +17,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   final TextEditingController heightController = TextEditingController();
   final FocusNode hightFocus = FocusNode();
 
+  final _controller = ScrollController();
+  int _index = 0;
+
   @override
   void initState() {
     super.initState();
@@ -26,18 +29,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   void dispose() {
     super.dispose();
   }
-
-  // int validatePassword(String pswd) {
-  //   if (pswd.isEmpty || pswd.length == 0) {
-  //     return 1;
-  //   } else if (pswd != null && pswd.isNotEmpty && pswd.length <= 8) {
-  //     return 2;
-  //   } else {
-  //     return 0;
-  //   }
-  // }
-
-  final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +71,58 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                       // ignore: fixme
                       MsaProgressBar(), //FIXME add logic for progressbar
                       msaSizeBox(height: 10),
-                      BmiForm(
-                        heightController: heightController,
-                        hightFocus: hightFocus,
-                        weightController: weightController,
-                        weightFocus: weightFocus,
+                      MsaStepper(
+                        context: context,
+                        currentStep: _index,
+                        onStepCancel: () {
+                          if (_index > 0) {
+                            setState(() {
+                              _index -= 1;
+                            });
+                          }
+                        },
+                        onStepContinue: () {
+                          if (_index <= 0) {
+                            setState(() {
+                              _index += 1;
+                            });
+                          }
+                        },
+                        onStepTapped: (int index) {
+                          setState(() {
+                            _index = index;
+                          });
+                        },
+                        steps: <Step>[
+                          Step(
+                            title: const Text('BMI Calculator'),
+                            subtitle: const Text(
+                              "please input your weight and height for calculate your BMI",
+                            ),
+                            content: BmiForm(
+                              heightController: heightController,
+                              hightFocus: hightFocus,
+                              weightController: weightController,
+                              weightFocus: weightFocus,
+                            ),
+                          ),
+                          const Step(
+                            title: Text('Step 2 title'),
+                            content: Text('Content for Step 2'),
+                          ),
+                          const Step(
+                            title: Text('Step 3 title'),
+                            content: Text('Content for Step 3'),
+                          ),
+                          const Step(
+                            title: Text('Step 4 title'),
+                            content: Text('Content for Step 4'),
+                          ),
+                          const Step(
+                            title: Text('Step 5 title'),
+                            content: Text('Content for Step 5'),
+                          ),
+                        ],
                       ),
                       msaSizeBox(height: 250),
                     ],
