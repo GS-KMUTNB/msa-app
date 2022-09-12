@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:msa_app/shared/shared.dart';
 import '../../theme/theme.dart';
 
@@ -10,8 +11,6 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  // List<GlobalKey<FormState>> _formKeys = [GlobalKey<FormState>()];
-
   late TextEditingController weightController = TextEditingController();
   final FocusNode weightFocus = FocusNode();
 
@@ -19,6 +18,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   final FocusNode hightFocus = FocusNode();
 
   final _controller = ScrollController();
+  final _formKey = GlobalKey<FormState>();
+
   int _index = 0;
   String bmiValue = "";
   int val = -1;
@@ -54,6 +55,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         subtitle: const Text(
             "please input your weight and height for calculate your BMI"),
         content: BmiForm(
+          stepperKey: _formKey,
           heightController: heightController,
           hightFocus: hightFocus,
           weightController: weightController,
@@ -67,6 +69,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             setState(() {
               hValue = heightController.text;
             });
+          },
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          validator: (val) {
+            if (val!.isValidNumber) {
+              return null;
+            } else {
+              return 'Cannot empty';
+            }
           },
         ),
       ),
@@ -187,6 +197,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: ListView(
                     controller: _controller,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       // ignore: fixme
                       MsaProgressBar(
@@ -216,26 +227,31 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                         onStepContinue: () {
                           // print(_index);
 
-                          if (bmiValue != "") {
+                          if (_formKey.currentState!.validate()) {
+                            // print("pass !");
                             if (_index == 0) {
                               setState(() {
                                 haveBMIValue = true;
 
                                 var wD = double.parse(wValue);
                                 var hD = double.parse(hValue);
+                                bmiValue = calculateBMI(wD, hD);
 
-                                var bmiResult = wD / (hD * hD);
+                                // print(wD);
+                                // print(hD);
 
-                                bmiValue = "$bmiResult";
+                                // print(bmiValue);
                               });
                             }
-                          }
 
-                          if (_index < (fromOne.length - 1)) {
-                            // To next Step
-                            setState(() {
-                              _index += 1;
-                            });
+                            if (_index < (fromOne.length - 1)) {
+                              // To next Step
+                              setState(() {
+                                _index += 1;
+                              });
+                            }
+                          } else {
+                            // print("not pass !");
                           }
 
                           // if (_index == 1) {
@@ -247,9 +263,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                         },
                         //*on tab
                         onStepTapped: (int index) {
-                          setState(() {
-                            _index = index;
-                          });
+                          // setState(() {
+                          //   _index = index;
+                          // });
                         },
                         steps: fromOne,
                       ),

@@ -1,4 +1,5 @@
 export './steper.dart';
-export './bmi_form.dart';
+export './bmi.dart';
 export './progress_bar.dart';
 export './radio_button.dart';
+export './validator.dart';
