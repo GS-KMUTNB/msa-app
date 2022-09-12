@@ -7,6 +7,8 @@ class BmiForm extends SizedBox {
     required TextEditingController heightController,
     required FocusNode weightFocus,
     required FocusNode hightFocus,
+    Function(String)? onWeightChanged,
+    Function(String)? onHeightChanged,
   }) : super(
           key: key,
           child: Form(
@@ -31,8 +33,8 @@ class BmiForm extends SizedBox {
                     ),
                     focusNode: weightFocus,
                     controller: weightController,
-                    onSubmitted: (value) {},
                     keyboardType: TextInputType.number,
+                    onChanged: (value) => onWeightChanged!(value),
                   ),
                 ),
                 Padding(
@@ -53,7 +55,7 @@ class BmiForm extends SizedBox {
                     ),
                     focusNode: hightFocus,
                     controller: heightController,
-                    onSubmitted: (value) {},
+                    onChanged: (value) => onHeightChanged!(value),
                     keyboardType: TextInputType.number,
                   ),
                 ),

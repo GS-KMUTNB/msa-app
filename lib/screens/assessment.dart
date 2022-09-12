@@ -10,6 +10,8 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
+  List<GlobalKey<FormState>> _formKeys = [GlobalKey<FormState>()];
+
   late TextEditingController weightController = TextEditingController();
   final FocusNode weightFocus = FocusNode();
 
@@ -20,6 +22,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   int _index = 0;
   String bmiValue = "";
   int val = -1;
+  String wValue = "";
+  String hValue = "";
+  bool haveBMIValue = false;
 
   @override
   void initState() {
@@ -40,17 +45,29 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
+    print("weight: " + wValue);
+    print("height: " + hValue);
+
     var fromOne = <Step>[
       Step(
-        title: bmiValue == "test" ? Text('BMI Calculator') : Text("data"),
-        subtitle: bmiValue == "test"
-            ? Text("please input your weight and height for calculate your BMI")
-            : Text("your BMI"),
+        title: const Text('BMI Calculator'),
+        subtitle: const Text(
+            "please input your weight and height for calculate your BMI"),
         content: BmiForm(
           heightController: heightController,
           hightFocus: hightFocus,
           weightController: weightController,
           weightFocus: weightFocus,
+          onWeightChanged: (v) {
+            setState(() {
+              wValue = weightController.text;
+            });
+          },
+          onHeightChanged: (v) {
+            setState(() {
+              hValue = heightController.text;
+            });
+          },
         ),
       ),
       Step(
@@ -172,33 +189,62 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     controller: _controller,
                     children: [
                       // ignore: fixme
-                      MsaProgressBar(), //FIXME add logic for progressbar
+                      MsaProgressBar(
+                        haveBMI: haveBMIValue,
+                        bmi: bmiValue,
+                      ), //FIXME add logic for progressbar
                       msaSizeBox(height: 10),
                       MsaStepper(
                         context: context,
                         currentStep: _index,
+                        //*cancel
                         onStepCancel: () {
                           if (_index > 0) {
                             setState(() {
                               _index -= 1;
                             });
                           }
+
+                          if (_index == 0) {
+                            setState(() {
+                              haveBMIValue = false;
+                            });
+                          }
                         },
+                        //*continue
                         onStepContinue: () {
                           print(_index);
+
+                          if (bmiValue != "") {
+                            if (_index == 0) {
+                              setState(() {
+                                haveBMIValue = true;
+
+                                var wD = double.parse(wValue);
+                                var hD = double.parse(hValue);
+
+                                var bmiResult = wD / (hD * hD);
+
+                                bmiValue = "$bmiResult";
+                              });
+                            }
+                          }
+
                           if (_index < (fromOne.length - 1)) {
+                            // To next Step
                             setState(() {
                               _index += 1;
                             });
                           }
 
-                          if (_index == 1) {
-                            setState(() {
-                              bmiValue = "test";
-                            });
-                            print("index 1 naja");
-                          }
+                          // if (_index == 1) {
+                          //   setState(() {
+                          //     bmiValue = "test";
+                          //   });
+                          //   print("index 1 naja");
+                          // }
                         },
+                        //*on tab
                         onStepTapped: (int index) {
                           setState(() {
                             _index = index;
