@@ -10,7 +10,7 @@ class AssessmentScreen extends StatefulWidget {
 }
 
 class _AssessmentScreenState extends State<AssessmentScreen> {
-  List<GlobalKey<FormState>> _formKeys = [GlobalKey<FormState>()];
+  // List<GlobalKey<FormState>> _formKeys = [GlobalKey<FormState>()];
 
   late TextEditingController weightController = TextEditingController();
   final FocusNode weightFocus = FocusNode();
@@ -45,8 +45,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    print("weight: " + wValue);
-    print("height: " + hValue);
+    // print("weight: " + wValue);
+    // print("height: " + hValue);
 
     var fromOne = <Step>[
       Step(
@@ -192,6 +192,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                       MsaProgressBar(
                         haveBMI: haveBMIValue,
                         bmi: bmiValue,
+                        // ignore: fixme
                       ), //FIXME add logic for progressbar
                       msaSizeBox(height: 10),
                       MsaStepper(
@@ -213,7 +214,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                         },
                         //*continue
                         onStepContinue: () {
-                          print(_index);
+                          // print(_index);
 
                           if (bmiValue != "") {
                             if (_index == 0) {
