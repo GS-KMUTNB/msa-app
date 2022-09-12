@@ -9,6 +9,7 @@ class MsaAppBar extends AppBar {
     String title = "",
     bool isLanguageScreen = false,
     VoidCallback? onPressed,
+    VoidCallback? onPressedHint,
     required BuildContext ctx,
   }) : super(
           key: key,
@@ -43,7 +44,7 @@ class MsaAppBar extends AppBar {
                     child: SizedBox(
                       width: 45,
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: onPressedHint,
                         color: primaryColor,
                         textColor: Colors.white,
                         padding: const EdgeInsets.all(16),

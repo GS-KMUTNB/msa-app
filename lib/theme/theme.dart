@@ -120,7 +120,7 @@ const subtitle2 = TextStyle(
 
 const bodyText1 = TextStyle(
   fontFamily: prompt,
-  fontSize: fontSizeH3,
+  fontSize: fontSizeH4,
   letterSpacing: 0.2,
   color: primaryColor,
 );
