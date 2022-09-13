@@ -1,4 +1,4 @@
-// // ignore_for_file: file_names
+// ignore_for_file: file_names
 
 // class Screening {
 //   String date = "";
@@ -33,7 +33,25 @@ class Screening {
   final String weight;
   final String height;
   final String bmi;
-  final List<String>? formData;
+  final List<NutritionalForm>? formData;
 
-  const Screening(this.date, this.weight, this.height, this.bmi, this.formData);
+  const Screening(
+    this.date,
+    this.weight,
+    this.height,
+    this.bmi,
+    this.formData,
+  );
+}
+
+class NutritionalForm {
+  final String question;
+  final String answer;
+  final String index;
+
+  const NutritionalForm(
+    this.question,
+    this.answer,
+    this.index,
+  );
 }

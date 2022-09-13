@@ -1,9 +1,10 @@
 // import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 import '../models/models.dart';
 import '../shared/shared.dart';
+import '../theme/theme.dart';
 // import '../theme/theme.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -19,18 +20,18 @@ class ResultScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    // var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
-    print("===========================");
+    // print("===========================");
 
-    print("data");
-    print(data.date);
-    print(data.bmi);
-    print(data.weight);
-    print(data.height);
-    print(data.formData);
+    // print("data");
+    // print(data.date);
+    // print(data.bmi);
+    // print(data.weight);
+    // print(data.height);
+    // print(data.formData);
 
-    print("===========================");
+    // print("===========================");
 
     return MsaScaffold(
       appbar: MsaAppBar(
@@ -61,6 +62,11 @@ class ResultScreen extends StatelessWidget {
                         header: 'Height : ', data: data.height, unit: "cm"),
                     TextRowResult(
                         header: 'BMI : ', data: data.bmi, unit: "kg./m^2"),
+                    msaSizeBox(height: 10),
+                    // Container(
+                    //   color: Colors.red,
+                    //   child: Text("data"),
+                    // )
                   ],
                 ),
               ),

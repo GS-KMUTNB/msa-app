@@ -84,12 +84,18 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 // ignore: fixme
 //FIXME in future next step add dynamic stepper
 
+    // var nuForm = NutritionalForm(
+    //     // now,
+    //     // wValue,
+    //     // hValue,
+    //     );
+
     var data = Screening(
       now,
       wValue,
       hValue,
       bmiValue,
-      result,
+      null,
     );
 
     var fromOne = <Step>[
