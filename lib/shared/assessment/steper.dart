@@ -19,12 +19,26 @@ class MsaStepper extends Container {
                   ),
             ),
             child: Stepper(
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               steps: steps,
               currentStep: currentStep,
               onStepCancel: onStepCancel,
               onStepContinue: onStepContinue,
               onStepTapped: onStepTapped,
+              // controlsBuilder: (context, details) {
+              //   return Row(
+              //     children: <Widget>[
+              //       TextButton(
+              //         onPressed: onStepContinue,
+              //         child: const Text('NEXT'),
+              //       ),
+              //       TextButton(
+              //         onPressed: onStepCancel,
+              //         child: const Text('PREVIOUS'),
+              //       ),
+              //     ],
+              //   );
+              // },
             ),
           ),
         );

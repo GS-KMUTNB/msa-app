@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
-import '../../theme/theme.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -25,10 +26,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   String bmiValue = "";
   String resultBmi = "";
   String interpreBmi = "";
-  int val = -1;
+  int step1 = -1;
+
   String wValue = "";
   String hValue = "";
   bool haveBMIValue = false;
+
+  var rdValue = ["Yes", "No"];
+  var radioResult = "";
+  List<String> result = [];
 
   @override
   void initState() {
@@ -44,6 +50,24 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     super.dispose();
   }
 
+  Color colorCondition(String value) {
+    var color = const Color.fromARGB(73, 0, 0, 0);
+
+    switch (value) {
+      case "Yes":
+        color = Colors.green;
+        break;
+
+      case "No":
+        color = Colors.red;
+        break;
+
+      default:
+        color = const Color.fromARGB(73, 0, 0, 0);
+    }
+    return color;
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -52,11 +76,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     // print("weight: " + wValue);
     // print("height: " + hValue);
 
+// ignore: fixme
+//FIXME in future next step add dynamic stepper
     var fromOne = <Step>[
-      // bmi: bmiValue,
-      //                 resultBmi: resultBmi,
-      //                 interpreBmi: interpreBmi,
       Step(
+        isActive: true,
         title: haveBMIValue
             ? Text(
                 "BMI: $bmiValue",
@@ -65,7 +89,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         subtitle: haveBMIValue
             ? AutoSizeText(
                 "Result: $resultBmi $interpreBmi",
-                minFontSize: 12,
+                minFontSize: 14,
                 maxLines: 2,
               )
             : const Text(
@@ -107,92 +131,98 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
       ),
       Step(
+        isActive: (_index >= 1) ? true : false,
         title: const Text(
             'The patient had an unintentional weight loss in During the past 6 months?'),
-        content: StepperRadioButton(
-          groupValueNo: val,
-          groupValueYes: val,
-          onChangedNo: (v) {
+        content: CustomRadioButton(
+          elevation: 0,
+          absoluteZeroSpacing: true,
+          unSelectedColor: Colors.transparent,
+          buttonLables: rdValue,
+          buttonValues: rdValue,
+          selectedColor: colorCondition(radioResult),
+          selectedBorderColor: colorCondition(radioResult),
+          unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
+          radioButtonValue: (value) {
             setState(() {
-              int a = v as int;
-              val = a;
+              radioResult = value.toString();
             });
           },
-          onChangedYes: (v) {
-            setState(() {
-              int a = v as int;
-              val = a;
-            });
-          },
-          width: width,
         ),
       ),
       Step(
+        isActive: (_index >= 2) ? true : false,
         title:
             const Text('Patients were fed less than they used to (> 7 days).'),
-        content: StepperRadioButton(
-          groupValueNo: val,
-          groupValueYes: val,
-          onChangedNo: (v) {
+        content: CustomRadioButton(
+          elevation: 0,
+          absoluteZeroSpacing: true,
+          unSelectedColor: Colors.transparent,
+          buttonLables: rdValue,
+          buttonValues: rdValue,
+          selectedColor: colorCondition(radioResult),
+          selectedBorderColor: colorCondition(radioResult),
+          unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
+          radioButtonValue: (value) {
             setState(() {
-              int a = v as int;
-              val = a;
+              radioResult = value.toString();
             });
           },
-          onChangedYes: (v) {
-            setState(() {
-              int a = v as int;
-              val = a;
-            });
-          },
-          width: width,
         ),
       ),
       Step(
+        isActive: (_index >= 3) ? true : false,
         title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
-        content: StepperRadioButton(
-          groupValueNo: val,
-          groupValueYes: val,
-          onChangedNo: (v) {
+        content: CustomRadioButton(
+          elevation: 0,
+          absoluteZeroSpacing: true,
+          unSelectedColor: Colors.transparent,
+          buttonLables: rdValue,
+          buttonValues: rdValue,
+          selectedColor: colorCondition(radioResult),
+          selectedBorderColor: colorCondition(radioResult),
+          unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
+          radioButtonValue: (value) {
             setState(() {
-              int a = v as int;
-              val = a;
+              radioResult = value.toString();
             });
           },
-          onChangedYes: (v) {
-            setState(() {
-              int a = v as int;
-              val = a;
-            });
-          },
-          width: width,
         ),
       ),
       Step(
+        isActive: (_index >= 4) ? true : false,
         title:
             const Text('Patients with critical illness or semi-crisis. or not'),
-        content: StepperRadioButton(
-          groupValueNo: val,
-          groupValueYes: val,
-          onChangedNo: (v) {
+        content: CustomRadioButton(
+          elevation: 0,
+          absoluteZeroSpacing: true,
+          unSelectedColor: Colors.transparent,
+          buttonLables: rdValue,
+          buttonValues: rdValue,
+          selectedColor: colorCondition(radioResult),
+          selectedBorderColor: colorCondition(radioResult),
+          unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
+          radioButtonValue: (value) {
             setState(() {
-              int a = v as int;
-              val = a;
+              radioResult = value.toString();
             });
           },
-          onChangedYes: (v) {
-            setState(() {
-              int a = v as int;
-              val = a;
-            });
-          },
-          width: width,
         ),
+      ),
+      Step(
+        isActive: (_index >= 5) ? true : false,
+        title: const Text('Confirm ?'),
+        subtitle: const Text(
+            "Are you sure? to be sent for evaluation. Click CONTINUE continue for check result and CANCEL for back to answer"),
+        content: const SizedBox(),
       ),
     ];
 
+    // print(result);
+
     return Scaffold(
       appBar: MsaAppBar(
+        haveTutor: true,
         ctx: context,
         title: "Assessment",
         onPressed: () {
@@ -222,7 +252,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, top: 20, bottom: 10),
                       child: MsaProgressBar(),
                     ),
                     Expanded(
@@ -238,6 +269,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                               if (_index > 0) {
                                 setState(() {
                                   _index -= 1;
+
+                                  result.remove(radioResult);
+                                  radioResult = "";
                                 });
                               }
 
@@ -275,18 +309,29 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                   // To next Step
                                   setState(() {
                                     _index += 1;
+
+                                    if (radioResult != "") {
+                                      result.add(radioResult);
+                                    }
+                                  });
+                                }
+
+                                if (_index == 5) {
+                                  // To next Step
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ResultScreen(
+                                          data: result,
+                                        ),
+                                      ),
+                                    );
                                   });
                                 }
                               } else {
                                 // print("not pass !");
                               }
-
-                              // if (_index == 1) {
-                              //   setState(() {
-                              //     bmiValue = "test";
-                              //   });
-                              //   print("index 1 naja");
-                              // }
                             },
                             //*on tab
                             onStepTapped: (int index) => null,
