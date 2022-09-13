@@ -60,7 +60,7 @@ class CardLanguageScreen extends Container {
                     ),
                     onPressed: thaiButton,
                     child: const Text(
-                      "Thai",
+                      "ไทย",
                       style: head3,
                     ),
                   ),
