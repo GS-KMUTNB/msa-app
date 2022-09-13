@@ -27,9 +27,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              msaSizeBox(height: 10),
               const Text(
                 "Nutrition Screening Tool",
                 style: head1,
+                textAlign: TextAlign.center,
               ),
               msaSizeBox(height: 10),
               const Text(
