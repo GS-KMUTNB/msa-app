@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 
+import '../shared/globals/alert_hint.dart';
 import '../theme/theme.dart';
 
 class DescriptionScreen extends StatelessWidget {
@@ -26,31 +27,16 @@ class DescriptionScreen extends StatelessWidget {
           // ignore: fixme
           //FIXME PART GO
           context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text('AlertDialog Title'),
-            content: Column(
-              children: [
-                const Text("data"),
-                Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/bg.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            haveButton: true,
+            haveQuestions: true,
+            continueButton: true,
+            warningQuestions: true,
+            title: 'Screening results',
+            numberQuestions: "3 Questions.",
+            textContent:
+                "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
           ),
         ),
       ),
