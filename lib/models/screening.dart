@@ -33,7 +33,7 @@ class Screening {
   final String weight;
   final String height;
   final String bmi;
-  final List<NutritionalForm>? formData;
+  final List<String>? formData;
 
   const Screening(
     this.date,

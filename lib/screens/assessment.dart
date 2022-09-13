@@ -95,10 +95,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       wValue,
       hValue,
       bmiValue,
-      null,
+      result,
     );
 
-    var fromOne = <Step>[
+    var formOne = <Step>[
       Step(
         isActive: true,
         title: haveBMIValue
@@ -244,7 +244,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         ctx: context,
-        title: "Assessment",
+        title: "Nutrition Screening Tool",
         onPressed: () {
           Navigator.pop(context);
         },
@@ -325,7 +325,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                   });
                                 }
 
-                                if (_index < (fromOne.length - 1)) {
+                                if (_index < (formOne.length - 1)) {
                                   // To next Step
                                   setState(() {
                                     _index += 1;
@@ -354,7 +354,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             },
                             //*on tab
                             onStepTapped: (int index) => null,
-                            steps: fromOne,
+                            steps: formOne,
                           ),
                         ],
                       ),

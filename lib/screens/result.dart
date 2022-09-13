@@ -1,4 +1,6 @@
 // import 'package:auto_size_text/auto_size_text.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 
@@ -7,13 +9,21 @@ import '../shared/shared.dart';
 import '../theme/theme.dart';
 // import '../theme/theme.dart';
 
+// ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
   final Screening data;
 
-  const ResultScreen({
+  ResultScreen({
     Key? key,
     required this.data,
   }) : super(key: key);
+
+  var formQuestion = [
+    "The patient had an unintentional weight loss in During the past 6 months?",
+    "Patients were fed less than they used to (> 7 days).",
+    "BMI < 18.5 or > = 25.0 kg/m2?",
+    "Patients with critical illness or semi-crisis .or not"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +73,19 @@ class ResultScreen extends StatelessWidget {
                     TextRowResult(
                         header: 'BMI : ', data: data.bmi, unit: "kg./m^2"),
                     msaSizeBox(height: 10),
-                    // Container(
-                    //   color: Colors.red,
-                    //   child: Text("data"),
-                    // )
+                    SizedBox(
+                      height: height,
+                      child: ListView.builder(
+                        itemCount: formQuestion.length,
+                        itemBuilder: (context, index) {
+                          return FormListResult(
+                            answer: data.formData![index],
+                            qustion: formQuestion[index],
+                            index: (index + 1),
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),
