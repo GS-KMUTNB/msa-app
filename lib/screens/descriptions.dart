@@ -18,9 +18,9 @@ class DescriptionScreen extends StatelessWidget {
 
     return MsaScaffold(
       appbar: MsaAppBar(
-        haveTutor: true,
+        haveTutor: false,
         ctx: context,
-        title: "Assessment",
+        title: "Nutrition Screening Tool",
         onPressed: () {
           Navigator.pop(context);
         },
