@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:msa_app/theme/theme.dart';
 
+import '../../screens/descriptions.dart';
+
 class MsaHintAlert extends SingleChildScrollView {
   MsaHintAlert({
     Key? key,
@@ -18,6 +20,7 @@ class MsaHintAlert extends SingleChildScrollView {
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
+    VoidCallback? onConfirm,
   }) : super(
           key: key,
           child: AlertDialog(
@@ -176,7 +179,12 @@ class MsaHintAlert extends SingleChildScrollView {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () => Navigator.pop(context, 'Yes'),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DescriptionScreen()),
+                                ),
                                 child: const Text(
                                   'Yes',
                                   style: TextStyle(color: blackColor),
@@ -216,8 +224,9 @@ class MsaHintAlert extends SingleChildScrollView {
                               ),
                               child: continueButton
                                   ? TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'Continue'),
+                                      // ignore: fixme
+                                      //FIXME
+                                      onPressed: onConfirm,
                                       child: const Text(
                                         'Continue',
                                         style: TextStyle(color: blackColor),

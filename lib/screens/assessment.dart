@@ -7,6 +7,7 @@ import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../models/models.dart';
+import '../shared/globals/alert_hint.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -229,13 +230,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           },
         ),
       ),
-      Step(
-        isActive: (_index >= 5) ? true : false,
-        title: const Text('Confirm ?'),
-        subtitle: const Text(
-            "Are you sure? to be sent for evaluation. Click CONTINUE continue for check result and CANCEL for back to answer"),
-        content: const SizedBox(),
-      ),
+      // Step(
+      //   isActive: (_index >= 5) ? true : false,
+      //   title: const Text('Confirm ?'),
+      //   subtitle: const Text(
+      //       "Are you sure? to be sent for evaluation. Click CONTINUE continue for check result and CANCEL for back to answer"),
+      //   content: const SizedBox(),
+      // ),
     ];
 
     // print(result);
@@ -244,10 +245,39 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         ctx: context,
-        title: "Nutrition Screening Tool",
-        onPressed: () {
-          Navigator.pop(context);
-        },
+        title: "Assessment",
+        onPressed: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: false,
+            haveButton: true,
+            have2Button: true,
+            haveColorText: true,
+            haveQuestions: false,
+            title: 'Warning!!!',
+          ),
+        ),
+        onPressedHint: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: true,
+            haveButton: false,
+            haveColorText: false,
+            haveQuestions: false,
+            haveCloseButton: true,
+            title: 'User Manual',
+            imageContent:
+                "https://cdn.discordapp.com/attachments/901148263502196816/1019187147464507402/unknown.png",
+            subTextContent:
+                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
+          ),
+        ),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -338,6 +368,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
                                 if (_index == 5) {
                                   // To next Step
+                                  //FIXME
                                   setState(() {
                                     Navigator.push(
                                       context,
