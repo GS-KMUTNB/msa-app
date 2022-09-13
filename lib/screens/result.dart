@@ -2,11 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../models/models.dart';
 import '../shared/shared.dart';
 // import '../theme/theme.dart';
 
 class ResultScreen extends StatelessWidget {
-  final List<String> data;
+  final Screening data;
 
   const ResultScreen({
     Key? key,
@@ -17,11 +18,19 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    // print("=======================");
-
-    // print(data);
 
     var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
+
+    print("===========================");
+
+    print("data");
+    print(data.date);
+    print(data.bmi);
+    print(data.weight);
+    print(data.height);
+    print(data.formData);
+
+    print("===========================");
 
     return MsaScaffold(
       appbar: MsaAppBar(
@@ -45,15 +54,13 @@ class ResultScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Date : $now"),
-                    const Text("Weight"),
-                    const Text("Height"),
-                    const Text("BMI"),
-                    const Text("data"),
-                    const Text("data"),
-                    const Text("data"),
-                    const Text("data"),
-                    const Text("data"),
+                    TextRowResult(header: 'Date : ', data: data.date, unit: ""),
+                    TextRowResult(
+                        header: 'Weight : ', data: data.weight, unit: "kg"),
+                    TextRowResult(
+                        header: 'Height : ', data: data.height, unit: "cm"),
+                    TextRowResult(
+                        header: 'BMI : ', data: data.bmi, unit: "kg./m^2"),
                   ],
                 ),
               ),
