@@ -1,4 +1,4 @@
-final numberRegExp = RegExp(r'[0-9]{1,2}[.,]\d{1,2}');
+final numberRegExp = RegExp('[0-9][,]');
 
 extension ExtString on String {
   bool get isValidNumber {

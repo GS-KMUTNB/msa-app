@@ -70,12 +70,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               hValue = heightController.text;
             });
           },
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)'))
+          ],
           validator: (val) {
             if (val!.isValidNumber) {
-              return null;
-            } else {
               return 'Cannot empty';
+            } else {
+              return null;
             }
           },
         ),
