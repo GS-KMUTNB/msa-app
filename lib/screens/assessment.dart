@@ -2,8 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
+
+import '../models/models.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -28,13 +31,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   String interpreBmi = "";
   int step1 = -1;
 
-  String wValue = "";
-  String hValue = "";
   bool haveBMIValue = false;
 
   var rdValue = ["Yes", "No"];
   var radioResult = "";
+
+  String wValue = "";
+  String hValue = "";
   List<String> result = [];
+  var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   @override
   void initState() {
@@ -78,6 +83,21 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
 // ignore: fixme
 //FIXME in future next step add dynamic stepper
+
+    // var nuForm = NutritionalForm(
+    //     // now,
+    //     // wValue,
+    //     // hValue,
+    //     );
+
+    var data = Screening(
+      now,
+      wValue,
+      hValue,
+      bmiValue,
+      null,
+    );
+
     var fromOne = <Step>[
       Step(
         isActive: true,
@@ -322,9 +342,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ResultScreen(
-                                          data: result,
-                                        ),
+                                        builder: (context) =>
+                                            ResultScreen(data: data),
                                       ),
                                     );
                                   });
