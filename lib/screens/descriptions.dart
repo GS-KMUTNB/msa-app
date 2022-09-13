@@ -17,6 +17,7 @@ class DescriptionScreen extends StatelessWidget {
 
     return MsaScaffold(
       appbar: MsaAppBar(
+        haveTutor: true,
         ctx: context,
         title: "Assessment",
         onPressed: () {

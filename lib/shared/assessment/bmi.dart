@@ -1,17 +1,26 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BmiForm extends SizedBox {
   BmiForm({
     Key? key,
+    required Key stepperKey,
     required TextEditingController weightController,
     required TextEditingController heightController,
     required FocusNode weightFocus,
     required FocusNode hightFocus,
     Function(String)? onWeightChanged,
     Function(String)? onHeightChanged,
+    required List<TextInputFormatter>? inputFormattersWeight,
+    required String? Function(String?)? validatorWeight,
+    required List<TextInputFormatter>? inputFormattersHeight,
+    required String? Function(String?)? validatorHeight,
   }) : super(
           key: key,
           child: Form(
+            key: stepperKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -20,7 +29,7 @@ class BmiForm extends SizedBox {
                     horizontal: 20,
                     vertical: 5,
                   ),
-                  child: TextField(
+                  child: TextFormField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -31,6 +40,8 @@ class BmiForm extends SizedBox {
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
+                    inputFormatters: inputFormattersWeight,
+                    validator: validatorWeight,
                     focusNode: weightFocus,
                     controller: weightController,
                     keyboardType: TextInputType.number,
@@ -42,7 +53,7 @@ class BmiForm extends SizedBox {
                     horizontal: 20,
                     vertical: 5,
                   ),
-                  child: TextField(
+                  child: TextFormField(
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -53,6 +64,8 @@ class BmiForm extends SizedBox {
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
+                    inputFormatters: inputFormattersHeight,
+                    validator: validatorHeight,
                     focusNode: hightFocus,
                     controller: heightController,
                     onChanged: (value) => onHeightChanged!(value),
@@ -63,4 +76,29 @@ class BmiForm extends SizedBox {
             ),
           ),
         );
+}
+
+double calculateBMI(double weight, double height) {
+  var bmi = (weight / pow(height / 100, 2));
+  return bmi;
+}
+
+String getResult(double bmi) {
+  if (bmi >= 25) {
+    return 'Overweight';
+  } else if (bmi > 18.5) {
+    return 'Normal';
+  } else {
+    return 'Underweight';
+  }
+}
+
+String getInterpretation(double bmi) {
+  if (bmi >= 25) {
+    return 'You have a higher than normal body weight. Try to exercise more.';
+  } else if (bmi >= 18.5) {
+    return 'You have a normal body weight. Good job!';
+  } else {
+    return 'You have a lower than normal body weight. You can eat a bit more.';
+  }
 }
