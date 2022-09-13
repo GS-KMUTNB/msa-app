@@ -46,7 +46,9 @@ class ResultScreen extends StatelessWidget {
         ctx: context,
         title: "Result screening nutritional status",
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.popUntil(context, ModalRoute.withName(
+              // ignore: fixme
+              Navigator.defaultRouteName)); //FIXME
         },
       ),
       bgImage: "bg.png",

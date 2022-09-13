@@ -7,6 +7,7 @@ import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../models/models.dart';
+import '../shared/globals/alert_hint.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -32,6 +33,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   int step1 = -1;
 
   bool haveBMIValue = false;
+  bool lastStep = false;
 
   var rdValue = ["Yes", "No"];
   var radioResult = "";
@@ -232,8 +234,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       Step(
         isActive: (_index >= 5) ? true : false,
         title: const Text('Confirm ?'),
-        subtitle: const Text(
-            "Are you sure? to be sent for evaluation. Click CONTINUE continue for check result and CANCEL for back to answer"),
         content: const SizedBox(),
       ),
     ];
@@ -244,10 +244,43 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         ctx: context,
-        title: "Nutrition Screening Tool",
-        onPressed: () {
-          Navigator.pop(context);
-        },
+        title: "Assessment",
+        onPressed: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: false,
+            haveButton: true,
+            have2Button: true,
+            haveColorText: true,
+            haveQuestions: false,
+            title: 'Warning!!!',
+            width: width,
+            height: height / 2,
+          ),
+        ),
+        onPressedHint: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: true,
+            haveButton: false,
+            haveColorText: false,
+            haveQuestions: false,
+            haveCloseButton: true,
+            title: 'User Manual',
+            imageContent:
+                "https://cdn.discordapp.com/attachments/901148263502196816/1019187147464507402/unknown.png",
+            subTextContent:
+                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
+            height: height / 2,
+            width: width,
+          ),
+        ),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -282,6 +315,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                         controller: _controller,
                         children: [
                           MsaStepper(
+                            // lastStep: lastStep,
                             context: context,
                             currentStep: _index,
                             //*cancel
@@ -327,26 +361,51 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
                                 if (_index < (formOne.length - 1)) {
                                   // To next Step
-                                  setState(() {
-                                    _index += 1;
 
-                                    if (radioResult != "") {
-                                      result.add(radioResult);
-                                    }
-                                  });
+                                  if (_index == 5) {
+                                    setState(() {
+                                      lastStep = true;
+                                      if (radioResult != "") {
+                                        result.add(radioResult);
+                                      }
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _index += 1;
+
+                                      if (radioResult != "") {
+                                        result.add(radioResult);
+                                      }
+                                    });
+                                  }
                                 }
 
                                 if (_index == 5) {
-                                  // To next Step
-                                  setState(() {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResultScreen(data: data),
-                                      ),
-                                    );
-                                  });
+                                  showDialog(
+                                    // ignore: fixme
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        MsaHintAlert(
+                                      context: context,
+                                      haveButton: true,
+                                      haveQuestions: true,
+                                      continueButton: true,
+                                      warningQuestions: true,
+                                      title: 'Screening results',
+                                      numberQuestions: "3 Questions.",
+                                      textContent:
+                                          "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
+                                      onContinue: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ResultScreen(data: data),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
                                 }
                               } else {
                                 // print("not pass !");

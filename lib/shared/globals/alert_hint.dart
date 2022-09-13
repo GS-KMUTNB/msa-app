@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:msa_app/theme/theme.dart';
 
-class MsaHintAlert extends SingleChildScrollView {
+class MsaHintAlert extends Container {
   MsaHintAlert({
     Key? key,
     required BuildContext context,
     required String title,
+    double? width,
+    double? height,
     bool ifPicture = false,
     bool haveButton = false,
     bool have2Button = false,
@@ -18,6 +20,7 @@ class MsaHintAlert extends SingleChildScrollView {
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
+    VoidCallback? onContinue,
   }) : super(
           key: key,
           child: AlertDialog(
@@ -39,7 +42,7 @@ class MsaHintAlert extends SingleChildScrollView {
                         style: const TextStyle(color: whiteColor, fontSize: 24),
                       ),
                       IconButton(
-                          onPressed: () => Navigator.pop(context, 'Close'),
+                          onPressed: () => Navigator.pop(context),
                           icon: const Icon(
                             Icons.close,
                             color: Colors.white,
@@ -94,43 +97,55 @@ class MsaHintAlert extends SingleChildScrollView {
                     ],
                   )
                 : ifPicture
-                    ? Column(
-                        children: [
-                          Image(
-                            image: NetworkImage(imageContent),
-                          ),
-                          msaSizeBox(height: 20),
-                          haveColorText
-                              ? RichText(
-                                  text: const TextSpan(
-                                    text:
-                                        'Description : The screening can be viewed in sequence of numbers as follows.\n1. Choose an answer : In this screening, there are two possible answers: ',
-                                    style: TextStyle(color: whiteColor),
-                                    /*defining default style is optional */
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'yes and no.',
-                                        style: TextStyle(color: primaryColor4),
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            '\n2. Once the answer has been selected, press the next button to do so. ',
-                                        style: TextStyle(color: whiteColor),
-                                      ),
-                                      TextSpan(
-                                        text: ' next screening',
-                                        style: TextStyle(
-                                          color: primaryColor4,
+                    ? SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: width,
+                              height: height,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(imageContent),
+                                  fit: BoxFit.contain,
+                                  // opacity: 0.7,
+                                ),
+                              ),
+                            ),
+                            msaSizeBox(height: 20),
+                            haveColorText
+                                ? RichText(
+                                    text: const TextSpan(
+                                      text:
+                                          'Description : The screening can be viewed in sequence of numbers as follows.\n1. Choose an answer : In this screening, there are two possible answers: ',
+                                      style: TextStyle(color: whiteColor),
+                                      /*defining default style is optional */
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: 'yes and no.',
+                                          style:
+                                              TextStyle(color: primaryColor4),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Text(
-                                  subTextContent,
-                                  style: const TextStyle(color: whiteColor),
-                                )
-                        ],
+                                        TextSpan(
+                                          text:
+                                              '\n2. Once the answer has been selected, press the next button to do so. ',
+                                          style: TextStyle(color: whiteColor),
+                                        ),
+                                        TextSpan(
+                                          text: ' next screening',
+                                          style: TextStyle(
+                                            color: primaryColor4,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Text(
+                                    subTextContent,
+                                    style: const TextStyle(color: whiteColor),
+                                  )
+                          ],
+                        ),
                       )
                     : haveColorText
                         ? RichText(
@@ -176,7 +191,10 @@ class MsaHintAlert extends SingleChildScrollView {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () => Navigator.pop(context, 'Yes'),
+                                onPressed: () => Navigator.popUntil(
+                                    context, ModalRoute.withName(
+                                        // ignore: fixme
+                                        Navigator.defaultRouteName)), //FIXME
                                 child: const Text(
                                   'Yes',
                                   style: TextStyle(color: blackColor),
@@ -192,7 +210,7 @@ class MsaHintAlert extends SingleChildScrollView {
                                 ),
                               ),
                               child: TextButton(
-                                onPressed: () => Navigator.pop(context, 'No'),
+                                onPressed: () => Navigator.pop(context),
                                 child: const Text(
                                   'No',
                                   style: TextStyle(color: blackColor),
@@ -216,16 +234,16 @@ class MsaHintAlert extends SingleChildScrollView {
                               ),
                               child: continueButton
                                   ? TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'Continue'),
+                                      // ignore: fixme
+                                      //FIXME
+                                      onPressed: onContinue,
                                       child: const Text(
                                         'Continue',
                                         style: TextStyle(color: blackColor),
                                       ),
                                     )
                                   : TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                      onPressed: () => Navigator.pop(context),
                                       child: const Text(
                                         'OK',
                                         style: TextStyle(color: blackColor),
