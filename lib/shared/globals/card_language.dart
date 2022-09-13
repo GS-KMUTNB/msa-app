@@ -36,9 +36,25 @@ class CardLanguageScreen extends Container {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                Container(
                   width: 280,
                   height: 60,
+                  decoration: BoxDecoration(
+                    color: primaryColor4,
+                    borderRadius: BorderRadius.circular(20),
+                    // border: Border.all(color: Colors.black),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 0.5,
+                        offset: Offset(3, 3),
+                      ), //BoxShadow
+                      BoxShadow(
+                        color: primaryColor1,
+                        blurRadius: 0,
+                        offset: Offset(4, 4),
+                      ),
+                    ],
+                  ),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(color),
@@ -50,7 +66,7 @@ class CardLanguageScreen extends Container {
                     ),
                   ),
                 ),
-                msaSizeBox(height: 40),
+                msaSizeBox(height: 20),
                 SizedBox(
                   width: 280,
                   height: 60,

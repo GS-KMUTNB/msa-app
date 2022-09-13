@@ -27,6 +27,30 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const Text(
+                "Nutrition Screening Tool",
+                style: head1,
+              ),
+              msaSizeBox(height: 10),
+              const Text(
+                "Select Language",
+                style: head1NoWeight,
+              ),
+              msaSizeBox(height: 10),
+              CardLanguageScreen(
+                w: width - 100,
+                h: height / 3,
+                color: primaryColor1,
+                engButton: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DescriptionScreen(),
+                    ),
+                  );
+                },
+                thaiButton: () {},
+              ),
               Container(
                 width: 150.0,
                 height: 120.0,
@@ -37,27 +61,6 @@ class HomeScreen extends StatelessWidget {
                     image: AssetImage("assets/images/logo.png"),
                   ),
                 ),
-              ),
-              msaSizeBox(height: 10),
-              const Text(
-                "Select Language",
-                style: head1NoWeight,
-              ),
-              msaSizeBox(height: 10),
-              CardLanguageScreen(
-                w: width - 100,
-                h: height / 2.2,
-                color: primaryColor1,
-                engButton: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DescriptionScreen(),
-                    ),
-                  );
-                },
-                thaiButton: () {
-                },
               ),
             ],
           ),
