@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:msa_app/shared/shared.dart';
@@ -22,6 +23,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   int _index = 0;
   String bmiValue = "";
+  String resultBmi = "";
+  String interpreBmi = "";
   int val = -1;
   String wValue = "";
   String hValue = "";
@@ -50,10 +53,23 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     // print("height: " + hValue);
 
     var fromOne = <Step>[
+      // bmi: bmiValue,
+      //                 resultBmi: resultBmi,
+      //                 interpreBmi: interpreBmi,
       Step(
-        title: const Text('BMI Calculator'),
-        subtitle: const Text(
-            "please input your weight and height for calculate your BMI"),
+        title: haveBMIValue
+            ? Text(
+                "BMI: $bmiValue",
+              )
+            : const Text('BMI Calculator'),
+        subtitle: haveBMIValue
+            ? AutoSizeText(
+                "Result: $resultBmi $interpreBmi",
+                minFontSize: 12,
+                maxLines: 2,
+              )
+            : const Text(
+                "please input your weight and height for calculate your BMI"),
         content: BmiForm(
           stepperKey: _formKey,
           heightController: heightController,
@@ -70,15 +86,23 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               hValue = heightController.text;
             });
           },
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)'))
+          inputFormattersWeight: [
+            FilteringTextInputFormatter.allow(numberRegExp)
           ],
-          validator: (val) {
-            if (val!.isValidNumber) {
+          validatorWeight: (String? val) {
+            if (val == null || val.isEmpty) {
               return 'Cannot empty';
-            } else {
-              return null;
             }
+            return null;
+          },
+          inputFormattersHeight: [
+            FilteringTextInputFormatter.allow(numberRegExp)
+          ],
+          validatorHeight: (String? val) {
+            if (val == null || val.isEmpty) {
+              return 'Cannot empty';
+            }
+            return null;
           },
         ),
       ),
@@ -195,84 +219,83 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 w: width - 40,
                 h: height / 1.20,
                 color: Colors.white,
-                child: Container(
-                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: ListView(
-                    controller: _controller,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      // ignore: fixme
-                      MsaProgressBar(
-                        haveBMI: haveBMIValue,
-                        bmi: bmiValue,
-                        // ignore: fixme
-                      ), //FIXME add logic for progressbar
-                      msaSizeBox(height: 10),
-                      MsaStepper(
-                        context: context,
-                        currentStep: _index,
-                        //*cancel
-                        onStepCancel: () {
-                          if (_index > 0) {
-                            setState(() {
-                              _index -= 1;
-                            });
-                          }
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: MsaProgressBar(),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        controller: _controller,
+                        children: [
+                          MsaStepper(
+                            context: context,
+                            currentStep: _index,
+                            //*cancel
+                            onStepCancel: () {
+                              if (_index > 0) {
+                                setState(() {
+                                  _index -= 1;
+                                });
+                              }
 
-                          if (_index == 0) {
-                            setState(() {
-                              haveBMIValue = false;
-                            });
-                          }
-                        },
-                        //*continue
-                        onStepContinue: () {
-                          // print(_index);
+                              if (_index == 0) {
+                                setState(() {
+                                  haveBMIValue = false;
+                                });
+                              }
+                            },
+                            //*continue
+                            onStepContinue: () {
+                              // print(_index);
 
-                          if (_formKey.currentState!.validate()) {
-                            // print("pass !");
-                            if (_index == 0) {
-                              setState(() {
-                                haveBMIValue = true;
+                              if (_formKey.currentState!.validate()) {
+                                // print("pass !");
+                                if (_index == 0) {
+                                  setState(() {
+                                    haveBMIValue = true;
 
-                                var wD = double.parse(wValue);
-                                var hD = double.parse(hValue);
-                                bmiValue = calculateBMI(wD, hD);
+                                    var wD = double.parse(wValue);
+                                    var hD = double.parse(hValue);
+                                    var bmi = calculateBMI(wD, hD);
 
-                                // print(wD);
-                                // print(hD);
+                                    bmiValue = bmi.toStringAsFixed(2);
+                                    resultBmi = getResult(bmi);
+                                    interpreBmi = getInterpretation(bmi);
+                                    // print(wD);
+                                    // print(hD);
 
-                                // print(bmiValue);
-                              });
-                            }
+                                    // print(bmiValue);
+                                  });
+                                }
 
-                            if (_index < (fromOne.length - 1)) {
-                              // To next Step
-                              setState(() {
-                                _index += 1;
-                              });
-                            }
-                          } else {
-                            // print("not pass !");
-                          }
+                                if (_index < (fromOne.length - 1)) {
+                                  // To next Step
+                                  setState(() {
+                                    _index += 1;
+                                  });
+                                }
+                              } else {
+                                // print("not pass !");
+                              }
 
-                          // if (_index == 1) {
-                          //   setState(() {
-                          //     bmiValue = "test";
-                          //   });
-                          //   print("index 1 naja");
-                          // }
-                        },
-                        //*on tab
-                        onStepTapped: (int index) {
-                          // setState(() {
-                          //   _index = index;
-                          // });
-                        },
-                        steps: fromOne,
+                              // if (_index == 1) {
+                              //   setState(() {
+                              //     bmiValue = "test";
+                              //   });
+                              //   print("index 1 naja");
+                              // }
+                            },
+                            //*on tab
+                            onStepTapped: (int index) => null,
+                            steps: fromOne,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

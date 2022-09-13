@@ -13,8 +13,10 @@ class BmiForm extends SizedBox {
     required FocusNode hightFocus,
     Function(String)? onWeightChanged,
     Function(String)? onHeightChanged,
-    required List<TextInputFormatter>? inputFormatters,
-    required String? Function(String?)? validator,
+    required List<TextInputFormatter>? inputFormattersWeight,
+    required String? Function(String?)? validatorWeight,
+    required List<TextInputFormatter>? inputFormattersHeight,
+    required String? Function(String?)? validatorHeight,
   }) : super(
           key: key,
           child: Form(
@@ -38,8 +40,8 @@ class BmiForm extends SizedBox {
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
-                    inputFormatters: inputFormatters,
-                    validator: validator,
+                    inputFormatters: inputFormattersWeight,
+                    validator: validatorWeight,
                     focusNode: weightFocus,
                     controller: weightController,
                     keyboardType: TextInputType.number,
@@ -62,8 +64,8 @@ class BmiForm extends SizedBox {
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
-                    inputFormatters: inputFormatters,
-                    validator: validator,
+                    inputFormatters: inputFormattersHeight,
+                    validator: validatorHeight,
                     focusNode: hightFocus,
                     controller: heightController,
                     onChanged: (value) => onHeightChanged!(value),
@@ -76,12 +78,12 @@ class BmiForm extends SizedBox {
         );
 }
 
-String calculateBMI(weight, height) {
+double calculateBMI(double weight, double height) {
   var bmi = (weight / pow(height / 100, 2));
-  return bmi.toStringAsFixed(2);
+  return bmi;
 }
 
-String getResult(bmi) {
+String getResult(double bmi) {
   if (bmi >= 25) {
     return 'Overweight';
   } else if (bmi > 18.5) {
@@ -91,7 +93,7 @@ String getResult(bmi) {
   }
 }
 
-String getInterpretation(bmi) {
+String getInterpretation(double bmi) {
   if (bmi >= 25) {
     return 'You have a higher than normal body weight. Try to exercise more.';
   } else if (bmi >= 18.5) {

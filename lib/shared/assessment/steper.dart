@@ -19,6 +19,7 @@ class MsaStepper extends Container {
                   ),
             ),
             child: Stepper(
+              physics: const NeverScrollableScrollPhysics(),
               steps: steps,
               currentStep: currentStep,
               onStepCancel: onStepCancel,

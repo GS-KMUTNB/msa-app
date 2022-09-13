@@ -144,4 +144,6 @@ const caption = TextStyle(
 ThemeData msaData() => ThemeData(
       textTheme: textTheme,
       primaryColor: primaryColor,
+      colorScheme:
+          ColorScheme.fromSwatch().copyWith(secondary: Colors.transparent),
     );
