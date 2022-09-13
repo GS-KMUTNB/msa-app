@@ -36,33 +36,27 @@ class CardLanguageScreen extends Container {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 280,
                   height: 60,
-                  decoration: BoxDecoration(
-                    color: primaryColor4,
-                    borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(color: Colors.black),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 0.5,
-                        offset: Offset(3, 3),
-                      ), //BoxShadow
-                      BoxShadow(
-                        color: primaryColor1,
-                        blurRadius: 0,
-                        offset: Offset(4, 4),
-                      ),
-                    ],
-                  ),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: engButton,
-                    child: const Text(
-                      "English",
-                      style: head3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage('assets/images/ukflag.png')),
+                        msaSizeBox(width: 10),
+                        const Text(
+                          "English",
+                          style: head3,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -75,9 +69,19 @@ class CardLanguageScreen extends Container {
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: thaiButton,
-                    child: const Text(
-                      "ไทย",
-                      style: head3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage('assets/images/thflag.png')),
+                        msaSizeBox(width: 10),
+                        const Text(
+                          "ไทย",
+                          style: head3,
+                        ),
+                      ],
                     ),
                   ),
                 )
