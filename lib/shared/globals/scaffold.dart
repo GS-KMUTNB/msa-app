@@ -16,6 +16,7 @@ class MsaScaffold extends Scaffold {
                   image: DecorationImage(
                     image: AssetImage("assets/images/$bgImage"),
                     fit: BoxFit.cover,
+                    // opacity: 0.7,
                   ),
                 ),
               ),

@@ -1,5 +1,3 @@
-export './scaffold.dart';
-export './appbar.dart';
-export './card_language.dart';
-export './button.dart';
-export './card_content.dart';
+export './globals/globals.dart';
+export './assessment/assessment.dart';
+export './result/result.dart';

@@ -1,7 +1,5 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
-import 'package:msa_app/screens/menu.dart';
+import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
@@ -10,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({
     Key? key,
     required BuildContext buildContext,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +23,49 @@ class HomeScreen extends StatelessWidget {
       ),
       bgImage: "language-screen.png",
       body: [
-        Column(
-          children: [
-            msaSizeBox(height: 10),
-            Container(
-              width: 150.0,
-              height: 150.0,
-              padding: const EdgeInsets.all(0),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage("assets/images/logo-transparent.png"),
-                ),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              msaSizeBox(height: 10),
+              const Text(
+                "Nutrition Screening Tool",
+                style: head1,
+                textAlign: TextAlign.center,
               ),
-            ),
-            const Text(
-              "Select Language",
-              style: head1NoWeight,
-            ),
-            msaSizeBox(height: 10),
-            Center(
-              child: CardLanguageScreen(
+              msaSizeBox(height: 10),
+              const Text(
+                "Select Language",
+                style: head1NoWeight,
+              ),
+              msaSizeBox(height: 10),
+              CardLanguageScreen(
                 w: width - 100,
-                h: height / 2.2,
+                h: height / 3,
                 color: primaryColor1,
                 engButton: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MenuScreen(),
+                      builder: (context) => const DescriptionScreen(),
                     ),
                   );
                 },
                 thaiButton: () {},
               ),
-            ),
-          ],
+              Container(
+                width: 150.0,
+                height: 120.0,
+                padding: const EdgeInsets.all(0),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage("assets/images/logo.png"),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

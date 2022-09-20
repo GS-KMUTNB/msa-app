@@ -44,13 +44,23 @@ class CardLanguageScreen extends Container {
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: engButton,
-                    child: const Text(
-                      "English",
-                      style: head3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage('assets/images/ukflag.png')),
+                        msaSizeBox(width: 10),
+                        const Text(
+                          "English",
+                          style: head3,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                msaSizeBox(height: 40),
+                msaSizeBox(height: 20),
                 SizedBox(
                   width: 280,
                   height: 60,
@@ -59,9 +69,19 @@ class CardLanguageScreen extends Container {
                       backgroundColor: MaterialStateProperty.all<Color>(color),
                     ),
                     onPressed: thaiButton,
-                    child: const Text(
-                      "Thai",
-                      style: head3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            width: 40,
+                            height: 40,
+                            image: AssetImage('assets/images/thflag.png')),
+                        msaSizeBox(width: 10),
+                        const Text(
+                          "ไทย",
+                          style: head3,
+                        ),
+                      ],
                     ),
                   ),
                 )

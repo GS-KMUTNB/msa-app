@@ -8,7 +8,9 @@ class MsaAppBar extends AppBar {
     Key? key,
     String title = "",
     bool isLanguageScreen = false,
+    bool haveTutor = false,
     VoidCallback? onPressed,
+    VoidCallback? onPressedHint,
     required BuildContext ctx,
   }) : super(
           key: key,
@@ -36,24 +38,28 @@ class MsaAppBar extends AppBar {
                   ),
                 ),
           actions: [
-            isLanguageScreen
-                ? const SizedBox()
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 45,
-                      child: MaterialButton(
-                        onPressed: () {},
-                        color: primaryColor,
-                        textColor: Colors.white,
-                        padding: const EdgeInsets.all(16),
-                        shape: const CircleBorder(),
-                        child: const Icon(
-                          Icons.question_mark,
-                          size: 15,
+            haveTutor
+                ? isLanguageScreen
+                    ? const SizedBox()
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 45,
+                          child: MaterialButton(
+                            onPressed: onPressedHint,
+                            color: primaryColor,
+                            textColor: Colors.white,
+                            padding: const EdgeInsets.all(16),
+                            shape: const CircleBorder(),
+                            child: const Icon(
+                              Icons.question_mark,
+                              size: 15,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      )
+                : const SizedBox(
+                    width: 45,
                   )
           ],
         );
