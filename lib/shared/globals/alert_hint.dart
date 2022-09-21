@@ -21,6 +21,7 @@ class MsaHintAlert extends Container {
     bool haveQuestions = false,
     bool warningQuestions = false,
     VoidCallback? onContinue,
+    VoidCallback? onPressedYes,
   }) : super(
           key: key,
           child: AlertDialog(
@@ -101,17 +102,6 @@ class MsaHintAlert extends Container {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           children: [
-                            Container(
-                              width: width,
-                              height: height,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(imageContent),
-                                  fit: BoxFit.contain,
-                                  // opacity: 0.7,
-                                ),
-                              ),
-                            ),
                             msaSizeBox(height: 20),
                             haveColorText
                                 ? RichText(
@@ -180,44 +170,46 @@ class MsaHintAlert extends Container {
             actions: haveButton
                 ? have2Button
                     ? <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: warningColor,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: warningColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: onPressedYes,
+                                  child: const Text(
+                                    'Yes',
+                                    style: TextStyle(color: blackColor),
+                                  ),
                                 ),
                               ),
-                              child: TextButton(
-                                onPressed: () => Navigator.popUntil(
-                                    context, ModalRoute.withName(
-                                        // ignore: fixme
-                                        Navigator.defaultRouteName)), //FIXME
-                                child: const Text(
-                                  'Yes',
-                                  style: TextStyle(color: blackColor),
+                              msaSizeBox(width: 15),
+                              Container(
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: primaryColor4,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text(
+                                    'No',
+                                    style: TextStyle(color: blackColor),
+                                  ),
                                 ),
                               ),
-                            ),
-                            msaSizeBox(width: 15),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: primaryColor4,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
-                                ),
-                              ),
-                              child: TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text(
-                                  'No',
-                                  style: TextStyle(color: blackColor),
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ]
                     : <Widget>[

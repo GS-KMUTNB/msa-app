@@ -28,18 +28,7 @@ class ResultScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    // var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
-
-    // print("===========================");
-
-    // print("data");
-    // print(data.date);
-    // print(data.bmi);
-    // print(data.weight);
-    // print(data.height);
-    // print(data.formData);
-
-    // print("===========================");
+    var countData = data.formData!.where((c) => c == "Yes").length;
 
     return MsaScaffold(
       appbar: MsaAppBar(
@@ -61,29 +50,66 @@ class ResultScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextRowResult(header: 'Date : ', data: data.date, unit: ""),
-                    TextRowResult(
-                        header: 'Weight : ', data: data.weight, unit: "kg"),
-                    TextRowResult(
-                        header: 'Height : ', data: data.height, unit: "cm"),
-                    TextRowResult(
-                        header: 'BMI : ', data: data.bmi, unit: "kg./m^2"),
-                    msaSizeBox(height: 10),
-                    SizedBox(
-                      height: height,
-                      child: ListView.builder(
-                        itemCount: formQuestion.length,
-                        itemBuilder: (context, index) {
-                          return FormListResult(
-                            answer: data.formData![index],
-                            qustion: formQuestion[index],
-                            index: (index + 1),
-                          );
-                        },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          TextRowResult(
+                              header: 'Date : ', data: data.date, unit: ""),
+                          TextRowResult(
+                              header: 'Weight : ',
+                              data: data.weight,
+                              unit: "kg"),
+                          TextRowResult(
+                              header: 'Height : ',
+                              data: data.height,
+                              unit: "cm"),
+                          TextRowResult(
+                              header: 'BMI : ',
+                              data: data.bmi,
+                              unit: "kg./m^2"),
+                        ],
+                      ),
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: formQuestion.length,
+                      itemBuilder: (context, index) {
+                        return FormListResult(
+                          answer: data.formData![index],
+                          qustion: formQuestion[index],
+                          index: (index + 1),
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      child: RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            const TextSpan(
+                              text: 'Your screening result is',
+                              style: TextStyle(
+                                color: blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  '\n- You answered yes to $countData questions\n- Continue the nutritional assessment. or consult a dietitian/nutrition team',
+                              style: const TextStyle(color: blackColor),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],

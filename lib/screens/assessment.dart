@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
+import 'package:msa_app/theme/theme.dart';
 
 import '../models/models.dart';
 import '../shared/globals/alert_hint.dart';
@@ -33,6 +34,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   int step1 = -1;
 
   bool haveBMIValue = false;
+
   bool lastStep = false;
 
   var rdValue = ["Yes", "No"];
@@ -41,6 +43,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   String wValue = "";
   String hValue = "";
   List<String> result = [];
+  List<Color> resultColor = [];
   var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   @override
@@ -57,40 +60,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     super.dispose();
   }
 
-  Color colorCondition(String value) {
-    var color = const Color.fromARGB(73, 0, 0, 0);
-
-    switch (value) {
-      case "Yes":
-        color = Colors.green;
-        break;
-
-      case "No":
-        color = Colors.red;
-        break;
-
-      default:
-        color = const Color.fromARGB(73, 0, 0, 0);
-    }
-    return color;
-  }
-
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
-    // print("weight: " + wValue);
-    // print("height: " + hValue);
-
-// ignore: fixme
-//FIXME in future next step add dynamic stepper
-
-    // var nuForm = NutritionalForm(
-    //     // now,
-    //     // wValue,
-    //     // hValue,
-    //     );
 
     var data = Screening(
       now,
@@ -99,6 +72,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       bmiValue,
       result,
     );
+
+    var countData = data.formData!.where((c) => c == "Yes").length;
 
     var formOne = <Step>[
       Step(
@@ -156,6 +131,25 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         isActive: (_index >= 1) ? true : false,
         title: const Text(
             'The patient had an unintentional weight loss in During the past 6 months?'),
+        subtitle: _index >= 2
+            ? RichText(
+                text: TextSpan(
+                  style: head6,
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: 'choose :',
+                    ),
+                    TextSpan(
+                      text: ' ${result[0]}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorCondition(result[0]),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const Text(''),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -176,6 +170,25 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         isActive: (_index >= 2) ? true : false,
         title:
             const Text('Patients were fed less than they used to (> 7 days).'),
+        subtitle: _index >= 3
+            ? RichText(
+                text: TextSpan(
+                  style: head6,
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: 'choose :',
+                    ),
+                    TextSpan(
+                      text: ' ${result[1]}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorCondition(result[1]),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const Text(''),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -195,6 +208,25 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       Step(
         isActive: (_index >= 3) ? true : false,
         title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
+        subtitle: _index >= 4
+            ? RichText(
+                text: TextSpan(
+                  style: head6,
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: 'choose :',
+                    ),
+                    TextSpan(
+                      text: ' ${result[2]}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorCondition(result[2]),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const Text(''),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -215,6 +247,25 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         isActive: (_index >= 4) ? true : false,
         title:
             const Text('Patients with critical illness or semi-crisis. or not'),
+        subtitle: _index >= 5
+            ? RichText(
+                text: TextSpan(
+                  style: head6,
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: 'choose :',
+                    ),
+                    TextSpan(
+                      text: ' ${result[3]}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorCondition(result[3]),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const Text(''),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -259,6 +310,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             title: 'Warning!!!',
             width: width,
             height: height / 2,
+            onPressedYes: () {
+              Navigator.of(context)
+                ..pop()
+                ..pop();
+            },
           ),
         ),
         onPressedHint: () => showDialog<String>(
@@ -273,8 +329,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             haveQuestions: false,
             haveCloseButton: true,
             title: 'User Manual',
-            imageContent:
-                "https://cdn.discordapp.com/attachments/901148263502196816/1019187147464507402/unknown.png",
             subTextContent:
                 "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
             height: height / 2,
@@ -352,10 +406,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     bmiValue = bmi.toStringAsFixed(2);
                                     resultBmi = getResult(bmi);
                                     interpreBmi = getInterpretation(bmi);
-                                    // print(wD);
-                                    // print(hD);
-
-                                    // print(bmiValue);
                                   });
                                 }
 
@@ -389,13 +439,14 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                       context: context,
                                       haveButton: true,
                                       haveQuestions: true,
-                                      continueButton: true,
+                                      continueButton: false,
                                       warningQuestions: true,
+                                      have2Button: true,
                                       title: 'Screening results',
-                                      numberQuestions: "3 Questions.",
+                                      numberQuestions: '$countData Questions.',
                                       textContent:
                                           "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
-                                      onContinue: () {
+                                      onPressedYes: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
