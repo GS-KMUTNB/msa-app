@@ -36,7 +36,8 @@ class BmiForm extends SizedBox {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       hintStyle: TextStyle(color: Colors.grey[800]),
-                      hintText: "Weight kg.",
+                      // hintText: "Please fill Weight kg.",
+                      labelText: 'Please fill Weight kg.',
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
@@ -60,7 +61,8 @@ class BmiForm extends SizedBox {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       hintStyle: TextStyle(color: Colors.grey[800]),
-                      hintText: "Height cm.",
+                      // hintText: "Please fill Height cm.",
+                      labelText: 'Please fill Height cm.',
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
@@ -90,6 +92,22 @@ String getResult(double bmi) {
     return 'Normal';
   } else {
     return 'Underweight';
+  }
+}
+
+Color getResultColor(String bmi) {
+  switch (bmi) {
+    case "Overweight":
+      return Colors.red;
+
+    case "Normal":
+      return Colors.green;
+
+    case "Underweight":
+      return Colors.red;
+
+    default:
+      return Colors.black;
   }
 }
 

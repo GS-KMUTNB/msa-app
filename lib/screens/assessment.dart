@@ -71,6 +71,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       result,
     );
 
+    print(radioResult);
+    print(result);
+
     var getStep = <Step>[
       Step(
         isActive: true,
@@ -80,10 +83,27 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               )
             : const Text('BMI Calculator'),
         subtitle: haveBMIValue
-            ? AutoSizeText(
-                "Result: $resultBmi $interpreBmi",
-                minFontSize: 14,
-                maxLines: 2,
+            ? RichText(
+                text: TextSpan(
+                  children: <TextSpan>[
+                    const TextSpan(
+                      text: 'Result:',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: " $resultBmi\n",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: getResultColor(resultBmi),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: interpreBmi,
+                      style: const TextStyle(fontSize: 12, color: Colors.black),
+                    )
+                  ],
+                ),
               )
             : const Text(
                 "please input your weight and height for calculate your BMI"),
@@ -144,7 +164,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text(''),
+            : const Text('Please select Yes or No'),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -183,7 +203,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text(''),
+            : const Text('Please select Yes or No'),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -222,7 +242,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text(''),
+            : const Text('Please select Yes or No'),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -261,7 +281,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text(''),
+            : const Text('Please select Yes or No'),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -278,11 +298,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           },
         ),
       ),
-      // Step(
-      //   isActive: (_index >= 5) ? true : false,
-      //   title: const Text('Confirm ?'),
-      //   content: const SizedBox(),
-      // ),
     ];
 
     // print("_index: ${_index}");
@@ -355,8 +370,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          right: 20, left: 20, top: 20, bottom: 10),
-                      child: MsaProgressBar(),
+                        right: 20,
+                        left: 20,
+                        top: 20,
+                        bottom: 10,
+                      ),
+                      // ignore: fixme
+                      child: MsaProgressBar(), //FIXME
                     ),
                     Expanded(
                       child: ListView(
@@ -364,7 +384,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                         controller: _controller,
                         children: [
                           MsaStepper(
-                            // lastStep: lastStep,
                             context: context,
                             currentStep: _index,
                             //*cancel
@@ -391,7 +410,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             //*continue
                             onStepContinue: () {
                               if (_formKey.currentState!.validate()) {
-                                // print("pass !");
                                 if (_index == 0) {
                                   setState(() {
                                     haveBMIValue = true;
@@ -405,7 +423,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     interpreBmi = getInterpretation(bmi);
                                   });
                                 }
-
                                 var lastStep = _index == getStep.length - 1;
 
                                 if (_index <= getStep.length - 1) {
@@ -462,8 +479,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     ),
                                   );
                                 }
-                              } else {
-                                // print("not pass !");
                               }
                             },
                             //*on tab
