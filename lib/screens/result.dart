@@ -30,6 +30,8 @@ class ResultScreen extends StatelessWidget {
 
     var countData = data.formData!.where((c) => c == "Yes").length;
 
+    print(data.formData);
+
     return MsaScaffold(
       appbar: MsaAppBar(
         ctx: context,

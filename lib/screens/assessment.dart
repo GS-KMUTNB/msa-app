@@ -35,8 +35,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
 
   bool haveBMIValue = false;
 
-  bool lastStep = false;
-
   var rdValue = ["Yes", "No"];
   var radioResult = "";
 
@@ -73,9 +71,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       result,
     );
 
-    var countData = data.formData!.where((c) => c == "Yes").length;
-
-    var formOne = <Step>[
+    var getStep = <Step>[
       Step(
         isActive: true,
         title: haveBMIValue
@@ -129,8 +125,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 1) ? true : false,
-        title: const Text(
-            'The patient had an unintentional weight loss in During the past 6 months?'),
+        title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
         subtitle: _index >= 2
             ? RichText(
                 text: TextSpan(
@@ -168,8 +163,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 2) ? true : false,
-        title:
-            const Text('Patients were fed less than they used to (> 7 days).'),
+        title: const Text(
+            'The patient had an unintentional weight loss in During the past 6 months?'),
         subtitle: _index >= 3
             ? RichText(
                 text: TextSpan(
@@ -207,7 +202,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 3) ? true : false,
-        title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
+        title:
+            const Text('Patients were fed less than they used to (> 7 days).'),
         subtitle: _index >= 4
             ? RichText(
                 text: TextSpan(
@@ -244,7 +240,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
       ),
       Step(
-        isActive: (_index >= 4) ? true : false,
+        isActive: (_index == 4) ? true : false,
         title:
             const Text('Patients with critical illness or semi-crisis. or not'),
         subtitle: _index >= 5
@@ -282,14 +278,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           },
         ),
       ),
-      Step(
-        isActive: (_index >= 5) ? true : false,
-        title: const Text('Confirm ?'),
-        content: const SizedBox(),
-      ),
+      // Step(
+      //   isActive: (_index >= 5) ? true : false,
+      //   title: const Text('Confirm ?'),
+      //   content: const SizedBox(),
+      // ),
     ];
 
-    // print(result);
+    print("_index: ${_index}");
+    print(result);
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -318,8 +315,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           ),
         ),
         onPressedHint: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
@@ -378,7 +373,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                 setState(() {
                                   _index -= 1;
 
-                                  result.remove(radioResult);
+                                  if (_index > 1) {
+                                    result.removeLast();
+                                  }
+
                                   radioResult = "";
                                 });
                               }
@@ -386,13 +384,12 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                               if (_index == 0) {
                                 setState(() {
                                   haveBMIValue = false;
+                                  result = [];
                                 });
                               }
                             },
                             //*continue
                             onStepContinue: () {
-                              // print(_index);
-
                               if (_formKey.currentState!.validate()) {
                                 // print("pass !");
                                 if (_index == 0) {
@@ -409,13 +406,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                   });
                                 }
 
-                                if (_index < (formOne.length - 1)) {
-                                  // To next Step
+                                var lastStep = _index == getStep.length - 1;
 
-                                  if (_index == 5) {
+                                if (_index <= getStep.length - 1) {
+                                  // To next Step
+                                  if (lastStep) {
                                     setState(() {
-                                      lastStep = true;
-                                      if (radioResult != "") {
+                                      if (result.length <= 3) {
                                         result.add(radioResult);
                                       }
                                     });
@@ -430,9 +427,12 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                   }
                                 }
 
-                                if (_index == 5) {
+                                if (_index == 4 && lastStep) {
+                                  var countData = data.formData!
+                                      .where((c) => c == "Yes")
+                                      .length;
+
                                   showDialog(
-                                    // ignore: fixme
                                     context: context,
                                     builder: (BuildContext context) =>
                                         MsaHintAlert(
@@ -455,6 +455,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                           ),
                                         );
                                       },
+                                      onPressedNo: () {
+                                        result.removeLast();
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                   );
                                 }
@@ -464,7 +468,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             },
                             //*on tab
                             onStepTapped: (int index) => null,
-                            steps: formOne,
+                            steps: getStep,
                           ),
                         ],
                       ),
