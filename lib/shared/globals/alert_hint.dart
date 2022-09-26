@@ -22,6 +22,7 @@ class MsaHintAlert extends Container {
     bool warningQuestions = false,
     VoidCallback? onContinue,
     VoidCallback? onPressedYes,
+    VoidCallback? onPressedNo,
   }) : super(
           key: key,
           child: AlertDialog(
@@ -201,7 +202,8 @@ class MsaHintAlert extends Container {
                                   ),
                                 ),
                                 child: TextButton(
-                                  onPressed: () => Navigator.pop(context),
+                                  onPressed:
+                                      onPressedNo, //() => Navigator.pop(context),
                                   child: const Text(
                                     'No',
                                     style: TextStyle(color: blackColor),
