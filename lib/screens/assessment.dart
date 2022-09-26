@@ -285,8 +285,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       // ),
     ];
 
-    print("_index: ${_index}");
-    print(result);
+    // print("_index: ${_index}");
+    // print(result);
 
     return Scaffold(
       appBar: MsaAppBar(
