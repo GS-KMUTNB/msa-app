@@ -191,7 +191,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 Row(
                   children: [
                     const AutoSizeText(
-                      "BMI",
+                      "IBW",
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
