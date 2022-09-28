@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,8 +70,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       result,
     );
 
-    print(radioResult);
-    print(result);
+    // print(radioResult);
+    // print(result);
 
     var getStep = <Step>[
       Step(
