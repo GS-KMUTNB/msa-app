@@ -19,11 +19,10 @@ class MsaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: msaData(),
       home: HomeScreen(
-        //GanttChartScreen(
-        //buildContext: context,
-        //);
         buildContext: context,
       ),
+      //GanttChartScreen(
+      // buildContext: context,
     );
   }
 }

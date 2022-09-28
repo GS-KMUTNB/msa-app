@@ -24,7 +24,7 @@ class MsaAppBar extends AppBar {
                   child: AutoSizeText(
                     title,
                     style: head1,
-                    maxLines: 2,
+                    maxLines: 1,
                     minFontSize: 12,
                   ),
                 ),

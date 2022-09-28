@@ -48,6 +48,7 @@ class GanttChartScreen extends StatelessWidget {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
+          // ignore: fixme
           //FIXME waiting design
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
