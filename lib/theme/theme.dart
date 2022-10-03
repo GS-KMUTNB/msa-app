@@ -133,6 +133,14 @@ const bodyText2 = TextStyle(
   color: blackColor,
 );
 
+const whiteText = TextStyle(
+  fontFamily: prompt,
+  fontWeight: FontWeight.w100,
+  fontSize: fontSizeH6,
+  letterSpacing: 0.2,
+  color: whiteColor,
+);
+
 const caption = TextStyle(
   fontFamily: prompt,
   fontWeight: FontWeight.w100,

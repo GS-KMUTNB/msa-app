@@ -1,8 +1,10 @@
 // import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 
 import '../models/models.dart';
+import '../shared/globals/alert_hint.dart';
 import '../shared/shared.dart';
 import '../theme/theme.dart';
 // import '../theme/theme.dart';
@@ -36,11 +38,27 @@ class ResultScreen extends StatelessWidget {
       appbar: MsaAppBar(
         ctx: context,
         title: "Result screening nutritional status",
-        onPressed: () {
-          Navigator.popUntil(context, ModalRoute.withName(
-              // ignore: fixme
-              Navigator.defaultRouteName)); //FIXME
-        },
+        onPressed: () => showDialog<String>(
+          // ignore: fixme
+          //FIXME PART GO
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: false,
+            haveButton: true,
+            have2Button: true,
+            haveColorText: true,
+            haveQuestions: false,
+            title: 'Warning!!!',
+            width: width,
+            height: height / 2,
+            onPressedYes: () {
+              Navigator.popUntil(context, ModalRoute.withName(
+                  // ignore: fixme
+                  Navigator.defaultRouteName)); //FIXME
+            },
+          ),
+        ),
       ),
       bgImage: "bg.png",
       body: [
@@ -113,7 +131,34 @@ class ResultScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.all(8),
+                    //   child: Column(
+                    //     children: [
+                    //       ElevatedButton(
+                    //         onPressed: () {},
+                    //         child: Text("aaaaa"),
+                    //         style: ElevatedButton.styleFrom(
+                    //             primary: Colors.purple,
+                    //             padding: EdgeInsets.symmetric(
+                    //                 horizontal: 50, vertical: 20),
+                    //             textStyle: TextStyle(
+                    //                 fontSize: 30, fontWeight: FontWeight.bold)),
+                    //       ),
+                    //       ElevatedButton(
+                    //         onPressed: () {},
+                    //         child: Text("bbbb"),
+                    //         style: ElevatedButton.styleFrom(
+                    //             primary: Colors.purple,
+                    //             padding: EdgeInsets.symmetric(
+                    //                 horizontal: 50, vertical: 20),
+                    //             textStyle: TextStyle(
+                    //                 fontSize: 30, fontWeight: FontWeight.bold)),
+                    //       )
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),

@@ -74,10 +74,14 @@ class MsaHintAlert extends Container {
                                   color: primaryColor4,
                                   size: 40,
                                 ),
-                                Text(
-                                  numberQuestions,
-                                  style: const TextStyle(
-                                      color: primaryColor4, fontSize: 32),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 3),
+                                  child: Text(
+                                    numberQuestions,
+                                    style: const TextStyle(
+                                        color: warningColor, fontSize: 32),
+                                  ),
                                 ),
                                 const Icon(
                                   Icons.error_rounded,

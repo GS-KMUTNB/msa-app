@@ -71,7 +71,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
     );
 
     // print(radioResult);
-    // print(result);
+    // print(_index);
 
     var getStep = <Step>[
       Step(
@@ -164,21 +164,23 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 ),
               )
             : const Text('Please select Yes or No'),
-        content: CustomRadioButton(
-          elevation: 0,
-          absoluteZeroSpacing: true,
-          unSelectedColor: Colors.transparent,
-          buttonLables: rdValue,
-          buttonValues: rdValue,
-          selectedColor: colorCondition(radioResult),
-          selectedBorderColor: colorCondition(radioResult),
-          unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
-          radioButtonValue: (value) {
-            setState(() {
-              radioResult = value.toString();
-            });
-          },
-        ),
+        content: const SizedBox(),
+        // content:
+        // CustomRadioButton(
+        //   elevation: 0,
+        //   absoluteZeroSpacing: true,
+        //   unSelectedColor: Colors.transparent,
+        //   buttonLables: rdValue,
+        //   buttonValues: rdValue,
+        //   selectedColor: colorCondition(radioResult),
+        //   selectedBorderColor: colorCondition(radioResult),
+        //   unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
+        //   radioButtonValue: (value) {
+        //     setState(() {
+        //       radioResult = value.toString();
+        //     });
+        //   },
+        // ),
       ),
       Step(
         isActive: (_index >= 2) ? true : false,
@@ -399,6 +401,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                 });
                               }
 
+                              if (_index == 1) {
+                                setState(() {
+                                  result.clear();
+                                  _index--;
+                                });
+                              }
+
                               if (_index == 0) {
                                 setState(() {
                                   haveBMIValue = false;
@@ -420,8 +429,17 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     bmiValue = bmi.toStringAsFixed(2);
                                     resultBmi = getResult(bmi);
                                     interpreBmi = getInterpretation(bmi);
+
+                                    if (bmi < 18.5 || bmi >= 25.0) {
+                                      result.add("Yes");
+                                    } else {
+                                      result.add("No");
+                                    }
+
+                                    _index++;
                                   });
                                 }
+
                                 var lastStep = _index == getStep.length - 1;
 
                                 if (_index <= getStep.length - 1) {
