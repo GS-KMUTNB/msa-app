@@ -136,32 +136,28 @@ class ResultScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        Container(
+                          color: primaryColor1,
                           height: 50,
                           width: 120,
                           child: TextButton(
                             onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              primary: primaryColor1,
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                              ),
+                            child: const Text(
+                              "Download",
+                              style: TextStyle(color: Colors.white),
                             ),
-                            child: const Text("Download"),
                           ),
                         ),
                         msaSizeBox(width: 20),
-                        SizedBox(
+                        Container(
+                          color: primaryColor,
                           height: 50,
                           width: 120,
                           child: TextButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                              ),
+                            child: const Text(
+                              "Print",
+                              style: TextStyle(color: Colors.white),
                             ),
-                            child: const Text("Print"),
                             onPressed: () {
                               Navigator.push(
                                 context,

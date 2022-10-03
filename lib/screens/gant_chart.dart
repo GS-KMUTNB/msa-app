@@ -38,9 +38,9 @@ class GanttChartScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.of(context)
-                ..pop()
-                ..pop();
+              Navigator.popUntil(context, ModalRoute.withName(
+                  // ignore: fixme
+                  Navigator.defaultRouteName)); //FIXME
             },
             onPressedNo: () {
               Navigator.pop(context);
