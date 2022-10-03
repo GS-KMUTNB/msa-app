@@ -1,6 +1,7 @@
 // import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:msa_app/screens/screens.dart';
 // import 'package:intl/intl.dart';
 
 import '../models/models.dart';
@@ -132,33 +133,50 @@ class ResultScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsets.all(8),
-                    //   child: Column(
-                    //     children: [
-                    //       ElevatedButton(
-                    //         onPressed: () {},
-                    //         child: Text("aaaaa"),
-                    //         style: ElevatedButton.styleFrom(
-                    //             primary: Colors.purple,
-                    //             padding: EdgeInsets.symmetric(
-                    //                 horizontal: 50, vertical: 20),
-                    //             textStyle: TextStyle(
-                    //                 fontSize: 30, fontWeight: FontWeight.bold)),
-                    //       ),
-                    //       ElevatedButton(
-                    //         onPressed: () {},
-                    //         child: Text("bbbb"),
-                    //         style: ElevatedButton.styleFrom(
-                    //             primary: Colors.purple,
-                    //             padding: EdgeInsets.symmetric(
-                    //                 horizontal: 50, vertical: 20),
-                    //             textStyle: TextStyle(
-                    //                 fontSize: 30, fontWeight: FontWeight.bold)),
-                    //       )
-                    //     ],
-                    //   ),
-                    // )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 50,
+                          width: 120,
+                          child: TextButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary: primaryColor1,
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            child: const Text("Download"),
+                          ),
+                        ),
+                        msaSizeBox(width: 20),
+                        SizedBox(
+                          height: 50,
+                          width: 120,
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: primaryColor,
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            child: const Text("Print"),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GanttChartScreen(
+                                    buildContext: context,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                    msaSizeBox(height: 50)
                   ],
                 ),
               ),

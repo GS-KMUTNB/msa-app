@@ -105,7 +105,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 ),
               )
             : const Text(
-                "please input your weight and height for calculate your BMI"),
+                "please input your weight and height for calculate your BMI",
+              ),
         content: BmiForm(
           stepperKey: _formKey,
           heightController: heightController,
