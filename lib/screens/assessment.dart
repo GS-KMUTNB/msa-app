@@ -1,6 +1,7 @@
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 import 'package:msa_app/screens/result.dart';
 import 'package:msa_app/shared/shared.dart';
@@ -35,7 +36,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   bool haveBMIValue = false;
   bool isHighRisk = false;
 
-  var rdValue = ["Yes", "No"];
+  var rdValue = [
+    translate("assesment_page.table_head_yes"),
+    translate("assesment_page.table_head_no")
+  ];
   var radioResult = "";
 
   String wValue = "";
@@ -76,16 +80,16 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         isActive: true,
         title: haveBMIValue
             ? Text(
-                "BMI: $bmiValue",
+                "${translate("assesment_page.text_box_bmi")}: $bmiValue",
               )
-            : const Text('BMI Calculator'),
+            : Text(translate("assesment_page.input_weight_height")),
         subtitle: haveBMIValue
             ? RichText(
                 text: TextSpan(
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'Result:',
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    TextSpan(
+                      text: translate("assesment_page.result"),
+                      style: const TextStyle(fontSize: 14, color: Colors.black),
                     ),
                     TextSpan(
                       text: " $resultBmi\n",
@@ -102,8 +106,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text(
-                "please input your weight and height for calculate your BMI",
+            : Text(
+                translate("assesment_page.sub_input_weight_height"),
               ),
         content: BmiForm(
           stepperKey: _formKey,
@@ -143,15 +147,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 1) ? true : false,
-        title: const Text('BMI < 18.5 or > = 25.0 kg/m2?'),
+        title: Text(translate("assesment_page.description_bmi_range")),
         subtitle: _index >= 2
             ? RichText(
                 text: TextSpan(
                   style: head6,
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'choose :',
-                    ),
+                    TextSpan(text: "${translate("assesment_page.choose")} :"),
                     TextSpan(
                       text: ' ${result[0]}',
                       style: TextStyle(
@@ -162,20 +164,20 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text('Please select Yes or No'),
+            : Text(translate("assesment_page.choose_yes_or_no")),
         content: const SizedBox(),
       ),
       Step(
         isActive: (_index >= 2) ? true : false,
-        title: const Text(
-            'The patient had an unintentional weight loss in During the past 6 months?'),
+        title:
+            Text(translate("assesment_page.description_assesment_weight_loss")),
         subtitle: _index >= 3
             ? RichText(
                 text: TextSpan(
                   style: head6,
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'choose :',
+                    TextSpan(
+                      text: "${translate("assesment_page.choose")} :",
                     ),
                     TextSpan(
                       text: ' ${result[1]}',
@@ -187,7 +189,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text('Please select Yes or No'),
+            : Text(translate("assesment_page.choose_yes_or_no")),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -206,15 +208,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 3) ? true : false,
-        title:
-            const Text('Patients were fed less than they used to (> 7 days).'),
+        title: Text(translate(
+            "assesment_page.description_assesment_Patients_were_fed_less")),
         subtitle: _index >= 4
             ? RichText(
                 text: TextSpan(
                   style: head6,
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'choose :',
+                    TextSpan(
+                      text: "${translate("assesment_page.choose")} :",
                     ),
                     TextSpan(
                       text: ' ${result[2]}',
@@ -226,7 +228,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text('Please select Yes or No'),
+            : Text(translate("assesment_page.choose_yes_or_no")),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -245,15 +247,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index == 4) ? true : false,
-        title:
-            const Text('Patients with critical illness or semi-crisis. or not'),
+        title: Text(
+            translate("assesment_page.description_patients_with_critical")),
         subtitle: _index >= 5
             ? RichText(
                 text: TextSpan(
                   style: head6,
                   children: <TextSpan>[
-                    const TextSpan(
-                      text: 'choose :',
+                    TextSpan(
+                      text: "${translate("assesment_page.choose")} :",
                     ),
                     TextSpan(
                       text: ' ${result[3]}',
@@ -265,7 +267,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   ],
                 ),
               )
-            : const Text('Please select Yes or No'),
+            : Text(translate("assesment_page.choose_yes_or_no")),
         content: CustomRadioButton(
           elevation: 0,
           absoluteZeroSpacing: true,
@@ -288,7 +290,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         ctx: context,
-        title: "Assessment",
+        title: translate("assessment_page_start.assessment"),
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
@@ -298,7 +300,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             have2Button: true,
             haveColorText: true,
             haveQuestions: false,
-            title: 'Warning!!!',
+            title: translate("warning_page_start.warning"),
             width: width,
             height: height / 2,
             onPressedYes: () {
@@ -320,9 +322,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
             haveColorText: false,
             haveQuestions: false,
             haveCloseButton: true,
-            title: 'User Manual',
+            title: translate("manual_select_menu.manual"),
             subTextContent:
-                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
+                translate("warning_page_start.description_user_manual"),
             height: height / 2,
             width: width,
           ),
@@ -416,9 +418,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                       interpreBmi = getInterpretation(bmi);
 
                                       if (bmi < 18.5 || bmi >= 25.0) {
-                                        result.add("Yes");
+                                        result.add(translate(
+                                            "assesment_page.table_head_yes"));
                                       } else {
-                                        result.add("No");
+                                        result.add(translate(
+                                            "assesment_page.table_head_no"));
                                       }
 
                                       _index += 2;
@@ -478,12 +482,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                         continueButton: false,
                                         warningQuestions: true,
                                         have2Button: true,
-                                        title: 'Screening results',
+                                        title: translate(
+                                            "alert_result.screening_result"),
                                         numberQuestions:
-                                            '$countData Questions.',
+                                            '$countData ${translate("alert_result.questions")}.',
                                         textContent: isHighRisk
-                                            ? "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team "
-                                            : "Your screening result is \n- The screening should be repeated once a week. during the hospital stay ",
+                                            ? "${translate("results_page.result_is")} \n- ${translate("results_page.continue_the_nutritional")} "
+                                            : "${translate("results_page.result_is")} \n- ${translate("results_page.should_be_repeated")} ",
                                         isHightRisk: isHighRisk,
                                         onPressedYes: () {
                                           Navigator.push(

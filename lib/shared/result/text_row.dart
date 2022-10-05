@@ -11,7 +11,12 @@ class TextRowResult extends Row {
           key: key,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(flex: 1, child: AutoSizeText(header)),
+            Expanded(
+                flex: 1,
+                child: AutoSizeText(
+                  header,
+                  maxLines: 1,
+                )),
             Expanded(
                 flex: 1,
                 child: AutoSizeText(

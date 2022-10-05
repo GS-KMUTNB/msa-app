@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class BmiForm extends SizedBox {
   BmiForm({
@@ -37,7 +38,7 @@ class BmiForm extends SizedBox {
                       ),
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       // hintText: "Please fill Weight kg.",
-                      labelText: 'Please fill Weight kg.',
+                      labelText: translate("assesment_page.text_box_weight"),
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
@@ -62,7 +63,7 @@ class BmiForm extends SizedBox {
                       ),
                       hintStyle: TextStyle(color: Colors.grey[800]),
                       // hintText: "Please fill Height cm.",
-                      labelText: 'Please fill Height cm.',
+                      labelText: translate("assesment_page.text_box_height"),
                       isDense: true,
                       contentPadding: const EdgeInsets.all(10),
                     ),
@@ -87,14 +88,15 @@ double calculateBMI(double weight, double height) {
 
 String getResult(double bmi) {
   if (bmi >= 25) {
-    return 'Overweight';
+    return translate("assesment_page.text_result_overweight");
   } else if (bmi > 18.5) {
-    return 'Normal';
+    return translate("assesment_page.text_result_normal");
   } else {
-    return 'Underweight';
+    return translate("assesment_page.text_result_underweight");
   }
 }
 
+//FIXME make it dynamic
 Color getResultColor(String bmi) {
   switch (bmi) {
     case "Overweight":
@@ -106,6 +108,15 @@ Color getResultColor(String bmi) {
     case "Underweight":
       return Colors.red;
 
+    case "น้ำหนักเกิน":
+      return Colors.red;
+
+    case "น้ำหนักปกติ":
+      return Colors.green;
+
+    case "น้ำหนักน้อย":
+      return Colors.red;
+
     default:
       return Colors.black;
   }
@@ -113,10 +124,10 @@ Color getResultColor(String bmi) {
 
 String getInterpretation(double bmi) {
   if (bmi >= 25) {
-    return 'You have a higher than normal body weight. Try to exercise more.';
+    return translate("assesment_page.text_guidelines_overweight");
   } else if (bmi >= 18.5) {
-    return 'You have a normal body weight. Good job!';
+    return translate("assesment_page.text_guidelines_normal");
   } else {
-    return 'You have a lower than normal body weight. You can eat a bit more.';
+    return translate("assesment_page.text_guidelines_underweight");
   }
 }

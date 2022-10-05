@@ -21,7 +21,7 @@ class DescriptionScreen extends StatelessWidget {
       appbar: MsaAppBar(
         haveTutor: false,
         ctx: context,
-        title: "Nutrition Screening Tool",
+        title: translate("manual_select_menu.title"),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -87,7 +87,8 @@ class DescriptionScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        text: 'Start screening',
+                        text: translate(
+                            "manual_select_menu.button_start_screening"),
                         textStyle: bodyText1,
                         h: 120,
                       ),

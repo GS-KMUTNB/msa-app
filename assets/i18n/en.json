@@ -11,11 +11,13 @@
     "menu_screening ": "Nutritional screening form"
   },
   "manual_select_menu": {
+    "title": "Nutrition Screening Tool",
     "manual": "User Manual",
-    "description_select_menu": "Description :\n\n1. This nutrition screening form uses weight and height data to calculate the mass index. body (BMI) and data from patient history taking By specifying only 'yes' or 'no' answers.\n\n2. This screening form does not save or store information that You fill out and screening results if you want. Screening results, please download or print after each screening."
+    "description_select_menu": "Description\n\n1. This nutrition screening form uses weight and height data to calculate the mass index. body (BMI) and data from patient history taking By specifying only 'yes' or 'no' answers.\n\n2. This screening form does not save or store information that You fill out and screening results if you want. Screening results, please download or print after each screening.",
+    "button_start_screening": "Start screening"
   },
   "assessment_page_start": {
-    "assessment": "Assessment",
+    "assessment": "Nutrition Screening Tool",
     "description_page_start": "Description : To make a screening Nutritional Status Assessment Model Information is required. /n - Weight /n - Height A section to use to calculate your body mass index (BMI) and have questions for you to do. Answer by choosing to answer in 2 cases, yes and no.",
     "button_page_start": "Start doing screening nutrition"
   },
@@ -23,17 +25,37 @@
     "warning": "Warningn!!!",
     "description_warning_page_start": "Would you like to leave the rating page? If you agree to leave the assessment Everything you do in this assessment will be deleted.",
     "button_agree": "Agree",
-    "button_cancel": "Cancel"
+    "button_cancel": "Cancel",
+    "button_yes": "Yes",
+    "button_no": "NO",
+    "text_would_you": "Would you like to",
+    "text_leave_the_screen": " leave the screening form?",
+    "text_if_you_agree": " \nIf you agree to leave the screening form",
+    "text_will_be_delete": " Everything you do in this assessment will be deleted.",
+    "button_continue": "Continue",
+    "button_ok": "OK",
+    "description_user_manual": "Description : Nutritional status screening page\n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer."
   },
   "assesment_page": {
     "progress": "Progress",
+    "input_weight_height": "Input weight and height",
+    "sub_input_weight_height": "please input your weight and height for calculate your BMI",
+    "result": "Result:",
     "text_box_weight": "Weight kg.",
     "text_box_height": "Height cm.",
     "button_confirm": "Confirm",
     "text_box_bmi": "BMI",
+    "text_result_overweight": "Overweight",
+    "text_result_normal": "Normal",
+    "text_result_underweight": "Underweight",
+    "text_guidelines_overweight": "You have a higher than normal body weight. Try to exercise more.",
+    "text_guidelines_normal": "You have a normal body weight. Good job!",
+    "text_guidelines_underweight": "You have a lower than normal body weight. You can eat a bit more.",
     "description_assesment_weight_loss": "The patient had an unintentional weight loss in During the past 6 months?",
     "description_assesment_Patients_were_fed_less": "Patients were fed less than they used to (> 7 days).",
     "description_bmi_range": "BMI < 18.5 or > = 25.0 kg/m2?",
+    "choose": "choose",
+    "choose_yes_or_no": "Please select Yes or No",
     "description_patients_with_critical": "Patients with critical illness or semi-crisis .or not",
     "table_head_yes": "Yes",
     "table_head_no": "No",
@@ -54,17 +76,27 @@
   "warning_model_complete": {
     "description_model_complete": "Please complete the assessment."
   },
+  "alert_result": {
+    "screening_result": "Screening results",
+    "you_answered_yes": "You answered yes ",
+    "questions": "Questions."
+  },
   "results_page": {
-    "result": "Results",
+    "result": "Result screening nutritional status",
     "date": "Date",
     "weight": "Weight",
     "kg": "kg",
     "cm": "cm",
     "height": "Height",
+    "kg/m": "kg./m^2",
     "slim": "Slim",
+    "result_is": "Your screening result is",
     "description_results_page": "Your screening result is /n - Continue with a nutritional assessment or consult a dietitian. Food/Nutritional team",
-    "button_download": "Download",
-    "button_print": "Print"
+    "button_print_download": "Print & Download",
+    "answered_yes": "You answered yes to",
+    "questions": "questions",
+    "continue_the_nutritional": "Continue the nutritional assessment. or consult a dietitian/nutrition team",
+    "should_be_repeated": "The screening should be repeated once a week. during the hospital stay"
   },
   "success_page": {
     "success": "Success",
