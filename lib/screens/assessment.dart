@@ -302,9 +302,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
     ];
 
-    // print("_index: ${_index}");
-    // print(result);
-
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
@@ -328,6 +325,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               Navigator.of(context)
                 ..pop()
                 ..pop();
+            },
+            onPressedNo: () {
+              Navigator.of(context).pop();
             },
           ),
         ),
@@ -419,83 +419,100 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                             //*continue
                             onStepContinue: () {
                               if (_formKey.currentState!.validate()) {
-                                if (_index == 0) {
-                                  setState(() {
-                                    haveBMIValue = true;
-
-                                    var wD = double.parse(wValue);
-                                    var hD = double.parse(hValue);
-                                    var bmi = calculateBMI(wD, hD);
-
-                                    bmiValue = bmi.toStringAsFixed(2);
-                                    resultBmi = getResult(bmi);
-                                    interpreBmi = getInterpretation(bmi);
-
-                                    if (bmi < 18.5 || bmi >= 25.0) {
-                                      result.add("Yes");
-                                    } else {
-                                      result.add("No");
-                                    }
-
-                                    _index++;
-                                  });
-                                }
-
                                 var lastStep = _index == getStep.length - 1;
 
                                 if (_index <= getStep.length - 1) {
                                   // To next Step
-                                  if (lastStep) {
+                                  if (_index == 0) {
                                     setState(() {
-                                      if (result.length <= 3) {
-                                        result.add(radioResult);
+                                      haveBMIValue = true;
+
+                                      var wD = double.parse(wValue);
+                                      var hD = double.parse(hValue);
+                                      var bmi = calculateBMI(wD, hD);
+
+                                      bmiValue = bmi.toStringAsFixed(2);
+                                      resultBmi = getResult(bmi);
+                                      interpreBmi = getInterpretation(bmi);
+
+                                      if (bmi < 18.5 || bmi >= 25.0) {
+                                        result.add("Yes");
+                                      } else {
+                                        result.add("No");
                                       }
+
+                                      _index += 2;
                                     });
                                   } else {
                                     setState(() {
-                                      _index += 1;
-
                                       if (radioResult != "") {
-                                        result.add(radioResult);
+                                        if (!lastStep) {
+                                          _index += 1;
+                                          result.add(radioResult);
+                                          radioResult = "";
+                                        }
+                                      } else {
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: const Text('Please Select'),
+                                            content: const Text('Yes or No'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () =>
+                                                    Navigator.of(context).pop(),
+                                                child: const Text('OK'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
                                       }
                                     });
                                   }
                                 }
 
                                 if (_index == 4 && lastStep) {
-                                  var countData = data.formData!
-                                      .where((c) => c == "Yes")
-                                      .length;
+                                  if (radioResult != "") {
+                                    setState(() {
+                                      result.add(radioResult);
+                                    });
 
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        MsaHintAlert(
+                                    var countData = data.formData!
+                                        .where((c) => c == "Yes")
+                                        .length;
+
+                                    showDialog(
                                       context: context,
-                                      haveButton: true,
-                                      haveQuestions: true,
-                                      continueButton: false,
-                                      warningQuestions: true,
-                                      have2Button: true,
-                                      title: 'Screening results',
-                                      numberQuestions: '$countData Questions.',
-                                      textContent:
-                                          "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
-                                      onPressedYes: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ResultScreen(data: data),
-                                          ),
-                                        );
-                                      },
-                                      onPressedNo: () {
-                                        result.removeLast();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  );
+                                      builder: (BuildContext context) =>
+                                          MsaHintAlert(
+                                        context: context,
+                                        haveButton: true,
+                                        haveQuestions: true,
+                                        continueButton: false,
+                                        warningQuestions: true,
+                                        have2Button: true,
+                                        title: 'Screening results',
+                                        numberQuestions:
+                                            '$countData Questions.',
+                                        textContent:
+                                            "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
+                                        onPressedYes: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ResultScreen(data: data),
+                                            ),
+                                          );
+                                        },
+                                        onPressedNo: () {
+                                          result.removeLast();
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
+                                  }
                                 }
                               }
                             },
