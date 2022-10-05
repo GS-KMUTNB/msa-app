@@ -55,6 +55,14 @@ const head1 = TextStyle(
   color: primaryColor,
 );
 
+const head1Gant = TextStyle(
+  fontFamily: prompt,
+  fontWeight: FontWeight.w700,
+  fontSize: fontSizeH5,
+  fontStyle: FontStyle.normal,
+  color: primaryColor,
+);
+
 const head1NoWeight = TextStyle(
   fontFamily: prompt,
   fontSize: fontSizeH1,

@@ -20,6 +20,7 @@ class MsaHintAlert extends Container {
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
+    bool isHightRisk = false,
     VoidCallback? onContinue,
     VoidCallback? onPressedYes,
     VoidCallback? onPressedNo,
@@ -68,26 +69,35 @@ class MsaHintAlert extends Container {
                       msaSizeBox(height: 30),
                       warningQuestions
                           ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(
-                                  Icons.error_rounded,
-                                  color: primaryColor4,
-                                  size: 40,
-                                ),
+                                isHightRisk
+                                    ? const Icon(
+                                        Icons.error_rounded,
+                                        color: primaryColor4,
+                                        size: 40,
+                                      )
+                                    : const SizedBox(),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 3),
                                   child: Text(
                                     numberQuestions,
-                                    style: const TextStyle(
-                                        color: warningColor, fontSize: 32),
+                                    style: TextStyle(
+                                      color: isHightRisk
+                                          ? warningColor
+                                          : whiteColor,
+                                      fontSize: 32,
+                                    ),
                                   ),
                                 ),
-                                const Icon(
-                                  Icons.error_rounded,
-                                  color: primaryColor4,
-                                  size: 40,
-                                ),
+                                isHightRisk
+                                    ? const Icon(
+                                        Icons.error_rounded,
+                                        color: primaryColor4,
+                                        size: 40,
+                                      )
+                                    : const SizedBox(),
                               ],
                             )
                           : Text(

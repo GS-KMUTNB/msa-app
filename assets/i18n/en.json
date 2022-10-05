@@ -12,7 +12,7 @@
   },
   "manual_select_menu": {
     "manual": "User Manual",
-    "description_select_menu": "Description: The menu item page you can select. Assess your kidney disease risk by choosing Menu ''Nutritionals creening form''"
+    "description_select_menu": "Description :\n\n1. This nutrition screening form uses weight and height data to calculate the mass index. body (BMI) and data from patient history taking By specifying only 'yes' or 'no' answers.\n\n2. This screening form does not save or store information that You fill out and screening results if you want. Screening results, please download or print after each screening."
   },
   "assessment_page_start": {
     "assessment": "Assessment",

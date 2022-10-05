@@ -33,6 +33,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
   int step1 = -1;
 
   bool haveBMIValue = false;
+  bool isHighRisk = false;
 
   var rdValue = ["Yes", "No"];
   var radioResult = "";
@@ -69,9 +70,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       bmiValue,
       result,
     );
-
-    // print(radioResult);
-    // print(_index);
 
     var getStep = <Step>[
       Step(
@@ -166,22 +164,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
               )
             : const Text('Please select Yes or No'),
         content: const SizedBox(),
-        // content:
-        // CustomRadioButton(
-        //   elevation: 0,
-        //   absoluteZeroSpacing: true,
-        //   unSelectedColor: Colors.transparent,
-        //   buttonLables: rdValue,
-        //   buttonValues: rdValue,
-        //   selectedColor: colorCondition(radioResult),
-        //   selectedBorderColor: colorCondition(radioResult),
-        //   unSelectedBorderColor: const Color.fromARGB(73, 0, 0, 0),
-        //   radioButtonValue: (value) {
-        //     setState(() {
-        //       radioResult = value.toString();
-        //     });
-        //   },
-        // ),
       ),
       Step(
         isActive: (_index >= 2) ? true : false,
@@ -308,8 +290,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ctx: context,
         title: "Assessment",
         onPressed: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
@@ -482,6 +462,12 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                         .where((c) => c == "Yes")
                                         .length;
 
+                                    if (countData >= 2) {
+                                      setState(() {
+                                        isHighRisk = true;
+                                      });
+                                    }
+
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) =>
@@ -495,8 +481,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                         title: 'Screening results',
                                         numberQuestions:
                                             '$countData Questions.',
-                                        textContent:
-                                            "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team",
+                                        textContent: isHighRisk
+                                            ? "Your screening result is \n- Continue the nutritional assessment. or consult a dietitian/nutrition team "
+                                            : "Your screening result is \n- The screening should be repeated once a week. during the hospital stay ",
+                                        isHightRisk: isHighRisk,
                                         onPressedYes: () {
                                           Navigator.push(
                                             context,
