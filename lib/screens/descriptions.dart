@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 
@@ -55,8 +56,8 @@ class DescriptionScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     msaSizeBox(height: 30),
-                    const AutoSizeText(
-                      "Description :\n\n1. This nutrition screening form uses weight and height data to calculate the mass index. body (BMI) and data from patient history taking By specifying only 'yes' or 'no' answers.\n\n2. This screening form does not save or store information that You fill out and screening results if you want. Screening results, please download or print after each screening.",
+                    AutoSizeText(
+                      translate("manual_select_menu.description_select_menu"),
                       style: bodyText1,
                       maxLines: 12,
                       textAlign: TextAlign.left,

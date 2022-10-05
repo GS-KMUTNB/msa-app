@@ -18,6 +18,30 @@ class PerioperativePatientScreen extends StatefulWidget {
 }
 
 class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
+  late TextEditingController weightController = TextEditingController();
+  final FocusNode weightFocus = FocusNode();
+
+  late TextEditingController heightController = TextEditingController();
+  final FocusNode hightFocus = FocusNode();
+
+  final _controller = ScrollController();
+  // final _formKey = GlobalKey<FormState>();
+  // int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    weightController = TextEditingController();
+    heightController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    weightController.dispose();
+    heightController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -423,10 +447,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         title: 'GANTT CHART Energy & Protein Intake Calculator',
+        maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
@@ -489,13 +512,26 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 40, right: 10, left: 10),
-                  child: MsaStepper(
-                      context: context,
-                      currentStep: 0,
-                      onStepCancel: () {},
-                      onStepContinue: () {},
-                      onStepTapped: (int index) => null,
-                      steps: getStep),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          physics: const BouncingScrollPhysics(),
+                          controller: _controller,
+                          children: [
+                            MsaStepper(
+                              context: context,
+                              currentStep: 0, //_index,
+                              onStepCancel: () {},
+                              onStepContinue: () {},
+                              onStepTapped: (int index) => null,
+                              steps: getStep,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

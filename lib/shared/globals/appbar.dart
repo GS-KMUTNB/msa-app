@@ -11,6 +11,7 @@ class MsaAppBar extends AppBar {
     bool haveTutor = false,
     VoidCallback? onPressed,
     VoidCallback? onPressedHint,
+    int? maxLines = 1,
     required BuildContext ctx,
   }) : super(
           key: key,
@@ -23,8 +24,8 @@ class MsaAppBar extends AppBar {
               : Center(
                   child: AutoSizeText(
                     title,
-                    style: head1,
-                    maxLines: 1,
+                    style: (maxLines == 2) ? head1Gant : head1,
+                    maxLines: maxLines,
                     minFontSize: 12,
                   ),
                 ),

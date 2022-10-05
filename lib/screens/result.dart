@@ -13,6 +13,7 @@ import '../theme/theme.dart';
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
   final Screening data;
+  bool isHightRisk = false;
 
   ResultScreen({
     Key? key,
@@ -32,16 +33,15 @@ class ResultScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
 
     var countData = data.formData!.where((c) => c == "Yes").length;
-
-    // print(data.formData);
+    if (countData >= 2) {
+      isHightRisk = true;
+    }
 
     return MsaScaffold(
       appbar: MsaAppBar(
         ctx: context,
         title: "Result screening nutritional status",
         onPressed: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
@@ -57,6 +57,9 @@ class ResultScreen extends StatelessWidget {
               Navigator.popUntil(context, ModalRoute.withName(
                   // ignore: fixme
                   Navigator.defaultRouteName)); //FIXME
+            },
+            onPressedNo: () {
+              Navigator.pop(context);
             },
           ),
         ),
@@ -125,37 +128,25 @@ class ResultScreen extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text:
-                                  '\n- You answered yes to $countData questions\n- Continue the nutritional assessment. or consult a dietitian/nutrition team',
+                              text: isHightRisk
+                                  ? '\n - You answered yes to $countData questions.\n - Continue the nutritional assessment. or consult a dietitian/nutrition team'
+                                  : '\n - You answered yes to $countData questions.\n - The screening should be repeated once a week. during the hospital stay',
                               style: const TextStyle(color: blackColor),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          color: primaryColor1,
-                          height: 50,
-                          width: 120,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "Download",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        msaSizeBox(width: 20),
-                        Container(
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
                           color: primaryColor,
                           height: 50,
-                          width: 120,
+                          width: width,
                           child: TextButton(
                             child: const Text(
-                              "Print",
+                              "Print & Download",
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
@@ -169,8 +160,8 @@ class ResultScreen extends StatelessWidget {
                               );
                             },
                           ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                     msaSizeBox(height: 50)
                   ],

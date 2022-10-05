@@ -11,14 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
   cupertino_icons: ^1.0.2
   flutter_feather_icons: ^2.0.0
   auto_size_text: ^3.0.0
   custom_radio_grouped_button: ^2.1.2+2
-  intl: ^0.17.0
   printing: ^5.9.3
   syncfusion_flutter_charts: ^20.3.47
+  flutter_translate: ^4.0.3
 
 dev_dependencies:
   flutter_test:
@@ -36,5 +39,7 @@ flutter:
         - asset: assets/fonts/Prompt-Regular.ttf
   assets:
     - assets/images/
+    - assets/i18n/th.json
+    - assets/i18n/en.json
 
   uses-material-design: true

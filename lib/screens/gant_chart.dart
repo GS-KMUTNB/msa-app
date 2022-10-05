@@ -22,10 +22,9 @@ class GanttChartScreen extends StatelessWidget {
       appBar: MsaAppBar(
         haveTutor: true,
         title: 'GANTT CHART Energy & Protein Intake Calculator',
+        maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,

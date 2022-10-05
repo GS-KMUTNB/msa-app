@@ -1008,6 +1008,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
       appBar: MsaAppBar(
         haveTutor: true,
         title: 'GANTT CHART Energy & Protein Intake Calculator',
+        maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
           // ignore: fixme

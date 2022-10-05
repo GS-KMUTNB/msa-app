@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/theme/theme.dart';
 
@@ -39,9 +40,9 @@ class HomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 msaSizeBox(height: 10),
-                const AutoSizeText(
-                  "Select Language",
-                  style: TextStyle(fontSize: 22),
+                AutoSizeText(
+                  translate("select_language_page.select_language"),
+                  style: const TextStyle(fontSize: 22),
                   maxLines: 1,
                 ),
                 msaSizeBox(height: 30),
@@ -50,6 +51,7 @@ class HomeScreen extends StatelessWidget {
                   h: height / 3.2,
                   color: primaryColor1,
                   engButton: () {
+                    changeLocale(context, "en");
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -57,7 +59,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  thaiButton: () {},
+                  thaiButton: () {
+                    changeLocale(context, "th");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DescriptionScreen(),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   width: 150.0,
