@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class MsaProgressBar extends SizedBox {
@@ -9,8 +10,8 @@ class MsaProgressBar extends SizedBox {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Progress",
+              Text(
+                translate("assesment_page.progress"),
                 style: bodyText1,
               ),
               const SizedBox(

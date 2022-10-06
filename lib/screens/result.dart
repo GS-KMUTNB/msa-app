@@ -1,6 +1,7 @@
 // import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/screens/screens.dart';
 // import 'package:intl/intl.dart';
 
@@ -21,10 +22,10 @@ class ResultScreen extends StatelessWidget {
   }) : super(key: key);
 
   var formQuestion = [
-    "The patient had an unintentional weight loss in During the past 6 months?",
-    "Patients were fed less than they used to (> 7 days).",
-    "BMI < 18.5 or > = 25.0 kg/m2?",
-    "Patients with critical illness or semi-crisis .or not"
+    translate("assesment_page.description_assesment_weight_loss"),
+    translate("assesment_page.description_assesment_Patients_were_fed_less"),
+    translate("assesment_page.description_bmi_range"),
+    translate("assesment_page.description_patients_with_critical"),
   ];
 
   @override
@@ -40,7 +41,7 @@ class ResultScreen extends StatelessWidget {
     return MsaScaffold(
       appbar: MsaAppBar(
         ctx: context,
-        title: "Result screening nutritional status",
+        title: translate("results_page.result"),
         onPressed: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
@@ -83,19 +84,22 @@ class ResultScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           TextRowResult(
-                              header: 'Date : ', data: data.date, unit: ""),
+                              header: '${translate("results_page.date")} : ',
+                              data: data.date,
+                              unit: ""),
                           TextRowResult(
-                              header: 'Weight : ',
+                              header: '${translate("results_page.weight")} : ',
                               data: data.weight,
-                              unit: "kg"),
+                              unit: translate("results_page.kg")),
                           TextRowResult(
-                              header: 'Height : ',
+                              header: '${translate("results_page.height")} : ',
                               data: data.height,
-                              unit: "cm"),
+                              unit: translate("results_page.cm")),
                           TextRowResult(
-                              header: 'BMI : ',
+                              header:
+                                  '${translate("assesment_page.text_box_bmi")} : ',
                               data: data.bmi,
-                              unit: "kg./m^2"),
+                              unit: translate("results_page.kg/m")),
                         ],
                       ),
                     ),
@@ -119,9 +123,9 @@ class ResultScreen extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           children: <TextSpan>[
-                            const TextSpan(
-                              text: 'Your screening result is',
-                              style: TextStyle(
+                            TextSpan(
+                              text: translate("results_page.result_is"),
+                              style: const TextStyle(
                                 color: blackColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
@@ -129,8 +133,8 @@ class ResultScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text: isHightRisk
-                                  ? '\n - You answered yes to $countData questions.\n - Continue the nutritional assessment. or consult a dietitian/nutrition team'
-                                  : '\n - You answered yes to $countData questions.\n - The screening should be repeated once a week. during the hospital stay',
+                                  ? '\n - ${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}.\n - ${translate("results_page.continue_the_nutritional")}'
+                                  : '\n - ${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}.\n - ${translate("results_page.should_be_repeated")}',
                               style: const TextStyle(color: blackColor),
                             ),
                           ],
@@ -145,9 +149,9 @@ class ResultScreen extends StatelessWidget {
                           height: 50,
                           width: width,
                           child: TextButton(
-                            child: const Text(
-                              "Print & Download",
-                              style: TextStyle(color: Colors.white),
+                            child: Text(
+                              translate("results_page.button_print_download"),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
                               Navigator.push(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class MsaHintAlert extends Container {
@@ -61,9 +62,9 @@ class MsaHintAlert extends Container {
             content: haveQuestions
                 ? Column(
                     children: [
-                      const Text(
-                        "You answered yes ",
-                        style: TextStyle(color: whiteColor),
+                      Text(
+                        translate("alert_result.you_answered_yes"),
+                        style: const TextStyle(color: whiteColor),
                         textAlign: TextAlign.left,
                       ),
                       msaSizeBox(height: 30),
@@ -154,24 +155,26 @@ class MsaHintAlert extends Container {
                       )
                     : haveColorText
                         ? RichText(
-                            text: const TextSpan(
-                              text: 'Would you like to',
-                              style: TextStyle(color: whiteColor),
+                            text: TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_would_you"),
+                              style: const TextStyle(color: whiteColor),
                               /*defining default style is optional */
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: ' leave the screening form?',
-                                  style: TextStyle(color: primaryColor4),
+                                  text: translate(
+                                      "warning_page_start.text_leave_the_screen"),
+                                  style: const TextStyle(color: primaryColor4),
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' \nIf you agree to leave the screening form',
-                                  style: TextStyle(color: whiteColor),
+                                  text: translate(
+                                      "warning_page_start.text_if_you_agree"),
+                                  style: const TextStyle(color: whiteColor),
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' Everything you do in this assessment will be deleted.',
-                                  style: TextStyle(
+                                  text: translate(
+                                      "warning_page_start.text_will_be_delete"),
+                                  style: const TextStyle(
                                     color: primaryColor4,
                                   ),
                                 ),
@@ -200,9 +203,9 @@ class MsaHintAlert extends Container {
                                 ),
                                 child: TextButton(
                                   onPressed: onPressedYes,
-                                  child: const Text(
-                                    'Yes',
-                                    style: TextStyle(color: blackColor),
+                                  child: Text(
+                                    translate("warning_page_start.button_yes"),
+                                    style: const TextStyle(color: blackColor),
                                   ),
                                 ),
                               ),
@@ -218,9 +221,9 @@ class MsaHintAlert extends Container {
                                 child: TextButton(
                                   onPressed:
                                       onPressedNo, //() => Navigator.pop(context),
-                                  child: const Text(
-                                    'No',
-                                    style: TextStyle(color: blackColor),
+                                  child: Text(
+                                    translate("warning_page_start.button_no"),
+                                    style: const TextStyle(color: blackColor),
                                   ),
                                 ),
                               ),
@@ -245,16 +248,20 @@ class MsaHintAlert extends Container {
                                       // ignore: fixme
                                       //FIXME
                                       onPressed: onContinue,
-                                      child: const Text(
-                                        'Continue',
-                                        style: TextStyle(color: blackColor),
+                                      child: Text(
+                                        translate(
+                                            "warning_page_start.button_continue"),
+                                        style:
+                                            const TextStyle(color: blackColor),
                                       ),
                                     )
                                   : TextButton(
                                       onPressed: () => Navigator.pop(context),
-                                      child: const Text(
-                                        'OK',
-                                        style: TextStyle(color: blackColor),
+                                      child: Text(
+                                        translate(
+                                            "warning_page_start.button_ok"),
+                                        style:
+                                            const TextStyle(color: blackColor),
                                       ),
                                     ),
                             ),
