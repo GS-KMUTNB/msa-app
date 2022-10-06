@@ -38,7 +38,7 @@
   },
   "assesment_page": {
     "progress": "ความคืบหน้าการทำแบบประเมิน",
-    "input_weight_height": "กรอกนำหนักและส่วนสูง",
+    "input_weight_height": "กรอกน้ำหนักและส่วนสูง",
     "sub_input_weight_height": "กรุณาใส่น้ำหนักและส่วนสูงของคุณเพื่อคำนวณค่าดัชนีมวลกายของคุณ",
     "result": "ผลลัพธ์:",
     "text_box_weight": "น้ำหนัก กก.",

@@ -29,10 +29,10 @@ class MsaApp extends StatelessWidget {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         title: appName,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-          localizationDelegate
         ],
         supportedLocales: localizationDelegate.supportedLocales,
         locale: localizationDelegate.currentLocale,

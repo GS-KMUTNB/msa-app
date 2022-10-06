@@ -19,6 +19,7 @@ class MsaStepper extends Container {
               colorScheme: Theme.of(context).colorScheme.copyWith(
                     primary: primaryColor,
                   ),
+              fontFamily: prompt,
             ),
             child: Stepper(
               physics: const BouncingScrollPhysics(),

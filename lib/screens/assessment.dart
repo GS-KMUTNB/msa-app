@@ -79,9 +79,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       Step(
         isActive: true,
         title: haveBMIValue
-            ? Text(
-                "${translate("assesment_page.text_box_bmi")}: $bmiValue",
-              )
+            ? Text("${translate("assesment_page.text_box_bmi")}: $bmiValue")
             : Text(translate("assesment_page.input_weight_height")),
         subtitle: haveBMIValue
             ? RichText(
@@ -101,13 +99,19 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                     ),
                     TextSpan(
                       text: interpreBmi,
-                      style: const TextStyle(fontSize: 12, color: Colors.black),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                      ),
                     )
                   ],
                 ),
               )
             : Text(
                 translate("assesment_page.sub_input_weight_height"),
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
               ),
         content: BmiForm(
           stepperKey: _formKey,
@@ -153,7 +157,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 text: TextSpan(
                   style: head6,
                   children: <TextSpan>[
-                    TextSpan(text: "${translate("assesment_page.choose")} :"),
+                    TextSpan(
+                        text: "${translate("assesment_page.choose")} :",
+                        style: const TextStyle()),
                     TextSpan(
                       text: ' ${result[0]}',
                       style: TextStyle(
@@ -463,12 +469,21 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     });
 
                                     var countData = data.formData!
-                                        .where((c) => c == "Yes")
+                                        .where(
+                                          (c) =>
+                                              c ==
+                                              translate(
+                                                  "assesment_page.table_head_yes"),
+                                        )
                                         .length;
 
                                     if (countData >= 2) {
                                       setState(() {
                                         isHighRisk = true;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        isHighRisk = false;
                                       });
                                     }
 

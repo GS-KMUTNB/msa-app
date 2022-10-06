@@ -160,4 +160,5 @@ const caption = TextStyle(
 ThemeData msaData() => ThemeData(
       textTheme: textTheme,
       primaryColor: primaryColor,
+      fontFamily: prompt,
     );

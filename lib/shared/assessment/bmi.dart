@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+import '../../theme/theme.dart';
+
 class BmiForm extends SizedBox {
   BmiForm({
     Key? key,
@@ -31,6 +33,7 @@ class BmiForm extends SizedBox {
                     vertical: 5,
                   ),
                   child: TextFormField(
+                    style: head6,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -56,6 +59,7 @@ class BmiForm extends SizedBox {
                     vertical: 5,
                   ),
                   child: TextFormField(
+                    style: head6,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -96,29 +100,11 @@ String getResult(double bmi) {
   }
 }
 
-//FIXME make it dynamic
 Color getResultColor(String bmi) {
-  switch (bmi) {
-    case "Overweight":
-      return Colors.red;
-
-    case "Normal":
-      return Colors.green;
-
-    case "Underweight":
-      return Colors.red;
-
-    case "น้ำหนักเกิน":
-      return Colors.red;
-
-    case "น้ำหนักปกติ":
-      return Colors.green;
-
-    case "น้ำหนักน้อย":
-      return Colors.red;
-
-    default:
-      return Colors.black;
+  if (bmi == translate("assesment_page.text_result_normal")) {
+    return Colors.green;
+  } else {
+    return Colors.red;
   }
 }
 

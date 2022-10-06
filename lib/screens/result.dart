@@ -33,7 +33,11 @@ class ResultScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    var countData = data.formData!.where((c) => c == "Yes").length;
+    var countData = data.formData!
+        .where(
+          (c) => c == translate("assesment_page.table_head_yes"),
+        )
+        .length;
     if (countData >= 2) {
       isHightRisk = true;
     }
