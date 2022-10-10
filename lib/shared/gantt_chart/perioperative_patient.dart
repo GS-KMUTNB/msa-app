@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../../theme/theme.dart';
@@ -47,6 +46,15 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   var sexValue = "";
 
   List<String> sex = <String>['Please select', 'Male', 'Female'];
+  List<String> energy = <String>['Please select', '20', '25', '30', '35', '40'];
+  List<String> protien = <String>[
+    'Please select',
+    '1.0',
+    '1.2',
+    '1.3',
+    '1.4',
+    '1.5'
+  ];
 
   @override
   void initState() {
@@ -66,6 +74,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
+    String energyValue = energy.first;
+    String protienValue = protien.first;
 
     var getStep = <Step>[
       Step(
@@ -178,200 +189,199 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
           ),
         ),
       ),
-      Step(title: Text("test"), content: Text("data"))
-      // Step(
-      //     isActive: (_index >= 1) ? true : false,
-      //     title: const AutoSizeText(
-      //       'Daily Requirement',
-      //       minFontSize: 16,
-      //       maxLines: 1,
-      //     ),
-      //     content: Container(
-      //       padding: const EdgeInsets.symmetric(horizontal: 10),
-      //       child: Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           const AutoSizeText(
-      //             "Energy goal (kcal/kg/day)",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           msaSizeBox(),
-      //           Container(
-      //             padding: const EdgeInsets.only(left: 10),
-      //             decoration: const ShapeDecoration(
-      //                 shape: RoundedRectangleBorder(
-      //               side: BorderSide(
-      //                   width: 1.0,
-      //                   style: BorderStyle.solid,
-      //                   color: Colors.grey),
-      //               borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      //             )),
-      //             width: width,
-      //             height: 40,
-      //             child: DropdownButton(
-      //                 underline: const SizedBox(),
-      //                 isExpanded: true,
-      //                 iconEnabledColor: Colors.grey,
-      //                 iconSize: 36,
-      //                 borderRadius:
-      //                     const BorderRadius.all(Radius.circular(20.0)),
-      //                 value: energyValue,
-      //                 items:
-      //                     energy.map<DropdownMenuItem<String>>((String value) {
-      //                   return DropdownMenuItem<String>(
-      //                       value: value, child: Text(value));
-      //                 }).toList(),
-      //                 onChanged: (String? value) {
-      //                   setState(() {
-      //                     energyValue = value!;
-      //                   });
-      //                 }),
-      //           ),
-      //           msaSizeBox(),
-      //           const AutoSizeText(
-      //             "Protien goal (g/kg/day)",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           msaSizeBox(),
-      //           Container(
-      //             padding: const EdgeInsets.only(left: 10),
-      //             decoration: const ShapeDecoration(
-      //                 shape: RoundedRectangleBorder(
-      //               side: BorderSide(
-      //                   width: 1.0,
-      //                   style: BorderStyle.solid,
-      //                   color: Colors.grey),
-      //               borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      //             )),
-      //             width: width,
-      //             height: 40,
-      //             child: DropdownButton(
-      //                 underline: const SizedBox(),
-      //                 isExpanded: true,
-      //                 iconEnabledColor: Colors.grey,
-      //                 iconSize: 36,
-      //                 borderRadius:
-      //                     const BorderRadius.all(Radius.circular(20.0)),
-      //                 value: protienValue,
-      //                 items:
-      //                     protien.map<DropdownMenuItem<String>>((String value) {
-      //                   return DropdownMenuItem<String>(
-      //                       value: value, child: Text(value));
-      //                 }).toList(),
-      //                 onChanged: (String? value) {
-      //                   setState(() {
-      //                     protienValue = value!;
-      //                   });
-      //                 }),
-      //           ),
-      //           msaSizeBox(),
-      //           const AutoSizeText(
-      //             "Energy daily requirement (kcal)",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           Container(
-      //             padding: const EdgeInsets.symmetric(horizontal: 10),
-      //             alignment: Alignment.centerLeft,
-      //             width: width,
-      //             height: 40,
-      //             decoration: const ShapeDecoration(
-      //                 color: primaryColor4,
-      //                 shape: RoundedRectangleBorder(
-      //                   side: BorderSide(
-      //                       width: 1.0,
-      //                       style: BorderStyle.solid,
-      //                       color: Colors.grey),
-      //                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      //                 )),
-      //             child: const AutoSizeText(
-      //               "1,250 (kcal)",
-      //               maxLines: 1,
-      //               minFontSize: 16,
-      //               maxFontSize: 18,
-      //               style: TextStyle(color: Colors.grey),
-      //             ),
-      //           ),
-      //           msaSizeBox(),
-      //           const AutoSizeText(
-      //             "Protein daily requirement (g)",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           Container(
-      //             padding: const EdgeInsets.symmetric(horizontal: 10),
-      //             alignment: Alignment.centerLeft,
-      //             width: width,
-      //             height: 40,
-      //             decoration: const ShapeDecoration(
-      //                 color: primaryColor4,
-      //                 shape: RoundedRectangleBorder(
-      //                   side: BorderSide(
-      //                       width: 1.0,
-      //                       style: BorderStyle.solid,
-      //                       color: Colors.grey),
-      //                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      //                 )),
-      //             child: const AutoSizeText(
-      //               "60.0 (g)",
-      //               maxLines: 1,
-      //               minFontSize: 16,
-      //               maxFontSize: 18,
-      //               style: TextStyle(color: Colors.grey),
-      //             ),
-      //           ),
-      //           msaSizeBox(),
-      //           const AutoSizeText(
-      //             "Actual Oral/EN energy intake (kcal)",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           msaSizeBox(),
-      //           TextFormField(
-      //             decoration: InputDecoration(
-      //               border: OutlineInputBorder(
-      //                 borderRadius: BorderRadius.circular(20.0),
-      //               ),
-      //               hintStyle: TextStyle(color: Colors.grey[800]),
-      //               hintText: "Please fill info",
-      //               isDense: true,
-      //               contentPadding: const EdgeInsets.all(10),
-      //             ),
-      //             keyboardType: TextInputType.number,
-      //           ),
-      //           msaSizeBox(),
-      //           const AutoSizeText(
-      //             "% actual energy intake vs requirement",
-      //             minFontSize: 14,
-      //             maxLines: 1,
-      //           ),
-      //           Container(
-      //             padding: const EdgeInsets.symmetric(horizontal: 10),
-      //             alignment: Alignment.centerLeft,
-      //             width: width,
-      //             height: 40,
-      //             decoration: const ShapeDecoration(
-      //                 color: primaryColor4,
-      //                 shape: RoundedRectangleBorder(
-      //                   side: BorderSide(
-      //                       width: 1.0,
-      //                       style: BorderStyle.solid,
-      //                       color: Colors.grey),
-      //                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      //                 )),
-      //             child: const AutoSizeText(
-      //               "56.0 %",
-      //               maxLines: 1,
-      //               minFontSize: 16,
-      //               maxFontSize: 18,
-      //               style: TextStyle(color: Colors.grey),
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     )),
+      Step(
+          isActive: (_index >= 1) ? true : false,
+          title: const AutoSizeText(
+            'Daily Requirement',
+            minFontSize: 16,
+            maxLines: 1,
+          ),
+          content: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const AutoSizeText(
+                  "Energy goal (kcal/kg/day)",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                msaSizeBox(),
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                        color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  )),
+                  width: width,
+                  height: 40,
+                  child: DropdownButton(
+                      underline: const SizedBox(),
+                      isExpanded: true,
+                      iconEnabledColor: Colors.grey,
+                      iconSize: 36,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20.0)),
+                      value: energyValue,
+                      items:
+                          energy.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value, child: Text(value));
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          energyValue = value!;
+                        });
+                      }),
+                ),
+                msaSizeBox(),
+                const AutoSizeText(
+                  "Protien goal (g/kg/day)",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                msaSizeBox(),
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  decoration: const ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                        color: Colors.grey),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  )),
+                  width: width,
+                  height: 40,
+                  child: DropdownButton(
+                      underline: const SizedBox(),
+                      isExpanded: true,
+                      iconEnabledColor: Colors.grey,
+                      iconSize: 36,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20.0)),
+                      value: protienValue,
+                      items:
+                          protien.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                            value: value, child: Text(value));
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          protienValue = value!;
+                        });
+                      }),
+                ),
+                msaSizeBox(),
+                const AutoSizeText(
+                  "Energy daily requirement (kcal)",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.centerLeft,
+                  width: width,
+                  height: 40,
+                  decoration: const ShapeDecoration(
+                      color: primaryColor4,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                            color: Colors.grey),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      )),
+                  child: const AutoSizeText(
+                    "1,250 (kcal)",
+                    maxLines: 1,
+                    minFontSize: 16,
+                    maxFontSize: 18,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                msaSizeBox(),
+                const AutoSizeText(
+                  "Protein daily requirement (g)",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.centerLeft,
+                  width: width,
+                  height: 40,
+                  decoration: const ShapeDecoration(
+                      color: primaryColor4,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                            color: Colors.grey),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      )),
+                  child: const AutoSizeText(
+                    "60.0 (g)",
+                    maxLines: 1,
+                    minFontSize: 16,
+                    maxFontSize: 18,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                msaSizeBox(),
+                const AutoSizeText(
+                  "Actual Oral/EN energy intake (kcal)",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                msaSizeBox(),
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    hintStyle: TextStyle(color: Colors.grey[800]),
+                    hintText: "Please fill info",
+                    isDense: true,
+                    contentPadding: const EdgeInsets.all(10),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                msaSizeBox(),
+                const AutoSizeText(
+                  "% actual energy intake vs requirement",
+                  minFontSize: 14,
+                  maxLines: 1,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.centerLeft,
+                  width: width,
+                  height: 40,
+                  decoration: const ShapeDecoration(
+                      color: primaryColor4,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                            color: Colors.grey),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      )),
+                  child: const AutoSizeText(
+                    "56.0 %",
+                    maxLines: 1,
+                    minFontSize: 16,
+                    maxFontSize: 18,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          )),
     ];
 
     return Scaffold(
@@ -512,7 +522,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                   }
 
                                   if (_index == 1 && lastStep) {
-                                    print("test");
+                                    // print("test");
                                   }
                                 }
                               },
