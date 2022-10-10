@@ -7,7 +7,6 @@ import 'package:msa_app/screens/screens.dart';
 
 import '../models/models.dart';
 import '../shared/globals/alert_hint.dart';
-import '../shared/result/print.dart';
 import '../shared/shared.dart';
 import '../theme/theme.dart';
 // import '../theme/theme.dart';
