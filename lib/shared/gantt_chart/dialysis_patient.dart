@@ -1011,8 +1011,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
@@ -1036,8 +1034,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
-          // ignore: fixme
-          //FIXME waiting design
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
             ifPicture: true,

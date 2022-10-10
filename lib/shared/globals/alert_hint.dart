@@ -245,8 +245,6 @@ class MsaHintAlert extends Container {
                               ),
                               child: continueButton
                                   ? TextButton(
-                                      // ignore: fixme
-                                      //FIXME
                                       onPressed: onContinue,
                                       child: Text(
                                         translate(

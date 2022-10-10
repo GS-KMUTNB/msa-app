@@ -473,8 +473,6 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
-          // ignore: fixme
-          //FIXME waiting design
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
             ifPicture: true,

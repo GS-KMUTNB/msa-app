@@ -26,8 +26,6 @@ class DescriptionScreen extends StatelessWidget {
           Navigator.pop(context);
         },
         onPressedHint: () => showDialog<String>(
-          // ignore: fixme
-          //FIXME PART GO
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,

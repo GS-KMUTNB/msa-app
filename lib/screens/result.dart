@@ -59,9 +59,8 @@ class ResultScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.popUntil(context, ModalRoute.withName(
-                  // ignore: fixme
-                  Navigator.defaultRouteName)); //FIXME
+              Navigator.popUntil(
+                  context, ModalRoute.withName(Navigator.defaultRouteName));
             },
             onPressedNo: () {
               Navigator.pop(context);

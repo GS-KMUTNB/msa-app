@@ -10,8 +10,6 @@ class MsaStepper extends Container {
     required Function() onStepContinue,
     required Function(int) onStepTapped,
     required List<Step> steps,
-    // ignore: fixme
-    // bool lastStep = false, FIXME
   }) : super(
           key: key,
           child: Theme(
@@ -28,20 +26,6 @@ class MsaStepper extends Container {
               onStepCancel: onStepCancel,
               onStepContinue: onStepContinue,
               onStepTapped: onStepTapped,
-              // controlsBuilder: (BuildContext context, ControlsDetails details) {
-              //   return Row(
-              //     children: <Widget>[
-              //       TextButton(
-              //         onPressed: details.onStepContinue,
-              //         child: const Text('NEXT'),
-              //       ),
-              //       TextButton(
-              //         onPressed: details.onStepCancel,
-              //         child: const Text('CANCEL'),
-              //       ),
-              //     ],
-              //   );
-              // },
             ),
           ),
         );

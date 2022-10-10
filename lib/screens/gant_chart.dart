@@ -37,9 +37,8 @@ class GanttChartScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.popUntil(context, ModalRoute.withName(
-                  // ignore: fixme
-                  Navigator.defaultRouteName)); //FIXME
+              Navigator.popUntil(
+                  context, ModalRoute.withName(Navigator.defaultRouteName));
             },
             onPressedNo: () {
               Navigator.pop(context);
@@ -48,8 +47,6 @@ class GanttChartScreen extends StatelessWidget {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
-          // ignore: fixme
-          //FIXME waiting design
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
             ifPicture: true,
