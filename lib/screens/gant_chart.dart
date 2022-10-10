@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/gantt_chart/dialysis_patient.dart';
 import 'package:msa_app/shared/shared.dart';
 
@@ -37,8 +38,9 @@ class GanttChartScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.popUntil(
-                  context, ModalRoute.withName(Navigator.defaultRouteName));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
             },
             onPressedNo: () {
               Navigator.pop(context);
