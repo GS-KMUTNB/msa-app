@@ -38,11 +38,7 @@ class MsaApp extends StatelessWidget {
         locale: localizationDelegate.currentLocale,
         debugShowCheckedModeBanner: false,
         theme: msaData(),
-        home: HomeScreen(
-          buildContext: context,
-        ),
-        //GanttChartScreen(
-        // buildContext: context,
+        home: const SplashScreen(),
       ),
     );
   }

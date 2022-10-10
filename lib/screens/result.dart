@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:msa_app/screens/screens.dart';
 // import 'package:intl/intl.dart';
 
 import '../models/models.dart';
 import '../shared/globals/alert_hint.dart';
+import '../shared/result/print.dart';
 import '../shared/shared.dart';
 import '../theme/theme.dart';
 // import '../theme/theme.dart';
@@ -151,22 +151,15 @@ class ResultScreen extends StatelessWidget {
                           color: primaryColor,
                           height: 50,
                           width: width,
-                          child: TextButton(
-                            child: Text(
-                              translate("results_page.button_print_download"),
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GanttChartScreen(
-                                    buildContext: context,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                          child: const PrintPdf(),
+                          //     //  Navigator.push(
+                          //     //   context,
+                          //     //   MaterialPageRoute(
+                          //     //     builder: (context) => GanttChartScreen(
+                          //     //       buildContext: context,
+                          //     //     ),
+                          //     //   ),
+                          //     // );
                         ),
                       ),
                     ),

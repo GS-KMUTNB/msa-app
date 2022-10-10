@@ -6,12 +6,14 @@ import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    Key? key,
-    required BuildContext buildContext,
-  }) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

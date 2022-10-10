@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <img class="center" src="Otsuka-Logo-Colour.png" alt="" style="width: 10em;">
+    <br>
+    <h3>ผลการคัดกรองภาวะโภชนาการ</h3>
+    <br>
+    <div class="sform">
+        <p>วันที่ : {{Date}}</p>
+        <p>น้ำหนัก : {{Weight}}</p>
+        <p>ส่วนสูง : {{Height}}</p>
+        <p>ค่าดัชนีมวลกาย : {{BMI}}</p>
+        <br>
+        <br>
+        <p>1. ผู้ป่วยมีน้ำหนักตัวลดลองโดยไม่ได้ตั้งใจในช่วง 6 เดือนที่ผ่านมาหรือไม่</p>
+        <br>
+            <!--Result-->
+            <table class="tcenter">
+                <tr>
+                    <th class="tcred">{{Camecase}}</th>
+                    <th>{{Camecase}}</th>
+                </tr>
+            </table>
+            <!--Result-->
+        <br>
+        <p>2. ผู้ป่วยได้รับอาหารน้อยกว่าที่เคยได้ (> 7 วัน)</p>
+        <br>
+             <!--Result-->
+             <table class="tcenter">
+                <tr>
+                    <th>{{Camecase}}</th>
+                    <th class="tcgreen">{{Camecase}}</th>
+                </tr>
+            </table>
+            <!--Result-->
+        <br>
+        <p>3. BMI < 18.5 หรือ > = 25.0 กก./ตร.ม. หรือไม่</p>
+        <br>
+             <!--Result-->
+             <table class="tcenter">
+                <tr>
+                    <th>{{Camecase}}</th>
+                    <th class="tcgreen">{{Camecase}}</th>
+                </tr>
+            </table>
+            <!--Result-->
+        <br>
+        <p>4. ผู้ป่วยมีภาวะโรควิกฤต หรือกึ่งวิกฤตร่วมด้วยหรือไม่</p>
+        <br>
+             <!--Result-->
+             <table class="tcenter">
+                <tr>
+                    <th class="tcred">{{Camecase}}</th>
+                    <th>{{Camecase}}</th>
+                </tr>
+            </table>
+            <!--Result-->
+        <br>
+        <h3 style="text-align: left; margin-bottom: 8pt;">ผลการคัดกรองของคุณคือ</h3>
+            <!--Result-->
+            <li style="margin-left: 2em;">{{result}}</li>
+            <li style="margin-left: 2em;">{{result}}</li>
+            <!--Result-->
+        <br>
+    </div>
+    <hr style=" border-top: 2px dashed grey;">
+    <div class="fbottom">
+        <div>
+            <img class="center" src="Otsuka-Logo-Colour.png" alt="" style="width: 7em;">
+            <p style="text-align: center;">Download App <br>
+            <a href="Link">www.sample.com</a></p>
+            <p style="text-align: center;">หรือสแกน QR-Code</p>
+        </div>
+        <div>
+            <img class="center" src="sample qr-code.png" alt="" style="width: 7em;">
+            <p style="text-align: center; margin-top: 0%;">แสกนเพื่อทำแบบคัดกรองภาวะโภชนาการ<br>
+            สนับสนุนโดย ไทยโอซูก้า</p>
+        </div>
+    </div>
+</body>
+</html>
