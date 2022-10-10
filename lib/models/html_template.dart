@@ -1,168 +1,168 @@
+import 'package:flutter_translate/flutter_translate.dart';
+
+import 'html_parser.dart';
+
+// ignore: non_constant_identifier_names
+String HtmlFormResult(HtmlSNSForm data, String type) {
+  var yes = translate("assesment_page.table_head_yes");
+  var no = translate("assesment_page.table_head_no");
+
+  var tTitle = translate("print.header.title");
+  var tDate = translate("print.header.date");
+  var tWeight = translate("print.header.weight");
+  var tHeight = translate("print.header.height");
+  var tBmi = translate("print.header.bmi");
+  var tQuestions_1 = translate("print.header.questions_1");
+  var tQuestions_2 = translate("print.header.questions_2");
+  var tQuestions_3 = translate("print.header.questions_3");
+  var tQuestions_4 = translate("print.header.questions_4");
+  var tResult = translate("print.header.result");
+  var tDownload = translate("print.header.download");
+  var tWebsite = translate("print.header.website");
+  var tScanqr = translate("print.header.scanqr");
+  var tFooter = translate("print.header.footer");
+
+  var answer = [];
+
+  for (var ans in data.answer) {
+    if (ans == "Yes") {
+      answer.add(
+        """<th class="tcred">$yes</th> <th>$no</th>""",
+      );
+    } else {
+      answer.add(
+        """<th>$yes</th> <th class="tcgreen">$no</th>""",
+      );
+    }
+  }
+
+  var template = """
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Form</title>
+    <title>$tTitle</title>
     <style>
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            padding: 1em;
-            font-size: 14pt;
+            padding: 5px;
+            font-size: 12pt;
             background-color: white;
         }
-
-        h3 {
-            text-align: center;
-        }
-
         .fbottom {
             background-color: #E5E7E9;
             font-size: 12pt;
             padding-top: 2em;
-            padding-bottom: 2em;
             padding-left: 2em;
             padding-right: 0em;
             border-radius: 0.5rem;
-
             display: grid;
             grid-template-columns: auto auto;
             grid-gap: 10px;
         }
-
         .center {
             display: block;
             margin-left: auto;
             margin-right: auto;
             width: 50%;
         }
-
         .sform {
             border: solid 1px grey;
             border-radius: 1rem;
             padding: 1em;
         }
-
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 50%;
         }
-
         td,
         th {
             border: 1px solid #dddddd;
             text-align: center;
-            padding: 8px;
+            padding: 4px;
         }
-
         tr:nth-child(even) {
             background-color: #dddddd;
         }
-
         .tcenter {
             margin-left: auto;
             margin-right: auto;
         }
-
         .tcred {
             background-color: #F1948A;
         }
-
         .tcgreen {
             background-color: #58D68D;
         }
     </style>
-
-
 </head>
 
 <body>
-    <img class="center"
+    <img class="left"
         src="https://media.discordapp.net/attachments/1002459006222213120/1028916064345673728/Otsuka-Logo-Colour.png"
-        alt="" style="width: 10em;">
-    <br>
-    <h3>Result screening nutritional status</h3>
-    <br>
+        alt="" style="width: 8em;">
+    <h3>$tTitle</h3>
+    <br />
     <div class="sform">
-        <p>Date : {{Date}}</p>
-        <p>Weight : {{Weight}}</p>
-        <p>Height : {{Height}}</p>
-        <p>BMI : {{BMI}}</p>
-        <br>
-        <br>
-        <p>1. The patient had an unintentional weight loss in During the past 6 months?</p>
-        <br>
+        <p>$tDate : ${data.date}</p>
+        <p>$tWeight : ${data.weight}</p>
+        <p>$tHeight : ${data.height}</p>
+        <p>$tBmi : ${data.bmi}</p>
+        <p>$tQuestions_1</p>
         <!--Result-->
         <table class="tcenter">
-            <tr>
-                <th class="tcred">{{Camecase}}</th>
-                <th>{{Camecase}}</th>
-            </tr>
+           <tr>${answer[0]}</tr>
         </table>
         <!--Result-->
-        <br>
-        <p>2. Patients were fed less than they used to (> 7 days).</p>
-        <br>
+        <p>$tQuestions_2</p>
         <!--Result-->
         <table class="tcenter">
-            <tr>
-                <th>{{Camecase}}</th>
-                <th class="tcgreen">{{Camecase}}</th>
-            </tr>
+           <tr>${answer[1]}</tr>
         </table>
         <!--Result-->
-        <br>
-        <p>3. BMI < 18.5 or> = 25.0 kg/m2?</p>
-        <br>
+        <p>$tQuestions_3</p>
         <!--Result-->
         <table class="tcenter">
-            <tr>
-                <th>{{Camecase}}</th>
-                <th class="tcgreen">{{Camecase}}</th>
-            </tr>
+           <tr>${answer[2]}</tr>
         </table>
         <!--Result-->
-        <br>
-        <p>4. Patients with critical illness or semi-crisis.or not</p>
-        <br>
+        <p>$tQuestions_4</p>
         <!--Result-->
         <table class="tcenter">
-            <tr>
-                <th class="tcred">{{Camecase}}</th>
-                <th>{{Camecase}}</th>
-            </tr>
+           <tr>${answer[3]}</tr>
         </table>
         <!--Result-->
-        <br>
-        <h3 style="text-align: left; margin-bottom: 8pt;">Your screening result is</h3>
+        <h3 style="text-align: left; margin-bottom: 4pt;">$tResult</h3>
         <!--Result-->
-        <li style="margin-left: 2em;">{{result}}</li>
-        <li style="margin-left: 2em;">{{result}}</li>
+        <li style="margin-left: 2em;"> ${data.result_1}</li>
+        <li style="margin-left: 2em;"> ${data.result_2}</li>
         <!--Result-->
-        <br>
     </div>
-    <hr style=" border-top: 2px dashed grey;">
+    <hr style=" border-top: 1px dashed grey;">
     <div class="fbottom">
         <div>
             <img class="center"
                 src="https://media.discordapp.net/attachments/1002459006222213120/1028916064345673728/Otsuka-Logo-Colour.png"
                 alt="" style="width: 7em;">
-            <p style="text-align: center;">Download App <br>
-                <a href="Link">www.sample.com</a>
+            <p style="text-align: center;">$tDownload<br>
+                <a href="Link">$tWebsite</a>
             </p>
-            <p style="text-align: center;">or scan QR-Code</p>
+            <p style="text-align: center;">$tScanqr</p>
         </div>
         <div>
             <img class="center"
                 src="https://media.discordapp.net/attachments/1002459006222213120/1028916063611654185/sample_qr-code.png?width=676&height=676"
                 alt="" style="width: 7em;">
-            <p style="text-align: center; margin-top: 0%;">Scanned for nutritional status screening<br>
-                Sponsored by Thai Otsuka</p>
+            <p style="text-align: center; margin-top: 0%;">$tFooter</p>
         </div>
     </div>
 </body>
 
 </html>
+""";
+
+  return template;
+}

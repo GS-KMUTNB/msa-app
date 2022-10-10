@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:msa_app/screens/screens.dart';
 // import 'package:intl/intl.dart';
 
 import '../models/models.dart';
@@ -14,6 +15,7 @@ import '../theme/theme.dart';
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
   final Screening data;
+  late HtmlSNSForm snsForm;
   bool isHightRisk = false;
 
   ResultScreen({
@@ -42,6 +44,20 @@ class ResultScreen extends StatelessWidget {
       isHightRisk = true;
     }
 
+    var snsForm = HtmlSNSForm(
+      data.date,
+      data.weight,
+      data.height,
+      data.bmi,
+      data.formData!,
+      isHightRisk
+          ? '${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}'
+          : '${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}',
+      isHightRisk
+          ? translate("results_page.continue_the_nutritional")
+          : translate("results_page.should_be_repeated"),
+    );
+
     return MsaScaffold(
       appbar: MsaAppBar(
         ctx: context,
@@ -59,8 +75,9 @@ class ResultScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.popUntil(
-                  context, ModalRoute.withName(Navigator.defaultRouteName));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
             },
             onPressedNo: () {
               Navigator.pop(context);
@@ -151,7 +168,7 @@ class ResultScreen extends StatelessWidget {
                           color: primaryColor,
                           height: 50,
                           width: width,
-                          child: const PrintPdf(),
+                          child: PrintPdf(data: snsForm),
                           //     //  Navigator.push(
                           //     //   context,
                           //     //   MaterialPageRoute(

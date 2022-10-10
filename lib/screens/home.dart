@@ -33,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                msaSizeBox(height: 120),
-                const AutoSizeText(
-                  "Nutrition Screening Tool",
+                msaSizeBox(height: 110),
+                AutoSizeText(
+                  translate("select_language_page.nutrition"),
                   style: head1,
                   maxLines: 1,
                   minFontSize: 1,
@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   translate("select_language_page.select_language"),
                   style: const TextStyle(fontSize: 22),
                   maxLines: 1,
+                  textAlign: TextAlign.center,
                 ),
                 msaSizeBox(height: 30),
                 CardLanguageScreen(

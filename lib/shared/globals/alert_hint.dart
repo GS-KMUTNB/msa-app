@@ -76,7 +76,7 @@ class MsaHintAlert extends Container {
                                     ? const Icon(
                                         Icons.error_rounded,
                                         color: primaryColor4,
-                                        size: 40,
+                                        size: 30,
                                       )
                                     : const SizedBox(),
                                 Padding(
@@ -88,7 +88,7 @@ class MsaHintAlert extends Container {
                                       color: isHightRisk
                                           ? warningColor
                                           : whiteColor,
-                                      fontSize: 32,
+                                      fontSize: 28,
                                     ),
                                   ),
                                 ),
@@ -96,7 +96,7 @@ class MsaHintAlert extends Container {
                                     ? const Icon(
                                         Icons.error_rounded,
                                         color: primaryColor4,
-                                        size: 40,
+                                        size: 30,
                                       )
                                     : const SizedBox(),
                               ],

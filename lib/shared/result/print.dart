@@ -1,14 +1,17 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:msa_app/models/models.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
+import '../../models/html_template.dart';
+
 class PrintPdf extends StatefulWidget {
-  const PrintPdf({Key? key}) : super(key: key);
+  final HtmlSNSForm data;
+  const PrintPdf({Key? key, required this.data}) : super(key: key);
 
   @override
   State<PrintPdf> createState() => _PrintPdfState();
@@ -16,15 +19,6 @@ class PrintPdf extends StatefulWidget {
 
 class _PrintPdfState extends State<PrintPdf> {
   final doc = pw.Document();
-  String htmlFile = "";
-
-  getData() async {
-    String res;
-    res = await rootBundle.loadString("assets/html/formphase1-en.html");
-    setState(() {
-      htmlFile = res;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +27,7 @@ class _PrintPdfState extends State<PrintPdf> {
         onLayout: (pageFormat) async {
           return await Printing.convertHtml(
             format: PdfPageFormat.standard,
-            html: htmlFile,
+            html: HtmlFormResult(widget.data, "form1"),
           );
         },
       );
@@ -41,7 +35,6 @@ class _PrintPdfState extends State<PrintPdf> {
 
     return TextButton(
       onPressed: () => {
-        getData(),
         _printDocument(),
       },
       child: Text(
