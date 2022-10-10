@@ -97,7 +97,8 @@
     "answered_yes": "You answered yes to",
     "questions": "questions",
     "continue_the_nutritional": "Continue the nutritional assessment. or consult a dietitian/nutrition team",
-    "should_be_repeated": "The screening should be repeated once a week. during the hospital stay"
+    "should_be_repeated": "The screening should be repeated once a week. during the hospital stay",
+    "next_button": "Next"
   },
   "success_page": {
     "success": "Success",

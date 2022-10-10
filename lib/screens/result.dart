@@ -161,23 +161,40 @@ class ResultScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          color: primaryColor,
-                          height: 50,
-                          width: width,
-                          child: PrintPdf(data: snsForm),
-                          //     //  Navigator.push(
-                          //     //   context,
-                          //     //   MaterialPageRoute(
-                          //     //     builder: (context) => GanttChartScreen(
-                          //     //       buildContext: context,
-                          //     //     ),
-                          //     //   ),
-                          //     // );
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            color: primaryColor,
+                            height: 50,
+                            width: width,
+                            child: PrintPdf(data: snsForm),
+                          ),
+                          msaSizeBox(),
+                          Container(
+                            color: primaryColor4,
+                            height: 50,
+                            width: width,
+                            child: TextButton(
+                              onPressed: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GanttChartScreen(
+                                      buildContext: context,
+                                    ),
+                                  ),
+                                ),
+                              },
+                              child: Text(
+                                translate("results_page.next_button"),
+                                style: const TextStyle(color: blackColor),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     msaSizeBox(height: 50)
