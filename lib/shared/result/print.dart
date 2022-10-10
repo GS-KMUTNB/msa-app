@@ -22,7 +22,7 @@ class _PrintPdfState extends State<PrintPdf> {
 
   @override
   Widget build(BuildContext context) {
-    void _printDocument() {
+    void printDocument() {
       Printing.layoutPdf(
         onLayout: (pageFormat) async {
           return await Printing.convertHtml(
@@ -35,7 +35,7 @@ class _PrintPdfState extends State<PrintPdf> {
 
     return TextButton(
       onPressed: () => {
-        _printDocument(),
+        printDocument(),
       },
       child: Text(
         translate("results_page.button_print_download"),
