@@ -6,12 +6,14 @@ import 'package:msa_app/theme/theme.dart';
 
 import '../shared/shared.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    Key? key,
-    required BuildContext buildContext,
-  }) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -31,9 +33,9 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                msaSizeBox(height: 120),
-                const AutoSizeText(
-                  "Nutrition Screening Tool",
+                msaSizeBox(height: 110),
+                AutoSizeText(
+                  translate("select_language_page.nutrition"),
                   style: head1,
                   maxLines: 1,
                   minFontSize: 1,
@@ -44,6 +46,7 @@ class HomeScreen extends StatelessWidget {
                   translate("select_language_page.select_language"),
                   style: const TextStyle(fontSize: 22),
                   maxLines: 1,
+                  textAlign: TextAlign.center,
                 ),
                 msaSizeBox(height: 30),
                 CardLanguageScreen(

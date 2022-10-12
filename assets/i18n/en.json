@@ -1,5 +1,6 @@
 {
   "select_language_page": {
+    "nutrition": "Nutrition Screening Tool",
     "select_language": "Select Language",
     "english": "English",
     "thai": "ไทย"
@@ -96,10 +97,40 @@
     "answered_yes": "You answered yes to",
     "questions": "questions",
     "continue_the_nutritional": "Continue the nutritional assessment. or consult a dietitian/nutrition team",
-    "should_be_repeated": "The screening should be repeated once a week. during the hospital stay"
+    "should_be_repeated": "The screening should be repeated once a week. during the hospital stay",
+    "next_button": "Next"
   },
   "success_page": {
     "success": "Success",
     "button_Back": "Back to homepage"
+  },
+  "print": {
+    "header": {
+      "title": "Result screening nutritional status",
+      "date": "Date : ",
+      "weight": "Weight : ",
+      "height": "Height : ",
+      "bmi": "BMI : ",
+      "questions_1": "1. The patient had an unintentional weight loss in During the past 6 months?",
+      "questions_2": "2. Patients were fed less than they used to (> 7 days).",
+      "questions_3": "3. BMI < 18.5 or> = 25.0 kg/m2?",
+      "questions_4": "4. Patients with critical illness or semi-crisis.or not",
+      "result": "Your screening result is",
+      "download": "Download App",
+      "website": "www.sample.com FIXME",
+      "scanqr": "or scan QR-Code",
+      "footer": "Scanned for nutritional status screening<br/>Sponsored by Thai Otsuka"
+    },
+    "data": {
+      "date": "",
+      "weight": "",
+      "height": "",
+      "bmi": "",
+      "questions_1": "",
+      "questions_2": "",
+      "questions_3": "",
+      "questions_4": "",
+      "result": ""
+    }
   }
 }

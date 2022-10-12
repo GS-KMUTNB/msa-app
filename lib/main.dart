@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import 'screens/screens.dart';
+// import 'shared/gantt_chart/perioperative_patient.dart';
 
 const appName = "MSA";
 
@@ -38,11 +39,10 @@ class MsaApp extends StatelessWidget {
         locale: localizationDelegate.currentLocale,
         debugShowCheckedModeBanner: false,
         theme: msaData(),
-        home: HomeScreen(
-          buildContext: context,
-        ),
-        //GanttChartScreen(
-        // buildContext: context,
+        // home: PerioperativePatientScreen(
+        //   buildContext: context,
+        // ),
+        home: const SplashScreen(),
       ),
     );
   }

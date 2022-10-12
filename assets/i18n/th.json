@@ -1,6 +1,7 @@
 {
   "select_language_page": {
-    "select_language": "Select Language",
+    "nutrition": "เครื่องมือคัดกรองโภชนาการ",
+    "select_language": "เลือกภาษา",
     "english": "English",
     "thai": "ไทย"
   },
@@ -96,10 +97,40 @@
     "answered_yes": "คุณตอบใช่",
     "questions": "ข้อ",
     "continue_the_nutritional": "ทำการประเมินภาวะโภชนาการต่อหรือ ปรึกษานักกำหนดอาหาร/ทีมโภชนาการ",
-    "should_be_repeated": "ควรตรวจคัดกรองซ้ำสัปดาห์ละครั้ง ระหว่างอยู่โรงพยาบาล"
+    "should_be_repeated": "ควรตรวจคัดกรองซ้ำสัปดาห์ละครั้ง ระหว่างอยู่โรงพยาบาล",
+    "next_button": "ถัดไป"
   },
   "success_page": {
     "success": "สำเร็จ",
     "button_Back": "กลับหน้าแรก"
+  },
+  "print": {
+    "header": {
+      "title": "ผลการคัดกรองภาวะโภชนาการ",
+      "date": "วันที่ : ",
+      "weight": "น้ำหนัก : ",
+      "height": "ส่วนสูง : ",
+      "bmi": "ค่าดัชนีมวลกาย : ",
+      "questions_1": "1. ผู้ป่วยมีน้ำหนักตัวลดลองโดยไม่ได้ตั้งใจในช่วง 6 เดือนที่ผ่านมาหรือไม่ ?",
+      "questions_2": "2. ผู้ป่วยได้รับอาหารน้อยกว่าที่เคยได้ (> 7 วัน) ?",
+      "questions_3": "3. BMI < 18.5 หรือ > = 25.0 กก./ตร.ม. หรือไม่ ?",
+      "questions_4": "4. ผู้ป่วยมีภาวะโรควิกฤต หรือกึ่งวิกฤตร่วมด้วยหรือไม่ ?",
+      "result": "ผลการคัดกรองของคุณคือ",
+      "download": "ดาวน์โหลด MSA Application ได้ที่",
+      "website": "www.sample.com FIXME",
+      "scanqr": "หรือสแกน QR-Code",
+      "footer": "แสกนเพื่อทำแบบคัดกรองภาวะโภชนาการ<br/>สนับสนุนโดย ไทยโอซูก้า"
+    },
+    "data": {
+      "date": "",
+      "weight": "",
+      "height": "",
+      "bmi": "",
+      "questions_1": "",
+      "questions_2": "",
+      "questions_3": "",
+      "questions_4": "",
+      "result": ""
+    }
   }
 }

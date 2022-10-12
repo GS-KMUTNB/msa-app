@@ -14,6 +14,7 @@ import '../theme/theme.dart';
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
   final Screening data;
+  late HtmlSNSForm snsForm;
   bool isHightRisk = false;
 
   ResultScreen({
@@ -42,6 +43,20 @@ class ResultScreen extends StatelessWidget {
       isHightRisk = true;
     }
 
+    var snsForm = HtmlSNSForm(
+      data.date,
+      data.weight,
+      data.height,
+      data.bmi,
+      data.formData!,
+      isHightRisk
+          ? '${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}'
+          : '${translate("results_page.answered_yes")} $countData ${translate("results_page.questions")}',
+      isHightRisk
+          ? translate("results_page.continue_the_nutritional")
+          : translate("results_page.should_be_repeated"),
+    );
+
     return MsaScaffold(
       appbar: MsaAppBar(
         ctx: context,
@@ -59,8 +74,9 @@ class ResultScreen extends StatelessWidget {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.popUntil(
-                  context, ModalRoute.withName(Navigator.defaultRouteName));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false);
             },
             onPressedNo: () {
               Navigator.pop(context);
@@ -144,30 +160,40 @@ class ResultScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          color: primaryColor,
-                          height: 50,
-                          width: width,
-                          child: TextButton(
-                            child: Text(
-                              translate("results_page.button_print_download"),
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GanttChartScreen(
-                                    buildContext: context,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            color: primaryColor,
+                            height: 50,
+                            width: width,
+                            child: PrintPdf(data: snsForm),
+                          ),
+                          msaSizeBox(),
+                          Container(
+                            color: primaryColor4,
+                            height: 50,
+                            width: width,
+                            child: TextButton(
+                              onPressed: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GanttChartScreen(
+                                      buildContext: context,
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
+                              },
+                              child: Text(
+                                translate("results_page.next_button"),
+                                style: const TextStyle(color: blackColor),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                     msaSizeBox(height: 50)
