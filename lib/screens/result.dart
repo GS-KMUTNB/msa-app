@@ -22,9 +22,9 @@ class ResultScreen extends StatelessWidget {
   }) : super(key: key);
 
   var formQuestion = [
+    translate("assesment_page.description_bmi_range"),
     translate("assesment_page.description_assesment_weight_loss"),
     translate("assesment_page.description_assesment_Patients_were_fed_less"),
-    translate("assesment_page.description_bmi_range"),
     translate("assesment_page.description_patients_with_critical"),
   ];
 

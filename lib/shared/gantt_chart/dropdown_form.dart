@@ -34,184 +34,73 @@ class DisplayResultStep extends Column {
     String energy = "",
     String protein = "",
     String actual = "",
-    required bool isCaseImfomation,
+    required String type,
   }) : super(
           key: key,
           children: [
-            isCaseImfomation
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            if (type == "case_infomation") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Case Information',
+                    minFontSize: 16,
+                    maxLines: 1,
+                  ),
+                  const AutoSizeText(
+                    'your result is',
+                    minFontSize: 8,
+                    maxLines: 1,
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
                     children: [
                       const AutoSizeText(
-                        'Case Information',
+                        "Sex",
+                        maxLines: 1,
                         minFontSize: 16,
-                        maxLines: 1,
+                        maxFontSize: 18,
                       ),
-                      const AutoSizeText(
-                        'your result is',
-                        minFontSize: 8,
-                        maxLines: 1,
-                      ),
-                      msaSizeBox(height: 10),
-                      Row(
-                        children: [
-                          const AutoSizeText(
-                            "Sex",
-                            maxLines: 1,
-                            minFontSize: 16,
-                            maxFontSize: 18,
-                          ),
-                          msaSizeBox(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.centerLeft,
-                            width: width / 1.95,
-                            height: 40,
-                            decoration: const ShapeDecoration(
-                                color: primaryColor4,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                )),
-                            child: AutoSizeText(
-                              sex,
-                              maxLines: 1,
-                              minFontSize: 16,
-                              maxFontSize: 18,
-                              style: const TextStyle(color: Colors.grey),
-                            ),
-                          )
-                        ],
-                      ),
-                      msaSizeBox(height: 10),
-                      Row(
-                        children: [
-                          const AutoSizeText(
-                            "BMI",
-                            maxLines: 1,
-                            minFontSize: 16,
-                            maxFontSize: 18,
-                          ),
-                          msaSizeBox(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.centerLeft,
-                            width: width / 1.95,
-                            height: 40,
-                            decoration: const ShapeDecoration(
-                                color: primaryColor4,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                )),
-                            child: AutoSizeText(
-                              bmi,
-                              maxLines: 1,
-                              minFontSize: 16,
-                              maxFontSize: 18,
-                              style: const TextStyle(color: Colors.grey),
-                            ),
-                          )
-                        ],
-                      ),
-                      msaSizeBox(height: 10),
-                      Row(
-                        children: [
-                          const AutoSizeText(
-                            "IBW",
-                            maxLines: 1,
-                            minFontSize: 16,
-                            maxFontSize: 18,
-                          ),
-                          msaSizeBox(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.centerLeft,
-                            width: width / 1.95,
-                            height: 40,
-                            decoration: const ShapeDecoration(
-                                color: primaryColor4,
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                )),
-                            child: AutoSizeText(
-                              ibw,
-                              maxLines: 1,
-                              minFontSize: 16,
-                              maxFontSize: 18,
-                              style: const TextStyle(color: Colors.grey),
-                            ),
-                          )
-                        ],
-                      ),
-                      msaSizeBox(height: 20),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerLeft,
+                        width: width / 1.95,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          sex,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )
                     ],
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
                     children: [
                       const AutoSizeText(
-                        'Daily Requirement',
+                        "BMI",
+                        maxLines: 1,
                         minFontSize: 16,
-                        maxLines: 1,
-                      ),
-                      const AutoSizeText(
-                        'your result is',
-                        minFontSize: 8,
-                        maxLines: 1,
-                      ),
-                      msaSizeBox(height: 10),
-                      const AutoSizeText(
-                        "Energy daily requirement (kcal)",
-                        minFontSize: 14,
-                        maxLines: 1,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        alignment: Alignment.centerLeft,
-                        width: width,
-                        height: 40,
-                        decoration: const ShapeDecoration(
-                            color: primaryColor4,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1.0,
-                                  style: BorderStyle.solid,
-                                  color: Colors.grey),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
-                            )),
-                        child: AutoSizeText(
-                          energy,
-                          maxLines: 1,
-                          minFontSize: 16,
-                          maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
-                        ),
+                        maxFontSize: 18,
                       ),
                       msaSizeBox(),
-                      const AutoSizeText(
-                        "Protein daily requirement (g)",
-                        minFontSize: 14,
-                        maxLines: 1,
-                      ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         alignment: Alignment.centerLeft,
-                        width: width,
+                        width: width / 1.95,
                         height: 40,
                         decoration: const ShapeDecoration(
                             color: primaryColor4,
@@ -224,45 +113,350 @@ class DisplayResultStep extends Column {
                                   BorderRadius.all(Radius.circular(20.0)),
                             )),
                         child: AutoSizeText(
-                          protein,
+                          bmi,
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
                           style: const TextStyle(color: Colors.grey),
                         ),
-                      ),
-                      msaSizeBox(),
-                      const AutoSizeText(
-                        "% actual energy intake vs requirement",
-                        minFontSize: 14,
-                        maxLines: 1,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        alignment: Alignment.centerLeft,
-                        width: width,
-                        height: 40,
-                        decoration: const ShapeDecoration(
-                            color: primaryColor4,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1.0,
-                                  style: BorderStyle.solid,
-                                  color: Colors.grey),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0)),
-                            )),
-                        child: AutoSizeText(
-                          "$actual%",
-                          maxLines: 1,
-                          minFontSize: 16,
-                          maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      msaSizeBox(height: 20),
+                      )
                     ],
-                  )
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
+                    children: [
+                      const AutoSizeText(
+                        "IBW",
+                        maxLines: 1,
+                        minFontSize: 16,
+                        maxFontSize: 18,
+                      ),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerLeft,
+                        width: width / 1.95,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          ibw,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
+                ],
+              )
+            ] else if (type == "daily_requirement") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Daily Requirement',
+                    minFontSize: 16,
+                    maxLines: 1,
+                  ),
+                  const AutoSizeText(
+                    'your result is',
+                    minFontSize: 8,
+                    maxLines: 1,
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "Energy daily requirement (kcal)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      energy,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Protein daily requirement (g)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      protein,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "% actual energy intake vs requirement",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      "$actual%",
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  msaSizeBox(height: 20),
+                ],
+              )
+            ] else if (type == "case_infomation_1") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Case Information 1',
+                    minFontSize: 16,
+                    maxLines: 1,
+                  ),
+                  const AutoSizeText(
+                    'your result is',
+                    minFontSize: 8,
+                    maxLines: 1,
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
+                    children: [
+                      const AutoSizeText(
+                        "Sex",
+                        maxLines: 1,
+                        minFontSize: 16,
+                        maxFontSize: 18,
+                      ),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerLeft,
+                        width: width / 1.95,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          sex,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    ],
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
+                    children: [
+                      const AutoSizeText(
+                        "BMI",
+                        maxLines: 1,
+                        minFontSize: 16,
+                        maxFontSize: 18,
+                      ),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerLeft,
+                        width: width / 1.95,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          bmi,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    ],
+                  ),
+                  msaSizeBox(height: 10),
+                  Row(
+                    children: [
+                      const AutoSizeText(
+                        "IBW",
+                        maxLines: 1,
+                        minFontSize: 16,
+                        maxFontSize: 18,
+                      ),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerLeft,
+                        width: width / 1.95,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          ibw,
+                          maxLines: 1,
+                          minFontSize: 16,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
+                ],
+              )
+            ] else if (type == "case_infomation_2") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Case Information 2',
+                    minFontSize: 16,
+                    maxLines: 1,
+                  ),
+                  const AutoSizeText(
+                    'your result is',
+                    minFontSize: 8,
+                    maxLines: 1,
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "Protein daily requirement (g)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      protein,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Protein daily requirement (g)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      protein,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  msaSizeBox(),
+                ],
+              ),
+            ],
           ],
         );
 }

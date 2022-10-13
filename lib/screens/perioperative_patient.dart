@@ -52,12 +52,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
 
   late double ibw, ed, pd, ae;
 
-  int step1 = -1;
-
   bool haveBMIValue = false;
   bool haveDrValue = false;
-
-  bool isHighRisk = false;
 
   List<String> sex = <String>['Please select', 'Male', 'Female'];
   List<String> energy = <String>['Please select', '20', '25', '30', '35', '40'];
@@ -94,7 +90,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         isActive: true,
         title: haveBMIValue
             ? DisplayResultStep(
-                isCaseImfomation: true,
+                type: "case_information",
                 width: width,
                 bmi: bmiValue,
                 ibw: ibwValue,
@@ -205,7 +201,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         isActive: (_index >= 1) ? true : false,
         title: haveDrValue
             ? DisplayResultStep(
-                isCaseImfomation: false,
+                type: "daily_requirement",
                 width: width,
                 energy: edResult,
                 protein: pdResult,
@@ -329,6 +325,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         ),
       ),
       Step(
+        isActive: (_index >= 2) ? true : false,
         title: const Text("Summary"),
         subtitle: const Text("plaese check result again before continue"),
         content: msaSizeBox(),
@@ -431,10 +428,10 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                               },
                               //*continue
                               onStepContinue: () {
+                                var lastStep = _index == getStep.length - 1;
+
                                 if (_fkPerio1.currentState!.validate() ||
                                     _fkPerio2.currentState!.validate()) {
-                                  var lastStep = _index == getStep.length - 1;
-
                                   if (_index <= getStep.length - 1) {
                                     // To next Step
                                     if (_index == 0) {
@@ -486,8 +483,12 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                       });
                                     }
                                   }
-
-                                  if (_index == 1 && lastStep) {}
+                                }
+                                if (_index == 2 && lastStep) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Work in progress')),
+                                  );
                                 }
                               },
                               //*on tab
