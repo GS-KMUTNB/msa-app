@@ -2,8 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
-import '../globals/alert_hint.dart';
-import '../shared.dart';
+import '../shared/shared.dart';
 
 class DialysisPatientScreen extends StatefulWidget {
   const DialysisPatientScreen({

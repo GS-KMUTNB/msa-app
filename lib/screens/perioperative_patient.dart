@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../../theme/theme.dart';
-import '../globals/alert_hint.dart';
-import 'dropdown_form.dart';
+import '../shared/shared.dart';
 
 class PerioperativePatientScreen extends StatefulWidget {
   const PerioperativePatientScreen({
@@ -26,24 +26,38 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   late TextEditingController heightController = TextEditingController();
   final FocusNode hightFocus = FocusNode();
 
-  List<String> result = [];
+  late TextEditingController actualOralController = TextEditingController();
+  final FocusNode actualOralFocus = FocusNode();
+
   final _controller = ScrollController();
-  final _formKey = GlobalKey<FormState>();
+  final _fkPerio1 = GlobalKey<FormState>();
+  final _fkPerio2 = GlobalKey<FormState>();
+  final formatter = NumberFormat.decimalPattern();
 
   int _index = 0;
 
-  String bmiValue = "";
-  String ibwValue = "";
-  String resultBmi = "";
-  String interpreBmi = "";
+  late String bmiValue,
+      ibwValue,
+      resultBmi,
+      wValue,
+      hValue,
+      acValue,
+      sexValue,
+      edValue,
+      pdValue,
+      aeValue,
+      edResult,
+      pdResult,
+      aeResult;
+
+  late double ibw, ed, pd, ae;
+
   int step1 = -1;
 
   bool haveBMIValue = false;
-  bool isHighRisk = false;
-  String wValue = "";
-  String hValue = "";
+  bool haveDrValue = false;
 
-  var sexValue = "";
+  bool isHighRisk = false;
 
   List<String> sex = <String>['Please select', 'Male', 'Female'];
   List<String> energy = <String>['Please select', '20', '25', '30', '35', '40'];
@@ -75,17 +89,16 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    String energyValue = energy.first;
-    String protienValue = protien.first;
-
     var getStep = <Step>[
       Step(
         isActive: true,
         title: haveBMIValue
             ? DisplayResultStep(
+                isCaseImfomation: true,
                 width: width,
                 bmi: bmiValue,
                 ibw: ibwValue,
+                sex: sexValue,
               )
             : const AutoSizeText(
                 'Case Information',
@@ -93,7 +106,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 maxLines: 1,
               ),
         content: Form(
-          key: _formKey,
+          key: _fkPerio1,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -128,7 +141,6 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 msaSizeBox(height: 10),
                 BmiForm(
                   isGanttChart: true,
-                  stepperKey: _formKey,
                   heightController: heightController,
                   hightFocus: hightFocus,
                   weightController: weightController,
@@ -190,13 +202,23 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         ),
       ),
       Step(
-          isActive: (_index >= 1) ? true : false,
-          title: const AutoSizeText(
-            'Daily Requirement',
-            minFontSize: 16,
-            maxLines: 1,
-          ),
-          content: Container(
+        isActive: (_index >= 1) ? true : false,
+        title: haveDrValue
+            ? DisplayResultStep(
+                isCaseImfomation: false,
+                width: width,
+                energy: edResult,
+                protein: pdResult,
+                actual: aeResult,
+              )
+            : const AutoSizeText(
+                'Daily Requirement',
+                minFontSize: 16,
+                maxLines: 1,
+              ),
+        content: Form(
+          key: _fkPerio2,
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,180 +230,109 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 ),
                 msaSizeBox(),
                 Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  decoration: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                    side: BorderSide(
+                    padding: const EdgeInsets.only(left: 10, top: 2),
+                    decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                      side: BorderSide(
                         width: 1.0,
                         style: BorderStyle.solid,
-                        color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  )),
-                  width: width,
-                  height: 40,
-                  child: DropdownButton(
-                      underline: const SizedBox(),
-                      isExpanded: true,
-                      iconEnabledColor: Colors.grey,
-                      iconSize: 36,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20.0)),
-                      value: energyValue,
-                      items:
-                          energy.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                            value: value, child: Text(value));
-                      }).toList(),
-                      onChanged: (String? value) {
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    )),
+                    width: width,
+                    child: DropDownForm(
+                      onChanged: (String? v) {
                         setState(() {
-                          energyValue = value!;
+                          edValue = v!;
                         });
-                      }),
-                ),
-                msaSizeBox(),
+                      },
+                      v: energy,
+                    )),
+                msaSizeBox(height: 10),
                 const AutoSizeText(
                   "Protien goal (g/kg/day)",
                   minFontSize: 14,
                   maxLines: 1,
                 ),
-                msaSizeBox(),
                 Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  decoration: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                    side: BorderSide(
+                    padding: const EdgeInsets.only(left: 10, top: 2),
+                    decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                      side: BorderSide(
                         width: 1.0,
                         style: BorderStyle.solid,
-                        color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  )),
-                  width: width,
-                  height: 40,
-                  child: DropdownButton(
-                      underline: const SizedBox(),
-                      isExpanded: true,
-                      iconEnabledColor: Colors.grey,
-                      iconSize: 36,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20.0)),
-                      value: protienValue,
-                      items:
-                          protien.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                            value: value, child: Text(value));
-                      }).toList(),
-                      onChanged: (String? value) {
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    )),
+                    width: width,
+                    child: DropDownForm(
+                      onChanged: (String? v) {
                         setState(() {
-                          protienValue = value!;
+                          pdValue = v!;
                         });
-                      }),
-                ),
-                msaSizeBox(),
-                const AutoSizeText(
-                  "Energy daily requirement (kcal)",
-                  minFontSize: 14,
-                  maxLines: 1,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.centerLeft,
-                  width: width,
-                  height: 40,
-                  decoration: const ShapeDecoration(
-                      color: primaryColor4,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            width: 1.0,
-                            style: BorderStyle.solid,
-                            color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      )),
-                  child: const AutoSizeText(
-                    "1,250 (kcal)",
-                    maxLines: 1,
-                    minFontSize: 16,
-                    maxFontSize: 18,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                msaSizeBox(),
-                const AutoSizeText(
-                  "Protein daily requirement (g)",
-                  minFontSize: 14,
-                  maxLines: 1,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.centerLeft,
-                  width: width,
-                  height: 40,
-                  decoration: const ShapeDecoration(
-                      color: primaryColor4,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            width: 1.0,
-                            style: BorderStyle.solid,
-                            color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      )),
-                  child: const AutoSizeText(
-                    "60.0 (g)",
-                    maxLines: 1,
-                    minFontSize: 16,
-                    maxFontSize: 18,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                msaSizeBox(),
+                      },
+                      v: protien,
+                    )),
+                msaSizeBox(height: 10),
                 const AutoSizeText(
                   "Actual Oral/EN energy intake (kcal)",
                   minFontSize: 14,
                   maxLines: 1,
                 ),
                 msaSizeBox(),
-                TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    hintStyle: TextStyle(color: Colors.grey[800]),
-                    hintText: "Please fill info",
-                    isDense: true,
-                    contentPadding: const EdgeInsets.all(10),
-                  ),
-                  keyboardType: TextInputType.number,
+                MsaFormField(
+                  controller: actualOralController,
+                  controllerFocus: actualOralFocus,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(numberRegExp)
+                  ],
+                  label: 'Please fill infomation',
+                  onChanged: (v) {
+                    setState(() {
+                      acValue = actualOralController.text;
+                    });
+                  },
+                  validator: (String? v) {
+                    if (v == null || v.isEmpty) {
+                      return 'Cannot empty';
+                    }
+                    return null;
+                  },
                 ),
-                msaSizeBox(),
-                const AutoSizeText(
-                  "% actual energy intake vs requirement",
-                  minFontSize: 14,
-                  maxLines: 1,
+                msaSizeBox(height: 20),
+                Row(
+                  // Dashed line
+                  children: [
+                    for (int i = 0; i < width / 8.5; i++)
+                      Container(
+                        width: 5,
+                        height: 1,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 1,
+                              color: i % 2 == 0
+                                  ? const Color.fromRGBO(214, 211, 211, 1)
+                                  : Colors.transparent,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.centerLeft,
-                  width: width,
-                  height: 40,
-                  decoration: const ShapeDecoration(
-                      color: primaryColor4,
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            width: 1.0,
-                            style: BorderStyle.solid,
-                            color: Colors.grey),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      )),
-                  child: const AutoSizeText(
-                    "56.0 %",
-                    maxLines: 1,
-                    minFontSize: 16,
-                    maxFontSize: 18,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
+                msaSizeBox(height: 10),
               ],
             ),
-          )),
+          ),
+        ),
+      ),
+      Step(
+        title: const Text("Summary"),
+        subtitle: const Text("plaese check result again before continue"),
+        content: msaSizeBox(),
+      )
     ];
 
     return Scaffold(
@@ -465,32 +416,23 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 if (_index > 0) {
                                   setState(() {
                                     _index -= 1;
-
-                                    if (_index > 1) {
-                                      result.removeLast();
-                                    }
-                                  });
-                                }
-
-                                if (_index == 1) {
-                                  setState(() {
-                                    result.clear();
-                                    _index--;
                                   });
                                 }
 
                                 if (_index == 0) {
                                   setState(() {
                                     haveBMIValue = false;
-                                    result = [];
+                                  });
+                                } else if (_index == 1) {
+                                  setState(() {
+                                    haveDrValue = false;
                                   });
                                 }
                               },
                               //*continue
                               onStepContinue: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState?.save();
-
+                                if (_fkPerio1.currentState!.validate() ||
+                                    _fkPerio2.currentState!.validate()) {
                                   var lastStep = _index == getStep.length - 1;
 
                                   if (_index <= getStep.length - 1) {
@@ -498,6 +440,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                     if (_index == 0) {
                                       setState(() {
                                         haveBMIValue = true;
+                                        _fkPerio1.currentState?.reset();
+                                        _fkPerio2.currentState?.reset();
 
                                         var wD = double.parse(wValue);
                                         var hD = double.parse(hValue);
@@ -505,10 +449,32 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
 
                                         bmiValue = bmi.toStringAsFixed(2);
                                         resultBmi = getResult(bmi);
-                                        interpreBmi = getInterpretation(bmi);
 
-                                        var ibw = calculateIBW(hD, sexValue);
+                                        ibw = calculateIBW(hD, sexValue);
                                         ibwValue = ibw.toStringAsFixed(2);
+
+                                        _index += 1;
+                                      });
+                                    } else if (_index == 1) {
+                                      setState(() {
+                                        haveDrValue = true;
+                                        _fkPerio1.currentState?.reset();
+                                        _fkPerio2.currentState?.reset();
+
+                                        var ao = double.parse(acValue);
+                                        var edRaw = double.parse(edValue);
+                                        var pdRaw = double.parse(pdValue);
+
+                                        ed = calculateDailyRequirement(
+                                            "ed", edRaw, ibw);
+                                        pd = calculateDailyRequirement(
+                                            "pd", pdRaw, ibw);
+                                        ae = calculateDailyRequirement(
+                                            "ae", ao, ed);
+
+                                        edResult = formatter.format(ed);
+                                        pdResult = formatter.format(pd);
+                                        aeResult = formatter.format(ae);
 
                                         _index += 1;
                                       });
@@ -521,9 +487,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                     }
                                   }
 
-                                  if (_index == 1 && lastStep) {
-                                    // print("test");
-                                  }
+                                  if (_index == 1 && lastStep) {}
                                 }
                               },
                               //*on tab
