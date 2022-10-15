@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 import 'package:msa_app/shared/shared.dart';
 
@@ -54,10 +55,21 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   bool haveBMIValue = false;
   bool haveDrValue = false;
 
-  List<String> sex = <String>['Please select', 'Male', 'Female'];
-  List<String> energy = <String>['Please select', '20', '25', '30', '35', '40'];
+  List<String> sex = <String>[
+    translate("gantt_chart.perio_page.select_sex"),
+    translate("gantt_chart.perio_page.male"),
+    translate("gantt_chart.perio_page.female")
+  ];
+  List<String> energy = <String>[
+    translate("gantt_chart.perio_page.select_sex"),
+    '20',
+    '25',
+    '30',
+    '35',
+    '40'
+  ];
   List<String> protien = <String>[
-    'Please select',
+    translate("gantt_chart.perio_page.select_sex"),
     '1.0',
     '1.2',
     '1.3',
@@ -89,14 +101,14 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         isActive: true,
         title: haveBMIValue
             ? DisplayResultStep(
-                type: "case_information",
+                type: "case_infomation",
                 width: width,
                 bmi: bmiValue,
                 ibw: ibwValue,
                 sex: sexValue,
               )
-            : const AutoSizeText(
-                'Case Information',
+            : AutoSizeText(
+                translate("gantt_chart.perio_page.title_1"),
                 minFontSize: 16,
                 maxLines: 1,
               ),
@@ -107,8 +119,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AutoSizeText(
-                  "Sex",
+                AutoSizeText(
+                  translate("gantt_chart.sex"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -206,8 +218,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                 protein: pdResult,
                 actual: aeResult,
               )
-            : const AutoSizeText(
-                'Daily Requirement',
+            : AutoSizeText(
+                translate("gantt_chart.perio_page.title_2"),
                 minFontSize: 16,
                 maxLines: 1,
               ),
@@ -218,8 +230,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AutoSizeText(
-                  "Energy goal (kcal/kg/day)",
+                AutoSizeText(
+                  translate("gantt_chart.energy_goal"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -245,8 +257,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                       v: energy,
                     )),
                 msaSizeBox(height: 10),
-                const AutoSizeText(
-                  "Protien goal (g/kg/day)",
+                AutoSizeText(
+                  translate("gantt_chart.protien_goal"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -271,8 +283,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                       v: protien,
                     )),
                 msaSizeBox(height: 10),
-                const AutoSizeText(
-                  "Actual Oral/EN energy intake (kcal)",
+                AutoSizeText(
+                  translate("gantt_chart.energy_intake"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -283,7 +295,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  label: 'Please fill infomation',
+                  label: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       acValue = actualOralController.text;
@@ -325,8 +337,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
       ),
       Step(
         isActive: (_index >= 2) ? true : false,
-        title: const Text("Summary"),
-        subtitle: const Text("plaese check result again before continue"),
+        title: Text(translate("gantt_chart.perio_page.summary")),
+        subtitle: Text(translate("gantt_chart.perio_page.check_result")),
         content: msaSizeBox(),
       )
     ];
@@ -334,7 +346,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: 'GANTT CHART Energy & Protein Intake Calculator',
+        title: translate("gantt_chart.title"),
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
@@ -346,7 +358,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
             have2Button: true,
             haveColorText: true,
             haveQuestions: false,
-            title: 'Warning!!!',
+            title: translate("warning_page_start.warning"),
             width: width,
             height: height / 2,
             onPressedYes: () {

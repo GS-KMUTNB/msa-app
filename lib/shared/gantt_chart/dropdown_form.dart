@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
 
@@ -42,21 +43,21 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Case Information',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.title_1"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
-                  const AutoSizeText(
-                    'your result is',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.your_result"),
                     minFontSize: 8,
                     maxLines: 1,
                   ),
                   msaSizeBox(height: 10),
                   Row(
                     children: [
-                      const AutoSizeText(
-                        "Sex",
+                      AutoSizeText(
+                        translate("gantt_chart.sex"),
                         maxLines: 1,
                         minFontSize: 16,
                         maxFontSize: 18,
@@ -164,19 +165,19 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Daily Requirement',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.title_2"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
-                  const AutoSizeText(
-                    'your result is',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.your_result"),
                     minFontSize: 8,
                     maxLines: 1,
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "Energy daily requirement (kcal)",
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.energy_daily"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -203,8 +204,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(),
-                  const AutoSizeText(
-                    "Protein daily requirement (g)",
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.protein_daily"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -231,8 +232,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(),
-                  const AutoSizeText(
-                    "% actual energy intake vs requirement",
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.actual_energy"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
