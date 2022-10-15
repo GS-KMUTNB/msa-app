@@ -1,11 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:msa_app/screens/screens.dart';
-import 'package:msa_app/shared/gantt_chart/dialysis_patient.dart';
 import 'package:msa_app/shared/shared.dart';
 
-import '../shared/gantt_chart/perioperative_patient.dart';
-import '../shared/globals/alert_hint.dart';
 import '../theme/theme.dart';
 
 class GanttChartScreen extends StatelessWidget {

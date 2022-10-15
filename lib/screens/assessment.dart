@@ -8,7 +8,6 @@ import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 import '../models/models.dart';
-import '../shared/globals/alert_hint.dart';
 
 class AssessmentScreen extends StatefulWidget {
   const AssessmentScreen({super.key});
@@ -114,7 +113,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                 ),
               ),
         content: BmiForm(
-          stepperKey: _formKey,
           heightController: heightController,
           hightFocus: hightFocus,
           weightController: weightController,
@@ -341,201 +339,195 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/bg.png"),
-                  fit: BoxFit.cover,
+        child: Form(
+          key: _formKey,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/bg.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Center(
-              child: CardContent(
-                w: width - 40,
-                h: height / 1.20,
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        right: 20,
-                        left: 20,
-                        top: 20,
-                        bottom: 10,
+              Center(
+                child: CardContent(
+                  w: width - 40,
+                  h: height / 1.20,
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 20,
+                          left: 20,
+                          top: 20,
+                          bottom: 10,
+                        ),
+                        // ignore: fixme
+                        child: MsaProgressBar(), //FIXME
                       ),
-                      // ignore: fixme
-                      child: MsaProgressBar(), //FIXME
-                    ),
-                    Expanded(
-                      child: ListView(
-                        physics: const BouncingScrollPhysics(),
-                        controller: _controller,
-                        children: [
-                          MsaStepper(
-                            context: context,
-                            currentStep: _index,
-                            //*cancel
-                            onStepCancel: () {
-                              if (_index > 0) {
-                                setState(() {
-                                  _index -= 1;
+                      Expanded(
+                        child: ListView(
+                          physics: const BouncingScrollPhysics(),
+                          controller: _controller,
+                          children: [
+                            MsaStepper(
+                              context: context,
+                              currentStep: _index,
+                              //*cancel
+                              onStepCancel: () {
+                                if (_index > 0) {
+                                  setState(() {
+                                    _index -= 1;
 
-                                  if (_index > 1) {
-                                    result.removeLast();
-                                  }
+                                    if (_index > 1) {
+                                      result.removeLast();
+                                    }
 
-                                  radioResult = "";
-                                });
-                              }
-
-                              if (_index == 1) {
-                                setState(() {
-                                  result.clear();
-                                  _index--;
-                                });
-                              }
-
-                              if (_index == 0) {
-                                setState(() {
-                                  haveBMIValue = false;
-                                  result = [];
-                                });
-                              }
-                            },
-                            //*continue
-                            onStepContinue: () {
-                              if (_formKey.currentState!.validate()) {
-                                var lastStep = _index == getStep.length - 1;
-
-                                if (_index <= getStep.length - 1) {
-                                  // To next Step
-                                  if (_index == 0) {
-                                    setState(() {
-                                      haveBMIValue = true;
-
-                                      var wD = double.parse(wValue);
-                                      var hD = double.parse(hValue);
-                                      var bmi = calculateBMI(wD, hD);
-
-                                      bmiValue = bmi.toStringAsFixed(2);
-                                      resultBmi = getResult(bmi);
-                                      interpreBmi = getInterpretation(bmi);
-
-                                      if (bmi < 18.5 || bmi >= 25.0) {
-                                        result.add(translate(
-                                            "assesment_page.table_head_yes"));
-                                      } else {
-                                        result.add(translate(
-                                            "assesment_page.table_head_no"));
-                                      }
-
-                                      _index += 2;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      if (radioResult != "") {
-                                        if (!lastStep) {
-                                          _index += 1;
-                                          result.add(radioResult);
-                                          radioResult = "";
-                                        }
-                                      } else {
-                                        showDialog<String>(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              AlertDialog(
-                                            title: const Text('Please Select'),
-                                            content: const Text('Yes or No'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop(),
-                                                child: const Text('OK'),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }
-                                    });
-                                  }
+                                    radioResult = "";
+                                  });
                                 }
 
-                                if (_index == 4 && lastStep) {
-                                  if (radioResult != "") {
-                                    setState(() {
-                                      result.add(radioResult);
-                                    });
+                                if (_index == 1) {
+                                  setState(() {
+                                    result.clear();
+                                    _index--;
+                                  });
+                                }
 
-                                    var countData = data.formData!
-                                        .where(
-                                          (c) =>
-                                              c ==
-                                              translate(
-                                                  "assesment_page.table_head_yes"),
-                                        )
-                                        .length;
+                                if (_index == 0) {
+                                  setState(() {
+                                    haveBMIValue = false;
+                                    result = [];
+                                  });
+                                }
+                              },
+                              //*continue
+                              onStepContinue: () {
+                                if (_formKey.currentState!.validate()) {
+                                  var lastStep = _index == getStep.length - 1;
 
-                                    if (countData >= 2) {
+                                  if (_index <= getStep.length - 1) {
+                                    // To next Step
+                                    if (_index == 0) {
                                       setState(() {
-                                        isHighRisk = true;
+                                        haveBMIValue = true;
+
+                                        var wD = double.parse(wValue);
+                                        var hD = double.parse(hValue);
+                                        var bmi = calculateBMI(wD, hD);
+
+                                        bmiValue = bmi.toStringAsFixed(2);
+                                        resultBmi = getResult(bmi);
+                                        interpreBmi = getInterpretation(bmi);
+
+                                        if (bmi < 18.5 || bmi >= 25.0) {
+                                          result.add(translate(
+                                              "assesment_page.table_head_yes"));
+                                        } else {
+                                          result.add(translate(
+                                              "assesment_page.table_head_no"));
+                                        }
+
+                                        _index += 2;
                                       });
                                     } else {
                                       setState(() {
-                                        isHighRisk = false;
+                                        if (radioResult != "") {
+                                          if (!lastStep) {
+                                            _index += 1;
+                                            result.add(radioResult);
+                                            radioResult = "";
+                                          }
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'Please select Yes or No')),
+                                          );
+                                        }
                                       });
                                     }
+                                  }
 
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          MsaHintAlert(
+                                  if (_index == 4 && lastStep) {
+                                    if (radioResult != "") {
+                                      setState(() {
+                                        result.add(radioResult);
+                                      });
+
+                                      var countData = data.formData!
+                                          .where(
+                                            (c) =>
+                                                c ==
+                                                translate(
+                                                    "assesment_page.table_head_yes"),
+                                          )
+                                          .length;
+
+                                      if (countData >= 2) {
+                                        setState(() {
+                                          isHighRisk = true;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          isHighRisk = false;
+                                        });
+                                      }
+
+                                      showDialog(
                                         context: context,
-                                        haveButton: true,
-                                        haveQuestions: true,
-                                        continueButton: false,
-                                        warningQuestions: true,
-                                        have2Button: true,
-                                        title: translate(
-                                            "alert_result.screening_result"),
-                                        numberQuestions:
-                                            '$countData ${translate("alert_result.questions")}.',
-                                        textContent: isHighRisk
-                                            ? "${translate("results_page.result_is")} \n- ${translate("results_page.continue_the_nutritional")} "
-                                            : "${translate("results_page.result_is")} \n- ${translate("results_page.should_be_repeated")} ",
-                                        isHightRisk: isHighRisk,
-                                        onPressedYes: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ResultScreen(data: data),
-                                            ),
-                                          );
-                                        },
-                                        onPressedNo: () {
-                                          result.removeLast();
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    );
+                                        builder: (BuildContext context) =>
+                                            MsaHintAlert(
+                                          context: context,
+                                          haveButton: true,
+                                          haveQuestions: true,
+                                          continueButton: false,
+                                          warningQuestions: true,
+                                          have2Button: true,
+                                          title: translate(
+                                              "alert_result.screening_result"),
+                                          numberQuestions:
+                                              '$countData ${translate("alert_result.questions")}.',
+                                          textContent: isHighRisk
+                                              ? "${translate("results_page.result_is")} \n- ${translate("results_page.continue_the_nutritional")} "
+                                              : "${translate("results_page.result_is")} \n- ${translate("results_page.should_be_repeated")} ",
+                                          isHightRisk: isHighRisk,
+                                          onPressedYes: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ResultScreen(data: data),
+                                              ),
+                                            );
+                                          },
+                                          onPressedNo: () {
+                                            result.removeLast();
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      );
+                                    }
                                   }
                                 }
-                              }
-                            },
-                            //*on tab
-                            onStepTapped: (int index) => null,
-                            steps: getStep,
-                          ),
-                        ],
+                              },
+                              //*on tab
+                              onStepTapped: (int index) => null,
+                              steps: getStep,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

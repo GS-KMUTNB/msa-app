@@ -11,7 +11,6 @@ class BmiForm extends SizedBox {
   BmiForm({
     Key? key,
     bool isGanttChart = false,
-    required Key stepperKey,
     required TextEditingController weightController,
     required TextEditingController heightController,
     required FocusNode weightFocus,
@@ -28,116 +27,117 @@ class BmiForm extends SizedBox {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    msaSizeBox(height: 10),
                     const AutoSizeText(
                       "Height",
                       minFontSize: 14,
                       maxLines: 1,
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: "Please fill info",
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(10),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "Please fill info",
-                        isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(left: 10, top: 10),
+                        inputFormatters: inputFormattersHeight,
+                        validator: validatorHeight,
+                        focusNode: hightFocus,
+                        controller: heightController,
+                        onChanged: (value) => onHeightChanged!(value),
+                        keyboardType: TextInputType.number,
                       ),
-                      inputFormatters: inputFormattersHeight,
-                      validator: validatorHeight,
-                      focusNode: hightFocus,
-                      controller: heightController,
-                      onChanged: (value) => onHeightChanged!(value),
-                      keyboardType: TextInputType.number,
                     ),
-                    msaSizeBox(height: 10),
                     const AutoSizeText(
                       "Width",
                       minFontSize: 14,
                       maxLines: 1,
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: "Please fill info",
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(10),
                         ),
-                        hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "Please fill info",
-                        isDense: true,
-                        contentPadding:
-                            const EdgeInsets.only(left: 10, top: 10),
+                        inputFormatters: inputFormattersWeight,
+                        validator: validatorWeight,
+                        focusNode: weightFocus,
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) => onWeightChanged!(value),
                       ),
-                      inputFormatters: inputFormattersWeight,
-                      validator: validatorWeight,
-                      focusNode: weightFocus,
-                      controller: weightController,
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) => onWeightChanged!(value),
                     ),
                   ],
                 )
-              : Form(
-                  key: stepperKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 5,
-                        ),
-                        child: TextFormField(
-                          style: head6,
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            hintStyle: TextStyle(color: Colors.grey[800]),
-                            // hintText: "Please fill Weight kg.",
-                            labelText:
-                                translate("assesment_page.text_box_weight"),
-                            isDense: true,
-                            contentPadding: const EdgeInsets.all(10),
-                          ),
-                          inputFormatters: inputFormattersWeight,
-                          validator: validatorWeight,
-                          focusNode: weightFocus,
-                          controller: weightController,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) => onWeightChanged!(value),
-                        ),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 5,
-                        ),
-                        child: TextFormField(
-                          style: head6,
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            hintStyle: TextStyle(color: Colors.grey[800]),
-                            // hintText: "Please fill Height cm.",
-                            labelText:
-                                translate("assesment_page.text_box_height"),
-                            isDense: true,
-                            contentPadding: const EdgeInsets.all(10),
+                      child: TextFormField(
+                        style: head6,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                          inputFormatters: inputFormattersHeight,
-                          validator: validatorHeight,
-                          focusNode: hightFocus,
-                          controller: heightController,
-                          onChanged: (value) => onHeightChanged!(value),
-                          keyboardType: TextInputType.number,
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          // hintText: "Please fill Height cm.",
+                          labelText:
+                              translate("assesment_page.text_box_height"),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(10),
                         ),
+                        inputFormatters: inputFormattersHeight,
+                        validator: validatorHeight,
+                        focusNode: hightFocus,
+                        controller: heightController,
+                        onChanged: (value) => onHeightChanged!(value),
+                        keyboardType: TextInputType.number,
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      child: TextFormField(
+                        style: head6,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          // hintText: "Please fill Weight kg.",
+                          labelText:
+                              translate("assesment_page.text_box_weight"),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(10),
+                        ),
+                        inputFormatters: inputFormattersWeight,
+                        validator: validatorWeight,
+                        focusNode: weightFocus,
+                        controller: weightController,
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) => onWeightChanged!(value),
+                      ),
+                    ),
+                  ],
                 ),
         );
 }

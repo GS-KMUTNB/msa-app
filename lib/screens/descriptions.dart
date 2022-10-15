@@ -4,7 +4,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 
-import '../shared/globals/alert_hint.dart';
 import '../theme/theme.dart';
 
 class DescriptionScreen extends StatelessWidget {

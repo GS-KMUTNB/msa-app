@@ -6,7 +6,6 @@ import 'package:msa_app/screens/screens.dart';
 // import 'package:intl/intl.dart';
 
 import '../models/models.dart';
-import '../shared/globals/alert_hint.dart';
 import '../shared/shared.dart';
 import '../theme/theme.dart';
 // import '../theme/theme.dart';
@@ -23,9 +22,9 @@ class ResultScreen extends StatelessWidget {
   }) : super(key: key);
 
   var formQuestion = [
+    translate("assesment_page.description_bmi_range"),
     translate("assesment_page.description_assesment_weight_loss"),
     translate("assesment_page.description_assesment_Patients_were_fed_less"),
-    translate("assesment_page.description_bmi_range"),
     translate("assesment_page.description_patients_with_critical"),
   ];
 
@@ -172,27 +171,30 @@ class ResultScreen extends StatelessWidget {
                             child: PrintPdf(data: snsForm),
                           ),
                           msaSizeBox(),
-                          Container(
-                            color: primaryColor4,
-                            height: 50,
-                            width: width,
-                            child: TextButton(
-                              onPressed: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => GanttChartScreen(
-                                      buildContext: context,
+                          isHightRisk
+                              ? Container(
+                                  color: primaryColor4,
+                                  height: 50,
+                                  width: width,
+                                  child: TextButton(
+                                    onPressed: () => {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              GanttChartScreen(
+                                            buildContext: context,
+                                          ),
+                                        ),
+                                      ),
+                                    },
+                                    child: Text(
+                                      translate("results_page.next_button"),
+                                      style: const TextStyle(color: blackColor),
                                     ),
                                   ),
-                                ),
-                              },
-                              child: Text(
-                                translate("results_page.next_button"),
-                                style: const TextStyle(color: blackColor),
-                              ),
-                            ),
-                          ),
+                                )
+                              : const SizedBox()
                         ],
                       ),
                     ),

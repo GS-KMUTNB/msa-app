@@ -154,7 +154,7 @@ String HtmlFormResult(HtmlSNSForm data, String type) {
         </div>
         <div>
             <img class="center"
-                src="https://media.discordapp.net/attachments/1002459006222213120/1028916063611654185/sample_qr-code.png?width=676&height=676"
+                src="https://media.discordapp.net/attachments/1002459006222213120/1030027604381667349/qrcode.png?width=670&height=670"
                 alt="" style="width: 7em;">
             <p style="text-align: center; margin-top: 0%;">$tFooter</p>
         </div>
