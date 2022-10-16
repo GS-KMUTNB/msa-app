@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
+import '../shared.dart';
 
 class DropDownForm extends DropdownButtonFormField<String> {
   DropDownForm({
@@ -34,7 +35,19 @@ class DisplayResultStep extends Column {
     String sex = "",
     String energy = "",
     String protein = "",
+    String energyReq = "",
+    String proteinReq = "",
     String actual = "",
+    String eGFR = "",
+    String cdkStage = "",
+    String renal = "",
+    String albumin = "",
+    String prealbumin = "",
+    String followUpBmi = "",
+    String diffBodyWeight = "",
+    String diffAlbumin = "",
+    String diffPrealbumin = "",
+    String intervention = "",
     required String type,
   }) : super(
           key: key,
@@ -83,7 +96,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -118,7 +131,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -153,7 +166,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -200,7 +213,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -228,7 +241,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -256,7 +269,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(height: 20),
@@ -270,6 +283,19 @@ class DisplayResultStep extends Column {
                     'Case Information 1',
                     minFontSize: 16,
                     maxLines: 1,
+                  ),
+                  MsaRichText(
+                    title: 'eGFR :',
+                    result: eGFR,
+                    unit: "(mL/mm/1.73m2)",
+                  ),
+                  MsaRichText(
+                    title: 'CDK :',
+                    result: cdkStage,
+                  ),
+                  MsaRichText(
+                    title: 'Renal :',
+                    result: renal,
                   ),
                   const AutoSizeText(
                     'your result is',
@@ -306,7 +332,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -341,7 +367,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -376,9 +402,29 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
+                  Row(
+                    children: [
+                      for (int i = 0; i < width / 8.5; i++)
+                        Container(
+                          width: 5,
+                          height: 1,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: i % 2 == 0
+                                    ? const Color.fromRGBO(214, 211, 211, 1)
+                                    : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                   msaSizeBox(height: 20),
@@ -400,7 +446,63 @@ class DisplayResultStep extends Column {
                   ),
                   msaSizeBox(height: 10),
                   const AutoSizeText(
-                    "Protein daily requirement (g)",
+                    "Energy intake (kCal/kg/day)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      energy,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Energy daily requirement (kCal)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      energyReq,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Protein intake (g/kg/day)",
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -423,7 +525,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -447,14 +549,231 @@ class DisplayResultStep extends Column {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         )),
                     child: AutoSizeText(
-                      protein,
+                      proteinReq,
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(height: 20),
+                  Row(
+                    children: [
+                      for (int i = 0; i < width / 8.5; i++)
+                        Container(
+                          width: 5,
+                          height: 1,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: i % 2 == 0
+                                    ? const Color.fromRGBO(214, 211, 211, 1)
+                                    : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
+                ],
+              ),
+            ] else if (type == "nutrition_parameter_baseline") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Nutrition parameter (Baseline)',
+                    minFontSize: 16,
+                    maxLines: 1,
+                  ),
+                  MsaRichText(
+                    title: 'Serum albumin :',
+                    result: albumin,
+                    unit: "(g/dl)",
+                  ),
+                  MsaRichText(
+                    title: 'Serum prealbumin :',
+                    result: prealbumin,
+                    unit: "(mg/dl)",
+                  ),
+                  msaSizeBox(height: 20),
+                  Row(
+                    children: [
+                      for (int i = 0; i < width / 8.5; i++)
+                        Container(
+                          width: 5,
+                          height: 1,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: i % 2 == 0
+                                    ? const Color.fromRGBO(214, 211, 211, 1)
+                                    : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
+                ],
+              ),
+            ] else if (type == "nutrition_parameter_follow_up") ...[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AutoSizeText(
+                    'Nutrition parameter (Follow-Up)',
+                    minFontSize: 15,
+                    maxLines: 1,
+                  ),
+                  MsaRichText(
+                    title: 'Intervention duration:',
+                    result: intervention,
+                    unit: "(weeks)",
+                  ),
+                  const AutoSizeText(
+                    'your result is',
+                    minFontSize: 8,
+                    maxLines: 1,
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "Follow-up BMI (kg/m2)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      followUpBmi,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "% diff of body weight",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      diffBodyWeight,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "% diff of Sr.albumin",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      diffAlbumin,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(height: 10),
+                  const AutoSizeText(
+                    "% diff of Sr.prealbumin",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      diffPrealbumin,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
+                  msaSizeBox(height: 20),
+                  Row(
+                    children: [
+                      for (int i = 0; i < width / 8.5; i++)
+                        Container(
+                          width: 5,
+                          height: 1,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: i % 2 == 0
+                                    ? const Color.fromRGBO(214, 211, 211, 1)
+                                    : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  msaSizeBox(height: 20),
                 ],
               ),
             ],
@@ -474,7 +793,7 @@ double calculateIBW(double height, String sex) {
   return ibw;
 }
 
-double calculateDailyRequirement(String type, double data1, double data2) {
+double calculateGanttChart(String type, double data1, double data2) {
   double result = 0;
 
   switch (type) {
@@ -489,6 +808,27 @@ double calculateDailyRequirement(String type, double data1, double data2) {
     case "ae":
       result = data1 / data2;
       break;
+
+    case "fu-bmi":
+      result = data1 / ((data2 / 100) * (data2 / 100));
+      break;
+
+    case "diff-bw":
+      result = (data1 - data2) / data2;
+      break;
+
+    case "diff-al":
+      //data 1 = albumin in baseline
+      //data 2 = albumin in follow up
+      result = (data1 - data2) / data2;
+      break;
+
+    case "diff-pal":
+      //data 1 = prealbumin in baseline
+      //data 2 = prealbumin in follow up
+      result = (data1 - data2) / data2;
+      break;
+
     default:
       result = 0;
   }
