@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:msa_app/models/models.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class GanttChartTodoScreen extends StatefulWidget {
-  const GanttChartTodoScreen({
-    Key? key,
-    required this.context,
-  }) : super(key: key);
+  const GanttChartTodoScreen(
+      {Key? key, required this.dataList, required this.context})
+      : super(key: key);
 
+  final List<ExpenseData> dataList;
   final BuildContext context;
+
   @override
   State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
 }
 
 class _GanttChartTodoState extends State<GanttChartTodoScreen> {
+  List<ExpenseData> dataList = <ExpenseData>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    dataList = widget.dataList;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: MsaAppBar(
         ctx: context,
@@ -89,58 +103,41 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: MsaButton(
-                          color: primaryColor5,
+                          color: dataList.isEmpty ? bgGreyColor : primaryColor5,
                           h: 40,
                           w: width - 75,
                           text: "Result",
                           textStyle: bodyText1,
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const MsaGanttChartResultScreen(
-                                  title: 'Perioperative Patient',
-                                  // data: null,
-                                ),
-                              ),
-                            );
+                            dataList.isEmpty
+                                ? null
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MsaGanttChartResultScreen(
+                                        title: 'Perioperative Patient',
+                                        // data: null,
+                                      ),
+                                    ),
+                                  );
                           },
                         ),
                       ),
-                      msaSizeBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        width: width,
-                        height: height / 1.45,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgGreyColor,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // ignore: fixme
-                            //FIXME change size box to dynamic Listview
-                            msaSizeBox(),
-                            SizedBox(
-                              width: width / 6,
-                              height: width / 6,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const GanttChartAddScreen()));
-                                },
-                                backgroundColor: primaryColor,
-                                child: const Icon(Icons.add),
-                              ),
-                            ),
-                          ],
+                      Expanded(
+                        child: ListView(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          children: widget.dataList.map((ExpenseData data) {
+                            return AssessMentItem(
+                              data: data,
+                              // onTodoChanged: () {
+                              //   print("test");
+                              // },
+                            );
+                          }).toList(),
                         ),
                       ),
+                      msaSizeBox(height: 10),
                     ]),
                   ),
                 ),
@@ -156,9 +153,13 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
           FloatingActionButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const GanttChartAddScreen()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GanttChartAddScreen(
+                    data: dataList,
+                  ),
+                ),
+              );
             },
             backgroundColor: primaryColor,
             child: const Icon(Icons.add),
