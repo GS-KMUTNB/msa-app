@@ -699,7 +699,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: 'GANTT CHART Energy & Protein Intake Calculator',
+        title: "Dialysis Patient Form",
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(

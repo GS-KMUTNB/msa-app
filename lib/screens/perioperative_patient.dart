@@ -346,7 +346,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: translate("gantt_chart.title"),
+        title: "Perioperative Patient Form",
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
