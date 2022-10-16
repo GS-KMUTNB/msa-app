@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
 import '../shared.dart';
@@ -25,7 +26,7 @@ class ContainerOfButton extends Container {
               MsaButton(
                 w: widthButton,
                 h: 40,
-                text: "Continue",
+                text: translate("screening_results.button_continue"),
                 textStyle: const TextStyle(color: whiteColor),
                 color: primaryColor1,
                 onPressed: onPressedContinue,
@@ -34,7 +35,7 @@ class ContainerOfButton extends Container {
               MsaButton(
                 w: widthButton,
                 h: 40,
-                text: "Cancel",
+                text: translate("warning_page_start.button_cancel"),
                 textStyle: const TextStyle(color: Colors.grey),
                 color: whiteColor,
                 onPressed: onPressedCancel,
@@ -45,7 +46,7 @@ class ContainerOfButton extends Container {
                   : MsaButton(
                       w: widthButton,
                       h: 40,
-                      text: "Delete",
+                      text: translate("dialysis_todo.delete"),
                       textStyle: const TextStyle(color: blackColor),
                       color: primaryColor3,
                       onPressed: onPressedDelete,

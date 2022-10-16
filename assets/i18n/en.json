@@ -146,6 +146,7 @@
     "protien_goal": "Protien goal (g/kg/day)",
     "energy_intake": "Actual Oral/EN energy intake (kcal)",
     "perio_page": {
+      "perio_patient": "Perioperative Patient Form",
       "title_1": "Case Information",
       "title_2": "Daily Requirement",
       "select_sex": "Please select",
@@ -159,10 +160,12 @@
       "actual_energy": "% actual energy intake vs requirement"
     },
     "dialysis_page": {
+      "dialysis_patient": "Dialysis Patient Form",
       "title_1": "Case Information 1",
       "eGFR": "eGFR (mL/mm/1.73m2)",
-      "ckd_stage ": "CKD Stage ",
+      "ckd_stage": "CKD Stage ",
       "no_ckd": "No CKD",
+      "renal": "Renal",
       "renal_replacement": "Renal Replacement Therapy",
       "hemo": "Hemodialysis",
       "peritoneal": "Peritoneal dialysis",
@@ -178,12 +181,30 @@
       "serum_albumin": "Serum albumin (g/dl)",
       "serum_prealbumin": "Serum prealbumin (mg/dl)",
       "title_4": "Nutrition parameter (Follow-up)",
-      "intervention_duration": "Intervention duration (weeks)",
       "actual_weight": "Follow-up actual weight (kg)",
       "follow_bmi": "Follow-up BMI (kg/m2)",
       "diff_body_weight": "% diff of body weight",
       "diff_sr_albumin": "% diff of Sr.albumin",
-      "diff_sr_prealbumin": "% diff of Sr.prealbumin"
+      "diff_sr_prealbumin": "% diff of Sr.prealbumin",
+      "intervention_duration": "Intervention duration",
+      "week": "weeks"
     }
+  },
+  "dialysis_todo": {
+    "parenteral": "Parenteral",
+    "round": "Round",
+    "daily_requirement": "% of daily requirement",
+    "delete": "Delete",
+    "normal_diet": "Normal Diet",
+    "energy": "Energy (kCal)",
+    "protein": "Protein (g)"
+  },
+  "analytics": {
+    "title": "GANTT CHART Analytics",
+    "en_energy": "EN Energy",
+    "pn_energy": "PN Energy",
+    "energy_requirement": "Energy requirement",
+    "protein": "Protein",
+    "protein_requirement": "Protein requirement"
   }
 }

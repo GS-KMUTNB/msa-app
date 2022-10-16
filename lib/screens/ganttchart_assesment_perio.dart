@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/models/models.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
@@ -39,7 +40,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
       appBar: MsaAppBar(
         ctx: context,
         haveTutor: true,
-        title: "GANTT CHART Energy & Protein Intake Calculator",
+        title: translate("gantt_chart.title"),
         maxLines: 2,
         onPressed: () => showDialog<String>(
           context: context,
@@ -107,7 +108,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                           color: data.isEmpty ? bgGreyColor : primaryColor5,
                           h: 40,
                           w: width - 75,
-                          text: "Result",
+                          text: translate("assesment_page.result"),
                           textStyle: bodyText1,
                           onPressed: () {
                             data.isEmpty

@@ -435,9 +435,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
-                                            const SnackBar(
-                                                content: Text(
-                                                    'Please select Yes or No')),
+                                            SnackBar(
+                                                content: Text(translate(
+                                                    "assesment_page.choose_yes_or_no"))),
                                           );
                                         }
                                       });
