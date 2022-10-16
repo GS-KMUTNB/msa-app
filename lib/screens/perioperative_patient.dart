@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
+import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../../theme/theme.dart';
@@ -495,9 +496,14 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                   }
                                 }
                                 if (_index == 2 && lastStep) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Work in progress')),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          GanttChartTodoScreen(
+                                        buildContext: context,
+                                      ),
+                                    ),
                                   );
                                 }
                               },

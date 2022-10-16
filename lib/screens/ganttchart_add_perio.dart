@@ -183,8 +183,8 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                           title1: "Parenteral 1",
                           title2: "Parenteral 2",
                           height: height / 4.3,
-                          width1: width / 2,
-                          width2: width / 4,
+                          widthParenteral: width / 2.1,
+                          widthSet: width / 4,
                           colorContainer: primaryColor1,
                           textColor: whiteColor,
                           list1: parenteral1,
@@ -212,13 +212,14 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                             });
                           },
                         ),
+                        msaSizeBox(height: 10),
                         ContainerDropdown(
                           width: width,
                           title1: "Oral/Enteral 1",
                           title2: "Oral/Enteral 1",
                           height: height / 4.3,
-                          width1: width / 2,
-                          width2: width / 4,
+                          widthParenteral: width / 2.1,
+                          widthSet: width / 4,
                           colorContainer: primaryColor5,
                           textColor: blackColor,
                           list1: parenteral1,
@@ -245,7 +246,7 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                               bag2Value = v!;
                             });
                           },
-                        )
+                        ),
                       ],
                     ),
                   ),

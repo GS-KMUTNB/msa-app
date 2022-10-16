@@ -1,0 +1,258 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:msa_app/models/models.dart';
+import 'package:msa_app/shared/shared.dart';
+import 'package:msa_app/theme/theme.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
+class MsaGanttChartResultScreen extends StatefulWidget {
+  const MsaGanttChartResultScreen({
+    super.key,
+    required this.title,
+    // required this.data,
+  });
+  final String title;
+  // final List<ExpenseData> data;
+
+  @override
+  State<MsaGanttChartResultScreen> createState() =>
+      _MsaGanttChartResultScreenState();
+}
+
+class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
+  late List<ExpenseData> firslChartData;
+  late List<ExpenseData> secondChartData;
+
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    firslChartData = getChaetData1();
+    secondChartData = getChaetData2();
+
+    _tooltipBehavior =
+        TooltipBehavior(enable: true, tooltipPosition: TooltipPosition.pointer);
+    super.initState();
+  }
+
+  List<ExpenseData> getChaetData1() {
+    final List<ExpenseData> chartData = [];
+
+    // for (var data in widget.data) {
+    //   chartData.add(data);
+    // }
+    return chartData;
+  }
+
+  List<ExpenseData> getChaetData2() {
+    final List<ExpenseData> chartData = [
+      ExpenseData(
+        expenseCategory: "pod",
+        pod1: 0, // EN Energy
+        pod2: 10, // PN Energy
+        color1: primaryColor5,
+        color2: primaryColor,
+      ),
+      ExpenseData(
+        expenseCategory: "pod 1",
+        pod1: 5, // EN Energy
+        pod2: 15, // PN Energy
+        color1: primaryColor5,
+        color2: primaryColor,
+      ),
+      ExpenseData(
+        expenseCategory: "pod 2",
+        pod1: 7, // EN Energy
+        pod2: 20, // PN Energy
+        color1: primaryColor5,
+        color2: primaryColor,
+      ),
+      ExpenseData(
+        expenseCategory: "pod 3",
+        pod1: 20, // EN Energy
+        pod2: 30, // PN Energy
+        color1: primaryColor5,
+        color2: primaryColor,
+      ),
+    ];
+    return chartData;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      appBar: MsaAppBar(
+        ctx: context,
+        haveTutor: true,
+        title: "GANTT CHART Analytics",
+        maxLines: 1,
+        onPressed: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: false,
+            haveButton: true,
+            have2Button: true,
+            haveColorText: true,
+            haveQuestions: false,
+            title: "Warning !!!",
+            width: width,
+            height: height / 2,
+            onPressedYes: () {
+              Navigator.of(context)
+                ..pop()
+                ..pop();
+            },
+            onPressedNo: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        onPressedHint: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => MsaHintAlert(
+            context: context,
+            ifPicture: true,
+            haveButton: false,
+            haveColorText: false,
+            haveQuestions: false,
+            haveCloseButton: true,
+            title: 'User Manual',
+            subTextContent:
+                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
+            height: height / 2,
+            width: width,
+          ),
+        ),
+      ),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Center(
+              child: CardContent(
+                w: width - 40,
+                h: height / 1.20,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          widget.title,
+                          minFontSize: 16,
+                          maxLines: 1,
+                        ),
+                        SfCartesianChart(
+                          legend: Legend(
+                            isVisible: true,
+                            position: LegendPosition.top,
+                            width: "100%",
+                            isResponsive: false,
+                            overflowMode: LegendItemOverflowMode.wrap,
+                          ),
+                          series: <ChartSeries>[
+                            StackedColumnSeries<ExpenseData, String>(
+                              name: "EN Energy",
+                              dataSource: firslChartData,
+                              xValueMapper: (ExpenseData exp, _) =>
+                                  exp.expenseCategory,
+                              yValueMapper: (ExpenseData exp, _) => exp.pod1,
+                              pointColorMapper: (ExpenseData exp, _) =>
+                                  exp.color1,
+                            ),
+                            StackedColumnSeries<ExpenseData, String>(
+                              name: "PN Energy",
+                              dataSource: firslChartData,
+                              xValueMapper: (ExpenseData exp, _) =>
+                                  exp.expenseCategory,
+                              yValueMapper: (ExpenseData exp, _) => exp.pod2,
+                              pointColorMapper: (ExpenseData exp, _) =>
+                                  exp.color2,
+                            ),
+                            StackedColumnSeries<ExpenseData, String>(
+                              name: "Energy requirement",
+                              dataSource: firslChartData,
+                              xValueMapper: (ExpenseData exp, _) =>
+                                  exp.expenseCategory,
+                              yValueMapper: (ExpenseData exp, _) => exp.pod3,
+                              pointColorMapper: (ExpenseData exp, _) =>
+                                  exp.color3,
+                            ),
+                          ],
+                          tooltipBehavior: _tooltipBehavior,
+                          primaryXAxis: CategoryAxis(),
+                        ),
+                        SfCartesianChart(
+                          legend: Legend(
+                            isVisible: true,
+                            position: LegendPosition.top,
+                            width: "100%",
+                            isResponsive: false,
+                            overflowMode: LegendItemOverflowMode.wrap,
+                          ),
+                          series: <ChartSeries>[
+                            LineSeries<ExpenseData, String>(
+                              dataSource: secondChartData,
+                              xValueMapper: (ExpenseData exp, _) =>
+                                  exp.expenseCategory,
+                              yValueMapper: (ExpenseData exp, _) => exp.pod1,
+                              pointColorMapper: (ExpenseData exp, _) =>
+                                  exp.color1,
+                              name: "Protein",
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
+                              dataLabelSettings: const DataLabelSettings(
+                                showZeroValue: false,
+                                isVisible: true,
+                              ),
+                            ),
+                            LineSeries<ExpenseData, String>(
+                              dataSource: secondChartData,
+                              xValueMapper: (ExpenseData exp, _) =>
+                                  exp.expenseCategory,
+                              yValueMapper: (ExpenseData exp, _) => exp.pod2,
+                              pointColorMapper: (ExpenseData exp, _) =>
+                                  exp.color2,
+                              name: "Protein requirement",
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
+                              dataLabelSettings: const DataLabelSettings(
+                                showZeroValue: false,
+                                isVisible: true,
+                              ),
+                            ),
+                          ],
+                          tooltipBehavior: _tooltipBehavior,
+                          primaryXAxis: CategoryAxis(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

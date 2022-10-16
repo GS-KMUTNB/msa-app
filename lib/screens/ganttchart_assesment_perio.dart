@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:msa_app/models/models.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class GanttChartTodoScreen extends StatefulWidget {
-  const GanttChartTodoScreen({Key? key, required BuildContext buildContext})
-      : super(key: key);
+  const GanttChartTodoScreen({
+    Key? key,
+    required BuildContext buildContext,
+  }) : super(key: key);
 
   @override
   State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
@@ -66,77 +69,70 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Form(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bg.png"),
-                    fit: BoxFit.cover,
-                  ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg.png"),
+                  fit: BoxFit.cover,
                 ),
               ),
-              Center(
-                child: CardContent(
-                  w: width - 40,
-                  h: height / 1.20,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        Stack(children: [
-                          ContainerText(
-                            h: 40,
-                            w: width - 75,
-                            color: primaryColor5,
-                            text: 'Result',
-                            wShadow: width,
-                            hShadow: 45,
-                            shadowColor: primaryColor4,
-                          )
-                        ]),
-                        msaSizeBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          width: width,
-                          height: height / 1.4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: bgGreyColor,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //FIXME change size box to dynamic Listview
-                              msaSizeBox(),
-                              SizedBox(
-                                width: width / 6,
-                                height: width / 6,
-                                child: FloatingActionButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const GanttChartAddScreen()));
-                                  },
-                                  backgroundColor: primaryColor,
-                                  child: const Icon(Icons.add),
+            ),
+            Center(
+              child: CardContent(
+                w: width - 40,
+                h: height / 1.20,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: MsaButton(
+                          color: primaryColor5,
+                          h: 40,
+                          w: width - 75,
+                          text: "Result",
+                          textStyle: bodyText1,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MsaGanttChartResultScreen(
+                                  title: 'Perioperative Patient',
+                                  // data: null,
                                 ),
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const GanttChartAddScreen()));
+            },
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.add),
+          ),
+          msaSizeBox(height: 20)
+        ],
       ),
     );
   }
