@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../theme/theme.dart';
 import '../shared/shared.dart';
+import 'screens.dart';
 
 class DialysisPatientScreen extends StatefulWidget {
   const DialysisPatientScreen({
@@ -915,8 +916,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               _index += 1;
                             });
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Work in progress')),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GanttChartDialysisTodoScreen(
+                                  buildContext: context,
+                                ),
+                              ),
                             );
                           }
                         }

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/models/models.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
@@ -148,7 +149,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                           ),
                           series: <ChartSeries>[
                             StackedColumnSeries<ExpenseData, String>(
-                              name: "EN Energy",
+                              name: translate("analytics.en_energy"),
                               dataSource: firslChartData,
                               xValueMapper: (ExpenseData exp, _) =>
                                   exp.expenseCategory,
@@ -157,7 +158,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   primaryColor5,
                             ),
                             StackedColumnSeries<ExpenseData, String>(
-                              name: "PN Energy",
+                              name: translate("analytics.pn_energy"),
                               dataSource: firslChartData,
                               xValueMapper: (ExpenseData exp, _) =>
                                   exp.expenseCategory,
@@ -166,7 +167,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   primaryColor,
                             ),
                             StackedColumnSeries<ExpenseData, String>(
-                              name: "Energy requirement",
+                              name: translate("analytics.energy_requirement"),
                               dataSource: firslChartData,
                               xValueMapper: (ExpenseData exp, _) =>
                                   exp.expenseCategory,
@@ -194,7 +195,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                               yValueMapper: (ExpenseData exp, _) => exp.pod1,
                               pointColorMapper: (ExpenseData exp, _) =>
                                   primaryColor5,
-                              name: "Protein",
+                              name: translate("analytics.protein"),
                               markerSettings:
                                   const MarkerSettings(isVisible: true),
                               dataLabelSettings: const DataLabelSettings(
@@ -209,7 +210,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                               yValueMapper: (ExpenseData exp, _) => exp.pod2,
                               pointColorMapper: (ExpenseData exp, _) =>
                                   primaryColor,
-                              name: "Protein requirement",
+                              name: translate("analytics.protein_requirement"),
                               markerSettings:
                                   const MarkerSettings(isVisible: true),
                               dataLabelSettings: const DataLabelSettings(

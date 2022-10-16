@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../shared/shared.dart';
 import '../theme/theme.dart';
@@ -109,7 +110,7 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
       appBar: MsaAppBar(
         ctx: context,
         haveTutor: true,
-        title: "GANTT CHART Energy & Protein Intake Calculator",
+        title: translate("gantt_chart.title"),
         maxLines: 2,
         onPressed: () => showDialog<String>(
           context: context,
@@ -120,7 +121,7 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
             have2Button: true,
             haveColorText: true,
             haveQuestions: false,
-            title: "Warning !!!",
+            title: translate("warning_page_start.warning"),
             width: width,
             height: height / 2,
             onPressedYes: () {
@@ -191,8 +192,8 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                             ),
                             child: Column(
                               children: [
-                                const AutoSizeText(
-                                  "Normal Diet",
+                                AutoSizeText(
+                                  translate("dialysis_todo.normal_diet"),
                                   minFontSize: 15,
                                 ),
                                 msaSizeBox(height: 5),
@@ -200,8 +201,8 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                                   children: [
                                     SizedBox(
                                       width: width / 3.6,
-                                      child: const AutoSizeText(
-                                        "Energy (kCal)",
+                                      child: AutoSizeText(
+                                        translate("dialysis_todo.energy"),
                                         minFontSize: 15,
                                       ),
                                     ),
@@ -237,8 +238,8 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                                   children: [
                                     SizedBox(
                                       width: width / 3.6,
-                                      child: const AutoSizeText(
-                                        "Protein (g)",
+                                      child: AutoSizeText(
+                                        translate("dialysis_todo.protein"),
                                         minFontSize: 15,
                                       ),
                                     ),
@@ -275,9 +276,11 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                           msaSizeBox(height: 10),
                           ContainerDropdown(
                             width: width,
-                            title1: "Parenteral 1",
-                            title2: "Parenteral 2",
-                            height: height / 4.3,
+                            title1:
+                                "${translate("dialysis_todo.parenteral")} 1",
+                            title2:
+                                "${translate("dialysis_todo.parenteral")} 2",
+                            height: height / 4,
                             widthParenteral: width / 2,
                             widthSet: width / 4,
                             colorContainer: primaryColor1,
@@ -394,7 +397,7 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                                     SizedBox(
                                       width: width / 3.6,
                                       child: const AutoSizeText(
-                                        "Energy (kCal)",
+                                        "PN Volume ",
                                         minFontSize: 15,
                                       ),
                                     ),

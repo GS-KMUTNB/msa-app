@@ -189,5 +189,22 @@
       "intervention_duration": "Intervention duration",
       "week": "weeks"
     }
+  },
+  "dialysis_todo": {
+    "parenteral": "Parenteral",
+    "round": "Round",
+    "daily_requirement": "% of daily requirement",
+    "delete": "Delete",
+    "normal_diet": "Normal Diet",
+    "energy": "Energy (kCal)",
+    "protein": "Protein (g)"
+  },
+  "analytics": {
+    "title": "GANTT CHART Analytics",
+    "en_energy": "EN Energy",
+    "pn_energy": "PN Energy",
+    "energy_requirement": "Energy requirement",
+    "protein": "Protein",
+    "protein_requirement": "Protein requirement"
   }
 }

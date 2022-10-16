@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
 
@@ -8,8 +9,8 @@ class RoundTextField extends Row {
       : super(
           key: key,
           children: [
-            const AutoSizeText(
-              "Round",
+            AutoSizeText(
+              translate("dialysis_todo.round"),
               minFontSize: 18,
             ),
             msaSizeBox(width: 10),
@@ -24,7 +25,7 @@ class RoundTextField extends Row {
                   ),
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   // hintText: "Please fill Weight kg.",
-                  hintText: "Please fill info",
+                  hintText: translate("gantt_chart.fill_info"),
                   isDense: true,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

@@ -189,5 +189,22 @@
       "intervention_duration": "ระยะเวลาการติดตาม",
       "week": "สัปดาห์"
     }
+  },
+  "dialysis_todo": {
+    "parenteral": "ทางหลอดเลือดที่",
+    "round": "ครั้งที่",
+    "daily_requirement": "% ของความต้องการรายวัน",
+    "delete": "ลบ",
+    "normal_diet": "ค่าปกติ",
+    "energy": "พลังงาน (kCal)",
+    "protein": "โปรตีน (g)"
+  },
+  "analytics": {
+    "title": "แผนภูมิแกนต์เพื่อการคำนวณ ปริมาณพลังงานและโปรตีน",
+    "en_energy": "EN Energy",
+    "pn_energy": "PN Energy",
+    "energy_requirement": "ความต้องการพลังงาน",
+    "protein": "โปรตีน",
+    "protein_requirement": "ความต้องการโปรตีน"
   }
 }

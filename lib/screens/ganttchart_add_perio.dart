@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/models/models.dart';
 import 'package:msa_app/screens/screens.dart';
 
@@ -111,7 +112,7 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
   ];
 
   List<String> percentOfDaily = <String>[
-    "Please select",
+    translate("gantt_chart.perio_page.select_sex"),
     "0%",
     "10%",
     "20%",
@@ -142,7 +143,7 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
       appBar: MsaAppBar(
         ctx: context,
         haveTutor: true,
-        title: "GANTT CHART Energy & Protein Intake Calculator",
+        title: translate("gantt_chart.title"),
         maxLines: 2,
         onPressed: () => showDialog<String>(
           context: context,
@@ -153,7 +154,7 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
             have2Button: true,
             haveColorText: true,
             haveQuestions: false,
-            title: "Warning !!!",
+            title: translate("warning_page_start.warning"),
             width: width,
             height: height / 2,
             onPressedYes: () {
@@ -218,9 +219,11 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                           msaSizeBox(height: 10),
                           ContainerDropdown(
                             width: width,
-                            title1: "Parenteral 1",
-                            title2: "Parenteral 2",
-                            height: height / 4.3,
+                            title1:
+                                "${translate("dialysis_todo.parenteral")} 1",
+                            title2:
+                                "${translate("dialysis_todo.parenteral")} 2",
+                            height: height / 4,
                             widthParenteral: width / 2,
                             widthSet: width / 4,
                             colorContainer: primaryColor1,
@@ -256,7 +259,7 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                             width: width,
                             title1: "Oral/Enteral 1",
                             title2: "Oral/Enteral 1",
-                            height: height / 4.3,
+                            height: height / 4,
                             widthParenteral: width / 2,
                             widthSet: width / 4,
                             colorContainer: primaryColor5,
@@ -287,8 +290,8 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const AutoSizeText(
-                                  "% of daily requirement",
+                                AutoSizeText(
+                                  translate("dialysis_todo.daily_requirement"),
                                   minFontSize: 15,
                                 ),
                                 Container(
