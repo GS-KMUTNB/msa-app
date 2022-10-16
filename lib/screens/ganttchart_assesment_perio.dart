@@ -120,7 +120,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                GanttChartAddScreen()));
+                                                const GanttChartAddScreen()));
                                   },
                                   backgroundColor: primaryColor,
                                   child: const Icon(Icons.add),
