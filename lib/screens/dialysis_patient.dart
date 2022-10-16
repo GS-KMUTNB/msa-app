@@ -96,10 +96,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
 
   int _index = 0;
 
-  List<String> sex = <String>['Please select', 'Male', 'Female'];
+  List<String> sex = <String>[
+    translate("gantt_chart.perio_page.select_sex"),
+    translate("gantt_chart.perio_page.male"),
+    translate("gantt_chart.perio_page.female"),
+  ];
 
   List<String> ckdStage = <String>[
-    'Please select',
+    translate("gantt_chart.perio_page.select_sex"),
     'CKD Stage',
     'No CKD',
     '1',
@@ -111,14 +115,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   ];
 
   List<String> energyGoal = <String>[
-    'Please select',
+    translate("gantt_chart.perio_page.select_sex"),
     '25',
     '30',
     '35',
   ];
 
   List<String> protienGoal = <String>[
-    'Please select',
+    translate("gantt_chart.perio_page.select_sex"),
     '0.6',
     '0.7',
     '0.8',
@@ -129,12 +133,12 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   ];
 
   List<String> renalReplacement = <String>[
-    'Please select',
-    'Renal Replacement Therapy',
-    'No',
-    'Hemodialysis',
-    'Peritoneal dialysis',
-    'Transplantation'
+    translate("gantt_chart.perio_page.select_sex"),
+    translate("gantt_chart.dialysis_page.peritoneal"),
+    translate("assesment_page.table_head_no"),
+    translate("gantt_chart.dialysis_page.hemo"),
+    translate("gantt_chart.dialysis_page.peritoneal"),
+    translate("gantt_chart.dialysis_page.transplantation"),
   ];
 
   @override
@@ -156,8 +160,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 cdkStage: ckdValue,
                 renal: renalValue,
               )
-            : const AutoSizeText(
-                'Case Information 1',
+            : AutoSizeText(
+                translate("gantt_chart.dialysis_page.title_1"),
                 minFontSize: 16,
                 maxLines: 1,
               ),
@@ -171,8 +175,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AutoSizeText(
-                      "Sex",
+                    AutoSizeText(
+                      translate("gantt_chart.sex"),
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -253,8 +257,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       ],
                     ),
                     msaSizeBox(height: 10),
-                    const AutoSizeText(
-                      "eGFR (mL/mm/1.73m2)",
+                    AutoSizeText(
+                      translate("gantt_chart.dialysis_page.eGFR"),
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -278,8 +282,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       },
                     ),
                     msaSizeBox(),
-                    const AutoSizeText(
-                      "CKD Stage ",
+                    AutoSizeText(
+                      translate("gantt_chart.dialysis_page.ckd_stage"),
+                      // "osuahdo",
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -304,8 +309,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           v: ckdStage,
                         )),
                     msaSizeBox(height: 10),
-                    const AutoSizeText(
-                      "Renal Replacement Therapy",
+                    AutoSizeText(
+                      translate("gantt_chart.dialysis_page.renal_replacement"),
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -348,8 +353,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 protein: pdResult,
                 proteinReq: pdReqResult,
               )
-            : const AutoSizeText(
-                'Case Information 2',
+            : AutoSizeText(
+                translate("gantt_chart.dialysis_page.title_2"),
                 minFontSize: 16,
                 maxLines: 1,
               ),
@@ -360,8 +365,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AutoSizeText(
-                  "Energy daily intake (kCal)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.energy_daily"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -371,7 +376,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  hint: 'Please fill infomation',
+                  hint: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       edValue = energyController.text;
@@ -384,8 +389,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     return null;
                   },
                 ),
-                const AutoSizeText(
-                  "Protein daily intake (g)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.protein_daily"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -395,7 +400,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  hint: 'Please fill infomation',
+                  hint: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       pdValue = proteinController.text;
@@ -408,8 +413,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     return null;
                   },
                 ),
-                const AutoSizeText(
-                  "Energy goal (kCal/kg/day)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.energy_intake"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -435,8 +440,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       v: energyGoal,
                     )),
                 msaSizeBox(),
-                const AutoSizeText(
-                  "Protien goal (g/kg/day)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.protein_intake"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -476,8 +481,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 albumin: albuminResult,
                 prealbumin: prealbuminResult,
               )
-            : const AutoSizeText(
-                'Nutrition parameter (Baseline)',
+            : AutoSizeText(
+                translate("gantt_chart.dialysis_page.title_3"),
                 minFontSize: 16,
                 maxLines: 1,
               ),
@@ -488,8 +493,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AutoSizeText(
-                  "Serum albumin (g/dl)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.serum_albumin"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -499,7 +504,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  hint: 'Please fill infomation',
+                  hint: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       albuminValue = albuminController.text;
@@ -512,8 +517,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     return null;
                   },
                 ),
-                const AutoSizeText(
-                  "Serum prealbumin (mg/dl)",
+                AutoSizeText(
+                  translate("gantt_chart.dialysis_page.serum_prealbumin"),
                   minFontSize: 14,
                   maxLines: 1,
                 ),
@@ -523,7 +528,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  hint: 'Please fill infomation',
+                  hint: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       prealbuminValue = prealbuminController.text;
@@ -553,8 +558,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                   diffPrealbumin: diffPrealbuminValue,
                   intervention: interventionResult,
                 )
-              : const AutoSizeText(
-                  'Nutrition parameter (Follow-up)',
+              : AutoSizeText(
+                  translate("gantt_chart.dialysis_page.title_4"),
                   minFontSize: 16,
                   maxLines: 1,
                 ),
@@ -565,8 +570,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    "Intervention duration (weeks)",
+                  AutoSizeText(
+                    translate(
+                        "gantt_chart.dialysis_page.intervention_duration"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -576,7 +582,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(numberRegExp)
                     ],
-                    hint: 'Please fill infomation',
+                    hint: translate("gantt_chart.fill_info"),
                     onChanged: (v) {
                       setState(() {
                         interventionValue = interventionController.text;
@@ -589,8 +595,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       return null;
                     },
                   ),
-                  const AutoSizeText(
-                    "Follow-up actual weight (kg)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.actual_weight"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -600,7 +606,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(numberRegExp)
                     ],
-                    hint: 'Please fill infomation',
+                    hint: translate("gantt_chart.fill_info"),
                     onChanged: (v) {
                       setState(() {
                         followUpActualValue = followUpActualController.text;
@@ -635,8 +641,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     ],
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "Serum albumin (g/dl)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.serum_albumin"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -646,7 +652,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(numberRegExp)
                     ],
-                    hint: 'Please fill infomation',
+                    hint: translate("gantt_chart.fill_info"),
                     onChanged: (v) {
                       setState(() {
                         albuminFollowUpValue = albuminFollowUpController.text;
@@ -659,8 +665,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       return null;
                     },
                   ),
-                  const AutoSizeText(
-                    "Serum prealbumin (mg/dl)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.serum_prealbumin"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -670,7 +676,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(numberRegExp)
                     ],
-                    hint: 'Please fill infomation',
+                    hint: translate("gantt_chart.fill_info"),
                     onChanged: (v) {
                       setState(() {
                         prealbuminFollowUpValue =
@@ -699,7 +705,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: "Dialysis Patient Form",
+        title: translate("gantt_chart.dialysis_page.dialysis_patient"),
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
@@ -711,7 +717,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
             have2Button: true,
             haveColorText: true,
             haveQuestions: false,
-            title: 'Warning!!!',
+            title: translate("warning_page_start.warning"),
             width: width,
             height: height / 2,
             onPressedYes: () {

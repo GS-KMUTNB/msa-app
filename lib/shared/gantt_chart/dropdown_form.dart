@@ -58,7 +58,7 @@ class DisplayResultStep extends Column {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    translate("gantt_chart.perio_page.title_1"),
+                    translate("gantt_chart.dialysis_page.title_1"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
@@ -280,8 +280,8 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Case Information 1',
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.title_1"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
@@ -295,19 +295,19 @@ class DisplayResultStep extends Column {
                     result: cdkStage,
                   ),
                   MsaRichText(
-                    title: 'Renal :',
+                    title: '${translate("gantt_chart.dialysis_page.renal")} :',
                     result: renal,
                   ),
-                  const AutoSizeText(
-                    'your result is',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.your_result"),
                     minFontSize: 8,
                     maxLines: 1,
                   ),
                   msaSizeBox(height: 10),
                   Row(
                     children: [
-                      const AutoSizeText(
-                        "Sex",
+                      AutoSizeText(
+                        translate("gantt_chart.sex"),
                         maxLines: 1,
                         minFontSize: 16,
                         maxFontSize: 18,
@@ -435,19 +435,19 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Case Information 2',
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.title_2"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
-                  const AutoSizeText(
-                    'your result is',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.your_result"),
                     minFontSize: 8,
                     maxLines: 1,
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "Energy intake (kCal/kg/day)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.energy_daily"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -474,8 +474,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(),
-                  const AutoSizeText(
-                    "Energy daily requirement (kCal)",
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.energy_daily"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -502,8 +502,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(),
-                  const AutoSizeText(
-                    "Protein intake (g/kg/day)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.protein_intake"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -530,8 +530,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(),
-                  const AutoSizeText(
-                    "Protein daily requirement (g)",
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.protein_daily"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -584,18 +584,20 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Nutrition parameter (Baseline)',
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.title_3"),
                     minFontSize: 16,
                     maxLines: 1,
                   ),
                   MsaRichText(
-                    title: 'Serum albumin :',
+                    title:
+                        '${translate("gantt_chart.dialysis_page.serum_albumin")} :',
                     result: albumin,
                     unit: "(g/dl)",
                   ),
                   MsaRichText(
-                    title: 'Serum prealbumin :',
+                    title:
+                        '${translate("gantt_chart.dialysis_page.serum_prealbumin")} :',
                     result: prealbumin,
                     unit: "(mg/dl)",
                   ),
@@ -626,24 +628,25 @@ class DisplayResultStep extends Column {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AutoSizeText(
-                    'Nutrition parameter (Follow-Up)',
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.title_4"),
                     minFontSize: 15,
                     maxLines: 1,
                   ),
                   MsaRichText(
-                    title: 'Intervention duration:',
+                    title:
+                        '${translate("gantt_chart.dialysis_page.intervention_duration")} :',
                     result: intervention,
-                    unit: "(weeks)",
+                    unit: "(${translate("gantt_chart.dialysis_page.week")})",
                   ),
-                  const AutoSizeText(
-                    'your result is',
+                  AutoSizeText(
+                    translate("gantt_chart.perio_page.your_result"),
                     minFontSize: 8,
                     maxLines: 1,
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "Follow-up BMI (kg/m2)",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.follow_bmi"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -670,8 +673,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "% diff of body weight",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.diff_body_weight"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -698,8 +701,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "% diff of Sr.albumin",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.diff_sr_albumin"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -726,8 +729,8 @@ class DisplayResultStep extends Column {
                     ),
                   ),
                   msaSizeBox(height: 10),
-                  const AutoSizeText(
-                    "% diff of Sr.prealbumin",
+                  AutoSizeText(
+                    translate("gantt_chart.dialysis_page.diff_sr_prealbumin"),
                     minFontSize: 14,
                     maxLines: 1,
                   ),

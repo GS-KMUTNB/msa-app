@@ -146,6 +146,7 @@
     "protien_goal": "โปรตีนที่ต้องได้รับ (g/kg/day)",
     "energy_intake": "พลังงานที่ได้รับจริง (kcal)",
     "perio_page": {
+      "perio_patient": "แบบฟอร์มผู้ป่วยระหว่างผ่าตัด",
       "title_1": "ข้อมูลเคสผู้ป่วย",
       "title_2": "ความต้องการรายวัน",
       "select_sex": "กรุณาเลือก",
@@ -159,10 +160,12 @@
       "actual_energy": "% การรับพลังงานจริงเทียบกับความต้องการ"
     },
     "dialysis_page": {
+      "dialysis_patient": "แบบฟอร์มผู้ป่วยฟอกไต",
       "title_1": "ข้อมูลเคสผู้ป่วย ส่วนที่ 1",
       "eGFR": "eGFR (mL/mm/1.73m2)",
-      "ckd_stage ": "ระยะของโรคไต",
+      "ckd_stage": "ระยะของโรคไต",
       "no_ckd": "No CKD",
+      "renal": "ไต",
       "renal_replacement": "การบำบัดทดแทนไต",
       "hemo": "การฟอกไต",
       "peritoneal": "การล้างไตทางช่องท้อง",
@@ -178,12 +181,13 @@
       "serum_albumin": "ระดับของอัลบูมินในเลือด (g/dl)",
       "serum_prealbumin": "ระดับของพรีอัลบูมินในเลือด (mg/dl)",
       "title_4": "ลักษณะทางโภชนาการ (การติดตาม)",
-      "intervention_duration": "ระยะเวลาการติดตาม (สัปดาห์)",
       "actual_weight": "น้ำหนักหลังการติดตาม (kg)",
       "follow_bmi": "ค่า BMI  (kg/m2)",
       "diff_body_weight": "% ส่วนต่างของน้ำหนัก",
       "diff_sr_albumin": "% ส่วนต่างของอัลบูมิน",
-      "diff_sr_prealbumin": "% ส่วนต่างของพรีอัลบูมิน"
+      "diff_sr_prealbumin": "% ส่วนต่างของพรีอัลบูมิน",
+      "intervention_duration": "ระยะเวลาการติดตาม",
+      "week": "สัปดาห์"
     }
   }
 }

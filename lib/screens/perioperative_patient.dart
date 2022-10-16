@@ -347,7 +347,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: "Perioperative Patient Form",
+        title: translate("gantt_chart.perio_page.perio_patient"),
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
@@ -501,7 +501,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           GanttChartTodoScreen(
-                                        buildContext: context,
+                                        context: context,
                                       ),
                                     ),
                                   );

@@ -38,6 +38,7 @@ class MsaApp extends StatelessWidget {
         locale: localizationDelegate.currentLocale,
         debugShowCheckedModeBanner: false,
         theme: msaData(),
+        //FIXME อย่าลืมมาแก้กู
         home: const SplashScreen(),
       ),
     );

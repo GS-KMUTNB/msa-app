@@ -6,9 +6,10 @@ import 'package:msa_app/theme/theme.dart';
 class GanttChartTodoScreen extends StatefulWidget {
   const GanttChartTodoScreen({
     Key? key,
-    required BuildContext buildContext,
+    required this.context,
   }) : super(key: key);
 
+  final BuildContext context;
   @override
   State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
 }
