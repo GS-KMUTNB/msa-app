@@ -174,35 +174,11 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              const AutoSizeText(
-                                "Round 1",
-                                minFontSize: 18,
-                              ),
-                              msaSizeBox(width: 10),
-                              SizedBox(
-                                width: width / 1.6,
-                                child: TextFormField(
-                                  style: head6,
-                                  textAlign: TextAlign.left,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    hintStyle:
-                                        TextStyle(color: Colors.grey[800]),
-                                    // hintText: "Please fill Weight kg.",
-                                    labelText: "Please fill info",
-                                    isDense: true,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          RoundTextField(
+                            width: width / 1.6,
                           ),
                           msaSizeBox(height: 10),
                           Container(
@@ -306,6 +282,7 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                             width2: width / 4,
                             colorContainer: primaryColor1,
                             textColor: whiteColor,
+                            isDropDown: true,
                             list1: parenteral1,
                             onChanged1: (String? v) {
                               setState(() {
@@ -452,46 +429,53 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                             ),
                           ),
                           msaSizeBox(height: 30),
-                          Container(
-                            padding: const EdgeInsets.all(20),
+                          ContainerOfButton(
                             width: width,
-                            // height: height,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: bgGreyColor,
-                            ),
-                            child: Column(
-                              children: [
-                                MsaButton(
-                                  w: width,
-                                  h: 40,
-                                  text: "Continue",
-                                  textStyle: const TextStyle(color: whiteColor),
-                                  color: primaryColor1,
-                                  onPressed: () {},
-                                ),
-                                msaSizeBox(height: 15),
-                                MsaButton(
-                                  w: width,
-                                  h: 40,
-                                  text: "Cancel",
-                                  textStyle:
-                                      const TextStyle(color: Colors.grey),
-                                  color: whiteColor,
-                                  onPressed: () {},
-                                ),
-                                msaSizeBox(height: 15),
-                                MsaButton(
-                                  w: width,
-                                  h: 40,
-                                  text: "Delete",
-                                  textStyle: const TextStyle(color: blackColor),
-                                  color: primaryColor3,
-                                  onPressed: () {},
-                                ),
-                              ],
-                            ),
+                            widthButton: width,
+                            onPressedCancel: () {},
+                            onPressedContinue: () {},
+                            onPressedDelete: () {},
                           )
+                          // Container(
+                          //   padding: const EdgeInsets.all(20),
+                          //   width: width,
+                          //   // height: height,
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(15),
+                          //     color: bgGreyColor,
+                          //   ),
+                          //   child: Column(
+                          //     children: [
+                          //       MsaButton(
+                          //         w: width,
+                          //         h: 40,
+                          //         text: "Continue",
+                          //         textStyle: const TextStyle(color: whiteColor),
+                          //         color: primaryColor1,
+                          //         onPressed: () {},
+                          //       ),
+                          //       msaSizeBox(height: 15),
+                          //       MsaButton(
+                          //         w: width,
+                          //         h: 40,
+                          //         text: "Cancel",
+                          //         textStyle:
+                          //             const TextStyle(color: Colors.grey),
+                          //         color: whiteColor,
+                          //         onPressed: () {},
+                          //       ),
+                          //       msaSizeBox(height: 15),
+                          //       MsaButton(
+                          //         w: width,
+                          //         h: 40,
+                          //         text: "Delete",
+                          //         textStyle: const TextStyle(color: blackColor),
+                          //         color: primaryColor3,
+                          //         onPressed: () {},
+                          //       ),
+                          //     ],
+                          //   ),
+                          // )
                         ],
                       ),
                     ),

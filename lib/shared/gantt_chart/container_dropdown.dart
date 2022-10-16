@@ -19,10 +19,11 @@ class ContainerDropdown extends Container {
     List<String>? list2,
     List<String>? list3,
     List<String>? list4,
-    required void Function(String?)? onChanged1,
-    required void Function(String?)? onChanged2,
-    required void Function(String?)? onChanged3,
-    required void Function(String?)? onChanged4,
+    void Function(String?)? onChanged1,
+    void Function(String?)? onChanged2,
+    void Function(String?)? onChanged3,
+    void Function(String?)? onChanged4,
+    required bool isDropDown,
   }) : super(
           key: key,
           padding: const EdgeInsets.all(10),
@@ -63,23 +64,30 @@ class ContainerDropdown extends Container {
                       )),
                   msaSizeBox(width: 10),
                   Container(
-                      padding: const EdgeInsets.only(left: 10, top: 2),
-                      decoration: const ShapeDecoration(
-                          color: whiteColor,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1.0,
-                              style: BorderStyle.solid,
-                              color: Colors.grey,
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                          )),
-                      width: width2,
-                      child: DropDownForm(
-                        onChanged: onChanged2,
-                        v: list2,
-                      )),
+                    padding: const EdgeInsets.only(left: 10, top: 2),
+                    alignment: Alignment.centerLeft,
+                    decoration: const ShapeDecoration(
+                        color: whiteColor,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    width: width2,
+                    height: isDropDown ? 42 : 42,
+                    child: isDropDown
+                        ? DropDownForm(
+                            onChanged: onChanged2,
+                            v: list2,
+                          )
+                        : const AutoSizeText(
+                            "kCal",
+                            minFontSize: 15,
+                          ),
+                  )
                 ],
               ),
               msaSizeBox(height: 5),
@@ -111,23 +119,30 @@ class ContainerDropdown extends Container {
                       )),
                   msaSizeBox(width: 10),
                   Container(
-                      padding: const EdgeInsets.only(left: 10, top: 2),
-                      decoration: const ShapeDecoration(
-                          color: whiteColor,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1.0,
-                              style: BorderStyle.solid,
-                              color: Colors.grey,
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
-                          )),
-                      width: width2,
-                      child: DropDownForm(
-                        onChanged: onChanged4,
-                        v: list4,
-                      )),
+                    padding: const EdgeInsets.only(left: 10, top: 2),
+                    alignment: Alignment.centerLeft,
+                    decoration: const ShapeDecoration(
+                        color: whiteColor,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 1.0,
+                            style: BorderStyle.solid,
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    width: width2,
+                    height: isDropDown ? 42 : 42,
+                    child: isDropDown
+                        ? DropDownForm(
+                            onChanged: onChanged4,
+                            v: list4,
+                          )
+                        : const AutoSizeText(
+                            "kCal",
+                            minFontSize: 15,
+                          ),
+                  ),
                 ],
               ),
             ],
