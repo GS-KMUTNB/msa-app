@@ -3,15 +3,17 @@ import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
-class GanttChartTodoScreen extends StatefulWidget {
-  const GanttChartTodoScreen({Key? key, required BuildContext buildContext})
+class GanttChartDialysisTodoScreen extends StatefulWidget {
+  const GanttChartDialysisTodoScreen(
+      {Key? key, required BuildContext buildContext})
       : super(key: key);
 
   @override
-  State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
+  State<GanttChartDialysisTodoScreen> createState() =>
+      _GanttChartDialysisTodoState();
 }
 
-class _GanttChartTodoState extends State<GanttChartTodoScreen> {
+class _GanttChartDialysisTodoState extends State<GanttChartDialysisTodoScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -84,48 +86,50 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: Column(children: [
-                      MsaButton(
-                        w: width,
-                        h: 40,
-                        text: "Result",
-                        textStyle: const TextStyle(color: blackColor),
-                        color: primaryColor5,
-                        onPressed: () {},
-                      ),
-                      msaSizeBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        width: width,
-                        height: height / 1.45,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: bgGreyColor,
+                    child: Column(
+                      children: [
+                        MsaButton(
+                          w: width,
+                          h: 40,
+                          text: "Result",
+                          textStyle: const TextStyle(color: blackColor),
+                          color: primaryColor5,
+                          onPressed: () {},
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            //FIXME change size box to dynamic Listview
-                            msaSizeBox(),
-                            SizedBox(
-                              width: width / 6,
-                              height: width / 6,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const GanttChartAddScreen()));
-                                },
-                                backgroundColor: primaryColor,
-                                child: const Icon(Icons.add),
+                        msaSizeBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          width: width,
+                          height: height / 1.4,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: bgGreyColor,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              //FIXME change size box to dynamic Listview
+                              msaSizeBox(),
+                              SizedBox(
+                                width: width / 6,
+                                height: width / 6,
+                                child: FloatingActionButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const GanttChartDialysisAddScreen()));
+                                  },
+                                  backgroundColor: primaryColor,
+                                  child: const Icon(Icons.add),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
