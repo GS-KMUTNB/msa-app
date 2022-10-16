@@ -7,11 +7,8 @@ import '../shared/shared.dart';
 import '../theme/theme.dart';
 
 class GanttChartAddScreen extends StatefulWidget {
-  final List<ExpenseData> data;
-
   const GanttChartAddScreen({
     Key? key,
-    required this.data,
   }) : super(key: key);
 
   @override
@@ -19,8 +16,6 @@ class GanttChartAddScreen extends StatefulWidget {
 }
 
 class _GanttChartAddState extends State<GanttChartAddScreen> {
-  late List<ExpenseData> dataList;
-
   List<String> parenteral1 = <String>[
     'Item',
     'Amiparen',
@@ -132,6 +127,25 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
   var percentDailyValue = "";
   var oral1Value = "";
   final _fkey = GlobalKey<FormState>();
+  List<ExpenseData> dataList = [];
+
+  void addedItem() {
+    // setState(() => dataList.add(ExpenseData(
+    //       id: 1,
+    //       expenseCategory: 'test naja',
+    //       pod1: 100,
+    //       pod2: 100,
+    //     )));
+  }
+
+  void deletedItem(int index) {
+    setState(() => dataList.removeAt(index));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -329,21 +343,21 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                               setState(() {
                                 dataList.add(ExpenseData(
                                   id: 1,
-                                  expenseCategory: 'test naja',
+                                  expenseCategory: 'test',
                                   pod1: 100,
                                   pod2: 100,
                                 ));
-                              });
 
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GanttChartTodoScreen(
-                                    dataList: dataList,
-                                    context: context,
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GanttChartTodoScreen(
+                                      dataList: dataList,
+                                      context: context,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              });
                             },
                             onPressedDelete: () {
                               // dataList.removeWhere((item) => item.id == '001');

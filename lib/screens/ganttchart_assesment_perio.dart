@@ -13,18 +13,18 @@ class GanttChartTodoScreen extends StatefulWidget {
   final BuildContext context;
 
   @override
-  State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
+  State<GanttChartTodoScreen> createState() =>
+      // ignore: no_logic_in_create_state
+      _GanttChartTodoState(dataList: dataList);
 }
 
 class _GanttChartTodoState extends State<GanttChartTodoScreen> {
-  List<ExpenseData> dataList = <ExpenseData>[];
+  _GanttChartTodoState({required List<ExpenseData> dataList});
+
+  List<ExpenseData> data = <ExpenseData>[];
 
   @override
   void initState() {
-    // TODO: implement initState
-
-    dataList = widget.dataList;
-
     super.initState();
   }
 
@@ -32,6 +32,8 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
+    data = widget.dataList;
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -52,9 +54,8 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
             width: width,
             height: height / 2,
             onPressedYes: () {
-              Navigator.of(context)
-                ..pop()
-                ..pop();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
             onPressedNo: () {
               Navigator.pop(context);
@@ -103,13 +104,13 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: MsaButton(
-                          color: dataList.isEmpty ? bgGreyColor : primaryColor5,
+                          color: data.isEmpty ? bgGreyColor : primaryColor5,
                           h: 40,
                           w: width - 75,
                           text: "Result",
                           textStyle: bodyText1,
                           onPressed: () {
-                            dataList.isEmpty
+                            data.isEmpty
                                 ? null
                                 : Navigator.push(
                                     context,
@@ -125,16 +126,28 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                         ),
                       ),
                       Expanded(
-                        child: ListView(
+                        child: ListView.builder(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          children: widget.dataList.map((ExpenseData data) {
+
+                          itemCount: data.length,
+
+                          itemBuilder: (context, index) {
                             return AssessMentItem(
-                              data: data,
+                              data: data[index],
                               // onTodoChanged: () {
                               //   print("test");
                               // },
                             );
-                          }).toList(),
+                          },
+
+                          //   children: widget.dataList.map((ExpenseData data) {
+                          //     return AssessMentItem(
+                          //       data: data,
+                          //       // onTodoChanged: () {
+                          //       //   print("test");
+                          //       // },
+                          //     );
+                          //   }).toList(),
                         ),
                       ),
                       msaSizeBox(height: 10),
@@ -155,9 +168,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GanttChartAddScreen(
-                    data: dataList,
-                  ),
+                  builder: (context) => const GanttChartAddScreen(),
                 ),
               );
             },
