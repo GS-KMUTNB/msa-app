@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
 
 class MsaFormField extends SizedBox {
-  MsaFormField({
-    Key? key,
-    required TextEditingController controller,
-    required FocusNode controllerFocus,
-    required Function(String)? onChanged,
-    required List<TextInputFormatter>? inputFormatters,
-    required String? Function(String?)? validator,
-    required String label,
-  }) : super(
+  MsaFormField(
+      {Key? key,
+      required TextEditingController controller,
+      required FocusNode controllerFocus,
+      required Function(String)? onChanged,
+      required List<TextInputFormatter>? inputFormatters,
+      required String? Function(String?)? validator,
+      String hint = ""})
+      : super(
           key: key,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,11 +28,9 @@ class MsaFormField extends SizedBox {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     hintStyle: TextStyle(color: Colors.grey[800]),
-                    // hintText: "Please fill Weight kg.",
-                    labelText: label,
+                    hintText: translate("gantt_chart.fill_info"),
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
+                    contentPadding: const EdgeInsets.all(10),
                   ),
                   inputFormatters: inputFormatters,
                   validator: validator,
