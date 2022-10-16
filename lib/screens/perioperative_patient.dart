@@ -295,7 +295,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(numberRegExp)
                   ],
-                  label: translate("gantt_chart.fill_info"),
+                  hint: translate("gantt_chart.fill_info"),
                   onChanged: (v) {
                     setState(() {
                       acValue = actualOralController.text;
@@ -473,12 +473,11 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                         var edRaw = double.parse(edValue);
                                         var pdRaw = double.parse(pdValue);
 
-                                        ed = calculateDailyRequirement(
+                                        ed = calculateGanttChart(
                                             "ed", edRaw, ibw);
-                                        pd = calculateDailyRequirement(
+                                        pd = calculateGanttChart(
                                             "pd", pdRaw, ibw);
-                                        ae = calculateDailyRequirement(
-                                            "ae", ao, ed);
+                                        ae = calculateGanttChart("ae", ao, ed);
 
                                         edResult = formatter.format(ed);
                                         pdResult = formatter.format(pd);
