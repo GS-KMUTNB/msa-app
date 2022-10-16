@@ -39,7 +39,7 @@ class MsaApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: msaData(),
         // home: const SplashScreen(),
-        home: DialysisPatientScreen(
+        home: GanttChartTodoScreen(
           buildContext: context,
         ),
       ),
