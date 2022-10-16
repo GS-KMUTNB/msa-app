@@ -7,8 +7,6 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-import '../../models/html_template.dart';
-
 class PrintPdf extends StatefulWidget {
   final HtmlSNSForm data;
   const PrintPdf({Key? key, required this.data}) : super(key: key);

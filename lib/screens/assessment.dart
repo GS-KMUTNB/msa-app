@@ -358,21 +358,12 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                   color: Colors.white,
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          right: 20,
-                          left: 20,
-                          top: 20,
-                          bottom: 10,
-                        ),
-                        // ignore: fixme
-                        child: MsaProgressBar(), //FIXME
-                      ),
                       Expanded(
                         child: ListView(
                           physics: const BouncingScrollPhysics(),
                           controller: _controller,
                           children: [
+                            msaSizeBox(height: 20),
                             MsaStepper(
                               context: context,
                               currentStep: _index,

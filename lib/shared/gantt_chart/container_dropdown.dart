@@ -8,8 +8,8 @@ class ContainerDropdown extends Container {
   ContainerDropdown({
     Key? key,
     double? width,
-    double? width1,
-    double? width2,
+    double? widthParenteral,
+    double? widthSet,
     double? height,
     required String title1,
     required String title2,
@@ -57,7 +57,7 @@ class ContainerDropdown extends Container {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
                           )),
-                      width: width1,
+                      width: widthParenteral,
                       child: DropDownForm(
                         onChanged: onChanged1,
                         v: list1,
@@ -76,7 +76,7 @@ class ContainerDropdown extends Container {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         )),
-                    width: width2,
+                    width: widthSet,
                     height: isDropDown ? 42 : 42,
                     child: isDropDown
                         ? DropDownForm(
@@ -112,7 +112,7 @@ class ContainerDropdown extends Container {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0)),
                           )),
-                      width: width1,
+                      width: widthParenteral,
                       child: DropDownForm(
                         onChanged: onChanged3,
                         v: list3,
@@ -131,7 +131,7 @@ class ContainerDropdown extends Container {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         )),
-                    width: width2,
+                    width: widthSet,
                     height: isDropDown ? 42 : 42,
                     child: isDropDown
                         ? DropDownForm(

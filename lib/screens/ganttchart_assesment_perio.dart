@@ -4,8 +4,10 @@ import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class GanttChartTodoScreen extends StatefulWidget {
-  const GanttChartTodoScreen({Key? key, required BuildContext buildContext})
-      : super(key: key);
+  const GanttChartTodoScreen({
+    Key? key,
+    required BuildContext buildContext,
+  }) : super(key: key);
 
   @override
   State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
@@ -66,18 +68,16 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Form(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/bg.png"),
-                    fit: BoxFit.cover,
-                  ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg.png"),
+                  fit: BoxFit.cover,
                 ),
               ),
-              Center(
+              child: Center(
                 child: CardContent(
                   w: width - 40,
                   h: height / 1.20,
@@ -85,13 +85,27 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Column(children: [
-                      MsaButton(
-                        w: width,
-                        h: 40,
-                        text: "Result",
-                        textStyle: const TextStyle(color: blackColor),
-                        color: primaryColor5,
-                        onPressed: () {},
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: MsaButton(
+                          color: primaryColor5,
+                          h: 40,
+                          w: width - 75,
+                          text: "Result",
+                          textStyle: bodyText1,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const MsaGanttChartResultScreen(
+                                  title: 'Perioperative Patient',
+                                  // data: null,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       msaSizeBox(height: 10),
                       Container(
@@ -105,6 +119,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            // ignore: fixme
                             //FIXME change size box to dynamic Listview
                             msaSizeBox(),
                             SizedBox(
@@ -129,9 +144,26 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const GanttChartAddScreen()));
+            },
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.add),
+          ),
+          msaSizeBox(height: 20)
+        ],
       ),
     );
   }

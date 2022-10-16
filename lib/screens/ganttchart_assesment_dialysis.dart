@@ -108,7 +108,6 @@ class _GanttChartDialysisTodoState extends State<GanttChartDialysisTodoScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              //FIXME change size box to dynamic Listview
                               msaSizeBox(),
                               SizedBox(
                                 width: width / 6,
