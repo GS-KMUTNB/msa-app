@@ -12,7 +12,6 @@ class MsaFormField extends SizedBox {
       required Function(String)? onChanged,
       required List<TextInputFormatter>? inputFormatters,
       required String? Function(String?)? validator,
-      required String label,
       String hint = ""})
       : super(
           key: key,
