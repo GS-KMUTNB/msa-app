@@ -8,12 +8,14 @@ const blackColor = Colors.black;
 const bgColor = Color(0xFFDDDDDD);
 const subBgColor = Color(0xFFEBEBEB);
 const warningColor = Color(0xFFFF0000);
+const bgGreyColor = Color.fromARGB(134, 217, 217, 217);
 
 const primaryColor = Color(0xFF2A3158);
 const primaryColor1 = Color(0xFF757090);
 const primaryColor2 = Color(0xFFB195A5);
 const primaryColor3 = Color(0xFFD8B3A5);
 const primaryColor4 = Color(0xFFFFDD91);
+const primaryColor5 = Color(0xFFFFC647);
 
 const double fontSizeH1 = 35.00;
 const double fontSizeH2 = 30.00;
