@@ -9,7 +9,7 @@ class RoundTextField extends Row {
           key: key,
           children: [
             const AutoSizeText(
-              "Round 1",
+              "Round",
               minFontSize: 18,
             ),
             msaSizeBox(width: 10),
@@ -24,7 +24,7 @@ class RoundTextField extends Row {
                   ),
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   // hintText: "Please fill Weight kg.",
-                  labelText: "Please fill info",
+                  hintText: "Please fill info",
                   isDense: true,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

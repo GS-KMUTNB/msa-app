@@ -47,32 +47,28 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
   List<ExpenseData> getChaetData2() {
     final List<ExpenseData> chartData = [
       ExpenseData(
+        id: 1,
         expenseCategory: "pod",
         pod1: 0, // EN Energy
         pod2: 10, // PN Energy
-        color1: primaryColor5,
-        color2: primaryColor,
       ),
       ExpenseData(
+        id: 2,
         expenseCategory: "pod 1",
         pod1: 5, // EN Energy
         pod2: 15, // PN Energy
-        color1: primaryColor5,
-        color2: primaryColor,
       ),
       ExpenseData(
+        id: 3,
         expenseCategory: "pod 2",
         pod1: 7, // EN Energy
         pod2: 20, // PN Energy
-        color1: primaryColor5,
-        color2: primaryColor,
       ),
       ExpenseData(
+        id: 4,
         expenseCategory: "pod 3",
         pod1: 20, // EN Energy
         pod2: 30, // PN Energy
-        color1: primaryColor5,
-        color2: primaryColor,
       ),
     ];
     return chartData;
@@ -89,28 +85,9 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
         haveTutor: true,
         title: "GANTT CHART Analytics",
         maxLines: 1,
-        onPressed: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => MsaHintAlert(
-            context: context,
-            ifPicture: false,
-            haveButton: true,
-            have2Button: true,
-            haveColorText: true,
-            haveQuestions: false,
-            title: "Warning !!!",
-            width: width,
-            height: height / 2,
-            onPressedYes: () {
-              Navigator.of(context)
-                ..pop()
-                ..pop();
-            },
-            onPressedNo: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
         onPressedHint: () => showDialog<String>(
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
@@ -177,7 +154,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   exp.expenseCategory,
                               yValueMapper: (ExpenseData exp, _) => exp.pod1,
                               pointColorMapper: (ExpenseData exp, _) =>
-                                  exp.color1,
+                                  primaryColor5,
                             ),
                             StackedColumnSeries<ExpenseData, String>(
                               name: "PN Energy",
@@ -186,7 +163,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   exp.expenseCategory,
                               yValueMapper: (ExpenseData exp, _) => exp.pod2,
                               pointColorMapper: (ExpenseData exp, _) =>
-                                  exp.color2,
+                                  primaryColor,
                             ),
                             StackedColumnSeries<ExpenseData, String>(
                               name: "Energy requirement",
@@ -195,7 +172,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   exp.expenseCategory,
                               yValueMapper: (ExpenseData exp, _) => exp.pod3,
                               pointColorMapper: (ExpenseData exp, _) =>
-                                  exp.color3,
+                                  bgGreyColor,
                             ),
                           ],
                           tooltipBehavior: _tooltipBehavior,
@@ -216,7 +193,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   exp.expenseCategory,
                               yValueMapper: (ExpenseData exp, _) => exp.pod1,
                               pointColorMapper: (ExpenseData exp, _) =>
-                                  exp.color1,
+                                  primaryColor5,
                               name: "Protein",
                               markerSettings:
                                   const MarkerSettings(isVisible: true),
@@ -231,7 +208,7 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
                                   exp.expenseCategory,
                               yValueMapper: (ExpenseData exp, _) => exp.pod2,
                               pointColorMapper: (ExpenseData exp, _) =>
-                                  exp.color2,
+                                  primaryColor,
                               name: "Protein requirement",
                               markerSettings:
                                   const MarkerSettings(isVisible: true),
