@@ -129,23 +129,9 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
   final _fkey = GlobalKey<FormState>();
   List<ExpenseData> dataList = [];
 
-  void addedItem() {
-    // setState(() => dataList.add(ExpenseData(
-    //       id: 1,
-    //       expenseCategory: 'test naja',
-    //       pod1: 100,
-    //       pod2: 100,
-    //     )));
-  }
-
-  void deletedItem(int index) {
-    setState(() => dataList.removeAt(index));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  // void deletedItem(int index) {
+  //   setState(() => dataList.removeAt(index));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -342,22 +328,22 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                             onPressedContinue: () {
                               setState(() {
                                 dataList.add(ExpenseData(
-                                  id: 1,
-                                  expenseCategory: 'test',
+                                  id: 2,
+                                  expenseCategory: 'asdf',
                                   pod1: 100,
                                   pod2: 100,
                                 ));
-
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => GanttChartTodoScreen(
-                                      dataList: dataList,
-                                      context: context,
-                                    ),
-                                  ),
-                                );
                               });
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GanttChartTodoScreen(
+                                    data: dataList,
+                                    context: context,
+                                  ),
+                                ),
+                              );
                             },
                             onPressedDelete: () {
                               // dataList.removeWhere((item) => item.id == '001');

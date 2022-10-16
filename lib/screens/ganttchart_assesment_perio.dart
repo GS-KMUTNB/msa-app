@@ -5,35 +5,26 @@ import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class GanttChartTodoScreen extends StatefulWidget {
-  const GanttChartTodoScreen(
-      {Key? key, required this.dataList, required this.context})
-      : super(key: key);
+  GanttChartTodoScreen({
+    Key? key,
+    required this.context,
+    required this.data,
+  }) : super(key: key);
 
-  final List<ExpenseData> dataList;
+  final List<ExpenseData> data;
   final BuildContext context;
 
   @override
-  State<GanttChartTodoScreen> createState() =>
-      // ignore: no_logic_in_create_state
-      _GanttChartTodoState(dataList: dataList);
+  State<GanttChartTodoScreen> createState() => _GanttChartTodoState();
 }
 
 class _GanttChartTodoState extends State<GanttChartTodoScreen> {
-  _GanttChartTodoState({required List<ExpenseData> dataList});
-
-  List<ExpenseData> data = <ExpenseData>[];
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  List<ExpenseData> data = [];
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
-    data = widget.dataList;
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -128,9 +119,7 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                       Expanded(
                         child: ListView.builder(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
-
                           itemCount: data.length,
-
                           itemBuilder: (context, index) {
                             return AssessMentItem(
                               data: data[index],
