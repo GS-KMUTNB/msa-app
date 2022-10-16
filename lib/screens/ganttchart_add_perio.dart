@@ -73,33 +73,52 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
   ];
   List<String> bag2 = <String>['#Bag', '1 Set', '2 Set', '3 Set'];
   List<String> oral1 = <String>[
+    "Item",
     "N/A",
     "NPO",
     "Normal Diet",
     "AMINOLEBAN-ORAL",
     "BD",
     "BD-DM",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "BLENDERA-MF",
+    "Ensure",
+    "GEN-DM",
+    "Glucerna",
+    "Glucose syrup",
+    "Impact",
+    "Isocal",
+    "NEO-MUNE",
+    "Nepro",
+    "Nutren",
+    "ONCE Complete",
+    "ONCE Dialyze",
+    "ONCE Renal",
+    "ONCE PRO",
+    "PanEnteral",
+    "Peptamen",
+    "Solf Diet",
+  ];
+  List<String> percentOfDaily = <String>[
+    "Please select",
+    "0%",
+    "10%",
+    "20%",
+    "30%",
+    "40%",
+    "50%",
+    "60%",
+    "70%",
+    "80%",
+    "90%",
+    "100%",
   ];
 
   var parenteral1Value = "";
   var bag1Value = "";
   var parenteral2Value = "";
   var bag2Value = "";
+  var percentDailyValue = "";
+  var oral1Value = "";
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -172,82 +191,126 @@ class _GanttChartAddState extends State<GanttChartAddScreen> {
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        const AutoSizeText(
-                          "Round 1",
-                          minFontSize: 18,
-                        ),
-                        ContainerDropdown(
-                          width: width,
-                          title1: "Parenteral 1",
-                          title2: "Parenteral 2",
-                          height: height / 4.3,
-                          widthParenteral: width / 2.1,
-                          widthSet: width / 4,
-                          colorContainer: primaryColor1,
-                          textColor: whiteColor,
-                          list1: parenteral1,
-                          onChanged1: (String? v) {
-                            setState(() {
-                              parenteral1Value = v!;
-                            });
-                          },
-                          list2: bag1,
-                          onChanged2: (String? v) {
-                            setState(() {
-                              bag1Value = v!;
-                            });
-                          },
-                          list3: parenteral2,
-                          onChanged3: (String? v) {
-                            setState(() {
-                              parenteral2Value = v!;
-                            });
-                          },
-                          list4: bag2,
-                          onChanged4: (String? v) {
-                            setState(() {
-                              bag2Value = v!;
-                            });
-                          },
-                        ),
-                        msaSizeBox(height: 10),
-                        ContainerDropdown(
-                          width: width,
-                          title1: "Oral/Enteral 1",
-                          title2: "Oral/Enteral 1",
-                          height: height / 4.3,
-                          widthParenteral: width / 2.1,
-                          widthSet: width / 4,
-                          colorContainer: primaryColor5,
-                          textColor: blackColor,
-                          list1: parenteral1,
-                          onChanged1: (String? v) {
-                            setState(() {
-                              parenteral1Value = v!;
-                            });
-                          },
-                          list2: bag1,
-                          onChanged2: (String? v) {
-                            setState(() {
-                              bag1Value = v!;
-                            });
-                          },
-                          list3: parenteral2,
-                          onChanged3: (String? v) {
-                            setState(() {
-                              parenteral2Value = v!;
-                            });
-                          },
-                          list4: bag2,
-                          onChanged4: (String? v) {
-                            setState(() {
-                              bag2Value = v!;
-                            });
-                          },
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RoundTextField(
+                            width: width / 1.6,
+                          ),
+                          msaSizeBox(height: 10),
+                          ContainerDropdown(
+                            width: width,
+                            title1: "Parenteral 1",
+                            title2: "Parenteral 2",
+                            height: height / 4.3,
+                            widthParenteral: width / 2,
+                            widthSet: width / 4,
+                            colorContainer: primaryColor1,
+                            textColor: whiteColor,
+                            list1: parenteral1,
+                            isDropDown: true,
+                            onChanged1: (String? v) {
+                              setState(() {
+                                parenteral1Value = v!;
+                              });
+                            },
+                            list2: bag1,
+                            onChanged2: (String? v) {
+                              setState(() {
+                                bag1Value = v!;
+                              });
+                            },
+                            list3: parenteral2,
+                            onChanged3: (String? v) {
+                              setState(() {
+                                parenteral2Value = v!;
+                              });
+                            },
+                            list4: bag2,
+                            onChanged4: (String? v) {
+                              setState(() {
+                                bag2Value = v!;
+                              });
+                            },
+                          ),
+                          msaSizeBox(height: 10),
+                          ContainerDropdown(
+                            width: width,
+                            title1: "Oral/Enteral 1",
+                            title2: "Oral/Enteral 1",
+                            height: height / 4.3,
+                            widthParenteral: width / 2,
+                            widthSet: width / 4,
+                            colorContainer: primaryColor5,
+                            textColor: blackColor,
+                            isDropDown: false,
+                            list1: oral1,
+                            onChanged1: (String? v) {
+                              setState(() {
+                                oral1Value = v!;
+                              });
+                            },
+                            list3: oral1,
+                            onChanged3: (String? v) {
+                              setState(() {
+                                oral1Value = v!;
+                              });
+                            },
+                          ),
+                          msaSizeBox(height: 10),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            width: width / 1.8,
+                            // height: height,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: bgGreyColor,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const AutoSizeText(
+                                  "% of daily requirement",
+                                  minFontSize: 15,
+                                ),
+                                Container(
+                                    padding:
+                                        const EdgeInsets.only(left: 10, top: 2),
+                                    decoration: const ShapeDecoration(
+                                        color: whiteColor,
+                                        shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                            width: 1.0,
+                                            style: BorderStyle.solid,
+                                            color: Colors.grey,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0)),
+                                        )),
+                                    width: width / 2,
+                                    child: DropDownForm(
+                                      v: percentOfDaily,
+                                      onChanged: (String? v) {
+                                        setState(() {
+                                          percentDailyValue = v!;
+                                        });
+                                      },
+                                    ))
+                              ],
+                            ),
+                          ),
+                          msaSizeBox(height: 30),
+                          ContainerOfButton(
+                            width: width,
+                            widthButton: width,
+                            onPressedCancel: () {},
+                            onPressedContinue: () {},
+                            onPressedDelete: () {},
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -77,16 +77,14 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Center(
-              child: CardContent(
-                w: width - 40,
-                h: height / 1.20,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    children: [
+              child: Center(
+                child: CardContent(
+                  w: width - 40,
+                  h: height / 1.20,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: MsaButton(
@@ -109,7 +107,40 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                           },
                         ),
                       ),
-                    ],
+                      msaSizeBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        width: width,
+                        height: height / 1.45,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: bgGreyColor,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // ignore: fixme
+                            //FIXME change size box to dynamic Listview
+                            msaSizeBox(),
+                            SizedBox(
+                              width: width / 6,
+                              height: width / 6,
+                              child: FloatingActionButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const GanttChartAddScreen()));
+                                },
+                                backgroundColor: primaryColor,
+                                child: const Icon(Icons.add),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                 ),
               ),

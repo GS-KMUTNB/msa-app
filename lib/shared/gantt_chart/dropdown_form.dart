@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:msa_app/shared/helper.dart';
 
 import '../../theme/theme.dart';
 import '../shared.dart';

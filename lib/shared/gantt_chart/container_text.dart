@@ -14,26 +14,24 @@ class ContainerText extends Stack {
     required String text,
     double borderRadius = 15,
   }) : super(key: key, children: [
-          Container(
-            width: wShadow,
-            height: hShadow,
-            decoration: BoxDecoration(
-              color: shadowColor,
-              borderRadius: BorderRadius.circular(borderRadius),
+          ElevatedButton(
+            style: const ButtonStyle(
+              alignment: Alignment.center,
             ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: w,
-            height: h,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(borderRadius),
-            ),
-            child: AutoSizeText(
-              text,
-              minFontSize: 15,
-              style: TextStyle(color: textColor),
+            onPressed: () {},
+            child: Container(
+              alignment: Alignment.center,
+              width: w,
+              height: h,
+              decoration: BoxDecoration(
+                // color: color,
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              child: AutoSizeText(
+                text,
+                minFontSize: 15,
+                style: TextStyle(color: textColor),
+              ),
             ),
           ),
         ]);
