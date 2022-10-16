@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../theme/theme.dart';
+import '../shared.dart';
 
 class DropDownForm extends DropdownButtonFormField<String> {
   DropDownForm({
@@ -34,7 +35,12 @@ class DisplayResultStep extends Column {
     String sex = "",
     String energy = "",
     String protein = "",
+    String energyReq = "",
+    String proteinReq = "",
     String actual = "",
+    String eGFR = "",
+    String cdkStage = "",
+    String renal = "",
     required String type,
   }) : super(
           key: key,
@@ -83,7 +89,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -118,7 +124,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -153,7 +159,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -200,7 +206,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -228,7 +234,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -256,7 +262,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(height: 20),
@@ -270,6 +276,20 @@ class DisplayResultStep extends Column {
                     'Case Information 1',
                     minFontSize: 16,
                     maxLines: 1,
+                  ),
+                  MsaRichText(
+                    title: 'eGFR :',
+                    result: eGFR,
+                    unit: "(mL/mm/1.73m2)",
+                  ),
+                  // RichText(
+                  MsaRichText(
+                    title: 'CDK :',
+                    result: cdkStage,
+                  ),
+                  MsaRichText(
+                    title: 'Renal :',
+                    result: renal,
                   ),
                   const AutoSizeText(
                     'your result is',
@@ -306,7 +326,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -341,7 +361,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -376,7 +396,7 @@ class DisplayResultStep extends Column {
                           maxLines: 1,
                           minFontSize: 16,
                           maxFontSize: 18,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: primaryColor),
                         ),
                       )
                     ],
@@ -400,7 +420,63 @@ class DisplayResultStep extends Column {
                   ),
                   msaSizeBox(height: 10),
                   const AutoSizeText(
-                    "Protein daily requirement (g)",
+                    "Energy intake (kCal/kg/day)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      energy,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Energy daily requirement (kCal)",
+                    minFontSize: 14,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      energyReq,
+                      maxLines: 1,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(),
+                  const AutoSizeText(
+                    "Protein intake (g/kg/day)",
                     minFontSize: 14,
                     maxLines: 1,
                   ),
@@ -423,7 +499,7 @@ class DisplayResultStep extends Column {
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -447,11 +523,11 @@ class DisplayResultStep extends Column {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         )),
                     child: AutoSizeText(
-                      protein,
+                      proteinReq,
                       maxLines: 1,
                       minFontSize: 16,
                       maxFontSize: 18,
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: primaryColor),
                     ),
                   ),
                   msaSizeBox(),
@@ -489,6 +565,7 @@ double calculateDailyRequirement(String type, double data1, double data2) {
     case "ae":
       result = data1 / data2;
       break;
+
     default:
       result = 0;
   }

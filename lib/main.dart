@@ -38,10 +38,10 @@ class MsaApp extends StatelessWidget {
         locale: localizationDelegate.currentLocale,
         debugShowCheckedModeBanner: false,
         theme: msaData(),
-        // home: const SplashScreen(),
-        home: DialysisPatientScreen(
-          buildContext: context,
-        ),
+        home: const SplashScreen(),
+        // home: DialysisPatientScreen(
+        //   buildContext: context,
+        // ),
       ),
     );
   }

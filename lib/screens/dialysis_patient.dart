@@ -53,7 +53,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
       protienGoalValue,
       edResult,
       pdResult,
-      aeResult;
+      edReqResult,
+      pdReqResult;
 
   late double ibw;
 
@@ -61,8 +62,11 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   final _fkDp2 = GlobalKey<FormState>();
   final _fkDp3 = GlobalKey<FormState>();
   final formatter = NumberFormat.decimalPattern();
+
   int _index = 0;
+
   List<String> sex = <String>['Please select', 'Male', 'Female'];
+
   List<String> ckdStage = <String>[
     'Please select',
     'CKD Stage',
@@ -74,12 +78,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     '4',
     'ERSD'
   ];
+
   List<String> energyGoal = <String>[
     'Please select',
     '25',
     '30',
     '35',
   ];
+
   List<String> protienGoal = <String>[
     'Please select',
     '0.6',
@@ -90,6 +96,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     '1.1',
     '1.2'
   ];
+
   List<String> renalReplacement = <String>[
     'Please select',
     'Renal Replacement Therapy',
@@ -103,7 +110,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    // print(haveCase2Value);
+
     var getStep = <Step>[
       Step(
         isActive: true,
@@ -114,6 +121,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 bmi: bmiValue,
                 ibw: ibwValue,
                 sex: sexValue,
+                eGFR: egfrValue,
+                cdkStage: ckdValue,
+                renal: renalValue,
               )
             : const AutoSizeText(
                 'Case Information 1',
@@ -121,7 +131,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                 maxLines: 1,
               ),
         content: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -193,7 +203,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                     ),
                     msaSizeBox(height: 20),
                     Row(
-                      // Dashed line
                       children: [
                         for (int i = 0; i < width / 8.5; i++)
                           Container(
@@ -224,7 +233,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(numberRegExp)
                       ],
-                      label: 'Please fill infomation',
+                      label: "",
+                      hint: 'Please fill infomation',
                       onChanged: (v) {
                         setState(() {
                           egfrValue = egfrController.text;
@@ -303,9 +313,10 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
               ? DisplayResultStep(
                   type: "case_infomation_2",
                   width: width,
-                  bmi: bmiValue,
-                  ibw: ibwValue,
-                  sex: sexValue,
+                  energy: edResult,
+                  energyReq: edReqResult,
+                  protein: pdResult,
+                  proteinReq: pdReqResult,
                 )
               : const AutoSizeText(
                   'Case Information 2',
@@ -343,7 +354,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       return null;
                     },
                   ),
-                  msaSizeBox(),
                   const AutoSizeText(
                     "Protein daily intake (g)",
                     minFontSize: 14,
@@ -368,63 +378,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       return null;
                     },
                   ),
-                  msaSizeBox(),
-                  // const AutoSizeText(
-                  //   "Energy intake (kCal/kg/day)",
-                  //   minFontSize: 14,
-                  //   maxLines: 1,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   alignment: Alignment.centerLeft,
-                  //   width: width,
-                  //   height: 40,
-                  //   decoration: const ShapeDecoration(
-                  //       color: primaryColor4,
-                  //       shape: RoundedRectangleBorder(
-                  //         side: BorderSide(
-                  //             width: 1.0,
-                  //             style: BorderStyle.solid,
-                  //             color: Colors.grey),
-                  //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //       )),
-                  //   child: const AutoSizeText(
-                  //     "16.0 (kCal/kg/day)",
-                  //     maxLines: 1,
-                  //     minFontSize: 16,
-                  //     maxFontSize: 18,
-                  //     style: TextStyle(color: Colors.grey),
-                  //   ),
-                  // ),
-                  // msaSizeBox(),
-                  // const AutoSizeText(
-                  //   "Protein intake (g/kg/day)",
-                  //   minFontSize: 14,
-                  //   maxLines: 1,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   alignment: Alignment.centerLeft,
-                  //   width: width,
-                  //   height: 40,
-                  //   decoration: const ShapeDecoration(
-                  //       color: primaryColor4,
-                  //       shape: RoundedRectangleBorder(
-                  //         side: BorderSide(
-                  //             width: 1.0,
-                  //             style: BorderStyle.solid,
-                  //             color: Colors.grey),
-                  //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //       )),
-                  //   child: const AutoSizeText(
-                  //     "0.4 (g/kg/day)",
-                  //     maxLines: 1,
-                  //     minFontSize: 16,
-                  //     maxFontSize: 18,
-                  //     style: TextStyle(color: Colors.grey),
-                  //   ),
-                  // ),
-                  msaSizeBox(),
                   const AutoSizeText(
                     "Energy goal (kCal/kg/day)",
                     minFontSize: 14,
@@ -451,7 +404,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         },
                         v: energyGoal,
                       )),
-                  msaSizeBox(height: 10),
+                  msaSizeBox(),
                   const AutoSizeText(
                     "Protien goal (g/kg/day)",
                     minFontSize: 14,
@@ -479,61 +432,6 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         v: protienGoal,
                       )),
                   msaSizeBox(),
-                  // const AutoSizeText(
-                  //   "Energy daily requirement (kCal)",
-                  //   minFontSize: 14,
-                  //   maxLines: 1,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   alignment: Alignment.centerLeft,
-                  //   width: width,
-                  //   height: 40,
-                  //   decoration: const ShapeDecoration(
-                  //       color: primaryColor4,
-                  //       shape: RoundedRectangleBorder(
-                  //         side: BorderSide(
-                  //             width: 1.0,
-                  //             style: BorderStyle.solid,
-                  //             color: Colors.grey),
-                  //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //       )),
-                  //   child: const AutoSizeText(
-                  //     "1,250 (kCal)",
-                  //     maxLines: 1,
-                  //     minFontSize: 16,
-                  //     maxFontSize: 18,
-                  //     style: TextStyle(color: Colors.grey),
-                  //   ),
-                  // ),
-                  // msaSizeBox(),
-                  // const AutoSizeText(
-                  //   "Protein daily requirement (g)",
-                  //   minFontSize: 14,
-                  //   maxLines: 1,
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   alignment: Alignment.centerLeft,
-                  //   width: width,
-                  //   height: 40,
-                  //   decoration: const ShapeDecoration(
-                  //       color: primaryColor4,
-                  //       shape: RoundedRectangleBorder(
-                  //         side: BorderSide(
-                  //             width: 1.0,
-                  //             style: BorderStyle.solid,
-                  //             color: Colors.grey),
-                  //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //       )),
-                  //   child: const AutoSizeText(
-                  //     "50.0 (g)",
-                  //     maxLines: 1,
-                  //     minFontSize: 16,
-                  //     maxFontSize: 18,
-                  //     style: TextStyle(color: Colors.grey),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -1021,6 +919,10 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         setState(() {
                           haveCase2Value = false;
                         });
+                      } else if (_index == 2) {
+                        setState(() {
+                          print("test");
+                        });
                       }
                     },
                     //*continue
@@ -1056,6 +958,31 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           } else if (_index == 1) {
                             setState(() {
                               haveCase2Value = true;
+                              _fkDp1.currentState?.reset();
+                              _fkDp2.currentState?.reset();
+                              _fkDp3.currentState?.reset();
+
+                              var edRaw = double.parse(edValue);
+                              var edReqRaw = double.parse(energyGoalValue);
+
+                              var pdRaw = double.parse(pdValue);
+                              var pdReqRaw = double.parse(protienGoalValue);
+
+                              var ed =
+                                  calculateDailyRequirement("ed", edRaw, ibw);
+                              var edr =
+                                  calculateDailyRequirement("ed", pdRaw, ibw);
+                              var pd = calculateDailyRequirement(
+                                  "pd", edReqRaw, ibw);
+                              var pdr = calculateDailyRequirement(
+                                  "pd", pdReqRaw, ibw);
+
+                              edResult = formatter.format(ed);
+                              edReqResult = formatter.format(edr);
+                              pdResult = formatter.format(pd);
+                              pdReqResult = formatter.format(pdr);
+
+                              _index += 1;
                             });
                           } else {
                             setState(() {
@@ -1066,11 +993,11 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           }
                         }
                       }
-                      if (_index == 2 && lastStep) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Work in progress')),
-                        );
-                      }
+                      // if (_index == 2 && lastStep) {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //     const SnackBar(content: Text('Work in progress')),
+                      //   );
+                      // }
                     },
 
                     //*on tab
