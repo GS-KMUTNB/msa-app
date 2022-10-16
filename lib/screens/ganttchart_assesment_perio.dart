@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:msa_app/models/models.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
@@ -100,7 +99,8 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MsaGanttChartResultScreen(
+                                builder: (context) =>
+                                    const MsaGanttChartResultScreen(
                                   title: 'Perioperative Patient',
                                   // data: null,
                                 ),
