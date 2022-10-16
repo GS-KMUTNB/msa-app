@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/screens/screens.dart';
 import 'package:msa_app/shared/shared.dart';
 
@@ -19,7 +20,7 @@ class GanttChartScreen extends StatelessWidget {
     return Scaffold(
       appBar: MsaAppBar(
         haveTutor: true,
-        title: 'GANTT CHART Energy & Protein Intake Calculator',
+        title: translate("gantt_chart.title"),
         maxLines: 2,
         ctx: context,
         onPressed: () => showDialog<String>(
@@ -87,9 +88,9 @@ class GanttChartScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         child: AutoSizeText(
-                          "Select the GANTT CHART Energy & Protein Intake Calculator.",
+                          translate("gantt_chart.select"),
                           style: subtitle1,
                           minFontSize: 12,
                           maxFontSize: 18,
@@ -98,7 +99,7 @@ class GanttChartScreen extends StatelessWidget {
                       ),
                       msaSizeBox(height: 20),
                       MsaButton(
-                        text: 'Perioperative patient',
+                        text: translate("gantt_chart.perioperative_button"),
                         textStyle: whiteText,
                         color: primaryColor1,
                         onPressed: () {
@@ -114,7 +115,7 @@ class GanttChartScreen extends StatelessWidget {
                       ),
                       msaSizeBox(height: 20),
                       MsaButton(
-                        text: 'Dialysis patient',
+                        text: translate("gantt_chart.dialysis"),
                         textStyle: whiteText,
                         color: primaryColor1,
                         onPressed: () {

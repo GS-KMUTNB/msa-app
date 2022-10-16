@@ -58,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DescriptionScreen(),
+                        builder: (context) => GanttChartScreen(
+                          buildContext: context,
+                        ),
                       ),
                     );
                   },
@@ -67,7 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DescriptionScreen(),
+                        builder: (context) => GanttChartScreen(
+                          buildContext: context,
+                        ),
                       ),
                     );
                   },

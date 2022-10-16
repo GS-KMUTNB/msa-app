@@ -132,5 +132,58 @@
       "questions_4": "",
       "result": ""
     }
+  },
+  "gantt_chart": {
+    "title": "GANTT CHART Energy & Protein Intake Calculator",
+    "select": "Select the GANTT CHART Energy & Protein Intake Calculator.",
+    "perioperative_button": "Perioperative patient",
+    "dialysis": "Dialysis patient",
+    "sex": "Sex",
+    "height": "Height",
+    "weight": "Weight",
+    "fill_info": "Please fill info",
+    "energy_goal": "Energy goal (kcal/kg/day)",
+    "protien_goal": "Protien goal (g/kg/day)",
+    "energy_intake": "Actual Oral/EN energy intake (kcal)",
+    "perio_page": {
+      "title_1": "Case Information",
+      "title_2": "Daily Requirement",
+      "select_sex": "Please select",
+      "your_result": "your result is",
+      "summary": "Summary",
+      "male": "Male",
+      "female": "Female",
+      "check_result": "pleaese check result again before continue",
+      "energy_daily": "Energy daily requirement (kcal)",
+      "protein_daily": "Protein daily requirement (g)",
+      "actual_energy": "% actual energy intake vs requirement"
+    },
+    "dialysis_page": {
+      "title_1": "Case Information 1",
+      "eGFR": "eGFR (mL/mm/1.73m2)",
+      "ckd_stage ": "CKD Stage ",
+      "no_ckd": "No CKD",
+      "renal_replacement": "Renal Replacement Therapy",
+      "hemo": "Hemodialysis",
+      "peritoneal": "Peritoneal dialysis",
+      "transplantation": "Transplantation",
+      "title_2": "Case Information 2",
+      "energy_daily": "Energy daily intake (kCal)",
+      "protein_daily": "Protein daily intake (g)",
+      "energy_intake": "Energy intake (kCal/kg/day)",
+      "protein_intake": "Protein intake (g/kg/day)",
+      "energy_goal": "Energy goal (kCal/kg/day)",
+      "protein_goal": "Protien goal (g/kg/day)",
+      "title_3": "Nutrition parameter (Baseline)",
+      "serum_albumin": "Serum albumin (g/dl)",
+      "serum_prealbumin": "Serum prealbumin (mg/dl)",
+      "title_4": "Nutrition parameter (Follow-up)",
+      "intervention_duration": "Intervention duration (weeks)",
+      "actual_weight": "Follow-up actual weight (kg)",
+      "follow_bmi": "Follow-up BMI (kg/m2)",
+      "diff_body_weight": "% diff of body weight",
+      "diff_sr_albumin": "% diff of Sr.albumin",
+      "diff_sr_prealbumin": "% diff of Sr.prealbumin"
+    }
   }
 }

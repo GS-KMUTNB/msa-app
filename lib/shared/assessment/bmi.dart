@@ -28,8 +28,8 @@ class BmiForm extends SizedBox {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     msaSizeBox(height: 10),
-                    const AutoSizeText(
-                      "Height",
+                    AutoSizeText(
+                      translate("gantt_chart.height"),
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -41,7 +41,7 @@ class BmiForm extends SizedBox {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Please fill info",
+                          hintText: translate("gantt_chart.fill_info"),
                           isDense: true,
                           contentPadding: const EdgeInsets.all(10),
                         ),
@@ -53,8 +53,8 @@ class BmiForm extends SizedBox {
                         keyboardType: TextInputType.number,
                       ),
                     ),
-                    const AutoSizeText(
-                      "Width",
+                    AutoSizeText(
+                      translate("gantt_chart.weight"),
                       minFontSize: 14,
                       maxLines: 1,
                     ),
@@ -66,7 +66,7 @@ class BmiForm extends SizedBox {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Please fill info",
+                          hintText: translate("gantt_chart.fill_info"),
                           isDense: true,
                           contentPadding: const EdgeInsets.all(10),
                         ),
