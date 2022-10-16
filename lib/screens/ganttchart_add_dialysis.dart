@@ -430,6 +430,7 @@ class _GanttChartDialysisAddState extends State<GanttChartDialysisAddScreen> {
                           ),
                           msaSizeBox(height: 30),
                           ContainerOfButton(
+                            isAdd: true,
                             width: width,
                             widthButton: width,
                             onPressedCancel: () {},

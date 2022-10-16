@@ -8,6 +8,7 @@ class ContainerOfButton extends Container {
     Key? key,
     double? width,
     double? widthButton,
+    required bool isAdd,
     required void Function() onPressedContinue,
     required void Function() onPressedCancel,
     required void Function() onPressedDelete,
@@ -39,14 +40,16 @@ class ContainerOfButton extends Container {
                 onPressed: onPressedCancel,
               ),
               msaSizeBox(height: 15),
-              MsaButton(
-                w: widthButton,
-                h: 40,
-                text: "Delete",
-                textStyle: const TextStyle(color: blackColor),
-                color: primaryColor3,
-                onPressed: onPressedDelete,
-              ),
+              isAdd
+                  ? const SizedBox()
+                  : MsaButton(
+                      w: widthButton,
+                      h: 40,
+                      text: "Delete",
+                      textStyle: const TextStyle(color: blackColor),
+                      color: primaryColor3,
+                      onPressed: onPressedDelete,
+                    ),
             ],
           ),
         );
