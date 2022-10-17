@@ -916,15 +916,19 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               _index += 1;
                             });
                           } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    GanttChartDialysisTodoScreen(
-                                  buildContext: context,
-                                ),
-                              ),
-                            );
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()),
+                                (Route<dynamic> route) => false);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         GanttChartDialysisTodoScreen(
+                            //       buildContext: context,
+                            //     ),
+                            //   ),
+                            // );
                           }
                         }
                       }
