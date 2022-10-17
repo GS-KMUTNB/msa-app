@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class MsaHintAlert extends Container {
@@ -20,7 +21,10 @@ class MsaHintAlert extends Container {
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
+    bool isHightRisk = false,
     VoidCallback? onContinue,
+    VoidCallback? onPressedYes,
+    VoidCallback? onPressedNo,
   }) : super(
           key: key,
           child: AlertDialog(
@@ -58,30 +62,43 @@ class MsaHintAlert extends Container {
             content: haveQuestions
                 ? Column(
                     children: [
-                      const Text(
-                        "You answered yes ",
-                        style: TextStyle(color: whiteColor),
+                      Text(
+                        translate("alert_result.you_answered_yes"),
+                        style: const TextStyle(color: whiteColor),
                         textAlign: TextAlign.left,
                       ),
                       msaSizeBox(height: 30),
                       warningQuestions
                           ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(
-                                  Icons.error_rounded,
-                                  color: primaryColor4,
-                                  size: 40,
+                                isHightRisk
+                                    ? const Icon(
+                                        Icons.error_rounded,
+                                        color: primaryColor4,
+                                        size: 30,
+                                      )
+                                    : const SizedBox(),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 3),
+                                  child: Text(
+                                    numberQuestions,
+                                    style: TextStyle(
+                                      color: isHightRisk
+                                          ? warningColor
+                                          : whiteColor,
+                                      fontSize: 28,
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  numberQuestions,
-                                  style: const TextStyle(
-                                      color: primaryColor4, fontSize: 32),
-                                ),
-                                const Icon(
-                                  Icons.error_rounded,
-                                  color: primaryColor4,
-                                  size: 40,
-                                ),
+                                isHightRisk
+                                    ? const Icon(
+                                        Icons.error_rounded,
+                                        color: primaryColor4,
+                                        size: 30,
+                                      )
+                                    : const SizedBox(),
                               ],
                             )
                           : Text(
@@ -101,17 +118,6 @@ class MsaHintAlert extends Container {
                         physics: const BouncingScrollPhysics(),
                         child: Column(
                           children: [
-                            Container(
-                              width: width,
-                              height: height,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(imageContent),
-                                  fit: BoxFit.contain,
-                                  // opacity: 0.7,
-                                ),
-                              ),
-                            ),
                             msaSizeBox(height: 20),
                             haveColorText
                                 ? RichText(
@@ -149,24 +155,26 @@ class MsaHintAlert extends Container {
                       )
                     : haveColorText
                         ? RichText(
-                            text: const TextSpan(
-                              text: 'Would you like to',
-                              style: TextStyle(color: whiteColor),
+                            text: TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_would_you"),
+                              style: const TextStyle(color: whiteColor),
                               /*defining default style is optional */
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: ' leave the screening form?',
-                                  style: TextStyle(color: primaryColor4),
+                                  text: translate(
+                                      "warning_page_start.text_leave_the_screen"),
+                                  style: const TextStyle(color: primaryColor4),
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' \nIf you agree to leave the screening form',
-                                  style: TextStyle(color: whiteColor),
+                                  text: translate(
+                                      "warning_page_start.text_if_you_agree"),
+                                  style: const TextStyle(color: whiteColor),
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' Everything you do in this assessment will be deleted.',
-                                  style: TextStyle(
+                                  text: translate(
+                                      "warning_page_start.text_will_be_delete"),
+                                  style: const TextStyle(
                                     color: primaryColor4,
                                   ),
                                 ),
@@ -180,44 +188,47 @@ class MsaHintAlert extends Container {
             actions: haveButton
                 ? have2Button
                     ? <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: warningColor,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: warningColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: onPressedYes,
+                                  child: Text(
+                                    translate("warning_page_start.button_yes"),
+                                    style: const TextStyle(color: blackColor),
+                                  ),
                                 ),
                               ),
-                              child: TextButton(
-                                onPressed: () => Navigator.popUntil(
-                                    context, ModalRoute.withName(
-                                        // ignore: fixme
-                                        Navigator.defaultRouteName)), //FIXME
-                                child: const Text(
-                                  'Yes',
-                                  style: TextStyle(color: blackColor),
+                              msaSizeBox(width: 15),
+                              Container(
+                                width: 100,
+                                decoration: const BoxDecoration(
+                                  color: primaryColor4,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed:
+                                      onPressedNo, //() => Navigator.pop(context),
+                                  child: Text(
+                                    translate("warning_page_start.button_no"),
+                                    style: const TextStyle(color: blackColor),
+                                  ),
                                 ),
                               ),
-                            ),
-                            msaSizeBox(width: 15),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: primaryColor4,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
-                                ),
-                              ),
-                              child: TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text(
-                                  'No',
-                                  style: TextStyle(color: blackColor),
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ]
                     : <Widget>[
@@ -234,19 +245,21 @@ class MsaHintAlert extends Container {
                               ),
                               child: continueButton
                                   ? TextButton(
-                                      // ignore: fixme
-                                      //FIXME
                                       onPressed: onContinue,
-                                      child: const Text(
-                                        'Continue',
-                                        style: TextStyle(color: blackColor),
+                                      child: Text(
+                                        translate(
+                                            "warning_page_start.button_continue"),
+                                        style:
+                                            const TextStyle(color: blackColor),
                                       ),
                                     )
                                   : TextButton(
                                       onPressed: () => Navigator.pop(context),
-                                      child: const Text(
-                                        'OK',
-                                        style: TextStyle(color: blackColor),
+                                      child: Text(
+                                        translate(
+                                            "warning_page_start.button_ok"),
+                                        style:
+                                            const TextStyle(color: blackColor),
                                       ),
                                     ),
                             ),

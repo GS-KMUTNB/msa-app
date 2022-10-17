@@ -11,31 +11,40 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
   cupertino_icons: ^1.0.2
   flutter_feather_icons: ^2.0.0
   auto_size_text: ^3.0.0
   custom_radio_grouped_button: ^2.1.2+2
-  intl: ^0.17.0
+  printing: ^5.9.3
+  syncfusion_flutter_charts: ^20.3.47
+  flutter_translate: ^4.0.3
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: "^0.10.0"
   flutter_lints: ^2.0.0
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/logo_luancher.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/logo_luancher.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/logo_luancher.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
 flutter:
   fonts:
@@ -47,5 +56,7 @@ flutter:
         - asset: assets/fonts/Prompt-Regular.ttf
   assets:
     - assets/images/
+    - assets/i18n/th.json
+    - assets/i18n/en.json
 
   uses-material-design: true
