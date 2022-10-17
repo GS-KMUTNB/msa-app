@@ -5,7 +5,7 @@ import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class GanttChartTodoScreen extends StatefulWidget {
-  GanttChartTodoScreen({
+  const GanttChartTodoScreen({
     Key? key,
     required this.context,
     required this.data,
