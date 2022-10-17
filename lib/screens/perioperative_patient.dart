@@ -501,7 +501,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           GanttChartTodoScreen(
-                                        dataList: const [],
+                                        data: const [],
                                         context: context,
                                       ),
                                     ),
