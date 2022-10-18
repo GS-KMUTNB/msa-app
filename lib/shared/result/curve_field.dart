@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
 class CurveCalculateResult extends Column {
@@ -7,6 +9,7 @@ class CurveCalculateResult extends Column {
     Key? key,
     required double width,
     String axis = "row",
+    bool isFollowUp = false,
     required String title,
     required String result,
   }) : super(
@@ -18,18 +21,24 @@ class CurveCalculateResult extends Column {
                     children: [
                       msaSizeBox(height: 10),
                       Row(
+                        mainAxisAlignment: isFollowUp
+                            ? MainAxisAlignment.spaceBetween
+                            : MainAxisAlignment.start,
                         children: [
-                          AutoSizeText(
-                            title,
-                            maxLines: 1,
-                            minFontSize: 16,
-                            maxFontSize: 18,
+                          SizedBox(
+                            width: isFollowUp ? width / 3 : 30,
+                            child: AutoSizeText(
+                              title,
+                              minFontSize: 5,
+                              maxLines: 1,
+                              maxFontSize: 18,
+                            ),
                           ),
                           msaSizeBox(),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.centerLeft,
-                            width: width / 1.9,
+                            width: isFollowUp ? width / 4 : width / 1.9,
                             height: 40,
                             decoration: const ShapeDecoration(
                                 color: primaryColor4,
@@ -43,8 +52,8 @@ class CurveCalculateResult extends Column {
                                 )),
                             child: AutoSizeText(
                               result,
+                              minFontSize: 10,
                               maxLines: 1,
-                              minFontSize: 16,
                               maxFontSize: 18,
                               style: const TextStyle(color: primaryColor),
                             ),
@@ -59,7 +68,7 @@ class CurveCalculateResult extends Column {
                     children: [
                       AutoSizeText(
                         title,
-                        minFontSize: 14,
+                        minFontSize: 5,
                         maxLines: 1,
                       ),
                       Container(
@@ -79,8 +88,8 @@ class CurveCalculateResult extends Column {
                             )),
                         child: AutoSizeText(
                           result,
+                          minFontSize: 5,
                           maxLines: 1,
-                          minFontSize: 16,
                           maxFontSize: 18,
                           style: const TextStyle(color: primaryColor),
                         ),
@@ -88,6 +97,38 @@ class CurveCalculateResult extends Column {
                       msaSizeBox(),
                     ],
                   )
+          ],
+        );
+}
+
+class CurveFormField extends Column {
+  CurveFormField({
+    Key? key,
+    required String title,
+    required TextEditingController controller,
+    required FocusNode controllerFocus,
+    required Function(String)? onChanged,
+    List<TextInputFormatter>? inputFormatters,
+    required String? Function(String?)? validator,
+    String hint = "",
+  }) : super(
+          key: key,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AutoSizeText(
+              title,
+              minFontSize: 5,
+              maxLines: 1,
+            ),
+            MsaFormField(
+              controller: controller,
+              controllerFocus: controllerFocus,
+              inputFormatters: inputFormatters,
+              hint: hint,
+              onChanged: onChanged,
+              validator: validator,
+            ),
           ],
         );
 }

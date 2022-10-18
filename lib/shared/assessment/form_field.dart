@@ -10,7 +10,7 @@ class MsaFormField extends SizedBox {
       required TextEditingController controller,
       required FocusNode controllerFocus,
       required Function(String)? onChanged,
-      required List<TextInputFormatter>? inputFormatters,
+      List<TextInputFormatter>? inputFormatters,
       required String? Function(String?)? validator,
       String hint = ""})
       : super(

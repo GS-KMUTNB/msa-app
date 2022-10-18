@@ -17,7 +17,7 @@ class CurveDropDown extends Column {
           children: [
             AutoSizeText(
               title,
-              minFontSize: 14,
+              minFontSize: 5,
               maxLines: 1,
             ),
             msaSizeBox(),

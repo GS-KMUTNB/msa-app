@@ -281,27 +281,23 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 result: "protein daily Result",
                                 axis: "col",
                               ),
-                              AutoSizeText(
-                                translate("gantt_chart.energy_intake"),
-                                minFontSize: 14,
-                                maxLines: 1,
-                              ),
-                              MsaFormField(
+                              CurveFormField(
+                                title: translate("gantt_chart.energy_intake"),
                                 controller: actualOralController,
                                 controllerFocus: actualOralFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
-                                hint: translate("gantt_chart.fill_info"),
                                 onChanged: (v) {
                                   setState(() {
                                     acValue = actualOralController.text;
                                   });
                                 },
+                                hint: translate("gantt_chart.fill_info"),
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
-                                    return 'Cannot empty';
+                                    return translate("validate.empty");
                                   }
                                   return null;
                                 },
