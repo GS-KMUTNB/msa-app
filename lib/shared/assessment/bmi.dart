@@ -27,7 +27,6 @@ class BmiForm extends SizedBox {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    msaSizeBox(height: 10),
                     AutoSizeText(
                       translate("gantt_chart.height"),
                       minFontSize: 14,

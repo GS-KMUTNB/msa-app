@@ -176,34 +176,16 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AutoSizeText(
-                                translate("gantt_chart.sex"),
-                                minFontSize: 14,
-                                maxLines: 1,
+                              CurveDropDown(
+                                title: translate("gantt_chart.sex"),
+                                width: width,
+                                onChanged: (String? v) {
+                                  setState(() {
+                                    sexValue = v!;
+                                  });
+                                },
+                                v: sex,
                               ),
-                              msaSizeBox(),
-                              Container(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, top: 2),
-                                  decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey,
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                  )),
-                                  width: width,
-                                  child: DropDownForm(
-                                    onChanged: (String? v) {
-                                      setState(() {
-                                        sexValue = v!;
-                                      });
-                                    },
-                                    v: sex,
-                                  )),
                               BmiForm(
                                 isGanttChart: true,
                                 heightController: heightController,
@@ -241,83 +223,16 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                   return null;
                                 },
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  msaSizeBox(height: 10),
-                                  Row(
-                                    children: [
-                                      const AutoSizeText(
-                                        "BMI",
-                                        maxLines: 1,
-                                        minFontSize: 16,
-                                        maxFontSize: 18,
-                                      ),
-                                      msaSizeBox(),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        alignment: Alignment.centerLeft,
-                                        width: width / 1.95,
-                                        height: 40,
-                                        decoration: const ShapeDecoration(
-                                            color: primaryColor4,
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(
-                                                  width: 1.0,
-                                                  style: BorderStyle.solid,
-                                                  color: Colors.grey),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20.0)),
-                                            )),
-                                        child: const AutoSizeText(
-                                          "bmi",
-                                          maxLines: 1,
-                                          minFontSize: 16,
-                                          maxFontSize: 18,
-                                          style: TextStyle(color: primaryColor),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  msaSizeBox(height: 10),
-                                  Row(
-                                    children: [
-                                      const AutoSizeText(
-                                        "IBW",
-                                        maxLines: 1,
-                                        minFontSize: 16,
-                                        maxFontSize: 18,
-                                      ),
-                                      msaSizeBox(),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        alignment: Alignment.centerLeft,
-                                        width: width / 1.95,
-                                        height: 40,
-                                        decoration: const ShapeDecoration(
-                                            color: primaryColor4,
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(
-                                                  width: 1.0,
-                                                  style: BorderStyle.solid,
-                                                  color: Colors.grey),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20.0)),
-                                            )),
-                                        child: const AutoSizeText(
-                                          "ibw",
-                                          maxLines: 1,
-                                          minFontSize: 16,
-                                          maxFontSize: 18,
-                                          style: TextStyle(color: primaryColor),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  msaSizeBox(height: 20),
-                                ],
+                              msaSizeBox(),
+                              CurveCalculateResult(
+                                width: width,
+                                title: "BMI",
+                                result: "BMI Result",
+                              ),
+                              CurveCalculateResult(
+                                width: width,
+                                title: "IBW",
+                                result: "IBW Result",
                               ),
                               DashedLine(width: width),
                             ],
@@ -332,185 +247,71 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              CurveDropDown(
+                                title: translate("gantt_chart.energy_goal"),
+                                width: width,
+                                v: energy,
+                                onChanged: (String? v) {
+                                  setState(() {
+                                    edValue = v!;
+                                  });
+                                },
+                              ),
+                              CurveDropDown(
+                                title: translate("gantt_chart.protien_goal"),
+                                width: width,
+                                onChanged: (String? v) {
+                                  setState(() {
+                                    pdValue = v!;
+                                  });
+                                },
+                                v: protien,
+                              ),
+                              CurveCalculateResult(
+                                width: width,
+                                title: translate(
+                                    "gantt_chart.perio_page.energy_daily"),
+                                result: "energy daily Result",
+                                axis: "col",
+                              ),
+                              CurveCalculateResult(
+                                width: width,
+                                title: translate(
+                                    "gantt_chart.perio_page.protein_daily"),
+                                result: "protein daily Result",
+                                axis: "col",
+                              ),
                               AutoSizeText(
-                                translate("gantt_chart.energy_goal"),
+                                translate("gantt_chart.energy_intake"),
                                 minFontSize: 14,
                                 maxLines: 1,
                               ),
-                              msaSizeBox(),
-                              Container(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 2),
-                                  decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey,
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                  )),
-                                  width: width,
-                                  child: DropDownForm(
-                                    onChanged: (String? v) {
-                                      setState(() {
-                                        edValue = v!;
-                                      });
-                                    },
-                                    v: energy,
-                                  )),
-                              msaSizeBox(height: 10),
-                              AutoSizeText(
-                                translate("gantt_chart.protien_goal"),
-                                minFontSize: 14,
-                                maxLines: 1,
-                              ),
-                              Container(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 2),
-                                  decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                    side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey,
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20.0)),
-                                  )),
-                                  width: width,
-                                  child: DropDownForm(
-                                    onChanged: (String? v) {
-                                      setState(() {
-                                        pdValue = v!;
-                                      });
-                                    },
-                                    v: protien,
-                                  )),
-                              msaSizeBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    translate(
-                                        "gantt_chart.perio_page.energy_daily"),
-                                    minFontSize: 14,
-                                    maxLines: 1,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    alignment: Alignment.centerLeft,
-                                    width: width,
-                                    height: 40,
-                                    decoration: const ShapeDecoration(
-                                        color: primaryColor4,
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1.0,
-                                              style: BorderStyle.solid,
-                                              color: Colors.grey),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.0)),
-                                        )),
-                                    child: const AutoSizeText(
-                                      "energy",
-                                      maxLines: 1,
-                                      minFontSize: 16,
-                                      maxFontSize: 18,
-                                      style: TextStyle(color: primaryColor),
-                                    ),
-                                  ),
-                                  msaSizeBox(),
-                                  AutoSizeText(
-                                    translate(
-                                        "gantt_chart.perio_page.protein_daily"),
-                                    minFontSize: 14,
-                                    maxLines: 1,
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    alignment: Alignment.centerLeft,
-                                    width: width,
-                                    height: 40,
-                                    decoration: const ShapeDecoration(
-                                        color: primaryColor4,
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1.0,
-                                              style: BorderStyle.solid,
-                                              color: Colors.grey),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.0)),
-                                        )),
-                                    child: const AutoSizeText(
-                                      "protein",
-                                      maxLines: 1,
-                                      minFontSize: 16,
-                                      maxFontSize: 18,
-                                      style: TextStyle(color: primaryColor),
-                                    ),
-                                  ),
-                                  msaSizeBox(height: 10),
-                                  AutoSizeText(
-                                    translate("gantt_chart.energy_intake"),
-                                    minFontSize: 14,
-                                    maxLines: 1,
-                                  ),
-                                  MsaFormField(
-                                    controller: actualOralController,
-                                    controllerFocus: actualOralFocus,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          numberRegExp)
-                                    ],
-                                    hint: translate("gantt_chart.fill_info"),
-                                    onChanged: (v) {
-                                      setState(() {
-                                        acValue = actualOralController.text;
-                                      });
-                                    },
-                                    validator: (String? v) {
-                                      if (v == null || v.isEmpty) {
-                                        return 'Cannot empty';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  AutoSizeText(
-                                    translate(
-                                        "gantt_chart.perio_page.actual_energy"),
-                                    minFontSize: 14,
-                                    maxLines: 1,
-                                  ),
-                                  msaSizeBox(),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    alignment: Alignment.centerLeft,
-                                    width: width,
-                                    height: 40,
-                                    decoration: const ShapeDecoration(
-                                        color: primaryColor4,
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              width: 1.0,
-                                              style: BorderStyle.solid,
-                                              color: Colors.grey),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20.0)),
-                                        )),
-                                    child: const AutoSizeText(
-                                      "actual%",
-                                      maxLines: 1,
-                                      minFontSize: 16,
-                                      maxFontSize: 18,
-                                      style: TextStyle(color: primaryColor),
-                                    ),
-                                  ),
+                              MsaFormField(
+                                controller: actualOralController,
+                                controllerFocus: actualOralFocus,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      numberRegExp)
                                 ],
+                                hint: translate("gantt_chart.fill_info"),
+                                onChanged: (v) {
+                                  setState(() {
+                                    acValue = actualOralController.text;
+                                  });
+                                },
+                                validator: (String? v) {
+                                  if (v == null || v.isEmpty) {
+                                    return 'Cannot empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              CurveCalculateResult(
+                                width: width,
+                                title: translate(
+                                    "gantt_chart.perio_page.actual_energy"),
+                                result: "protein daily Result",
+                                axis: "col",
                               ),
                             ],
                           ),
