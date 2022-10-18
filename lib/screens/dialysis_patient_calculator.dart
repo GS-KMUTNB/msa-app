@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -6,7 +5,6 @@ import 'package:intl/intl.dart';
 
 import '../../theme/theme.dart';
 import '../shared/shared.dart';
-import 'screens.dart';
 
 class DialysisPatientScreen extends StatefulWidget {
   const DialysisPatientScreen({
@@ -638,6 +636,19 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           height: 50,
                           width: width,
                           child: const PrintPdf(data: null),
+                        ),
+                        msaSizeBox(),
+                        Container(
+                          color: primaryColor4,
+                          height: 50,
+                          width: width,
+                          child: TextButton(
+                            onPressed: () => {},
+                            child: const Text(
+                              "reset",
+                              style: TextStyle(color: blackColor),
+                            ),
+                          ),
                         ),
                         msaSizeBox(height: 30),
                       ],

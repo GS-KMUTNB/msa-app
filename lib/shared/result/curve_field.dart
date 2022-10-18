@@ -4,6 +4,112 @@ import 'package:flutter/services.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
+class CurveCalculateResultV2 extends StatelessWidget {
+  final double width;
+  final String axis;
+  final bool isFollowUp;
+  final String title;
+  final String result;
+
+  const CurveCalculateResultV2({
+    Key? key,
+    required this.width,
+    required this.axis,
+    required this.isFollowUp,
+    required this.title,
+    required this.result,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        axis == "row"
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  msaSizeBox(height: 10),
+                  Row(
+                    mainAxisAlignment: isFollowUp
+                        ? MainAxisAlignment.spaceBetween
+                        : MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: isFollowUp ? width / 3 : 30,
+                        child: AutoSizeText(
+                          title,
+                          minFontSize: 5,
+                          maxLines: 1,
+                          maxFontSize: 18,
+                        ),
+                      ),
+                      msaSizeBox(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        alignment: Alignment.centerLeft,
+                        width: isFollowUp ? width / 4 : width / 1.9,
+                        height: 40,
+                        decoration: const ShapeDecoration(
+                            color: primaryColor4,
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 1.0,
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0)),
+                            )),
+                        child: AutoSizeText(
+                          result,
+                          minFontSize: 10,
+                          maxLines: 1,
+                          maxFontSize: 18,
+                          style: const TextStyle(color: primaryColor),
+                        ),
+                      )
+                    ],
+                  ),
+                  msaSizeBox(height: 10),
+                ],
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    title,
+                    minFontSize: 5,
+                    maxLines: 1,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    width: width,
+                    height: 40,
+                    decoration: const ShapeDecoration(
+                        color: primaryColor4,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: 1.0,
+                              style: BorderStyle.solid,
+                              color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        )),
+                    child: AutoSizeText(
+                      result,
+                      minFontSize: 5,
+                      maxLines: 1,
+                      maxFontSize: 18,
+                      style: const TextStyle(color: primaryColor),
+                    ),
+                  ),
+                  msaSizeBox(),
+                ],
+              )
+      ],
+    );
+  }
+}
+
 class CurveCalculateResult extends Column {
   CurveCalculateResult({
     Key? key,

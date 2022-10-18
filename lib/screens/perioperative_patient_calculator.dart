@@ -1,4 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -20,18 +21,20 @@ class PerioperativePatientScreen extends StatefulWidget {
 }
 
 class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
-  late TextEditingController weightController = TextEditingController();
+  static const defaultWeight = 0.0;
+  static const defalutHight = 0.0;
+  static const defalutActualOral = 0.0;
+
+  final TextEditingController weightController =
+      TextEditingController(text: defaultWeight.toString());
+  late TextEditingController heightController =
+      TextEditingController(text: defalutHight.toString());
+  late TextEditingController actualOralController =
+      TextEditingController(text: defalutActualOral.toString());
   final FocusNode weightFocus = FocusNode();
-
-  late TextEditingController heightController = TextEditingController();
   final FocusNode hightFocus = FocusNode();
-
-  late TextEditingController actualOralController = TextEditingController();
   final FocusNode actualOralFocus = FocusNode();
-
   final _controller = ScrollController();
-  // final _fkPerio1 = GlobalKey<FormState>();
-
   final formatter = NumberFormat.decimalPattern();
 
   late String bmiValue,
@@ -75,17 +78,70 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     '1.5'
   ];
 
+  double _weight = defaultWeight;
+  double _hight = defalutHight;
+  // double _actualOral = defalutActualOral;
+
   @override
   void initState() {
     super.initState();
-    weightController = TextEditingController();
-    heightController = TextEditingController();
+    weightController.addListener(_onWeightChanged);
+    heightController.addListener(_onHightChanged);
+    // actualOralController.addListener(_onActualOralChanged);
+  }
+
+  _onWeightChanged() {
+    setState(() {
+      _weight = double.tryParse(weightController.text) ?? 0.0;
+    });
+  }
+
+  _onHightChanged() {
+    setState(() {
+      _hight = double.tryParse(heightController.text) ?? 0.0;
+    });
+  }
+
+  // _onActualOralChanged() {
+  //   setState(() {
+  //     _actualOral = double.tryParse(actualOralController.text) ?? 0;
+  //   });
+  // }
+
+  //This method is used to calculate the latest tip amount
+  String _calculated(String type) {
+    var res = "";
+    switch (type) {
+      case "bmi":
+        var result = (_weight / pow(_hight / 100, 2));
+
+        res = formatter.format(result);
+        break;
+
+      case "ibw":
+        break;
+
+      case "energy_daily_requirement":
+        break;
+
+      case "protien_daily_requirement":
+        break;
+
+      case "actual_energy_intake_vs_requirement":
+        break;
+
+      default:
+        res = "";
+    }
+
+    return res;
   }
 
   @override
   void dispose() {
     weightController.dispose();
     heightController.dispose();
+    actualOralController.dispose();
     super.dispose();
   }
 
@@ -224,10 +280,17 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 },
                               ),
                               msaSizeBox(),
+                              CurveCalculateResultV2(
+                                width: width,
+                                title: "BMI",
+                                result: _calculated("bmi"),
+                                axis: 'row',
+                                isFollowUp: false,
+                              ),
                               CurveCalculateResult(
                                 width: width,
                                 title: "BMI",
-                                result: "BMI Result",
+                                result: _calculated("bmi"),
                               ),
                               CurveCalculateResult(
                                 width: width,
@@ -318,6 +381,19 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                           height: 50,
                           width: width,
                           child: const PrintPdf(data: null),
+                        ),
+                        msaSizeBox(),
+                        Container(
+                          color: primaryColor4,
+                          height: 50,
+                          width: width,
+                          child: TextButton(
+                            onPressed: () => {},
+                            child: const Text(
+                              "reset",
+                              style: TextStyle(color: blackColor),
+                            ),
+                          ),
                         ),
                         msaSizeBox(height: 30),
                       ],
