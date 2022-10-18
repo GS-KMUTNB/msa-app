@@ -37,7 +37,36 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
   }
 
   List<ExpenseData> getChaetData1() {
-    final List<ExpenseData> chartData = [];
+    final List<ExpenseData> chartData = [
+      ExpenseData(
+        id: 1,
+        expenseCategory: "pod",
+        pod1: 0, // EN Energy
+        pod2: 10, // PN Energy
+        pod3: 20,
+      ),
+      ExpenseData(
+        id: 2,
+        expenseCategory: "pod 1",
+        pod1: 5, // EN Energy
+        pod2: 15, // PN Energy
+        pod3: 20,
+      ),
+      ExpenseData(
+        id: 3,
+        expenseCategory: "pod 2",
+        pod1: 7, // EN Energy
+        pod2: 20, // PN Energy
+        pod3: 20,
+      ),
+      ExpenseData(
+        id: 4,
+        expenseCategory: "pod 3",
+        pod1: 20, // EN Energy
+        pod2: 30, // PN Energy
+        pod3: 20,
+      ),
+    ];
 
     // for (var data in widget.data) {
     //   chartData.add(data);

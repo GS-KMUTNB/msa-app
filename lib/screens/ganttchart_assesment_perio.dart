@@ -103,7 +103,16 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                           textStyle: bodyText1,
                           onPressed: () {
                             data.isEmpty
-                                ? null
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MsaGanttChartResultScreen(
+                                        title: 'Perioperative Patient',
+                                        // data: null,
+                                      ),
+                                    ),
+                                  )
                                 : Navigator.push(
                                     context,
                                     MaterialPageRoute(

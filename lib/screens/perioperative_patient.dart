@@ -496,21 +496,21 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                   }
                                 }
                                 if (_index == 2 && lastStep) {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomeScreen()),
-                                      (Route<dynamic> route) => false);
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         GanttChartTodoScreen(
-                                  //       data: const [],
-                                  //       context: context,
-                                  //     ),
-                                  //   ),
-                                  // );
+                                  // Navigator.of(context).pushAndRemoveUntil(
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const HomeScreen()),
+                                  //     (Route<dynamic> route) => false);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          GanttChartTodoScreen(
+                                        data: const [],
+                                        context: context,
+                                      ),
+                                    ),
+                                  );
                                 }
                               },
                               //*on tab
