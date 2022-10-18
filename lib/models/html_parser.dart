@@ -17,3 +17,21 @@ class HtmlSNSForm {
     this.result_2,
   );
 }
+
+class HtmlPerioForm {
+  final String energyGoal;
+  final String protienGoal;
+  final String energyRequirement;
+  final String protienRequirement;
+  final String actualOral;
+  final String actualOralPercent;
+
+  HtmlPerioForm(
+    this.energyGoal,
+    this.protienGoal,
+    this.energyRequirement,
+    this.protienRequirement,
+    this.actualOral,
+    this.actualOralPercent,
+  );
+}

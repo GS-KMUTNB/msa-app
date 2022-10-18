@@ -19,7 +19,7 @@ class DropDownForm extends DropdownButtonFormField<String> {
           iconEnabledColor: Colors.grey,
           iconSize: 40,
           validator: (value) => value == v?.first ? 'field required' : null,
-          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
           items: v?.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(value: value, child: Text(value));
           }).toList(),

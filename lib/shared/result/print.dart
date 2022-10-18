@@ -8,8 +8,8 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class PrintPdf extends StatefulWidget {
-  final HtmlSNSForm data;
-  const PrintPdf({Key? key, required this.data}) : super(key: key);
+  final HtmlSNSForm? data;
+  const PrintPdf({Key? key, this.data}) : super(key: key);
 
   @override
   State<PrintPdf> createState() => _PrintPdfState();
@@ -32,7 +32,7 @@ class _PrintPdfState extends State<PrintPdf> {
         onLayout: (pageFormat) async {
           return await Printing.convertHtml(
             format: PdfPageFormat.standard,
-            html: HtmlFormResult(widget.data, "form1", nameInfo),
+            html: HtmlFormResult(widget.data!, "form1", nameInfo),
           );
         },
       );
