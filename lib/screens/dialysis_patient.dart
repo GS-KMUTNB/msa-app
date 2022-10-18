@@ -223,7 +223,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       ],
                       validatorWeight: (String? val) {
                         if (val == null || val.isEmpty) {
-                          return 'Cannot empty';
+                          return translate("validate.empty");
                         }
                         return null;
                       },
@@ -232,7 +232,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       ],
                       validatorHeight: (String? val) {
                         if (val == null || val.isEmpty) {
-                          return 'Cannot empty';
+                          return translate("validate.empty");
                         }
                         return null;
                       },

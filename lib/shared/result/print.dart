@@ -17,7 +17,10 @@ class PrintPdf extends StatefulWidget {
 
 class _PrintPdfState extends State<PrintPdf> {
   final TextEditingController _textFieldController = TextEditingController();
+  final FocusNode _textFieldFocus = FocusNode();
+
   final doc = pw.Document();
+  final _formKey = GlobalKey<FormState>();
 
   String nameInfo = "";
   String valueText = "";
@@ -41,15 +44,25 @@ class _PrintPdfState extends State<PrintPdf> {
           builder: (context) {
             return AlertDialog(
               title: Text(translate("alert_result.title_form")),
-              content: TextField(
-                onChanged: (value) {
-                  setState(() {
-                    valueText = value;
-                  });
-                },
-                controller: _textFieldController,
-                decoration: InputDecoration(
-                    hintText: translate("alert_result.hint_form")),
+              content: Form(
+                key: _formKey,
+                child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      valueText = value;
+                    });
+                  },
+                  validator: (String? val) {
+                    if (val == null || val.isEmpty) {
+                      return translate("validate.empty");
+                    }
+                    return null;
+                  },
+                  focusNode: _textFieldFocus,
+                  controller: _textFieldController,
+                  decoration: InputDecoration(
+                      hintText: translate("alert_result.hint_form")),
+                ),
               ),
               actions: <Widget>[
                 TextButton(
@@ -65,8 +78,12 @@ class _PrintPdfState extends State<PrintPdf> {
                   child: Text(translate("warning_page_start.button_agree")),
                   onPressed: () {
                     setState(() {
-                      nameInfo = valueText;
-                      printDocument(nameInfo);
+                      if (_formKey.currentState!.validate()) {
+                        nameInfo = valueText;
+                        printDocument(nameInfo);
+                        _textFieldController.clear();
+                        Navigator.pop(context);
+                      }
                     });
                   },
                 ),

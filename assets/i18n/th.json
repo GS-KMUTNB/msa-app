@@ -1,4 +1,7 @@
 {
+  "validate": {
+    "empty": "กรุณาใส่ข้อมูล"
+  },
   "select_language_page": {
     "nutrition": "เครื่องมือคัดกรองโภชนาการ",
     "select_language": "เลือกภาษา",

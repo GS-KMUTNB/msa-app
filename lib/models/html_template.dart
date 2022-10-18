@@ -152,9 +152,9 @@ String HtmlFormResult(HtmlSNSForm data, String type, String nameInfo) {
                 <a href="Link">$tWebsite</a>
             </p>
             <p style="text-align: center;">$tScanqr</p>
+            <p style="text-align: center;">$tAuditor : $nameInfo</p>
         </div>
         <div>
-        <h6 style="text-align: center; margin-top: 0%;margin-bottom: 0%;">$tAuditor <br/> $nameInfo</h6>
             <img class="center"
                 src="https://media.discordapp.net/attachments/1002459006222213120/1030027604381667349/qrcode.png?width=670&height=670"
                 alt="" style="width: 6em;">

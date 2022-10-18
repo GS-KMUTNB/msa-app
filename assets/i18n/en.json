@@ -1,4 +1,7 @@
 {
+  "validate": {
+    "empty": "Can't empty field"
+  },
   "select_language_page": {
     "nutrition": "Nutrition Screening Tool",
     "select_language": "Select Language",

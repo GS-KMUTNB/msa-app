@@ -162,7 +162,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           ],
           validatorWeight: (String? val) {
             if (val == null || val.isEmpty) {
-              return 'Cannot empty';
+              return translate("validate.empty");
             }
             return null;
           },
@@ -171,7 +171,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           ],
           validatorHeight: (String? val) {
             if (val == null || val.isEmpty) {
-              return 'Cannot empty';
+              return translate("validate.empty");
             }
             return null;
           },
