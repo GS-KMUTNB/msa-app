@@ -78,33 +78,63 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       Step(
         isActive: true,
         title: haveBMIValue
-            ? Text("${translate("assesment_page.text_box_bmi")}: $bmiValue")
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(translate("assesment_page.description_bmi_range")),
+                  Text(
+                      "${translate("assesment_page.text_box_bmi")}: $bmiValue"),
+                ],
+              )
             : Text(translate("assesment_page.input_weight_height")),
         subtitle: haveBMIValue
-            ? RichText(
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: translate("assesment_page.result"),
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: translate("assesment_page.result"),
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black),
+                        ),
+                        TextSpan(
+                          text: " $resultBmi\n",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: getResultColor(resultBmi),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: interpreBmi,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
                     ),
-                    TextSpan(
-                      text: " $resultBmi\n",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: getResultColor(resultBmi),
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: head6,
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: "${translate("assesment_page.choose")} :",
+                            style: const TextStyle()),
+                        TextSpan(
+                          text: ' ${result[0]}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: colorCondition(result[0]),
+                          ),
+                        ),
+                      ],
                     ),
-                    TextSpan(
-                      text: interpreBmi,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               )
             : Text(
                 translate("assesment_page.sub_input_weight_height"),
@@ -149,33 +179,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
       ),
       Step(
         isActive: (_index >= 1) ? true : false,
-        title: Text(translate("assesment_page.description_bmi_range")),
-        subtitle: _index >= 2
-            ? RichText(
-                text: TextSpan(
-                  style: head6,
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: "${translate("assesment_page.choose")} :",
-                        style: const TextStyle()),
-                    TextSpan(
-                      text: ' ${result[0]}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: colorCondition(result[0]),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            : Text(translate("assesment_page.choose_yes_or_no")),
-        content: const SizedBox(),
-      ),
-      Step(
-        isActive: (_index >= 2) ? true : false,
         title:
             Text(translate("assesment_page.description_assesment_weight_loss")),
-        subtitle: _index >= 3
+        subtitle: _index >= 2
             ? RichText(
                 text: TextSpan(
                   style: head6,
@@ -211,10 +217,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
       ),
       Step(
-        isActive: (_index >= 3) ? true : false,
+        isActive: (_index >= 2) ? true : false,
         title: Text(translate(
             "assesment_page.description_assesment_Patients_were_fed_less")),
-        subtitle: _index >= 4
+        subtitle: _index >= 3
             ? RichText(
                 text: TextSpan(
                   style: head6,
@@ -250,10 +256,10 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
       ),
       Step(
-        isActive: (_index == 4) ? true : false,
+        isActive: (_index == 3) ? true : false,
         title: Text(
             translate("assesment_page.description_patients_with_critical")),
-        subtitle: _index >= 5
+        subtitle: _index >= 4
             ? RichText(
                 text: TextSpan(
                   style: head6,
@@ -422,7 +428,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                               "assesment_page.table_head_no"));
                                         }
 
-                                        _index += 2;
+                                        _index += 1;
                                       });
                                     } else {
                                       setState(() {
@@ -444,7 +450,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                     }
                                   }
 
-                                  if (_index == 4 && lastStep) {
+                                  if (_index == 3 && lastStep) {
                                     if (radioResult != "") {
                                       setState(() {
                                         result.add(radioResult);

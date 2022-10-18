@@ -3,7 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'html_parser.dart';
 
 // ignore: non_constant_identifier_names
-String HtmlFormResult(HtmlSNSForm data, String type) {
+String HtmlFormResult(HtmlSNSForm data, String type, String nameInfo) {
   var yes = translate("assesment_page.table_head_yes");
   var no = translate("assesment_page.table_head_no");
 
@@ -21,11 +21,12 @@ String HtmlFormResult(HtmlSNSForm data, String type) {
   var tWebsite = translate("print.header.website");
   var tScanqr = translate("print.header.scanqr");
   var tFooter = translate("print.header.footer");
+  var tAuditor = translate("print.header.auditor");
 
   var answer = [];
 
   for (var ans in data.answer) {
-    if (ans == "Yes") {
+    if (ans == yes) {
       answer.add(
         """<th class="tcred">$yes</th> <th>$no</th>""",
       );
@@ -153,9 +154,11 @@ String HtmlFormResult(HtmlSNSForm data, String type) {
             <p style="text-align: center;">$tScanqr</p>
         </div>
         <div>
+        <h6 style="text-align: center; margin-top: 0%;margin-bottom: 0%;">$tAuditor <br/> $nameInfo</h6>
             <img class="center"
                 src="https://media.discordapp.net/attachments/1002459006222213120/1030027604381667349/qrcode.png?width=670&height=670"
-                alt="" style="width: 7em;">
+                alt="" style="width: 6em;">
+                <br/>
             <p style="text-align: center; margin-top: 0%;">$tFooter</p>
         </div>
     </div>

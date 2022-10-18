@@ -80,7 +80,9 @@
   "alert_result": {
     "screening_result": "ผลการคัดกรอง",
     "you_answered_yes": "คุณตอบใช่",
-    "questions": "ข้อ"
+    "questions": "ข้อ",
+    "title_form": "ลงชื่อผู้กรอกข้อมูล",
+    "hint_form": "กรุณาใส่เพียงตัวอักษร"
   },
   "results_page": {
     "result": "สรุปผลการคัดกรอง ภาวะโภชนาการ",
@@ -119,7 +121,8 @@
       "download": "ดาวน์โหลด MSA Application ได้ที่",
       "website": "https://msa-application.web.app/",
       "scanqr": "หรือสแกน QR-Code",
-      "footer": "แสกนเพื่อทำแบบคัดกรองภาวะโภชนาการ<br/>สนับสนุนโดย ไทยโอซูก้า"
+      "footer": "แสกนเพื่อทำแบบคัดกรองภาวะโภชนาการ<br/>สนับสนุนโดย ไทยโอซูก้า",
+      "auditor": "ผู้ตรวจสอบข้อมูล"
     },
     "data": {
       "date": "",

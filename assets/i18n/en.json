@@ -80,7 +80,9 @@
   "alert_result": {
     "screening_result": "Screening results",
     "you_answered_yes": "You answered yes ",
-    "questions": "Questions."
+    "questions": "Questions.",
+    "title_form": "Sign the person filling in the information",
+    "hint_form": "Please enter only characters."
   },
   "results_page": {
     "result": "Result screening nutritional status",
@@ -119,7 +121,8 @@
       "download": "Download App",
       "website": "https://msa-application.web.app/",
       "scanqr": "or scan QR-Code",
-      "footer": "Scanned for nutritional status screening<br/>Sponsored by Thai Otsuka"
+      "footer": "Scanned for nutritional status screening<br/>Sponsored by Thai Otsuka",
+      "auditor": "Auditor"
     },
     "data": {
       "date": "",
