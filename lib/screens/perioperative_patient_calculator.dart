@@ -25,33 +25,19 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   static const defalutHight = 0.0;
   static const defalutActualOral = 0.0;
 
-  final TextEditingController weightController =
-      TextEditingController(text: defaultWeight.toString());
-  late TextEditingController heightController =
-      TextEditingController(text: defalutHight.toString());
-  late TextEditingController actualOralController =
-      TextEditingController(text: defalutActualOral.toString());
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController actualOralController = TextEditingController();
   final FocusNode weightFocus = FocusNode();
   final FocusNode hightFocus = FocusNode();
   final FocusNode actualOralFocus = FocusNode();
   final _controller = ScrollController();
   final formatter = NumberFormat.decimalPattern();
+  final GlobalKey<FormFieldState> _key = GlobalKey<FormFieldState>();
 
-  late String bmiValue,
-      ibwValue,
-      resultBmi,
-      wValue,
-      hValue,
-      acValue,
-      sexValue,
-      edValue,
-      pdValue,
-      aeValue,
-      edResult,
-      pdResult,
-      aeResult;
-
-  late double ibw, ed, pd, ae;
+  String sexValue = "";
+  String egValue = "";
+  String pgValue = "";
 
   bool haveBMIValue = false;
   bool haveDrValue = false;
@@ -61,7 +47,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     translate("gantt_chart.perio_page.male"),
     translate("gantt_chart.perio_page.female")
   ];
-  List<String> energy = <String>[
+  List<String> energyGoal = <String>[
     translate("gantt_chart.perio_page.select_sex"),
     '20',
     '25',
@@ -69,7 +55,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     '35',
     '40'
   ];
-  List<String> protien = <String>[
+  List<String> protienGoal = <String>[
     translate("gantt_chart.perio_page.select_sex"),
     '1.0',
     '1.2',
@@ -80,14 +66,17 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
 
   double _weight = defaultWeight;
   double _hight = defalutHight;
-  // double _actualOral = defalutActualOral;
+  double _actualOral = defalutActualOral;
+
+  double ibw = 0;
+  double energyDaily = 0;
 
   @override
   void initState() {
     super.initState();
     weightController.addListener(_onWeightChanged);
     heightController.addListener(_onHightChanged);
-    // actualOralController.addListener(_onActualOralChanged);
+    actualOralController.addListener(_onActualOralChanged);
   }
 
   _onWeightChanged() {
@@ -102,36 +91,79 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     });
   }
 
-  // _onActualOralChanged() {
-  //   setState(() {
-  //     _actualOral = double.tryParse(actualOralController.text) ?? 0;
-  //   });
-  // }
+  _onActualOralChanged() {
+    setState(() {
+      _actualOral = double.tryParse(actualOralController.text) ?? 0.0;
+    });
+  }
 
-  //This method is used to calculate the latest tip amount
   String _calculated(String type) {
     var res = "";
     switch (type) {
       case "bmi":
-        var result = (_weight / pow(_hight / 100, 2));
+        var bmi = (_weight / pow(_hight / 100, 2));
+        String inString = bmi.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
 
-        res = formatter.format(result);
+        result == "NaN" || result == "∞"
+            ? res = "-"
+            : res = "$result (kg./m^2)";
         break;
 
       case "ibw":
+        var ideal = 0;
+        sexValue == "Male" ? ideal = 100 : ideal = 105;
+        ibw = _hight - ideal;
+        String inString = ibw.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result (kg.)";
         break;
 
       case "energy_daily_requirement":
+        var t = translate("gantt_chart.perio_page.select_sex");
+
+        if (egValue == t || egValue == "") {
+          res = "-";
+        } else {
+          var eg = double.parse(egValue);
+          energyDaily = eg * ibw;
+          String inString = energyDaily.toStringAsFixed(2);
+          var result = formatter.format(double.parse(inString));
+          res = "$result (kcal)";
+        }
         break;
 
-      case "protien_daily_requirement":
+      case "protein_daily_requirement":
+        var t = translate("gantt_chart.perio_page.select_sex");
+
+        if (pgValue == t || pgValue == "") {
+          res = "-";
+        } else {
+          var pg = double.parse(pgValue);
+          var edr = pg * ibw;
+          String inString = edr.toStringAsFixed(2);
+          var result = formatter.format(double.parse(inString));
+
+          res = "$result (g)";
+        }
         break;
 
       case "actual_energy_intake_vs_requirement":
+        var aei = (_actualOral / energyDaily) * 100;
+
+        String inString = aei.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+        result == "NaN" || result == "∞" || result == "-0"
+            ? res = "-"
+            : res = "$result %";
+
         break;
 
       default:
-        res = "";
+        res = "-";
     }
 
     return res;
@@ -248,16 +280,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 hightFocus: hightFocus,
                                 weightController: weightController,
                                 weightFocus: weightFocus,
-                                onWeightChanged: (v) {
-                                  setState(() {
-                                    wValue = weightController.text;
-                                  });
-                                },
-                                onHeightChanged: (v) {
-                                  setState(() {
-                                    hValue = heightController.text;
-                                  });
-                                },
+                                onWeightChanged: (v) {},
+                                onHeightChanged: (v) {},
                                 inputFormattersWeight: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
@@ -280,13 +304,6 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 },
                               ),
                               msaSizeBox(),
-                              CurveCalculateResultV2(
-                                width: width,
-                                title: "BMI",
-                                result: _calculated("bmi"),
-                                axis: 'row',
-                                isFollowUp: false,
-                              ),
                               CurveCalculateResult(
                                 width: width,
                                 title: "BMI",
@@ -295,7 +312,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                               CurveCalculateResult(
                                 width: width,
                                 title: "IBW",
-                                result: "IBW Result",
+                                result: _calculated("ibw"),
                               ),
                               DashedLine(width: width),
                             ],
@@ -313,10 +330,10 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                               CurveDropDown(
                                 title: translate("gantt_chart.energy_goal"),
                                 width: width,
-                                v: energy,
+                                v: energyGoal,
                                 onChanged: (String? v) {
                                   setState(() {
-                                    edValue = v!;
+                                    egValue = v!;
                                   });
                                 },
                               ),
@@ -325,23 +342,24 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 width: width,
                                 onChanged: (String? v) {
                                   setState(() {
-                                    pdValue = v!;
+                                    pgValue = v!;
                                   });
                                 },
-                                v: protien,
+                                v: protienGoal,
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: translate(
                                     "gantt_chart.perio_page.energy_daily"),
-                                result: "energy daily Result",
+                                result: _calculated("energy_daily_requirement"),
                                 axis: "col",
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: translate(
                                     "gantt_chart.perio_page.protein_daily"),
-                                result: "protein daily Result",
+                                result:
+                                    _calculated("protein_daily_requirement"),
                                 axis: "col",
                               ),
                               CurveFormField(
@@ -352,11 +370,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
-                                onChanged: (v) {
-                                  setState(() {
-                                    acValue = actualOralController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 hint: translate("gantt_chart.fill_info"),
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
@@ -369,7 +383,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                                 width: width,
                                 title: translate(
                                     "gantt_chart.perio_page.actual_energy"),
-                                result: "protein daily Result",
+                                result: _calculated(
+                                    "actual_energy_intake_vs_requirement"),
                                 axis: "col",
                               ),
                             ],
@@ -388,9 +403,15 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                           height: 50,
                           width: width,
                           child: TextButton(
-                            onPressed: () => {},
+                            onPressed: () => {
+                              setState(() {
+                                weightController.clear();
+                                heightController.clear();
+                                actualOralController.clear();
+                              })
+                            },
                             child: const Text(
-                              "reset",
+                              "Reset",
                               style: TextStyle(color: blackColor),
                             ),
                           ),
