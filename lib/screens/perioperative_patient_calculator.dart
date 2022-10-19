@@ -69,7 +69,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   String egValue = "";
   String pgValue = "";
 
-  late HtmlResultCalculateForm rcf;
+  late HtmlResultPerioCalculateForm rcf;
   String energyGoalPrint = "";
   String protienGoalPrint = "";
   String energyRequirementPrint = "";
@@ -211,7 +211,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    rcf = HtmlResultCalculateForm(
+    rcf = HtmlResultPerioCalculateForm(
       energyGoal: energyGoalPrint,
       protienGoal: protienGoalPrint,
       energyRequirement: energyRequirementPrint,
@@ -445,7 +445,7 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
                             height: 50,
                             width: width,
                             child: PrintPdf(
-                              rcf: rcf,
+                              rpcf: rcf,
                               type: 'ppc',
                             ),
                           ),
