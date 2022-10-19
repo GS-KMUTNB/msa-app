@@ -125,19 +125,35 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   double _albuminFollowUp = defaultAlbuminFollowUp;
   double _prealbuminFollowUp = defalutPreAlbuminFollowUp;
 
-  late HtmlResultCalculateForm rcf;
+  late HtmlResultDialysisCalculateForm rdf;
   String energyGoalPrint = "";
   String protienGoalPrint = "";
   String energyRequirementPrint = "";
   String protienRequirementPrint = "";
-  String actualOralPrint = "";
-  String actualOralPercentPrint = "";
   String sexPrint = "";
   String datePrint = "";
   String weightPrint = "";
   String heightPrint = "";
   String bmiPrint = "";
   String ibwPrint = "";
+  String albuminBaselinePrint = "";
+  String albuminFollowUpPrint = "";
+  String ckdStagePrint = "";
+  String diffAlbuminPrint = "";
+  String diffBodyWeightPrint = "";
+  String diffPreAlbuminPrint = "";
+  String egfrPrint = "";
+  String energyDiaryIntakePrint = "";
+  String energyIntakePrint = "";
+  String followUpActualWeightPrint = "";
+  String followUpBMIPrint = "";
+  String interventionPrint = "";
+  String preAlbuminBaselinePrint = "";
+  String preAlbuminFollowUpPrint = "";
+  String protienDiaryIntakePrint = "";
+  String protienIntakePrint = "";
+  String renalReplacementPrint = "";
+
   var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   @override
@@ -303,6 +319,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result (kCal/kg/day)";
+        energyIntakePrint = _energy.toString();
+        energyDiaryIntakePrint = res;
         break;
 
       case "protein_intake":
@@ -313,6 +331,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result (g/kg/day)";
+        protienIntakePrint = _protein.toString();
+        protienDiaryIntakePrint = res;
         break;
 
       case "follow_up_bmi":
@@ -323,6 +343,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = result;
+
+        followUpActualWeightPrint = _followUp.toString();
+        followUpBMIPrint = res;
         break;
 
       case "diff_of_body_weight":
@@ -333,6 +356,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result %";
+        diffBodyWeightPrint = res;
         break;
 
       case "diff_of_sr_albumin":
@@ -343,6 +367,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result %";
+        diffAlbuminPrint = res;
         break;
 
       case "diff_of_sr_prealbumin":
@@ -354,11 +379,22 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result %";
+
+        preAlbuminFollowUpPrint = _prealbuminFollowUp.toString();
+        diffPreAlbuminPrint = res;
         break;
 
       default:
         res = "-";
     }
+
+    albuminBaselinePrint = _albumin.toString();
+    albuminFollowUpPrint = _albuminFollowUp.toString();
+    ckdStagePrint = ckdValue;
+    egfrPrint = _egfr.toString();
+    interventionPrint =
+        _intervention.toString() + translate("gantt_chart.dialysis_page.week");
+    renalReplacementPrint = renalValue;
 
     return res;
   }
@@ -384,19 +420,34 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    rcf = HtmlResultCalculateForm(
+    rdf = HtmlResultDialysisCalculateForm(
       energyGoal: energyGoalPrint,
       protienGoal: protienGoalPrint,
       energyRequirement: energyRequirementPrint,
       protienRequirement: protienRequirementPrint,
-      actualOral: actualOralPrint,
-      actualOralPercent: actualOralPercentPrint,
       sex: sexPrint,
       date: datePrint,
       weight: weightPrint,
       height: heightPrint,
       bmi: bmiPrint,
       ibw: ibwPrint,
+      albuminBaseline: albuminBaselinePrint,
+      albuminFollowUp: albuminFollowUpPrint,
+      ckdStage: ckdStagePrint,
+      diffAlbumin: diffAlbuminPrint,
+      diffBodyWeight: diffBodyWeightPrint,
+      diffPreAlbumin: diffPreAlbuminPrint,
+      egfr: egfrPrint,
+      energyDiaryIntake: energyDiaryIntakePrint,
+      energyIntake: energyIntakePrint,
+      protienDiaryIntake: protienDiaryIntakePrint,
+      protienIntake: protienIntakePrint,
+      followUpActualWeight: followUpActualWeightPrint,
+      followUpBMI: followUpBMIPrint,
+      intervention: interventionPrint,
+      preAlbuminBaseline: preAlbuminBaselinePrint,
+      preAlbuminFollowUp: preAlbuminFollowUpPrint,
+      renalReplacement: renalReplacementPrint,
     );
 
     return Scaffold(
@@ -856,7 +907,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           height: 50,
                           width: width,
                           child: PrintPdf(
-                            rcf: rcf,
+                            rdcf: rdf,
                             type: 'dpc',
                           ),
                         ),

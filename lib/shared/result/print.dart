@@ -9,13 +9,16 @@ import 'package:printing/printing.dart';
 
 class PrintPdf extends StatefulWidget {
   final HtmlSNSForm? sns;
-  final HtmlResultCalculateForm? rcf;
+  final HtmlResultPerioCalculateForm? rpcf;
+  final HtmlResultDialysisCalculateForm? rdcf;
+
   final String type;
 
   const PrintPdf({
     Key? key,
     this.sns,
-    this.rcf,
+    this.rpcf,
+    this.rdcf,
     required this.type,
   }) : super(key: key);
 
@@ -48,19 +51,20 @@ class _PrintPdfState extends State<PrintPdf> {
             case "ppc":
               return await Printing.convertHtml(
                 format: PdfPageFormat.standard,
-                html: HtmlForm2Result(widget.rcf!, nameInfo),
+                html: HtmlForm2Result(widget.rpcf!, nameInfo),
               );
 
             case "dpc":
               return await Printing.convertHtml(
                 format: PdfPageFormat.standard,
-                html: HtmlForm2Result(widget.rcf!, nameInfo),
+                html: HtmlForm3Result(widget.rdcf!, nameInfo),
               );
 
             default:
               return await Printing.convertHtml(
                 format: PdfPageFormat.standard,
-                html: '<html><body><p>Hello!</p></body></html>',
+                html:
+                    '<html><body><p>Error please restart application!</p></body></html>',
               );
           }
         },
