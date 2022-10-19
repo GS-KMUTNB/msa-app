@@ -192,7 +192,7 @@
       "diff_body_weight": "% ส่วนต่างของน้ำหนัก",
       "diff_sr_albumin": "% ส่วนต่างของอัลบูมิน",
       "diff_sr_prealbumin": "% ส่วนต่างของพรีอัลบูมิน",
-      "intervention_duration": "ระยะเวลาการติดตาม",
+      "intervention_duration": "ระยะเวลาการติดตาม (เป็นสัปดาห์)",
       "week": "สัปดาห์"
     }
   },

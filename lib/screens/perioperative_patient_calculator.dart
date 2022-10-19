@@ -33,14 +33,10 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   final FocusNode actualOralFocus = FocusNode();
   final _controller = ScrollController();
   final formatter = NumberFormat.decimalPattern();
-  final GlobalKey<FormFieldState> _key = GlobalKey<FormFieldState>();
 
   String sexValue = "";
   String egValue = "";
   String pgValue = "";
-
-  bool haveBMIValue = false;
-  bool haveDrValue = false;
 
   List<String> sex = <String>[
     translate("gantt_chart.perio_page.select_sex"),

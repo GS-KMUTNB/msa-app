@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -18,20 +20,29 @@ class DialysisPatientScreen extends StatefulWidget {
 }
 
 class _DialysisPatientScreen extends State<DialysisPatientScreen> {
+  static const defaultWeight = 0.0;
+  static const defalutHight = 0.0;
+  static const defalutEgfr = 0.0;
+  static const defaultEnergy = 0.0;
+  static const defalutProtein = 0.0;
+  static const defalutAlbumin = 0.0;
+  static const defaultPreAlbumin = 0.0;
+  static const defalutIntervention = 0.0;
+  static const defalutFollowUpActual = 0.0;
+  static const defaultAlbuminFollowUp = 0.0;
+  static const defalutPreAlbuminFollowUp = 0.0;
+
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
   final TextEditingController egfrController = TextEditingController();
   final TextEditingController energyController = TextEditingController();
   final TextEditingController proteinController = TextEditingController();
   final TextEditingController albuminController = TextEditingController();
-
   final TextEditingController prealbuminController = TextEditingController();
   final TextEditingController interventionController = TextEditingController();
-  final TextEditingController followUpActualController =
-      TextEditingController();
-  final TextEditingController albuminFollowUpController =
-      TextEditingController();
-  final TextEditingController prealbuminFollowUpController =
+  final TextEditingController followUpActController = TextEditingController();
+  final TextEditingController albuFollowUpController = TextEditingController();
+  final TextEditingController prealbuFollowUpController =
       TextEditingController();
 
   final FocusNode weightFocus = FocusNode();
@@ -46,49 +57,13 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   final FocusNode albuminFollowUpFocus = FocusNode();
   final FocusNode prealbuminFollowUpFocus = FocusNode();
   final _controller = ScrollController();
-
-  bool haveBMIValue = false;
-  bool haveCase2Value = false;
-  bool haveNutritionValue = false;
-  bool haveFollowUpValue = false;
-
-  late String bmiValue,
-      ibwValue,
-      resultBmi,
-      wValue,
-      hValue,
-      sexValue,
-      egfrValue,
-      ckdValue,
-      renalValue,
-      aeValue,
-      edValue,
-      pdValue,
-      energyGoalValue,
-      protienGoalValue,
-      edResult,
-      pdResult,
-      edReqResult,
-      pdReqResult,
-      albuminValue,
-      prealbuminValue,
-      followUpValue,
-      diffBodyWeightValue,
-      diffAlbuminValue,
-      diffPrealbuminValue,
-      interventionValue,
-      followUpActualValue,
-      albuminFollowUpValue,
-      prealbuminFollowUpValue,
-      heightValue,
-      weightValue;
-
-  late String albuminResult, prealbuminResult, interventionResult;
-
-  late double ibw;
-
-  // final _fkDp1 = GlobalKey<FormState>();
   final formatter = NumberFormat.decimalPattern();
+
+  String sexValue = "";
+  String egValue = "";
+  String pgValue = "";
+  String ckdValue = "";
+  String renalValue = "";
 
   List<String> sex = <String>[
     translate("gantt_chart.perio_page.select_sex"),
@@ -134,6 +109,245 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
     translate("gantt_chart.dialysis_page.peritoneal"),
     translate("gantt_chart.dialysis_page.transplantation"),
   ];
+
+  double _weight = defaultWeight;
+  double _hight = defalutHight;
+  // ignore: unused_field
+  double _egfr = defalutEgfr;
+  double _energy = defaultEnergy;
+  double _protein = defalutProtein;
+  double _albumin = defalutAlbumin;
+  double _prealbumin = defaultPreAlbumin;
+  // ignore: unused_field
+  double _intervention = defalutIntervention;
+  double _followUp = defalutFollowUpActual;
+  double _albuminFollowUp = defaultAlbuminFollowUp;
+  double _prealbuminFollowUp = defalutPreAlbuminFollowUp;
+
+  @override
+  void initState() {
+    super.initState();
+    weightController.addListener(_onWeightChanged);
+    heightController.addListener(_onHightChanged);
+    egfrController.addListener(_onEgfrChanged);
+    energyController.addListener(_onEnergyChanged);
+    proteinController.addListener(_onProteinChanged);
+    albuminController.addListener(_onAlbuminChanged);
+    prealbuminController.addListener(_onPreAlbuminChanged);
+    interventionController.addListener(_onInterventionChanged);
+    followUpActController.addListener(_onFollowUpChanged);
+    albuFollowUpController.addListener(_onAlbuminFollowUpChanged);
+    prealbuFollowUpController.addListener(_onPreAlbuminFollowUpChanged);
+  }
+
+  _onWeightChanged() {
+    setState(() {
+      _weight = double.tryParse(weightController.text) ?? 0.0;
+    });
+  }
+
+  _onHightChanged() {
+    setState(() {
+      _hight = double.tryParse(heightController.text) ?? 0.0;
+    });
+  }
+
+  _onEgfrChanged() {
+    setState(() {
+      _egfr = double.tryParse(egfrController.text) ?? 0.0;
+    });
+  }
+
+  _onEnergyChanged() {
+    setState(() {
+      _energy = double.tryParse(energyController.text) ?? 0.0;
+    });
+  }
+
+  _onProteinChanged() {
+    setState(() {
+      _protein = double.tryParse(proteinController.text) ?? 0.0;
+    });
+  }
+
+  _onAlbuminChanged() {
+    setState(() {
+      _albumin = double.tryParse(albuminController.text) ?? 0.0;
+    });
+  }
+
+  _onPreAlbuminChanged() {
+    setState(() {
+      _prealbumin = double.tryParse(prealbuminController.text) ?? 0.0;
+    });
+  }
+
+  _onInterventionChanged() {
+    setState(() {
+      _intervention = double.tryParse(interventionController.text) ?? 0.0;
+    });
+  }
+
+  _onFollowUpChanged() {
+    setState(() {
+      _followUp = double.tryParse(followUpActController.text) ?? 0.0;
+    });
+  }
+
+  _onAlbuminFollowUpChanged() {
+    setState(() {
+      _albuminFollowUp = double.tryParse(albuFollowUpController.text) ?? 0.0;
+    });
+  }
+
+  _onPreAlbuminFollowUpChanged() {
+    setState(() {
+      _prealbuminFollowUp =
+          double.tryParse(prealbuFollowUpController.text) ?? 0.0;
+    });
+  }
+
+  double ibw = 0;
+  double energyDaily = 0;
+  double followUp = 0;
+
+  String _calculated(String type) {
+    var res = "";
+    switch (type) {
+      case "bmi":
+        var bmi = (_weight / pow(_hight / 100, 2));
+        String inString = bmi.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞"
+            ? res = "-"
+            : res = "$result (kg./m^2)";
+        break;
+
+      case "ibw":
+        var ideal = 0;
+        sexValue == "Male" ? ideal = 100 : ideal = 105;
+        ibw = _hight - ideal;
+        String inString = ibw.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result (kg.)";
+        break;
+
+      case "energy_daily_requirement":
+        var t = translate("gantt_chart.perio_page.select_sex");
+
+        if (egValue == t || egValue == "") {
+          res = "-";
+        } else {
+          var eg = double.parse(egValue);
+          energyDaily = eg * ibw;
+          String inString = energyDaily.toStringAsFixed(2);
+          var result = formatter.format(double.parse(inString));
+          res = "$result (kcal)";
+        }
+        break;
+
+      case "protein_daily_requirement":
+        var t = translate("gantt_chart.perio_page.select_sex");
+
+        if (pgValue == t || pgValue == "") {
+          res = "-";
+        } else {
+          var pg = double.parse(pgValue);
+          var edr = pg * ibw;
+          String inString = edr.toStringAsFixed(2);
+          var result = formatter.format(double.parse(inString));
+
+          res = "$result (g)";
+        }
+        break;
+
+      case "energy_intake":
+        var ei = (_energy / ibw);
+        String inString = ei.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result (kCal/kg/day)";
+        break;
+
+      case "protein_intake":
+        var ei = (_protein / ibw);
+        String inString = ei.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result (g/kg/day)";
+        break;
+
+      case "follow_up_bmi":
+        followUp = _followUp / ((_hight / 100) * (_hight / 100));
+        String inString = followUp.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = result;
+        break;
+
+      case "diff_of_body_weight":
+        var diffBW = ((_followUp - _weight) / _weight) * 100;
+        String inString = diffBW.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result %";
+        break;
+
+      case "diff_of_sr_albumin":
+        var diffSAbumin = ((_albuminFollowUp - _albumin) / _albumin) * 100;
+        String inString = diffSAbumin.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result %";
+        break;
+
+      case "diff_of_sr_prealbumin":
+        var diffSAbumin =
+            ((_prealbuminFollowUp - _prealbumin) / _prealbumin) * 100;
+        String inString = diffSAbumin.toStringAsFixed(2);
+        var result = formatter.format(double.parse(inString));
+
+        result == "NaN" || result == "∞" || result == "-105" || result == "-100"
+            ? res = "-"
+            : res = "$result %";
+        break;
+
+      default:
+        res = "-";
+    }
+
+    return res;
+  }
+
+  @override
+  void dispose() {
+    weightController.dispose();
+    heightController.dispose();
+    egfrController.dispose();
+    energyController.dispose();
+    proteinController.dispose();
+    albuminController.dispose();
+    prealbuminController.dispose();
+    interventionController.dispose();
+    followUpActController.dispose();
+    albuFollowUpController.dispose();
+    prealbuFollowUpController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -238,16 +452,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                 hightFocus: hightFocus,
                                 weightController: weightController,
                                 weightFocus: weightFocus,
-                                onWeightChanged: (v) {
-                                  setState(() {
-                                    wValue = weightController.text;
-                                  });
-                                },
-                                onHeightChanged: (v) {
-                                  setState(() {
-                                    hValue = heightController.text;
-                                  });
-                                },
+                                onWeightChanged: (v) {},
+                                onHeightChanged: (v) {},
                                 inputFormattersWeight: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
@@ -274,12 +480,12 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveCalculateResult(
                                 width: width,
                                 title: "BMI",
-                                result: "BMI Result",
+                                result: _calculated("bmi"),
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: "IBW",
-                                result: "IBW Result",
+                                result: _calculated("ibw"),
                               ),
                               DashedLine(width: width),
                               CurveFormField(
@@ -292,11 +498,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    egfrValue = egfrController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -347,11 +549,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    edValue = energyController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -369,11 +567,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -386,14 +580,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                 width: width,
                                 title: translate(
                                     "gantt_chart.dialysis_page.energy_intake"),
-                                result: "protein daily Result",
+                                result: _calculated("energy_intake"),
                                 axis: "col",
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: translate(
                                     "gantt_chart.dialysis_page.protein_intake"),
-                                result: "protein daily Result",
+                                result: _calculated("protein_intake"),
                                 axis: "col",
                               ),
                               DashedLine(width: width),
@@ -402,34 +596,35 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                 width: width,
                                 onChanged: (String? v) {
                                   setState(() {
-                                    renalValue = v!;
+                                    egValue = v!;
                                   });
                                 },
-                                v: renalReplacement,
+                                v: energyGoal,
                               ),
                               CurveDropDown(
                                 title: translate("gantt_chart.protien_goal"),
                                 width: width,
                                 onChanged: (String? v) {
                                   setState(() {
-                                    renalValue = v!;
+                                    pgValue = v!;
                                   });
                                 },
-                                v: renalReplacement,
+                                v: protienGoal,
                               ),
                               DashedLine(width: width),
                               CurveCalculateResult(
                                 width: width,
                                 title: translate(
                                     "gantt_chart.perio_page.energy_daily"),
-                                result: "protein daily Result",
+                                result: _calculated("energy_daily_requirement"),
                                 axis: "col",
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: translate(
                                     "gantt_chart.perio_page.protein_daily"),
-                                result: "protein daily Result",
+                                result:
+                                    _calculated("protein_daily_requirement"),
                                 axis: "col",
                               ),
                               DashedLine(width: width),
@@ -447,29 +642,25 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveCalculateResult(
                                 width: width,
                                 title: "BMI",
-                                result: "BMI Result",
+                                result: _calculated("bmi"),
                               ),
                               CurveCalculateResult(
                                 width: width,
                                 title: "IBW",
-                                result: "IBW Result",
+                                result: _calculated("ibw"),
                               ),
                               DashedLine(width: width),
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.serum_albumin"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: albuminController,
+                                controllerFocus: albuminFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -480,18 +671,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.serum_prealbumin"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: prealbuminController,
+                                controllerFocus: prealbuminFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -513,18 +700,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.intervention_duration"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: interventionController,
+                                controllerFocus: interventionFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -535,18 +718,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.actual_weight"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: followUpActController,
+                                controllerFocus: followUpActualFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -558,24 +737,20 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                 isFollowUp: true,
                                 width: width,
                                 title: "Follow-up BMI (kg/m2)",
-                                result: "BMI Result",
+                                result: _calculated("follow_up_bmi"),
                               ),
                               DashedLine(width: width),
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.serum_albumin"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: albuFollowUpController,
+                                controllerFocus: albuminFollowUpFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -586,18 +761,14 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                               CurveFormField(
                                 title: translate(
                                     "gantt_chart.dialysis_page.serum_prealbumin"),
-                                controller: proteinController,
-                                controllerFocus: proteinFocus,
+                                controller: prealbuFollowUpController,
+                                controllerFocus: prealbuminFollowUpFocus,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       numberRegExp)
                                 ],
                                 hint: translate("gantt_chart.fill_info"),
-                                onChanged: (v) {
-                                  setState(() {
-                                    pdValue = proteinController.text;
-                                  });
-                                },
+                                onChanged: (v) {},
                                 validator: (String? v) {
                                   if (v == null || v.isEmpty) {
                                     return translate("validate.empty");
@@ -611,21 +782,21 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                                 width: width,
                                 title: translate(
                                     "gantt_chart.dialysis_page.diff_body_weight"),
-                                result: "IBW Result",
+                                result: _calculated("diff_of_body_weight"),
                               ),
                               CurveCalculateResult(
                                 isFollowUp: true,
                                 width: width,
                                 title: translate(
                                     "gantt_chart.dialysis_page.diff_sr_albumin"),
-                                result: "IBW Result",
+                                result: _calculated("diff_of_sr_albumin"),
                               ),
                               CurveCalculateResult(
                                 isFollowUp: true,
                                 width: width,
                                 title: translate(
                                     "gantt_chart.dialysis_page.diff_sr_prealbumin"),
-                                result: "IBW Result",
+                                result: _calculated("diff_of_sr_prealbumin"),
                               ),
                             ],
                           ),
@@ -645,7 +816,7 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           child: TextButton(
                             onPressed: () => {},
                             child: const Text(
-                              "reset",
+                              "Reset",
                               style: TextStyle(color: blackColor),
                             ),
                           ),

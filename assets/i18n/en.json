@@ -192,7 +192,7 @@
       "diff_body_weight": "% diff of body weight",
       "diff_sr_albumin": "% diff of Sr.albumin",
       "diff_sr_prealbumin": "% diff of Sr.prealbumin",
-      "intervention_duration": "Intervention duration",
+      "intervention_duration": "Intervention duration (weeks)",
       "week": "weeks"
     }
   },
