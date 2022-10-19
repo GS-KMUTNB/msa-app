@@ -225,8 +225,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         break;
 
       case "ibw":
+        var t = translate("gantt_chart.perio_page.male");
         var ideal = 0;
-        sexValue == "Male" ? ideal = 100 : ideal = 105;
+        sexValue == t ? ideal = 100 : ideal = 105;
         ibw = _hight - ideal;
         String inString = ibw.toStringAsFixed(2);
         var result = formatter.format(double.parse(inString));
@@ -429,7 +430,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                       children: [
                         HeaderWithCircleAvatar(
                           header: 'Info',
-                          content: 'Case Information 1',
+                          content:
+                              translate("gantt_chart.dialysis_page.title_1"),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
@@ -533,7 +535,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         ),
                         HeaderWithCircleAvatar(
                           header: 'Info',
-                          content: 'Case Infomation 2',
+                          content:
+                              translate("gantt_chart.dialysis_page.title_2"),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
@@ -633,7 +636,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         ),
                         HeaderWithCircleAvatar(
                           header: 'NP',
-                          content: 'Nutrition parameter (Baseline)',
+                          content:
+                              translate("gantt_chart.dialysis_page.title_3"),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
@@ -691,7 +695,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                         ),
                         HeaderWithCircleAvatar(
                           header: 'NP',
-                          content: 'Nutrition parameter (Follow-up)',
+                          content:
+                              translate("gantt_chart.dialysis_page.title_4"),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
