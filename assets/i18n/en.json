@@ -1,4 +1,7 @@
 {
+  "validate": {
+    "empty": "Can't empty field"
+  },
   "select_language_page": {
     "nutrition": "Nutrition Screening Tool",
     "select_language": "Select Language",
@@ -80,7 +83,9 @@
   "alert_result": {
     "screening_result": "Screening results",
     "you_answered_yes": "You answered yes ",
-    "questions": "Questions."
+    "questions": "Questions.",
+    "title_form": "Sign the person filling in the information",
+    "hint_form": "Please enter only characters."
   },
   "results_page": {
     "result": "Result screening nutritional status",
@@ -119,7 +124,8 @@
       "download": "Download App",
       "website": "https://msa-application.web.app/",
       "scanqr": "or scan QR-Code",
-      "footer": "Scanned for nutritional status screening<br/>Sponsored by Thai Otsuka"
+      "footer": "Scanned for nutritional status screening<br/>Sponsored by Thai Otsuka",
+      "auditor": "Auditor"
     },
     "data": {
       "date": "",
@@ -134,8 +140,8 @@
     }
   },
   "gantt_chart": {
-    "title": "GANTT CHART Energy & Protein Intake Calculator",
-    "select": "Select the GANTT CHART Energy & Protein Intake Calculator.",
+    "title": "Energy & Protein Intake Calculator",
+    "select": "Select the Energy & Protein Intake Calculator.",
     "perioperative_button": "Perioperative patient",
     "dialysis": "Dialysis patient",
     "sex": "Sex",
@@ -186,7 +192,7 @@
       "diff_body_weight": "% diff of body weight",
       "diff_sr_albumin": "% diff of Sr.albumin",
       "diff_sr_prealbumin": "% diff of Sr.prealbumin",
-      "intervention_duration": "Intervention duration",
+      "intervention_duration": "Intervention duration (weeks)",
       "week": "weeks"
     }
   },
@@ -200,7 +206,7 @@
     "protein": "Protein (g)"
   },
   "analytics": {
-    "title": "GANTT CHART Analytics",
+    "title": "Analytics",
     "en_energy": "EN Energy",
     "pn_energy": "PN Energy",
     "energy_requirement": "Energy requirement",

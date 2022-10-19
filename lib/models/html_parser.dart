@@ -17,3 +17,33 @@ class HtmlSNSForm {
     this.result_2,
   );
 }
+
+class HtmlResultCalculateForm {
+  final String sex;
+  final String date;
+  final String weight;
+  final String height;
+  final String bmi;
+  final String ibw;
+  final String energyGoal;
+  final String protienGoal;
+  final String energyRequirement;
+  final String protienRequirement;
+  final String actualOral;
+  final String actualOralPercent;
+
+  HtmlResultCalculateForm({
+    required this.energyGoal,
+    required this.protienGoal,
+    required this.energyRequirement,
+    required this.protienRequirement,
+    required this.actualOral,
+    required this.actualOralPercent,
+    required this.sex,
+    required this.date,
+    required this.weight,
+    required this.height,
+    required this.bmi,
+    required this.ibw,
+  });
+}

@@ -27,7 +27,6 @@ class BmiForm extends SizedBox {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    msaSizeBox(height: 10),
                     AutoSizeText(
                       translate("gantt_chart.height"),
                       minFontSize: 14,
@@ -43,7 +42,8 @@ class BmiForm extends SizedBox {
                           hintStyle: TextStyle(color: Colors.grey[800]),
                           hintText: translate("gantt_chart.fill_info"),
                           isDense: true,
-                          contentPadding: const EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                         ),
                         inputFormatters: inputFormattersHeight,
                         validator: validatorHeight,
@@ -68,7 +68,8 @@ class BmiForm extends SizedBox {
                           hintStyle: TextStyle(color: Colors.grey[800]),
                           hintText: translate("gantt_chart.fill_info"),
                           isDense: true,
-                          contentPadding: const EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                         ),
                         inputFormatters: inputFormattersWeight,
                         validator: validatorWeight,
@@ -100,7 +101,8 @@ class BmiForm extends SizedBox {
                           labelText:
                               translate("assesment_page.text_box_height"),
                           isDense: true,
-                          contentPadding: const EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                         ),
                         inputFormatters: inputFormattersHeight,
                         validator: validatorHeight,
@@ -127,7 +129,8 @@ class BmiForm extends SizedBox {
                           labelText:
                               translate("assesment_page.text_box_weight"),
                           isDense: true,
-                          contentPadding: const EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                         ),
                         inputFormatters: inputFormattersWeight,
                         validator: validatorWeight,

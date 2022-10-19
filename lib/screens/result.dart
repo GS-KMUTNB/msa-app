@@ -168,7 +168,10 @@ class ResultScreen extends StatelessWidget {
                             color: primaryColor,
                             height: 50,
                             width: width,
-                            child: PrintPdf(data: snsForm),
+                            child: PrintPdf(
+                              sns: snsForm,
+                              type: 'sns',
+                            ),
                           ),
                           msaSizeBox(),
                           isHightRisk

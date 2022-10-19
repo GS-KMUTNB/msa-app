@@ -12,3 +12,5 @@ export './ganttchart_assesment_dialysis.dart';
 export './ganttchart_add_perio.dart';
 export './ganttchart_add_dialysis.dart';
 export './result_gantt_chart.dart';
+export './perioperative_patient_calculator.dart';
+export './dialysis_patient_calculator.dart';

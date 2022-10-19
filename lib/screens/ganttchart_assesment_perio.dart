@@ -103,7 +103,16 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                           textStyle: bodyText1,
                           onPressed: () {
                             data.isEmpty
-                                ? null
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MsaGanttChartResultScreen(
+                                        title: 'Perioperative Patient',
+                                        // data: null,
+                                      ),
+                                    ),
+                                  )
                                 : Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -117,29 +126,29 @@ class _GanttChartTodoState extends State<GanttChartTodoScreen> {
                           },
                         ),
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          itemCount: data.length,
-                          itemBuilder: (context, index) {
-                            return AssessMentItem(
-                              data: data[index],
-                              // onTodoChanged: () {
-                              //   print("test");
-                              // },
-                            );
-                          },
+                      // Expanded(
+                      //   child: ListView.builder(
+                      //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      //     itemCount: data.length,
+                      //     itemBuilder: (context, index) {
+                      //       return AssessMentItem(
+                      //         data: data[index],
+                      //         // onTodoChanged: () {
+                      //         //   print("test");
+                      //         // },
+                      //       );
+                      //     },
 
-                          //   children: widget.dataList.map((ExpenseData data) {
-                          //     return AssessMentItem(
-                          //       data: data,
-                          //       // onTodoChanged: () {
-                          //       //   print("test");
-                          //       // },
-                          //     );
-                          //   }).toList(),
-                        ),
-                      ),
+                      //     //   children: widget.dataList.map((ExpenseData data) {
+                      //     //     return AssessMentItem(
+                      //     //       data: data,
+                      //     //       // onTodoChanged: () {
+                      //     //       //   print("test");
+                      //     //       // },
+                      //     //     );
+                      //     //   }).toList(),
+                      //   ),
+                      // ),
                       msaSizeBox(height: 10),
                     ]),
                   ),

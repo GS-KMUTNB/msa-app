@@ -48,3 +48,46 @@ class MsaRichText extends RichText {
           ),
         );
 }
+
+class DashedLine extends Padding {
+  DashedLine({Key? key, required double width})
+      : super(
+          key: key,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            children: [
+              for (int i = 0; i < width / 8.5; i++)
+                Container(
+                  width: 5,
+                  height: 1,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: i % 2 == 0
+                            ? const Color.fromRGBO(214, 211, 211, 1)
+                            : Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+}
+
+class HeaderWithCircleAvatar extends Row {
+  HeaderWithCircleAvatar(
+      {Key? key, required String header, required String content})
+      : super(key: key, children: [
+          CircleAvatar(
+            backgroundColor: primaryColor1,
+            child: Text(
+              header,
+              style: const TextStyle(color: whiteColor, fontSize: 12),
+            ),
+          ),
+          msaSizeBox(width: 10),
+          Text(content)
+        ]);
+}
