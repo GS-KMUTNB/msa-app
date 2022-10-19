@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
+import 'package:msa_app/models/models.dart';
 
 import '../../theme/theme.dart';
 import '../shared/shared.dart';
@@ -124,6 +125,21 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   double _albuminFollowUp = defaultAlbuminFollowUp;
   double _prealbuminFollowUp = defalutPreAlbuminFollowUp;
 
+  late HtmlResultCalculateForm rcf;
+  String energyGoalPrint = "";
+  String protienGoalPrint = "";
+  String energyRequirementPrint = "";
+  String protienRequirementPrint = "";
+  String actualOralPrint = "";
+  String actualOralPercentPrint = "";
+  String sexPrint = "";
+  String datePrint = "";
+  String weightPrint = "";
+  String heightPrint = "";
+  String bmiPrint = "";
+  String ibwPrint = "";
+  var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
+
   @override
   void initState() {
     super.initState();
@@ -222,6 +238,10 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞"
             ? res = "-"
             : res = "$result (kg./m^2)";
+
+        weightPrint = _weight.toString();
+        heightPrint = _hight.toString();
+        bmiPrint = res;
         break;
 
       case "ibw":
@@ -235,6 +255,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result (kg.)";
+
+        sexPrint = sexValue;
+        ibwPrint = res;
         break;
 
       case "energy_daily_requirement":
@@ -249,6 +272,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
           var result = formatter.format(double.parse(inString));
           res = "$result (kcal)";
         }
+
+        energyGoalPrint = egValue;
+        energyRequirementPrint = res;
         break;
 
       case "protein_daily_requirement":
@@ -264,6 +290,9 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
 
           res = "$result (g)";
         }
+
+        protienGoalPrint = egValue;
+        protienRequirementPrint = res;
         break;
 
       case "energy_intake":
@@ -354,6 +383,21 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
+    rcf = HtmlResultCalculateForm(
+      energyGoal: energyGoalPrint,
+      protienGoal: protienGoalPrint,
+      energyRequirement: energyRequirementPrint,
+      protienRequirement: protienRequirementPrint,
+      actualOral: actualOralPrint,
+      actualOralPercent: actualOralPercentPrint,
+      sex: sexPrint,
+      date: datePrint,
+      weight: weightPrint,
+      height: heightPrint,
+      bmi: bmiPrint,
+      ibw: ibwPrint,
+    );
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -811,7 +855,10 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           color: primaryColor,
                           height: 50,
                           width: width,
-                          child: const PrintPdf(data: null),
+                          child: PrintPdf(
+                            rcf: rcf,
+                            type: 'dpc',
+                          ),
                         ),
                         msaSizeBox(),
                         Container(
@@ -819,7 +866,23 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
                           height: 50,
                           width: width,
                           child: TextButton(
-                            onPressed: () => {},
+                            onPressed: () => {
+                              setState(
+                                () {
+                                  weightController.clear();
+                                  heightController.clear();
+                                  egfrController.clear();
+                                  energyController.clear();
+                                  proteinController.clear();
+                                  albuminController.clear();
+                                  prealbuminController.clear();
+                                  interventionController.clear();
+                                  followUpActController.clear();
+                                  albuFollowUpController.clear();
+                                  prealbuFollowUpController.clear();
+                                },
+                              )
+                            },
                             child: const Text(
                               "Reset",
                               style: TextStyle(color: blackColor),

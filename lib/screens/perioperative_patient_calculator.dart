@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:msa_app/shared/shared.dart';
 
 import '../../theme/theme.dart';
+import '../models/models.dart';
 
 class PerioperativePatientScreen extends StatefulWidget {
   const PerioperativePatientScreen({
@@ -33,10 +34,6 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   final FocusNode actualOralFocus = FocusNode();
   final _controller = ScrollController();
   final formatter = NumberFormat.decimalPattern();
-
-  String sexValue = "";
-  String egValue = "";
-  String pgValue = "";
 
   List<String> sex = <String>[
     translate("gantt_chart.perio_page.select_sex"),
@@ -66,6 +63,26 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
 
   double ibw = 0;
   double energyDaily = 0;
+  final _key = GlobalKey<FormState>();
+
+  String sexValue = "";
+  String egValue = "";
+  String pgValue = "";
+
+  late HtmlResultCalculateForm rcf;
+  String energyGoalPrint = "";
+  String protienGoalPrint = "";
+  String energyRequirementPrint = "";
+  String protienRequirementPrint = "";
+  String actualOralPrint = "";
+  String actualOralPercentPrint = "";
+  String sexPrint = "";
+  String datePrint = "";
+  String weightPrint = "";
+  String heightPrint = "";
+  String bmiPrint = "";
+  String ibwPrint = "";
+  var now = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   @override
   void initState() {
@@ -104,6 +121,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         result == "NaN" || result == "∞"
             ? res = "-"
             : res = "$result (kg./m^2)";
+        weightPrint = _weight.toString();
+        heightPrint = _hight.toString();
+        bmiPrint = res;
         break;
 
       case "ibw":
@@ -117,6 +137,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         result == "NaN" || result == "∞" || result == "-105" || result == "-100"
             ? res = "-"
             : res = "$result (kg.)";
+
+        sexPrint = sexValue;
+        ibwPrint = res;
         break;
 
       case "energy_daily_requirement":
@@ -131,6 +154,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
           var result = formatter.format(double.parse(inString));
           res = "$result (kcal)";
         }
+
+        energyGoalPrint = egValue;
+        energyRequirementPrint = res;
         break;
 
       case "protein_daily_requirement":
@@ -146,6 +172,9 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
 
           res = "$result (g)";
         }
+
+        protienGoalPrint = egValue;
+        protienRequirementPrint = res;
         break;
 
       case "actual_energy_intake_vs_requirement":
@@ -157,11 +186,14 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
             ? res = "-"
             : res = "$result %";
 
+        actualOralPrint = _actualOral.toString();
+        actualOralPercentPrint = res;
         break;
 
       default:
         res = "-";
     }
+    datePrint = now;
 
     return res;
   }
@@ -178,6 +210,21 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
+    rcf = HtmlResultCalculateForm(
+      energyGoal: energyGoalPrint,
+      protienGoal: protienGoalPrint,
+      energyRequirement: energyRequirementPrint,
+      protienRequirement: protienRequirementPrint,
+      actualOral: actualOralPrint,
+      actualOralPercent: actualOralPercentPrint,
+      sex: sexPrint,
+      date: datePrint,
+      weight: weightPrint,
+      height: heightPrint,
+      bmi: bmiPrint,
+      ibw: ibwPrint,
+    );
 
     return Scaffold(
       appBar: MsaAppBar(
@@ -229,198 +276,208 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/bg.png"),
-                  fit: BoxFit.cover,
+        child: Form(
+          key: _key,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/bg.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Center(
-              child: CardContent(
-                w: width - 40,
-                h: height / 1.20,
-                color: Colors.white,
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _controller,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, left: 30, right: 30),
-                    child: Column(
-                      children: [
-                        HeaderWithCircleAvatar(
-                          header: 'Info',
-                          content: translate("gantt_chart.perio_page.title_1"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 50),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CurveDropDown(
-                                title: translate("gantt_chart.sex"),
-                                width: width,
-                                onChanged: (String? v) {
-                                  setState(() {
-                                    sexValue = v!;
-                                  });
-                                },
-                                v: sex,
-                              ),
-                              BmiForm(
-                                isGanttChart: true,
-                                heightController: heightController,
-                                hightFocus: hightFocus,
-                                weightController: weightController,
-                                weightFocus: weightFocus,
-                                onWeightChanged: (v) {},
-                                onHeightChanged: (v) {},
-                                inputFormattersWeight: [
-                                  FilteringTextInputFormatter.allow(
-                                      numberRegExp)
-                                ],
-                                validatorWeight: (String? val) {
-                                  if (val == null || val.isEmpty) {
-                                    return translate("validate.empty");
-                                  }
-                                  return null;
-                                },
-                                inputFormattersHeight: [
-                                  FilteringTextInputFormatter.allow(
-                                      numberRegExp)
-                                ],
-                                validatorHeight: (String? val) {
-                                  if (val == null || val.isEmpty) {
-                                    return translate("validate.empty");
-                                  }
-                                  return null;
-                                },
-                              ),
-                              msaSizeBox(),
-                              CurveCalculateResult(
-                                width: width,
-                                title: "BMI",
-                                result: _calculated("bmi"),
-                              ),
-                              CurveCalculateResult(
-                                width: width,
-                                title: "IBW",
-                                result: _calculated("ibw"),
-                              ),
-                              DashedLine(width: width),
-                            ],
+              Center(
+                child: CardContent(
+                  w: width - 40,
+                  h: height / 1.20,
+                  color: Colors.white,
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: _controller,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 30, right: 30),
+                      child: Column(
+                        children: [
+                          HeaderWithCircleAvatar(
+                            header: 'Info',
+                            content:
+                                translate("gantt_chart.perio_page.title_1"),
                           ),
-                        ),
-                        HeaderWithCircleAvatar(
-                          header: 'DR',
-                          content: translate("gantt_chart.perio_page.title_2"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 50),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CurveDropDown(
-                                title: translate("gantt_chart.energy_goal"),
-                                width: width,
-                                v: energyGoal,
-                                onChanged: (String? v) {
-                                  setState(() {
-                                    egValue = v!;
-                                  });
-                                },
-                              ),
-                              CurveDropDown(
-                                title: translate("gantt_chart.protien_goal"),
-                                width: width,
-                                onChanged: (String? v) {
-                                  setState(() {
-                                    pgValue = v!;
-                                  });
-                                },
-                                v: protienGoal,
-                              ),
-                              CurveCalculateResult(
-                                width: width,
-                                title: translate(
-                                    "gantt_chart.perio_page.energy_daily"),
-                                result: _calculated("energy_daily_requirement"),
-                                axis: "col",
-                              ),
-                              CurveCalculateResult(
-                                width: width,
-                                title: translate(
-                                    "gantt_chart.perio_page.protein_daily"),
-                                result:
-                                    _calculated("protein_daily_requirement"),
-                                axis: "col",
-                              ),
-                              CurveFormField(
-                                title: translate("gantt_chart.energy_intake"),
-                                controller: actualOralController,
-                                controllerFocus: actualOralFocus,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      numberRegExp)
-                                ],
-                                onChanged: (v) {},
-                                hint: translate("gantt_chart.fill_info"),
-                                validator: (String? v) {
-                                  if (v == null || v.isEmpty) {
-                                    return translate("validate.empty");
-                                  }
-                                  return null;
-                                },
-                              ),
-                              CurveCalculateResult(
-                                width: width,
-                                title: translate(
-                                    "gantt_chart.perio_page.actual_energy"),
-                                result: _calculated(
-                                    "actual_energy_intake_vs_requirement"),
-                                axis: "col",
-                              ),
-                            ],
-                          ),
-                        ),
-                        msaSizeBox(height: 30),
-                        Container(
-                          color: primaryColor,
-                          height: 50,
-                          width: width,
-                          child: const PrintPdf(data: null),
-                        ),
-                        msaSizeBox(),
-                        Container(
-                          color: primaryColor4,
-                          height: 50,
-                          width: width,
-                          child: TextButton(
-                            onPressed: () => {
-                              setState(() {
-                                weightController.clear();
-                                heightController.clear();
-                                actualOralController.clear();
-                              })
-                            },
-                            child: const Text(
-                              "Reset",
-                              style: TextStyle(color: blackColor),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CurveDropDown(
+                                  title: translate("gantt_chart.sex"),
+                                  width: width,
+                                  onChanged: (String? v) {
+                                    setState(() {
+                                      sexValue = v!;
+                                    });
+                                  },
+                                  v: sex,
+                                ),
+                                BmiForm(
+                                  isGanttChart: true,
+                                  heightController: heightController,
+                                  hightFocus: hightFocus,
+                                  weightController: weightController,
+                                  weightFocus: weightFocus,
+                                  onWeightChanged: (v) {},
+                                  onHeightChanged: (v) {},
+                                  inputFormattersWeight: [
+                                    FilteringTextInputFormatter.allow(
+                                        numberRegExp)
+                                  ],
+                                  validatorWeight: (String? val) {
+                                    if (val == null || val.isEmpty) {
+                                      return translate("validate.empty");
+                                    }
+                                    return null;
+                                  },
+                                  inputFormattersHeight: [
+                                    FilteringTextInputFormatter.allow(
+                                        numberRegExp)
+                                  ],
+                                  validatorHeight: (String? val) {
+                                    if (val == null || val.isEmpty) {
+                                      return translate("validate.empty");
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                msaSizeBox(),
+                                CurveCalculateResult(
+                                  width: width,
+                                  title: "BMI",
+                                  result: _calculated("bmi"),
+                                ),
+                                CurveCalculateResult(
+                                  width: width,
+                                  title: "IBW",
+                                  result: _calculated("ibw"),
+                                ),
+                                DashedLine(width: width),
+                              ],
                             ),
                           ),
-                        ),
-                        msaSizeBox(height: 30),
-                      ],
+                          HeaderWithCircleAvatar(
+                            header: 'DR',
+                            content:
+                                translate("gantt_chart.perio_page.title_2"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CurveDropDown(
+                                  title: translate("gantt_chart.energy_goal"),
+                                  width: width,
+                                  v: energyGoal,
+                                  onChanged: (String? v) {
+                                    setState(() {
+                                      egValue = v!;
+                                    });
+                                  },
+                                ),
+                                CurveDropDown(
+                                  title: translate("gantt_chart.protien_goal"),
+                                  width: width,
+                                  onChanged: (String? v) {
+                                    setState(() {
+                                      pgValue = v!;
+                                    });
+                                  },
+                                  v: protienGoal,
+                                ),
+                                CurveCalculateResult(
+                                  width: width,
+                                  title: translate(
+                                      "gantt_chart.perio_page.energy_daily"),
+                                  result:
+                                      _calculated("energy_daily_requirement"),
+                                  axis: "col",
+                                ),
+                                CurveCalculateResult(
+                                  width: width,
+                                  title: translate(
+                                      "gantt_chart.perio_page.protein_daily"),
+                                  result:
+                                      _calculated("protein_daily_requirement"),
+                                  axis: "col",
+                                ),
+                                CurveFormField(
+                                  title: translate("gantt_chart.energy_intake"),
+                                  controller: actualOralController,
+                                  controllerFocus: actualOralFocus,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        numberRegExp)
+                                  ],
+                                  onChanged: (v) {},
+                                  hint: translate("gantt_chart.fill_info"),
+                                  validator: (String? v) {
+                                    if (v == null || v.isEmpty) {
+                                      return translate("validate.empty");
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CurveCalculateResult(
+                                  width: width,
+                                  title: translate(
+                                      "gantt_chart.perio_page.actual_energy"),
+                                  result: _calculated(
+                                      "actual_energy_intake_vs_requirement"),
+                                  axis: "col",
+                                ),
+                              ],
+                            ),
+                          ),
+                          msaSizeBox(height: 30),
+                          Container(
+                            color: primaryColor,
+                            height: 50,
+                            width: width,
+                            child: PrintPdf(
+                              rcf: rcf,
+                              type: 'ppc',
+                            ),
+                          ),
+                          msaSizeBox(),
+                          Container(
+                            color: primaryColor4,
+                            height: 50,
+                            width: width,
+                            child: TextButton(
+                              onPressed: () => {
+                                setState(() {
+                                  weightController.clear();
+                                  heightController.clear();
+                                  actualOralController.clear();
+                                  _key.currentState?.reset();
+                                })
+                              },
+                              child: const Text(
+                                "Reset",
+                                style: TextStyle(color: blackColor),
+                              ),
+                            ),
+                          ),
+                          msaSizeBox(height: 30),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

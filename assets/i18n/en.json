@@ -140,8 +140,8 @@
     }
   },
   "gantt_chart": {
-    "title": "GANTT CHART Energy & Protein Intake Calculator",
-    "select": "Select the GANTT CHART Energy & Protein Intake Calculator.",
+    "title": "Energy & Protein Intake Calculator",
+    "select": "Select the Energy & Protein Intake Calculator.",
     "perioperative_button": "Perioperative patient",
     "dialysis": "Dialysis patient",
     "sex": "Sex",
@@ -206,7 +206,7 @@
     "protein": "Protein (g)"
   },
   "analytics": {
-    "title": "GANTT CHART Analytics",
+    "title": "Analytics",
     "en_energy": "EN Energy",
     "pn_energy": "PN Energy",
     "energy_requirement": "Energy requirement",

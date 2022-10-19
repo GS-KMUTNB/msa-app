@@ -8,8 +8,16 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 class PrintPdf extends StatefulWidget {
-  final HtmlSNSForm? data;
-  const PrintPdf({Key? key, this.data}) : super(key: key);
+  final HtmlSNSForm? sns;
+  final HtmlResultCalculateForm? rcf;
+  final String type;
+
+  const PrintPdf({
+    Key? key,
+    this.sns,
+    this.rcf,
+    required this.type,
+  }) : super(key: key);
 
   @override
   State<PrintPdf> createState() => _PrintPdfState();
@@ -30,10 +38,31 @@ class _PrintPdfState extends State<PrintPdf> {
     void printDocument(String nameInfo) {
       Printing.layoutPdf(
         onLayout: (pageFormat) async {
-          return await Printing.convertHtml(
-            format: PdfPageFormat.standard,
-            html: HtmlFormResult(widget.data!, "form1", nameInfo),
-          );
+          switch (widget.type) {
+            case "sns":
+              return await Printing.convertHtml(
+                format: PdfPageFormat.standard,
+                html: HtmlForm1Result(widget.sns!, nameInfo),
+              );
+
+            case "ppc":
+              return await Printing.convertHtml(
+                format: PdfPageFormat.standard,
+                html: HtmlForm2Result(widget.rcf!, nameInfo),
+              );
+
+            case "dpc":
+              return await Printing.convertHtml(
+                format: PdfPageFormat.standard,
+                html: HtmlForm2Result(widget.rcf!, nameInfo),
+              );
+
+            default:
+              return await Printing.convertHtml(
+                format: PdfPageFormat.standard,
+                html: '<html><body><p>Hello!</p></body></html>',
+              );
+          }
         },
       );
     }

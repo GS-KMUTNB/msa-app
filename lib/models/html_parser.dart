@@ -18,7 +18,13 @@ class HtmlSNSForm {
   );
 }
 
-class HtmlPerioForm {
+class HtmlResultCalculateForm {
+  final String sex;
+  final String date;
+  final String weight;
+  final String height;
+  final String bmi;
+  final String ibw;
   final String energyGoal;
   final String protienGoal;
   final String energyRequirement;
@@ -26,12 +32,18 @@ class HtmlPerioForm {
   final String actualOral;
   final String actualOralPercent;
 
-  HtmlPerioForm(
-    this.energyGoal,
-    this.protienGoal,
-    this.energyRequirement,
-    this.protienRequirement,
-    this.actualOral,
-    this.actualOralPercent,
-  );
+  HtmlResultCalculateForm({
+    required this.energyGoal,
+    required this.protienGoal,
+    required this.energyRequirement,
+    required this.protienRequirement,
+    required this.actualOral,
+    required this.actualOralPercent,
+    required this.sex,
+    required this.date,
+    required this.weight,
+    required this.height,
+    required this.bmi,
+    required this.ibw,
+  });
 }
