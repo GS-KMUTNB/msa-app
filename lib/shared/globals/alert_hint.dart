@@ -9,13 +9,11 @@ class MsaHintAlert extends Container {
     required String title,
     double? width,
     double? height,
-    bool ifPicture = false,
     bool haveButton = false,
     bool have2Button = false,
     bool haveCloseButton = false,
     bool continueButton = false,
     textContent = "",
-    imageContent = "",
     subTextContent = "",
     numberQuestions = "",
     bool haveColorText = false,
@@ -113,78 +111,37 @@ class MsaHintAlert extends Container {
                       )
                     ],
                   )
-                : ifPicture
-                    ? SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            msaSizeBox(height: 20),
-                            haveColorText
-                                ? RichText(
-                                    text: const TextSpan(
-                                      text:
-                                          'Description : The screening can be viewed in sequence of numbers as follows.\n1. Choose an answer : In this screening, there are two possible answers: ',
-                                      style: TextStyle(color: whiteColor),
-                                      /*defining default style is optional */
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: 'yes and no.',
-                                          style:
-                                              TextStyle(color: primaryColor4),
-                                        ),
-                                        TextSpan(
-                                          text:
-                                              '\n2. Once the answer has been selected, press the next button to do so. ',
-                                          style: TextStyle(color: whiteColor),
-                                        ),
-                                        TextSpan(
-                                          text: ' next screening',
-                                          style: TextStyle(
-                                            color: primaryColor4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Text(
-                                    subTextContent,
-                                    style: const TextStyle(color: whiteColor),
-                                  )
+                : haveColorText
+                    ? RichText(
+                        text: TextSpan(
+                          text: translate("warning_page_start.text_would_you"),
+                          style: const TextStyle(color: whiteColor),
+                          /*defining default style is optional */
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_leave_the_screen"),
+                              style: const TextStyle(color: primaryColor4),
+                            ),
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_if_you_agree"),
+                              style: const TextStyle(color: whiteColor),
+                            ),
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_will_be_delete"),
+                              style: const TextStyle(
+                                color: primaryColor4,
+                              ),
+                            ),
                           ],
                         ),
                       )
-                    : haveColorText
-                        ? RichText(
-                            text: TextSpan(
-                              text: translate(
-                                  "warning_page_start.text_would_you"),
-                              style: const TextStyle(color: whiteColor),
-                              /*defining default style is optional */
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_leave_the_screen"),
-                                  style: const TextStyle(color: primaryColor4),
-                                ),
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_if_you_agree"),
-                                  style: const TextStyle(color: whiteColor),
-                                ),
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_will_be_delete"),
-                                  style: const TextStyle(
-                                    color: primaryColor4,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Text(
-                            textContent,
-                            style: const TextStyle(color: whiteColor),
-                          ),
+                    : Text(
+                        textContent,
+                        style: const TextStyle(color: whiteColor),
+                      ),
             actions: haveButton
                 ? have2Button
                     ? <Widget>[

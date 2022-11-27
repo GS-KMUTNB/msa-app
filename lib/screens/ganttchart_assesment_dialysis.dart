@@ -29,7 +29,6 @@ class _GanttChartDialysisTodoState extends State<GanttChartDialysisTodoScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
@@ -51,7 +50,6 @@ class _GanttChartDialysisTodoState extends State<GanttChartDialysisTodoScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: true,
             haveButton: false,
             haveColorText: false,
             haveQuestions: false,

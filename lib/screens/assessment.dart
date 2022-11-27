@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 import 'package:msa_app/screens/result.dart';
+import 'package:msa_app/shared/globals/user_manual.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
@@ -305,7 +306,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
@@ -324,21 +324,27 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           ),
         ),
         onPressedHint: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: true,
-            haveButton: false,
-            haveColorText: false,
-            haveQuestions: false,
-            haveCloseButton: true,
-            title: translate("manual_select_menu.manual"),
-            subTextContent:
-                translate("warning_page_start.description_user_manual"),
-            height: height / 2,
-            width: width,
-          ),
-        ),
+            builder: (BuildContext context) => UserManual(
+                  context: context,
+                  indexImageList: 0,
+                  textContents:
+                      'Description : Nutritional status screening page\n1. progress tube is a tube that indicates the status of the nutritional status screening. \n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.',
+                )
+            // MsaHintAlert(
+            //   context: context,
+            //   ifPicture: true,
+            //   haveButton: false,
+            //   haveColorText: false,
+            //   haveQuestions: false,
+            //   haveCloseButton: true,
+            //   title: translate("manual_select_menu.manual"),
+            //   subTextContent:
+            //       translate("warning_page_start.description_user_manual"),
+            //   height: height / 2,
+            //   width: width,
+            // ),
+            ),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,

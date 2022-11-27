@@ -8,6 +8,7 @@ import 'package:msa_app/shared/shared.dart';
 
 import '../../theme/theme.dart';
 import '../models/models.dart';
+import '../shared/globals/user_manual.dart';
 
 class PerioperativePatientScreen extends StatefulWidget {
   const PerioperativePatientScreen({
@@ -236,7 +237,6 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
@@ -256,18 +256,11 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
-          builder: (BuildContext context) => MsaHintAlert(
+          builder: (BuildContext context) => UserManual(
             context: context,
-            ifPicture: true,
-            haveButton: false,
-            haveColorText: false,
-            haveQuestions: false,
-            haveCloseButton: true,
-            title: 'User Manual',
-            subTextContent:
-                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
-            height: height / 2,
-            width: width,
+            indexImageList: 2,
+            textContents:
+                'Description : Case Information\n1. On this page, the user must complete the information according to the topic.\n2. After filling out the information, press the Continue button to fill out the next topic.',
           ),
         ),
       ),

@@ -63,7 +63,6 @@ class ResultDemoScreen extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
