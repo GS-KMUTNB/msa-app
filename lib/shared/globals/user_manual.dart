@@ -6,7 +6,7 @@ class UserManual extends Container {
   UserManual({
     required BuildContext context,
     required int indexImageList,
-    required String textContents,
+    required int indexText,
     Key? key,
   }) : super(
           key: key,
@@ -49,13 +49,14 @@ class UserManual extends Container {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: NetworkImage(
-                                imageManual[indexImageList],
+                                imageManual[indexImageList].image,
                               ),
                               fit: BoxFit.cover)),
                     ),
                   ),
                   msaSizeBox(height: 20),
-                  Text(textContents, style: const TextStyle(color: whiteColor))
+                  Text(imageManual[indexImageList].textContent,
+                      style: const TextStyle(color: whiteColor))
                 ],
               ),
             ),

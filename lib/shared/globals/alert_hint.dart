@@ -16,6 +16,7 @@ class MsaHintAlert extends Container {
     textContent = "",
     subTextContent = "",
     numberQuestions = "",
+    bool isNotRedButton = true,
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
@@ -58,58 +59,61 @@ class MsaHintAlert extends Container {
                     textAlign: TextAlign.center,
                   ),
             content: haveQuestions
-                ? Column(
-                    children: [
-                      Text(
-                        translate("alert_result.you_answered_yes"),
-                        style: const TextStyle(color: whiteColor),
-                        textAlign: TextAlign.left,
-                      ),
-                      msaSizeBox(height: 30),
-                      warningQuestions
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                isHightRisk
-                                    ? const Icon(
-                                        Icons.error_rounded,
-                                        color: primaryColor4,
-                                        size: 30,
-                                      )
-                                    : const SizedBox(),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 3),
-                                  child: Text(
-                                    numberQuestions,
-                                    style: TextStyle(
-                                      color: isHightRisk
-                                          ? warningColor
-                                          : whiteColor,
-                                      fontSize: 28,
+                ? SizedBox(
+                    height: 220,
+                    child: Column(
+                      children: [
+                        Text(
+                          translate("alert_result.you_answered_yes"),
+                          style: const TextStyle(color: whiteColor),
+                          textAlign: TextAlign.left,
+                        ),
+                        msaSizeBox(height: 30),
+                        warningQuestions
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  isHightRisk
+                                      ? const Icon(
+                                          Icons.error_rounded,
+                                          color: primaryColor4,
+                                          size: 30,
+                                        )
+                                      : const SizedBox(),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    child: Text(
+                                      numberQuestions,
+                                      style: TextStyle(
+                                        color: isHightRisk
+                                            ? warningColor
+                                            : whiteColor,
+                                        fontSize: 28,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                isHightRisk
-                                    ? const Icon(
-                                        Icons.error_rounded,
-                                        color: primaryColor4,
-                                        size: 30,
-                                      )
-                                    : const SizedBox(),
-                              ],
-                            )
-                          : Text(
-                              numberQuestions,
-                              style: const TextStyle(
-                                  color: whiteColor, fontSize: 36),
-                            ),
-                      msaSizeBox(height: 30),
-                      Text(
-                        textContent,
-                        style: const TextStyle(color: whiteColor),
-                      )
-                    ],
+                                  isHightRisk
+                                      ? const Icon(
+                                          Icons.error_rounded,
+                                          color: primaryColor4,
+                                          size: 30,
+                                        )
+                                      : const SizedBox(),
+                                ],
+                              )
+                            : Text(
+                                numberQuestions,
+                                style: const TextStyle(
+                                    color: whiteColor, fontSize: 36),
+                              ),
+                        msaSizeBox(height: 30),
+                        Text(
+                          textContent,
+                          style: const TextStyle(color: whiteColor),
+                        )
+                      ],
+                    ),
                   )
                 : haveColorText
                     ? RichText(
@@ -152,9 +156,11 @@ class MsaHintAlert extends Container {
                             children: [
                               Container(
                                 width: 100,
-                                decoration: const BoxDecoration(
-                                  color: warningColor,
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  color: isNotRedButton
+                                      ? warningColor
+                                      : primaryColor4,
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(10.0),
                                   ),
                                 ),

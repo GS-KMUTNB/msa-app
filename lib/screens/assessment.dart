@@ -325,26 +325,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
         ),
         onPressedHint: () => showDialog<String>(
             context: context,
-            builder: (BuildContext context) => UserManual(
-                  context: context,
-                  indexImageList: 0,
-                  textContents:
-                      'Description : Nutritional status screening page\n1. progress tube is a tube that indicates the status of the nutritional status screening. \n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.',
-                )
-            // MsaHintAlert(
-            //   context: context,
-            //   ifPicture: true,
-            //   haveButton: false,
-            //   haveColorText: false,
-            //   haveQuestions: false,
-            //   haveCloseButton: true,
-            //   title: translate("manual_select_menu.manual"),
-            //   subTextContent:
-            //       translate("warning_page_start.description_user_manual"),
-            //   height: height / 2,
-            //   width: width,
-            // ),
-            ),
+            builder: (BuildContext context) =>
+                UserManual(context: context, indexImageList: 0, indexText: 0)),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -491,6 +473,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                           continueButton: false,
                                           warningQuestions: true,
                                           have2Button: true,
+                                          isNotRedButton: false,
                                           title: translate(
                                               "alert_result.screening_result"),
                                           numberQuestions:

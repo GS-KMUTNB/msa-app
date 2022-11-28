@@ -256,12 +256,8 @@ class _PerioperativePatientScreen extends State<PerioperativePatientScreen> {
         ),
         onPressedHint: () => showDialog<String>(
           context: context,
-          builder: (BuildContext context) => UserManual(
-            context: context,
-            indexImageList: 2,
-            textContents:
-                'Description : Case Information\n1. On this page, the user must complete the information according to the topic.\n2. After filling out the information, press the Continue button to fill out the next topic.',
-          ),
+          builder: (BuildContext context) =>
+              UserManual(context: context, indexImageList: 2, indexText: 2),
         ),
       ),
       body: GestureDetector(

@@ -480,12 +480,8 @@ class _DialysisPatientScreen extends State<DialysisPatientScreen> {
         ),
         onPressedHint: () => showDialog<String>(
             context: context,
-            builder: (BuildContext context) => UserManual(
-                  context: context,
-                  indexImageList: 4,
-                  textContents:
-                      'Description : Case Information\n1. On this page, the user must complete the information according to the topic.\n2. After filling out the information, press the Continue button to fill out the next topic.',
-                )),
+            builder: (BuildContext context) =>
+                UserManual(context: context, indexImageList: 4, indexText: 4)),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
