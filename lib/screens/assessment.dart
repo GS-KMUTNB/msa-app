@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intl/intl.dart';
 import 'package:msa_app/screens/result.dart';
+import 'package:msa_app/shared/globals/user_manual.dart';
 import 'package:msa_app/shared/shared.dart';
 import 'package:msa_app/theme/theme.dart';
 
@@ -305,7 +306,6 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
@@ -324,21 +324,9 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
           ),
         ),
         onPressedHint: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: true,
-            haveButton: false,
-            haveColorText: false,
-            haveQuestions: false,
-            haveCloseButton: true,
-            title: translate("manual_select_menu.manual"),
-            subTextContent:
-                translate("warning_page_start.description_user_manual"),
-            height: height / 2,
-            width: width,
-          ),
-        ),
+            builder: (BuildContext context) =>
+                UserManual(context: context, indexImageList: 0, indexText: 0)),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -485,6 +473,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> {
                                           continueButton: false,
                                           warningQuestions: true,
                                           have2Button: true,
+                                          isNotRedButton: false,
                                           title: translate(
                                               "alert_result.screening_result"),
                                           numberQuestions:

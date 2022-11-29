@@ -19,7 +19,7 @@ class GanttChartScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: MsaAppBar(
-        haveTutor: true,
+        haveTutor: false,
         title: translate("gantt_chart.title"),
         maxLines: 2,
         ctx: context,
@@ -27,7 +27,6 @@ class GanttChartScreen extends StatelessWidget {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: false,
             haveButton: true,
             have2Button: true,
             haveColorText: true,
@@ -43,22 +42,6 @@ class GanttChartScreen extends StatelessWidget {
             onPressedNo: () {
               Navigator.pop(context);
             },
-          ),
-        ),
-        onPressedHint: () => showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => MsaHintAlert(
-            context: context,
-            ifPicture: true,
-            haveButton: false,
-            haveColorText: false,
-            haveQuestions: false,
-            haveCloseButton: true,
-            title: 'User Manual',
-            subTextContent:
-                "Description : Nutritional status screening page \n1. progress tube is a tube that indicates the status of the nutritional status screening.\n2. Calculate BMI, enter weight and height, then enter confirmation to calculate BMI.\n3. There are four screening topics, each with a yes and no answer.",
-            height: height / 2,
-            width: width,
           ),
         ),
       ),
