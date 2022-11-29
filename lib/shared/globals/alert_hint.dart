@@ -9,15 +9,14 @@ class MsaHintAlert extends Container {
     required String title,
     double? width,
     double? height,
-    bool ifPicture = false,
     bool haveButton = false,
     bool have2Button = false,
     bool haveCloseButton = false,
     bool continueButton = false,
     textContent = "",
-    imageContent = "",
     subTextContent = "",
     numberQuestions = "",
+    bool isNotRedButton = true,
     bool haveColorText = false,
     bool haveQuestions = false,
     bool warningQuestions = false,
@@ -60,131 +59,93 @@ class MsaHintAlert extends Container {
                     textAlign: TextAlign.center,
                   ),
             content: haveQuestions
-                ? Column(
-                    children: [
-                      Text(
-                        translate("alert_result.you_answered_yes"),
-                        style: const TextStyle(color: whiteColor),
-                        textAlign: TextAlign.left,
-                      ),
-                      msaSizeBox(height: 30),
-                      warningQuestions
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                isHightRisk
-                                    ? const Icon(
-                                        Icons.error_rounded,
-                                        color: primaryColor4,
-                                        size: 30,
-                                      )
-                                    : const SizedBox(),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 3),
-                                  child: Text(
-                                    numberQuestions,
-                                    style: TextStyle(
-                                      color: isHightRisk
-                                          ? warningColor
-                                          : whiteColor,
-                                      fontSize: 28,
+                ? SizedBox(
+                    height: 220,
+                    child: Column(
+                      children: [
+                        Text(
+                          translate("alert_result.you_answered_yes"),
+                          style: const TextStyle(color: whiteColor),
+                          textAlign: TextAlign.left,
+                        ),
+                        msaSizeBox(height: 30),
+                        warningQuestions
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  isHightRisk
+                                      ? const Icon(
+                                          Icons.error_rounded,
+                                          color: primaryColor4,
+                                          size: 30,
+                                        )
+                                      : const SizedBox(),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 3),
+                                    child: Text(
+                                      numberQuestions,
+                                      style: TextStyle(
+                                        color: isHightRisk
+                                            ? warningColor
+                                            : whiteColor,
+                                        fontSize: 28,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                isHightRisk
-                                    ? const Icon(
-                                        Icons.error_rounded,
-                                        color: primaryColor4,
-                                        size: 30,
-                                      )
-                                    : const SizedBox(),
-                              ],
-                            )
-                          : Text(
-                              numberQuestions,
-                              style: const TextStyle(
-                                  color: whiteColor, fontSize: 36),
-                            ),
-                      msaSizeBox(height: 30),
-                      Text(
-                        textContent,
-                        style: const TextStyle(color: whiteColor),
-                      )
-                    ],
+                                  isHightRisk
+                                      ? const Icon(
+                                          Icons.error_rounded,
+                                          color: primaryColor4,
+                                          size: 30,
+                                        )
+                                      : const SizedBox(),
+                                ],
+                              )
+                            : Text(
+                                numberQuestions,
+                                style: const TextStyle(
+                                    color: whiteColor, fontSize: 36),
+                              ),
+                        msaSizeBox(height: 30),
+                        Text(
+                          textContent,
+                          style: const TextStyle(color: whiteColor),
+                        )
+                      ],
+                    ),
                   )
-                : ifPicture
-                    ? SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            msaSizeBox(height: 20),
-                            haveColorText
-                                ? RichText(
-                                    text: const TextSpan(
-                                      text:
-                                          'Description : The screening can be viewed in sequence of numbers as follows.\n1. Choose an answer : In this screening, there are two possible answers: ',
-                                      style: TextStyle(color: whiteColor),
-                                      /*defining default style is optional */
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: 'yes and no.',
-                                          style:
-                                              TextStyle(color: primaryColor4),
-                                        ),
-                                        TextSpan(
-                                          text:
-                                              '\n2. Once the answer has been selected, press the next button to do so. ',
-                                          style: TextStyle(color: whiteColor),
-                                        ),
-                                        TextSpan(
-                                          text: ' next screening',
-                                          style: TextStyle(
-                                            color: primaryColor4,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Text(
-                                    subTextContent,
-                                    style: const TextStyle(color: whiteColor),
-                                  )
+                : haveColorText
+                    ? RichText(
+                        text: TextSpan(
+                          text: translate("warning_page_start.text_would_you"),
+                          style: const TextStyle(color: whiteColor),
+                          /*defining default style is optional */
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_leave_the_screen"),
+                              style: const TextStyle(color: primaryColor4),
+                            ),
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_if_you_agree"),
+                              style: const TextStyle(color: whiteColor),
+                            ),
+                            TextSpan(
+                              text: translate(
+                                  "warning_page_start.text_will_be_delete"),
+                              style: const TextStyle(
+                                color: primaryColor4,
+                              ),
+                            ),
                           ],
                         ),
                       )
-                    : haveColorText
-                        ? RichText(
-                            text: TextSpan(
-                              text: translate(
-                                  "warning_page_start.text_would_you"),
-                              style: const TextStyle(color: whiteColor),
-                              /*defining default style is optional */
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_leave_the_screen"),
-                                  style: const TextStyle(color: primaryColor4),
-                                ),
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_if_you_agree"),
-                                  style: const TextStyle(color: whiteColor),
-                                ),
-                                TextSpan(
-                                  text: translate(
-                                      "warning_page_start.text_will_be_delete"),
-                                  style: const TextStyle(
-                                    color: primaryColor4,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Text(
-                            textContent,
-                            style: const TextStyle(color: whiteColor),
-                          ),
+                    : Text(
+                        textContent,
+                        style: const TextStyle(color: whiteColor),
+                      ),
             actions: haveButton
                 ? have2Button
                     ? <Widget>[
@@ -195,9 +156,11 @@ class MsaHintAlert extends Container {
                             children: [
                               Container(
                                 width: 100,
-                                decoration: const BoxDecoration(
-                                  color: warningColor,
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  color: isNotRedButton
+                                      ? warningColor
+                                      : primaryColor4,
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(10.0),
                                   ),
                                 ),

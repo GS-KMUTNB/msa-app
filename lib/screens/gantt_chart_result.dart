@@ -122,7 +122,6 @@ class _MsaGanttChartResultScreenState extends State<MsaGanttChartResultScreen> {
           context: context,
           builder: (BuildContext context) => MsaHintAlert(
             context: context,
-            ifPicture: true,
             haveButton: false,
             haveColorText: false,
             haveQuestions: false,
